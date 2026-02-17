@@ -1,0 +1,11 @@
+# This file defines the code owners for the repository.
+# Code owners are automatically requested for review when someone opens a pull request.
+
+# All files are owned by the group members
+*       Bartha Maxime ; Delobbe Antoine ; Verscheure Nicolas ; Godard Alexis
+
+# GitHub Actions workflows
+.github/workflows/  Bartha Maxime ; Delobbe Antoine ; Verscheure Nicolas ; Godard Alexis
+
+# Documentation
+*.md    Bartha Maxime ; Delobbe Antoine ; Verscheure Nicolas ; Godard Alexis

@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-1. [getting Started](#getting-started)
+1. [Getting Started](#getting-started)
 2. [How to Contribute](#how-to-contribute)
 3. [Coding Conventions](#coding-conventions)
 4. [Testing](#testing)

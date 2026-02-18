@@ -24,7 +24,7 @@ The project currently supports:
 
 *  All tests can be found in the src\test directory. They serve as executable documentation of the source code.
 *  The source code is accompanied by a set of JUnit 5 unit tests. 
-*  The source code is accompanied by a set of Cucumber BDD scenarios, also running in Junit.
+*  The source code is accompanied by a set of Cucumber BDD scenarios, also running in JUnit.
 The BDD scenarios are specified as .feature files in the src\test\resources directory. Some classes defined in src\test take care of converting these scenarios to executable JUnit tests.
 
 ### Prerequisites

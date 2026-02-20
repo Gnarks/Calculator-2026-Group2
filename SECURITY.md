@@ -19,7 +19,7 @@ We take the security of our software seriously. If you believe you have found a 
 
 1.  **Do not open a public issue.** Publicly readable issues can alert potential attackers to the vulnerability before a fix is available.
 2.  **Email the maintainers.** If you have found a vulnerability, please email the project maintainers directly. 
-3.  **Provide details.** In your report, please include:
+2.  **Provide details.** In your report, please include:
     *   A description of the vulnerability.
     *   Steps to reproduce the issue.
     *   Any relevant code snippets or logs.

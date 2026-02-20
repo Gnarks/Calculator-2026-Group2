@@ -1,6 +1,6 @@
-[![](https://img.shields.io/github/v/release/University-of-Mons/calculator-cucumber-2026?label=Latest%20Release)](https://github.com/University-of-Mons/calculator-cucumber/releases/latest)
+[![](https://img.shields.io/github/v/release/University-of-Mons/calculator-cucumber-2026?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
 
-Code quality: ![Maven Build](https://github.com/University-of-Mons/calculator-cucumber-2026/actions/workflows/maven.yml/badge.svg)
+Code quality: ![Maven Build](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/maven.yml/badge.svg)
 
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
@@ -10,15 +10,21 @@ Test coverage: ![Coverage](.github/badges/jacoco.svg)
 
 ## About
 
-This repository contains Java code for computing arithmetic expressions. It is deliberately incomplete as it serves to be the basis of all kinds of extensions, such as a more sophisticated Calculator application. The code was written to be used for educational purposes at the University of Mons, Belgium in the context of the software evolution course.
+This repository contains Java code for computing arithmetic expressions. It acts as a basis for extensions, specifically for the Software Evolution course at the University of Mons.
 
-**For more information about how to use this repository for the student project assignment, please read the [Wiki pages](https://github.com/University-of-Mons/calculator-cucumber-2026/wiki).**
+The project currently supports:
+* **Arithmetic Operations**: Basic integer arithmetic including addition, subtraction, multiplication, and division.
+* **Notations**: Expressions can be represented and printed in Infix, Prefix, and Postfix notations.
+* **Design Patterns**: The code implements the **Composite** pattern for expression structures and the **Visitor** pattern for operations like evaluation and printing.
+* **Testing**: Includes a comprehensive test suite using **JUnit 5** for unit tests and **Cucumber** for Behavior-Driven Development (BDD).
+
+**For more information about the instructions for this project, please read the [Wiki pages](https://github.com/University-of-Mons/calculator-cucumber-2026/wiki).**
 
 ### Unit testing and BDD
 
 *  All tests can be found in the src\test directory. They serve as executable documentation of the source code.
-*  The source code is accompanied by a set of JUnit 5 unit tests. These tests can be written and run in the usual way. If you are not familiar with unit testing or JUnit 5, please refer to https://junit.org/junit5/.
-*  The source code is accompanied by a set of Cucumber BDD scenarios, also running in Junit. If you are not familiar with Cucumber and BDD, please refer to https://cucumber.io/docs/cucumber/.
+*  The source code is accompanied by a set of JUnit 5 unit tests. 
+*  The source code is accompanied by a set of Cucumber BDD scenarios, also running in JUnit.
 The BDD scenarios are specified as .feature files in the src\test\resources directory. Some classes defined in src\test take care of converting these scenarios to executable JUnit tests.
 
 ### Prerequisites
@@ -55,6 +61,10 @@ We use [SemVer](http://semver.org/) for semantic versioning. For the versions av
 
 * Tom Mens
 * Gauvain Devillez @GauvainD
+* Bartha Maxime
+* Delobbe Antoine
+* Verscheure Nicolas
+* Godard Alexis
 
 ## Licence
 

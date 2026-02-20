@@ -1,4 +1,4 @@
-[![](https://img.shields.io/github/v/release/University-of-Mons/calculator-cucumber-2026?label=Latest%20Release)](https://github.com/UGnarks/Calculator-2026-Group2/releases/latest)
+[![](https://img.shields.io/github/v/release/University-of-Mons/calculator-cucumber-2026?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
 
 Code quality: ![Maven Build](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/maven.yml/badge.svg)
 

@@ -13,4 +13,9 @@ All notable changes to this project will be documented in this file.
 - Documentation updates: README badges, .gitignore configuration.
 
 ### Changed
-- Updated `.gitignore` to ignore the `target/` directory.
+- Updated `.gitignore` to ignore the `target/` directory and others files.
+- Updated dependencies of Junit and Cucumner to the latest version (6.0.2 and 7.34.2 respectively).
+
+
+## Fixed
+- 

@@ -2,10 +2,10 @@
 # Code owners are automatically requested for review when someone opens a pull request.
 
 # All files are owned by the group members
-*       @BarthaMaxime @DelobbeAntoine @VerscheureNicolas @GodardAlexis
+*       @Gnarks @Antoine280401 @nicolas-vrsc @CaptainGAXS
 
 # GitHub Actions workflows
-.github/workflows/  @BarthaMaxime @DelobbeAntoine @VerscheureNicolas @GodardAlexis
+.github/workflows/  @Gnarks @Antoine280401 @nicolas-vrsc @CaptainGAXS
 
 # Documentation
-*.md    @BarthaMaxime @DelobbeAntoine @VerscheureNicolas @GodardAlexis
+*.md    @Gnarks @Antoine280401 @nicolas-vrsc @CaptainGAXS

@@ -18,7 +18,6 @@ We take the security of our software seriously. If you believe you have found a 
 ### How to submit a security bug
 
 1.  ** Please, simply open a public issue**. As the project is a open student project for academic purposes, feel free to open a free issue.
-2.  **Email the maintainers.** If you have found a vulnerability, please email the project maintainers directly. 
 2.  **Provide details.** In your report, please include:
     *   A description of the vulnerability.
     *   Steps to reproduce the issue.

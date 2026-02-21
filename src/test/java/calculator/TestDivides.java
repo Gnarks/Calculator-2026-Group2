@@ -76,4 +76,15 @@ class TestDivides {
 		assertThrows(IllegalConstruction.class, () -> op = new Divides(params));
 	}
 
+	@Test
+	void testDivideByZero() {
+		List<Expression> paramsWithZero = Arrays.asList(new MyNumber(value1), new MyNumber(0));
+		try {
+			Divides d = new Divides(paramsWithZero);
+			assertThrows(ArithmeticException.class, () -> d.op(value1, 0));
+		} catch (IllegalConstruction _) {
+			fail();
+		}
+	}
+
 }

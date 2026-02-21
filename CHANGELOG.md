@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - JUnit 5 tests and Cucumber scenarios.
 - CI/CD workflows for Maven build and dependency review.
 - Documentation updates: README badges, .gitignore configuration.
+- Added division by zero handling
 
 ### Changed
 - Updated `.gitignore` to ignore the `target/` directory.

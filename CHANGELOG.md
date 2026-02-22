@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - Basic arithmetic operations: Addition, Subtraction, Multiplication, Division.
 - Support for Prefix, Infix, and Postfix notations.
 - JUnit 5 tests and Cucumber scenarios.
-- CI/CD workflows for Maven build and dependency review.
+- CI/CD workflows for Maven build and dependency review. Build on three OS (Linux, Max and Windows).
 - Documentation updates: README badges, .gitignore configuration.
 
 ### Changed

@@ -52,6 +52,7 @@ jobs:
       
     - name: Generate JaCoCo Badge
       id: jacoco
+      if: runner.os == 'Linux'
       uses: cicirello/jacoco-badge-generator@v2.12.1
       with:
         generate-coverage-badge: true
@@ -59,6 +60,7 @@ jobs:
         generate-summary: true
         
     - name: Log coverage percentage
+      if: runner.os == 'Linux'
       run: |
         echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
         echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"

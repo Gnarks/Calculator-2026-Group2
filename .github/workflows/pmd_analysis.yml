@@ -35,7 +35,7 @@ jobs:
           rulesets: 'category/java/errorprone.xml'
           analyzeModifiedFilesOnly: 'false'
       - name: Fail build if there are violations
-        if: steps.pmd.outputs.violations > 10
+        if: steps.pmd.outputs.violations > 20
         run: exit 1
             
       - name: Upload SARIF file

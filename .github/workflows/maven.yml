@@ -4,17 +4,24 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, dev ]
   pull_request:
-    branches: [ master ]
-
+    branches: [ master, dev]
+  workflow_dispatch:  # For manual triggering of the workflow if we want to run it on our branch
 permissions:
   contents: read
 
 jobs:
   build:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+
     name: building, testing and quality analysis
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     permissions:
       # need write permissions for publishing the test report
@@ -45,6 +52,7 @@ jobs:
       
     - name: Generate JaCoCo Badge
       id: jacoco
+      if: runner.os == 'Linux'
       uses: cicirello/jacoco-badge-generator@v2.12.1
       with:
         generate-coverage-badge: true
@@ -52,6 +60,7 @@ jobs:
         generate-summary: true
         
     - name: Log coverage percentage
+      if: runner.os == 'Linux'
       run: |
         echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
         echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"

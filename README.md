@@ -1,4 +1,4 @@
-[![](https://img.shields.io/github/v/release/University-of-Mons/calculator-cucumber-2026?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
+[![](https://img.shields.io/github/v/release/Gnarks/Calculator-2026-Group2?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
 
 Code quality: ![Maven Build](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/maven.yml/badge.svg)
 
@@ -55,7 +55,7 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 
 ## Versions
 
-We use [SemVer](http://semver.org/) for semantic versioning. For the versions available, see the [tags on this repository](https://github.com/University-of-Mons/calculator-cucumber-2025/tags). 
+We use [SemVer](http://semver.org/) for semantic versioning. For the versions available, see the [tags on this repository](https://github.com/Gnarks/Calculator-2026-Group2/tags). 
 
 ## Contributors
 

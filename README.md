@@ -1,7 +1,7 @@
 [![](https://img.shields.io/github/v/release/Gnarks/Calculator-2026-Group2?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
 
 Code quality:
-![Maven Build](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/maven.yml/badge.svg) ![CodeQL Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/codeql.yml/badge.svg)
+![Maven Build](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/maven.yml/badge.svg) ![CodeQL Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/codeql.yml/badge.svg) ![PMD Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/pmd-analysis.yml/badge.svg)
 
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)

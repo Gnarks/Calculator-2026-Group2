@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - CI/CD workflows for Maven build and dependency review. Build on three OS (Linux, Max and Windows).
 - CI/CD workflows for security analysis.
 - Documentation updates: README badges, .gitignore configuration.
+- Added division by zero handling
 
 ### Changed
 - Updated `.gitignore` to ignore the `target/` directory and others files.

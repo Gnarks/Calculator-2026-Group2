@@ -1,0 +1,37 @@
+# used to upload the SARIF file on github 
+# Permits to have a PMD badge
+# is dependant of the maven Verify success
+name: PMD code analysis
+
+on:
+  workflow_run:
+    workflows: ["Maven Verify"]
+    types: [completed]
+
+jobs:
+  pmd:
+    # only if the verification worked 
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write 
+    steps:
+
+      - uses: actions/checkout@v6
+
+      - name: Download Build Assets
+        uses: actions/download-artifact@v7
+        with:
+          name: build-assets
+          path: target/
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+          # runs PMD and outputs a SARIF for github
+      - name: Run PMD (SARIF output)
+        run: mvn pmd:pmd -Dformat=sarif 
+
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v6
+        with:
+          sarif_file: target/pmd.sarif

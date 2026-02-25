@@ -1,0 +1,43 @@
+name: Final Report
+on:
+  workflow_run:
+    # here add the other code analyser workflows to wait there success
+    # before posting the report
+    workflows: ["Maven Verify"]
+    types: [completed]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publish:
+    # only if the verification worked 
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+
+      - name: Download Build Assets
+        uses: actions/download-artifact@v7
+        with:
+          name: build-assets
+          path: target/
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Download Full Context
+        # We need the target folder from the very first run
+        # Use a specific action or API call if the chain is long, 
+        # but for simplicity, we assume we recreate the site here.
+        run: mvn site -DskipTests
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

@@ -70,13 +70,17 @@ jobs:
           name: build-assets
           path: target/
 
-      - name: Run PMD (SARIF output)
-        run: mvn pmd:pmd -Dformat=sarif 
+      - name: Run PMD
+        id: pmd
+        uses: pmd/pmd-github-action@v2
+        with:
+          rulesets: 'category/java/errorprone.xml'
+          analyzeModifiedFilesOnly: 'false'
 
       - name: Upload SARIF to GitHub
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: target/pmd.sarif
+          sarif_file: pmd-report.sarif
 
   # the third job requires the first one to suceed
   # then runs JaCoCo to generate a badge for github

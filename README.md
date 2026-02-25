@@ -1,4 +1,4 @@
-[![](https://img.shields.io/github/v/release/Gnarks/Calculator-2026-Group2?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
+Release:[![](https://img.shields.io/github/v/release/Gnarks/Calculator-2026-Group2?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
 
 
 Build: ![Maven Build Status](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/Pipeline.yml/badge.svg)
@@ -6,16 +6,18 @@ Build: ![Maven Build Status](https://github.com/Gnarks/Calculator-2026-Group2/ac
 Code quality:
 ![CodeQL Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/codeql.yml/badge.svg)
 <!-- ![PMD Code Analysis](https://github.com/OWNER/REPO/security/code-scanning/badge/master) -->
-![PMD Quality](https://github.com/OWNER/REPO/security/code-scanning/badge/Maxime/feat/AutomaticReport)
-<!-- ![PMD Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/pmd_analysis.yml/badge.svg) -->
 ![Scorecard](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/scorecard.yml/badge.svg)
 
 Test coverage: 
 ![JaCoCo Coverage](.github/badges/jacoco.svg)
 ![Branches Coverage](.github/badges/branches.svg)
 
-
 # Calculating arithmetic expressions
+
+## Site
+A report of the code quality, test coverage, BDD tests, and units test can be found at :
+[This repository GitHub Pages](https://gnarks.github.io/Calculator-2026-Group2/)
+
 
 ## About
 

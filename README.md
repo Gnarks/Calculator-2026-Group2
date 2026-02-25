@@ -1,11 +1,18 @@
 [![](https://img.shields.io/github/v/release/Gnarks/Calculator-2026-Group2?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
 
-Code quality:
-![Maven Build](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/maven.yml/badge.svg) ![CodeQL Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/codeql.yml/badge.svg)
-![PMD Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/pmd_analysis.yml/badge.svg) ![Scorecard](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/scorecard.yml/badge.svg)
 
-Test coverage: ![Coverage](.github/badges/jacoco.svg)
-![Branches](.github/badges/branches.svg)
+Build: ![Maven Build Status](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/Pipeline.yml/badge.svg)
+
+Code quality:
+![CodeQL Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/codeql.yml/badge.svg)
+<!-- ![PMD Code Analysis](https://github.com/OWNER/REPO/security/code-scanning/badge/master) -->
+![PMD Quality](https://github.com/OWNER/REPO/security/code-scanning/badge/Maxime/feat/AutomaticReport)
+<!-- ![PMD Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/pmd_analysis.yml/badge.svg) -->
+![Scorecard](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/scorecard.yml/badge.svg)
+
+Test coverage: 
+![JaCoCo Coverage](.github/badges/jacoco.svg)
+![Branches Coverage](.github/badges/branches.svg)
 
 
 # Calculating arithmetic expressions

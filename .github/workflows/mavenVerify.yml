@@ -9,7 +9,7 @@ on:
   #todo: remove this push (only for test purposes)
   # ===========
   push: 
-    branches: [ Maxime/feat/AutomaticReport ]
+    # branches: [ Maxime/feat/AutomaticReport ]
   # ===========
 
   pull_request:

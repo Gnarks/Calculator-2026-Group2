@@ -21,6 +21,7 @@
 		<jacoco.version>0.8.14</jacoco.version>
 		<pmd.version>3.28.0</pmd.version>
 		<javadoc.version>3.12.0</javadoc.version>
+		<maven-cucumber-reporting.version>5.10.2</maven-cucumber-reporting.version>
 		<jrx.version>3.6.0</jrx.version>
 
 		<sonar.organization>tommens</sonar.organization>
@@ -144,6 +145,32 @@
 						<exclude>calculator/Main.class</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>net.masterthought</groupId>
+				<artifactId>maven-cucumber-reporting</artifactId>
+				<version>${maven-cucumber-reporting.version}</version>
+				<executions>
+					<execution>
+						<id>execution</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<projectName>Calculator Cucumber Report</projectName>
+							<skip>false</skip>
+							<outputDirectory>${project.build.directory}/site/cucumber-reports</outputDirectory>
+							<inputDirectory>${project.build.directory}</inputDirectory>
+							<jsonFiles>
+								<param>**/cucumber.json</param>
+							</jsonFiles>
+							<checkBuildResult>true</checkBuildResult>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 

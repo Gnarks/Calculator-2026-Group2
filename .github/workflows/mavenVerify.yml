@@ -58,6 +58,8 @@ jobs:
     # uploads the assets in the target folder
     # used by future workflows to avoid rebuilding each time
     - name: Upload Target Folder
+        # only upload from unbuntu otherwise would need to overwrite
+      if: runner.os == 'Linux'
       uses: actions/upload-artifact@v6
       with:
         name: build-assets

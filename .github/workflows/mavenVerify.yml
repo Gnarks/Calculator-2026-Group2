@@ -5,6 +5,13 @@ name: Maven Verify
 # Triggers on PR of master of dev
 # Or when a release is made
 on:
+
+  #todo: remove this push (only for test purposes)
+  # ===========
+  push: 
+    branches: [ Maxime/feat/AutomaticReport ]
+  # ===========
+
   pull_request:
     branches: [ master, dev]
   release:

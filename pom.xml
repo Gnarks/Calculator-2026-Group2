@@ -146,6 +146,7 @@
 				</configuration>
 			</plugin>
 
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -214,6 +215,8 @@
 				</configuration>
 			</plugin>
 
+
+			<!-- adds the JavaDocs to the final report -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -226,6 +229,7 @@
 				<version>${maven.surefire.version}</version>
 			</plugin>
 
+			<!-- adds the JaCoCo report to the final report -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -239,5 +243,4 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
 </project>

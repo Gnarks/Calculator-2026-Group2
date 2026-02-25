@@ -8,7 +8,7 @@ on:
 
   #todo: remove this push (only for test purposes)
   # ===========
-  push: 
+  # push: 
     # branches: [ Maxime/feat/AutomaticReport ]
   # ===========
 

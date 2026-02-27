@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Fixed
+
+
+
+## [v0.0.1]
+
+### Added
 - Initial project structure based on `calculator-cucumber-2026` template.
 - Basic arithmetic operations: Addition, Subtraction, Multiplication, Division.
 - Support for Prefix, Infix, and Postfix notations.
@@ -18,7 +28,3 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated `.gitignore` to ignore the `target/` directory and others files.
 - Updated dependencies of Junit and Cucumner to the latest version (6.0.2 and 7.34.2 respectively).
-
-
-## Fixed
-- 

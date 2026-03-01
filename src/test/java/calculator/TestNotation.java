@@ -2,6 +2,7 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -50,6 +51,26 @@ class TestNotation {
 			fail();
 		}
 		testNotations(symbol, value1, value2, op);
+	}
+
+	@Test
+	void testSeveralNotation() {
+		// Construction of an expression with a several notation and check that the notation of the inner operation does not affect the printing of the outer operation.
+		try {
+			List<Expression> innerParams = Arrays.asList(new MyNumber(3), new MyNumber(4));
+			Plus inner = new Plus(innerParams);
+			inner.notation = Notation.POSTFIX; // force postfix notation for the inner operation, but it should be ignored when printing the outer operation
+
+			List<Expression> outerParams = Arrays.asList(inner, new MyNumber(2));
+			Times outer = new Times(outerParams);
+			outer.notation = Notation.PREFIX;
+
+			assertEquals("* (+ (3, 4), 2)",   outer.toString(Notation.PREFIX));
+			assertEquals("( ( 3 + 4 ) * 2 )", outer.toString(Notation.INFIX));
+			assertEquals("((3, 4) +, 2) *",   outer.toString(Notation.POSTFIX));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
 	}
 
 }

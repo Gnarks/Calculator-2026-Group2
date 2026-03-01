@@ -1,10 +1,10 @@
 package calculator;
 
+import visitor.Printer;
 import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
@@ -76,6 +76,15 @@ public abstract class Operation implements Expression
   }
 
 	/**
+	 * getter method to return the symbol of the arithmetic operation.
+	 *
+	 * @return	The symbol of the arithmetic operation (e.g. "+", "-", "*", "/").
+	 */
+	public String getSymbol() {
+		return symbol;
+	}
+
+	/**
 	 * Abstract method representing the actual binary arithmetic operation to compute
 	 * @param l	 first argument of the binary operation
 	 * @param r	second argument of the binary operation
@@ -100,7 +109,6 @@ public abstract class Operation implements Expression
 	 * @param v	The visitor object
 	 */
   public void accept(Visitor v) {
-  	for(Expression a:args) { a.accept(v); }
   	v.visit(this);
   }
 
@@ -152,27 +160,16 @@ public abstract class Operation implements Expression
   }
 
   /**
-   * Convert the arithmetic operation into a String to allow it to be printed,
+   * Appeal to the visitor to convert the arithmetic operation into a String to allow it to be printed,
    * using the notation n (prefix, infix or postfix) that is specified as a parameter.
    *
    * @param n	The notation to be used for representing the operation (prefix, infix or postfix)
    * @return	The String that is the result of the conversion.
    */
   public final String toString(Notation n) {
-	   Stream<String> s = args.stream().map(Object::toString);
-	   return switch (n) {
-		   case INFIX -> "( " +
-				   s.reduce((s1, s2) -> s1 + " " + symbol + " " + s2).get() +
-				   " )";
-		   case PREFIX -> symbol + " " +
-				   "(" +
-				   s.reduce((s1, s2) -> s1 + ", " + s2).get() +
-				   ")";
-		   case POSTFIX -> "(" +
-				   s.reduce((s1, s2) -> s1 + ", " + s2).get() +
-				   ")" +
-				   " " + symbol;
-	   };
+	   Printer p = new Printer(n);
+	   this.accept(p);
+	   return p.getResult();
   }
 
 	/**

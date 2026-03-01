@@ -1,6 +1,7 @@
 package calculator;
 
 import visitor.Evaluator;
+import visitor.Printer;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -63,6 +64,18 @@ public class Calculator {
         e.accept(v);
         // and return the result of the evaluation at the end of the process
         return v.getResult();
+    }
+
+    /**
+     * Formats an arithmetic expression in a given notation
+     * @param e the arithmetic Expression to be formatted
+     * @param notation the notation to be used for formatting
+     * @return The formatted expression as a String
+     */
+    public String format(Expression e, Notation notation) {
+        Printer p = new Printer(notation);
+        e.accept(p);
+        return p.getResult();
     }
 
     /*

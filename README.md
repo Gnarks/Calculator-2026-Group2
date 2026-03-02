@@ -1,12 +1,23 @@
-[![](https://img.shields.io/github/v/release/University-of-Mons/calculator-cucumber-2026?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
+Release:[![](https://img.shields.io/github/v/release/Gnarks/Calculator-2026-Group2?label=Latest%20Release)](https://github.com/Gnarks/Calculator-2026-Group2/releases/latest)
 
-Code quality: ![Maven Build](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/maven.yml/badge.svg)
 
-Test coverage: ![Coverage](.github/badges/jacoco.svg)
-![Branches](.github/badges/branches.svg)
+Build: ![Maven Build Status](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/Pipeline.yml/badge.svg)
 
+Code quality:
+![CodeQL Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/codeql.yml/badge.svg)
+![PMD Code Analysis](https://github.com/Gnarks/Calculator-2026-Group2/security/code-scanning/badge/master)
+![Scorecard](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/scorecard.yml/badge.svg)
+
+Test coverage: 
+![JaCoCo Coverage](.github/badges/jacoco.svg)
+![Branches Coverage](.github/badges/branches.svg)
 
 # Calculating arithmetic expressions
+
+## Site
+A report of the code quality, test coverage, BDD tests, and units test can be found at :
+[This repository GitHub Pages](https://gnarks.github.io/Calculator-2026-Group2/)
+
 
 ## About
 
@@ -55,7 +66,7 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 
 ## Versions
 
-We use [SemVer](http://semver.org/) for semantic versioning. For the versions available, see the [tags on this repository](https://github.com/University-of-Mons/calculator-cucumber-2025/tags). 
+We use [SemVer](http://semver.org/) for semantic versioning. For the versions available, see the [tags on this repository](https://github.com/Gnarks/Calculator-2026-Group2/tags). 
 
 ## Contributors
 

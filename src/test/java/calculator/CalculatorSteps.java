@@ -110,4 +110,14 @@ public class CalculatorSteps {
 		assertEquals(val, c.eval(op));
 	}
 
+	@Then("the operation throws an ArithmeticException")
+	public void thenTheOperationThrowsAnArithmeticException() {
+		try {
+			c.eval(op);
+			fail("should have thrown an ArithmeticException");
+		} catch (ArithmeticException e) {
+			assertEquals("Division by zero", e.getMessage());
+		}
+	}
+
 }

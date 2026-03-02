@@ -72,7 +72,7 @@ jobs:
 
 
       - name: Upload SARIF to GitHub
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@v4.32.5
         with:
           sarif_file: pmd-report.sarif
 

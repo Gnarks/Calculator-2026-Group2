@@ -21,4 +21,4 @@ All notable changes to this project will be documented in this file.
 
 
 ## Fixed
-- 
+- In case of an usage of several notation inside an expression (infix, prefix and postfix), the expresion is considered as the type of the top-level.

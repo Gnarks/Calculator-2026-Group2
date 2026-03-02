@@ -12,6 +12,7 @@ permissions:
   contents: write
   checks: write
   pages: write
+  id-token: write
 
 jobs:
   # the first job to be ran, maven verify to test

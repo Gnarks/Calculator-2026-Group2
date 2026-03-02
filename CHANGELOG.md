@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 ## Fixed
-- In case of an usage of several notation inside an expression (infix, prefix and postfix), the expresion is considered as the type of the top-level.
+- In case of a usage of several notations inside an expression (infix, prefix and postfix), the expression is considered as the type of the top-level.
 
 
 
@@ -28,5 +28,5 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Updated `.gitignore` to ignore the `target/` directory and others files.
-- Updated dependencies of Junit and Cucumner to the latest version (6.0.2 and 7.34.2 respectively).
+- Updated dependencies of Junit and Cucumber to the latest version (6.0.2 and 7.34.2 respectively).
 

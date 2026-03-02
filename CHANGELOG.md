@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+## Fixed
+- In case of an usage of several notation inside an expression (infix, prefix and postfix), the expresion is considered as the type of the top-level.
+
+
+
+## [v0.0.1]
+
+### Added
 - Initial project structure based on `calculator-cucumber-2026` template.
 - Basic arithmetic operations: Addition, Subtraction, Multiplication, Division.
 - Support for Prefix, Infix, and Postfix notations.
@@ -19,6 +30,3 @@ All notable changes to this project will be documented in this file.
 - Updated `.gitignore` to ignore the `target/` directory and others files.
 - Updated dependencies of Junit and Cucumner to the latest version (6.0.2 and 7.34.2 respectively).
 
-
-## Fixed
-- In case of an usage of several notation inside an expression (infix, prefix and postfix), the expresion is considered as the type of the top-level.

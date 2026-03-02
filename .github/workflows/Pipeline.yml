@@ -67,7 +67,7 @@ jobs:
   # the last job requires the all others to suceed (by chained dependencies)
   # creates a report from the javadoc, tests, test coverage and code analysis 
   report:
-    needs: [pmd, jacoco]
+    needs: [jacoco]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

@@ -23,6 +23,7 @@
 		<javadoc.version>3.12.0</javadoc.version>
 		<maven-cucumber-reporting.version>5.10.2</maven-cucumber-reporting.version>
 		<jrx.version>3.6.0</jrx.version>
+		<antlr4.version>4.13.2</antlr4.version>
 
 		<sonar.organization>tommens</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -82,6 +83,15 @@
 			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr4-runtime</artifactId>
+			<version>${antlr4.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -212,6 +222,20 @@
 					<execution>
 						<goals>
 							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- antlrs's plugin to generate the code from the grammar -->
+			<plugin>
+				<groupId>org.antlr</groupId>
+				<artifactId>antlr4-maven-plugin</artifactId>
+				<version>${antlr4.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>antlr4</goal>
 						</goals>
 					</execution>
 				</executions>

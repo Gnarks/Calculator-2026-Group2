@@ -43,44 +43,35 @@ public class Printer extends Visitor{
         switch (notation) {
             case PREFIX -> {
                 sb.append(o.getSymbol()).append(" (");
-                visitArgs(o);
+                visitArgs(o, ", ");
                 sb.append(")");
             }
             case INFIX -> {
                 sb.append("( ");
-                visitArgsInfix(o);
+                visitArgs(o, " " + o.getSymbol() + " ");
                 sb.append(" )");
             }
             case POSTFIX -> {
                 sb.append("(");
-                visitArgs(o);
+                visitArgs(o, ", ");
                 sb.append(") ").append(o.getSymbol());
             }
         }
     }
 
     /**
-     * Helper method to visit the arguments of an operation and build their string representation in the specified notation.
+     * Helper method to visit the arguments of an operation and build their string representation.
      * @param o The operation whose arguments are to be visited
+     * @param separator The string used to separate the arguments
      */
-    private void visitArgs(Operation o) {
-        var args = o.getArgs();
-        for (int i = 0; i < args.size(); i++) {
-            args.get(i).accept(this);
-            if (i < args.size() - 1) sb.append(", ");
+    private void visitArgs(Operation o, String separator) {
+        var it = o.getArgs().iterator();
+        if (it.hasNext()) {
+            it.next().accept(this);
         }
-    }
-
-    /**
-     * Helper method to visit the arguments of an operation and build their string representation in infix notation, which requires a different handling than prefix and postfix notations. 
-     * @param o The operation whose arguments are to be visited in infix notation
-     */
-    private void visitArgsInfix(Operation o) {
-        var args = o.getArgs();
-        for (int i = 0; i < args.size(); i++) {
-            args.get(i).accept(this);
-            if (i < args.size() - 1)
-                sb.append(" ").append(o.getSymbol()).append(" ");
+        while (it.hasNext()) {
+            sb.append(separator);
+            it.next().accept(this);
         }
     }
 

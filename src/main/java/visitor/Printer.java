@@ -3,6 +3,7 @@ import calculator.Notation;
 
 import calculator.MyNumber;
 import calculator.Operation;
+import calculator.Expression;
 
 /**
  * Printer is a Visitor that converts arithmetic expressions into Strings, using a specified notation (prefix, infix or postfix).
@@ -65,13 +66,13 @@ public class Printer extends Visitor{
      * @param separator The string used to separate the arguments
      */
     private void visitArgs(Operation o, String separator) {
-        var it = o.getArgs().iterator();
-        if (it.hasNext()) {
-            it.next().accept(this);
-        }
-        while (it.hasNext()) {
+        for (Expression arg : o.getArgs()) {
+            arg.accept(this);
             sb.append(separator);
-            it.next().accept(this);
+        }
+        // Remove the last separator
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - separator.length());
         }
     }
 

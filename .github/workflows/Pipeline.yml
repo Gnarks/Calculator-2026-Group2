@@ -53,7 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Download Build Assets
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: build-assets
           path: target/
@@ -79,7 +79,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Download Build Assets
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: build-assets
           path: target/

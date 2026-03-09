@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ## Fixed
 - In case of a usage of several notations inside an expression (infix, prefix and postfix), the expression is considered as the type of the top-level.
+- Removal of the notation field in the class Operation. Now, the notation is only used when we use the Printer Visitor.
 
 
 

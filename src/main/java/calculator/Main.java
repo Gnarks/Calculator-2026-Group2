@@ -35,13 +35,13 @@ public class Main {
 
 			List<Expression> params = new ArrayList<>();
 			Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
-			e = new Plus(params,Notation.PREFIX);
+			e = new Plus(params);
 			c.printExpressionDetails(e);
 			c.eval(e);
 
 			List<Expression> params2 = new ArrayList<>();
 			Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
-			e = new Minus(params2, Notation.INFIX);
+			e = new Minus(params2);
 			c.print(e);
 			c.eval(e);
 
@@ -49,11 +49,15 @@ public class Main {
 			Collections.addAll(params3, new Plus(params), new Minus(params2));
 			e = new Times(params3);
 			c.printExpressionDetails(e);
+
+			System.out.println("PREFIX notation: " + c.format(e, Notation.PREFIX));
+			System.out.println("POSTFIX notation: " + c.format(e, Notation.POSTFIX));
+
 			c.eval(e);
 
 			List<Expression> params4 = new ArrayList<>();
 			Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(0));
-			e = new Divides(params4,Notation.POSTFIX);
+			e = new Divides(params4);
 			c.print(e);
 			c.eval(e);
 		}

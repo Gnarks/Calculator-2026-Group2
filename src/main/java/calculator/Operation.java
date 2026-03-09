@@ -30,24 +30,6 @@ public abstract class Operation implements Expression
    */
   protected int neutral;
 
-  /**
-   * The notation used to render operations as strings.
-   * By default, the infix notation will be used.
-   */
-  public Notation notation = Notation.INFIX;
-
-  /** It is not allowed to construct an operation with a null list of expressions.
-   * Note that it is allowed to have an EMPTY list of arguments.
-   *
-   * @param elist	The list of expressions passed as argument to the arithmetic operation
-   * @throws IllegalConstruction	Exception thrown if a null list of expressions is passed as argument
-   */
-  protected /*constructor*/ Operation(List<Expression> elist)
-		  throws IllegalConstruction
-	{
-		this(elist, null);
-    }
-
 	/** To construct an operation with a list of expressions as arguments,
 	 * as well as the Notation used to represent the operation.
 	 *
@@ -55,7 +37,7 @@ public abstract class Operation implements Expression
 	 * @param n 	The notation to be used to represent the operation
 	 * @throws IllegalConstruction	Exception thrown if a null list of expressions is passed as argument
 	 */
-	protected /*constructor*/ Operation(List<Expression> elist,Notation n)
+	protected /*constructor*/ Operation(List<Expression> elist)
 			throws IllegalConstruction
 	{
 		if (elist == null) {
@@ -63,7 +45,6 @@ public abstract class Operation implements Expression
 		else {
 			args = new ArrayList<>(elist);
 		}
-		if (n!=null) notation = n;
 	}
 
 	/**
@@ -114,13 +95,15 @@ public abstract class Operation implements Expression
 
   /**
    * Convert the arithmetic operation into a String to allow it to be printed,
-   * using the default notation (prefix, infix or postfix) that is specified in some variable.
+   * using the default printer
    *
    * @return	The String that is the result of the conversion.
    */
   @Override
   public final String toString() {
-  	return toString(notation);
+		Printer p = new Printer();
+		this.accept(p);
+		return p.getResult();
   }
 
   /**

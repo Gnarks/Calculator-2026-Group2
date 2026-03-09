@@ -38,12 +38,12 @@ public class EvalCommand implements CLICommand {
 
 			List<Expression> params = new ArrayList<>();
 			Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
-			e = new Plus(params,Notation.PREFIX);
+			e = new Plus(params);
 			c.printExpressionDetails(e);
 
 			List<Expression> params2 = new ArrayList<>();
 			Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
-			e = new Minus(params2, Notation.INFIX);
+			e = new Minus(params2);
 			c.print(e);
 
 			List<Expression> params3 = new ArrayList<>();
@@ -53,7 +53,7 @@ public class EvalCommand implements CLICommand {
 
 			List<Expression> params4 = new ArrayList<>();
 			Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(0));
-			e = new Divides(params4,Notation.POSTFIX);
+			e = new Divides(params4);
 			c.print(e);
 		}
 

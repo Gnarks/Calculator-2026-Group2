@@ -1,9 +1,13 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Logger;
+import calculator.command.CLICommand;
+import calculator.command.EvalCommand;
+import calculator.command.ExitCommand;
+import calculator.command.HelpCommand;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
  * A very simple calculator in Java
@@ -22,48 +26,36 @@ public class Main {
 	 * @param args	Command-line parameters are not used in this version
 	 */
 	public static void main(String[] args) {
+		// Commands registration
+        Map<String, CLICommand> commands = new HashMap<>();
+        commands.put("help", new HelpCommand());
+        commands.put("exit", new ExitCommand());
+        commands.put("eval", new EvalCommand());
 
-		Expression e;
-		Calculator c = new Calculator();
-		Logger logger = Logger.getLogger(Main.class.getName());
-
-		try{
-
-			e = new MyNumber(8);
-			c.print(e);
-			c.eval(e);
-
-			List<Expression> params = new ArrayList<>();
-			Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
-			e = new Plus(params,Notation.PREFIX);
-			c.printExpressionDetails(e);
-			c.eval(e);
-
-			List<Expression> params2 = new ArrayList<>();
-			Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
-			e = new Minus(params2, Notation.INFIX);
-			c.print(e);
-			c.eval(e);
-
-			List<Expression> params3 = new ArrayList<>();
-			Collections.addAll(params3, new Plus(params), new Minus(params2));
-			e = new Times(params3);
-			c.printExpressionDetails(e);
-			c.eval(e);
-
-			List<Expression> params4 = new ArrayList<>();
-			Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(0));
-			e = new Divides(params4,Notation.POSTFIX);
-			c.print(e);
-			c.eval(e);
-		}
-
-		catch(IllegalConstruction _) {
-			logger.info("cannot create operations without parameters");
-		}
-		catch(ArithmeticException error) {
-			System.out.println("Error: " + error.getMessage() + " (NaN)");
-		}
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Welcome to the Calculator! Type 'help' for assistance.");
+		
+		boolean running = true;
+        while (running) {
+            System.out.print("calc> ");
+            String input = scanner.nextLine().trim();
+            
+            if (input.isEmpty()) continue;
+            
+            String[] parts = input.split(" ", 2);
+            String commandName = parts[0].toLowerCase();
+            String arguments = parts.length > 1 ? parts[1] : "";
+            
+            CLICommand command = commands.get(commandName);
+            
+            if (command != null) {
+                running = command.execute(arguments);
+            } else {
+                CLICommand defaultEval = commands.get("eval");
+                running = defaultEval.execute(input);
+            }
+        }
+        scanner.close();
 	}
 
 }

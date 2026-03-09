@@ -34,7 +34,6 @@ public abstract class Operation implements Expression
 	 * as well as the Notation used to represent the operation.
 	 *
 	 * @param elist	The list of expressions passed as argument to the arithmetic operation
-	 * @param n 	The notation to be used to represent the operation
 	 * @throws IllegalConstruction	Exception thrown if a null list of expressions is passed as argument
 	 */
 	protected /*constructor*/ Operation(List<Expression> elist)

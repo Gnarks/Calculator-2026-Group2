@@ -16,6 +16,12 @@ public class Counter extends Visitor {
     private int currentDepth = 0;
 
     /**
+     * Default constructor.
+     */
+    public Counter() {
+    }
+
+    /**
      * Visit a number: increments the number count and tracks the current depth.
      *
      * @param n The number being visited
@@ -43,16 +49,19 @@ public class Counter extends Visitor {
     }
 
     /**
+     * Gets the number of operations.
      * @return The number of operations in the expression
      */
     public int getNbOps() { return nbOps; }
 
     /**
+     * Gets the number of numbers.
      * @return The number of numbers in the expression
      */
     public int getNbNbs() { return nbNbs; }
 
     /**
+     * Gets the depth.
      * @return The depth (0 for a number, 1 for a simple operation, etc.)
      */
     public int getDepth() { return maxDepth; }

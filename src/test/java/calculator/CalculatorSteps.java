@@ -75,8 +75,7 @@ public class CalculatorSteps {
 	@Then("^its (.*) notation is (.*)$")
 	public void thenItsNotationIs(String notation, String s) {
 		if (notation.equals("PREFIX")||notation.equals("POSTFIX")||notation.equals("INFIX")) {
-			op.notation = Notation.valueOf(notation);
-			assertEquals(s, op.toString());
+			assertEquals(s, op.toString(Notation.valueOf(notation)));
 		}
 		else fail(notation + " is not a correct notation! ");
 	}

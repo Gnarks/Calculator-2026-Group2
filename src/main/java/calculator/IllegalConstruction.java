@@ -5,4 +5,10 @@ package calculator;
  */
 public class IllegalConstruction extends Exception {
 
+    /**
+     * Default constructor.
+     */
+    public IllegalConstruction() {
+        super();
+    }
 }

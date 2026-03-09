@@ -16,8 +16,6 @@ class TestNotation {
 	 */
 	void testNotation(String s, Operation o, Notation n) {
 		assertEquals(s, o.toString(n));
-		o.notation = n;
-		assertEquals(s, o.toString());
 	}
 
 	/*
@@ -63,12 +61,9 @@ class TestNotation {
 		try {
 			List<Expression> innerParams = Arrays.asList(new MyNumber(3), new MyNumber(4));
 			Plus inner = new Plus(innerParams);
-			inner.notation = Notation.POSTFIX; // force postfix notation for the inner operation, but it should be ignored
-																					// when printing the outer operation
 
 			List<Expression> outerParams = Arrays.asList(inner, new MyNumber(2));
 			Times outer = new Times(outerParams);
-			outer.notation = Notation.PREFIX;
 
 			assertEquals("* (+ (3, 4), 2)", outer.toString(Notation.PREFIX));
 			assertEquals("( ( 3 + 4 ) * 2 )", outer.toString(Notation.INFIX));

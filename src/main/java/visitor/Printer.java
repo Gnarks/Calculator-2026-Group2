@@ -26,6 +26,12 @@ public class Printer extends Visitor{
         this.notation = notation;
     }
 
+    /** Constructor of the Printer class, which initializes the notation to infix by default.
+     */
+    public Printer() {
+        this.notation = Notation.INFIX; // Default notation is infix
+    }
+
     /** The visit methods for MyNumber and Operation, which are called when the Printer visits a MyNumber or an Operation, respectively.
      * These methods build the string representation of the expression being visited, using the specified notation.
      * @param n The MyNumber to be visited

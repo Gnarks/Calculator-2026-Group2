@@ -33,16 +33,24 @@
     </div>
 
     <div v-if="isHelpVisible" class="modal-overlay" @click="closeHelp">
-      <div class="modal-content" @click.stop>
-        <h2>Calculator help</h2>
-          <ul>
-            <li>Enter a math expression (e.g., 2 + 3) and press '='.</li>
-            <li>Calculations are processed by a Java server</li>
-          </ul>
-        <button class="close-modal-btn" @click="closeHelp">OK</button>
+        <div class="modal-content" @click.stop>
+          <h2>Calculator Help</h2>
+          <div class="help-body">
+            <ul>
+              <li><strong>Operations:</strong> Enter your math expression (e.g., <code class="math-preview">2 + 3 * 5</code>) and press <span class="key-hint">=</span>.</li>
+              <li><strong>Editing:</strong> 
+                <ul>
+                  <li>Press <span class="key-hint">C</span> to clear the entire screen.</li>
+                  <li>Press <span class="key-hint">DEL</span> to remove the last character or reset a result.</li>
+                </ul>
+              </li>
+              <li> Calculations are processed by a <strong>Java</strong> server.</li>
+            </ul>
+          </div>
+          <button class="close-modal-btn" @click="closeHelp">OK</button>
+        </div>
       </div>
-    </div>
-  </div>
+      </div>
 </template>
 
 <script setup>
@@ -51,34 +59,48 @@ import axios from 'axios';
 
 const display = ref('');
 const isHelpVisible = ref(false);
+const isResultState = ref(false);
 
 const appendToDisplay = (value) => {
+  if (display.value === 'Error' || isResultState.value) display.value = '';
   display.value += value;
 };
 
 const clearDisplay = () => {
   display.value = '';
+  isResultState.value = false;
 };
 
 const deleteLast = () => {
+  if (display.value == "Error" || isResultState.value){
+    clearDisplay();
+    return;
+  }
   display.value = display.value.slice(0, -1);
 };
 
 const calculate = async () => {
-  if (!display.value) return;
+  if (!display.value || display.value === 'Error') return;
   
   try {
-    const response = await axios.post('http://localhost:8080/api/evaluate', {
+      const response = await axios.post('http://localhost:8080/api/evaluate', {
       expression: display.value
     });
-    
-    display.value = response.data.result;
+
+    if (response.data.success === 1) {
+      display.value = response.data.result.toString();
+      isResultState.value = true; 
+    } else {
+      display.value = 'Error';
+      isResultState.value = false;
+      console.warn("Calculation error :", response.data.result);
+    }
+
   } catch (error) {
-    alert("Calculation error ! Please try again with another expression.");
+    alert("Impossible to reach server. Please try again later");
     console.error(error);
   }
 };
-
 const showHelp = () => {
   isHelpVisible.value = true;
 };
@@ -225,4 +247,39 @@ button:active { background-color: #71717a; }
 }
 
 .close-modal-btn:hover { background-color: #22c55e; }
+
+.key-hint {
+  background-color: #3f3f46;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  border-bottom: 2px solid #1a1a1a;
+  color: #4ade80;
+  font-weight: bold;
+}
+
+.math-preview {
+  color: #fbbf24;
+  font-style: italic;
+}
+
+.help-body ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.help-body li {
+  margin-bottom: 1.2rem;
+  line-height: 1.4;
+}
+
+.help-body ul ul {
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.help-body ul ul li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
 </style>

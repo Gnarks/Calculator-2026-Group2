@@ -57,13 +57,13 @@ jobs:
         with:
           name: build-assets
           path: backend/target/
-
       - name: Generate JaCoCo Badge
         uses: cicirello/jacoco-badge-generator@v2
         with:
           generate-coverage-badge: true
           generate-branches-badge: true
           generate-summary: true
+          jacoco-csv-file: backend/target/site/jacoco/jacoco.csv
 
   # the last job requires the all others to suceed (by chained dependencies)
   # creates a report from the javadoc, tests, test coverage and code analysis 

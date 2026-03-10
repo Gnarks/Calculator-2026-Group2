@@ -1,6 +1,8 @@
 package calculator;
 
+import visitor.Counter;
 import visitor.Evaluator;
+import visitor.Printer;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -11,11 +13,11 @@ import visitor.Evaluator;
 public class Calculator {
 
 
+    /**
+     * Default constructor of the class.
+     * Does nothing since the class does not have any variables that need to be initialised.
+     */
     public Calculator() {
-        /**
-         * Default constructor of the class.
-         * Does nothing since the class does not have any variables that need to be initialised.
-         **/
     }
 
     /*
@@ -33,7 +35,7 @@ public class Calculator {
      * @see #printExpressionDetails(Expression) 
      */
     public void print(Expression e) {
-        System.out.println("The result of evaluating expression " + e);
+        System.out.println("The result of evaluating expression " + format(e, Notation.INFIX));
         System.out.println("is: " + eval(e) + ".");
         System.out.println();
     }
@@ -45,9 +47,11 @@ public class Calculator {
      */
     public void printExpressionDetails(Expression e) {
         print(e);
-        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
-        System.out.print(e.countOps() + " operations");
-        System.out.println(" and " + e.countNbs() + " numbers.");
+        Counter c = new Counter();
+        e.accept(c);
+        System.out.print("It contains " + c.getDepth() + " levels of nested expressions, ");
+        System.out.print(c.getNbOps() + " operations");
+        System.out.println(" and " + c.getNbNbs() + " numbers.");
         System.out.println();
     }
 
@@ -63,6 +67,18 @@ public class Calculator {
         e.accept(v);
         // and return the result of the evaluation at the end of the process
         return v.getResult();
+    }
+
+    /**
+     * Formats an arithmetic expression in a given notation
+     * @param e the arithmetic Expression to be formatted
+     * @param notation the notation to be used for formatting
+     * @return The formatted expression as a String
+     */
+    public String format(Expression e, Notation notation) {
+        Printer p = new Printer(notation);
+        e.accept(p);
+        return p.getResult();
     }
 
     /*

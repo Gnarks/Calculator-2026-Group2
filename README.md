@@ -5,7 +5,7 @@ Build: ![Maven Build Status](https://github.com/Gnarks/Calculator-2026-Group2/ac
 
 Code quality:
 ![CodeQL Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/codeql.yml/badge.svg)
-<!-- ![PMD Code Analysis](https://github.com/OWNER/REPO/security/code-scanning/badge/master) -->
+![PMD Code Analysis](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/pmd.yml/badge.svg)
 ![Scorecard](https://github.com/Gnarks/Calculator-2026-Group2/actions/workflows/scorecard.yml/badge.svg)
 
 Test coverage: 

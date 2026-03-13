@@ -4,7 +4,7 @@ package calculator.atoms;
 import java.math.BigDecimal;
 
 import calculator.Expression;
-import calculator.Operation;
+import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 import visitor.Visitor;
 

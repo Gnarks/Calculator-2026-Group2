@@ -2,7 +2,7 @@ package visitor;
 
 import calculator.Notation;
 
-import calculator.Operation;
+import calculator.operations.Operation;
 import calculator.atoms.*;
 import calculator.Expression;
 

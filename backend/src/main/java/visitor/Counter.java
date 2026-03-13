@@ -1,7 +1,7 @@
 package visitor;
 
 import calculator.Expression;
-import calculator.Operation;
+import calculator.operations.Operation;
 import calculator.atoms.Complex;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;

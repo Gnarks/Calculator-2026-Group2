@@ -1,6 +1,6 @@
 package visitor;
 
-import calculator.Operation;
+import calculator.operations.Operation;
 import calculator.atoms.*;
 
 /**

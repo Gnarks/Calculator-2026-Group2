@@ -2,7 +2,7 @@
 package calculator.atoms;
 
 import calculator.Expression;
-import calculator.Operation;
+import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 
 public interface Atom extends Expression {

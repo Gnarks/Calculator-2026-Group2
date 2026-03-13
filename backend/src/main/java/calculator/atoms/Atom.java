@@ -1,4 +1,3 @@
-
 package calculator.atoms;
 
 import calculator.Expression;

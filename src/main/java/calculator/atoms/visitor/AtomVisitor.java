@@ -3,7 +3,7 @@ package calculator.atoms.visitor;
 import calculator.atoms.*;
 
 /**
- * Visitor design pattern
+ * Visitor design pattern for atoms
  */
 public abstract class AtomVisitor {
 
@@ -17,21 +17,21 @@ public abstract class AtomVisitor {
 	/**
 	 * The Visitor can traverse a Complex number (a subtype of Expression)
 	 *
-	 * @param r The Real number being visited
+	 * @param r The Complex number being visited
 	 */
 	public abstract void visit(Complex c);
 
 	/**
 	 * The Visitor can traverse a Rationnal number (a subtype of Expression)
 	 *
-	 * @param r The Real number being visited
+	 * @param r The Rationnal number being visited
 	 */
 	public abstract void visit(Rationnal q);
 
 	/**
 	 * The Visitor can traverse a Rationnal number (a subtype of Expression)
 	 *
-	 * @param r The Real number being visited
+	 * @param r The Rationnal number being visited
 	 */
 	public abstract void visit(IntegerAtom i);
 

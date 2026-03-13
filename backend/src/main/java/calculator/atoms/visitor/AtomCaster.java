@@ -1,0 +1,107 @@
+package calculator.atoms.visitor;
+
+import calculator.atoms.*;
+
+/**
+ * AtomCaster is an AtomVisitor whose goal is to cast
+ * the visited atom to the specified type
+ * and throw errors if this cast is imossible e.g a complex to an Integer
+ *
+ * @see AtomVisitor
+ */
+public class AtomCaster extends AtomVisitor {
+
+	/* The type to Cast the visited Atom to */
+	private AtomType type;
+
+	/* The Result of the casting after the visit */
+	private Atom result;
+
+	/**
+	 * returns the result of the cast of the visited to the specified type
+	 * 
+	 * @return the Result of the cast from the visited Atom to the specified type
+	 */
+	public Atom getResult() {
+		return result;
+	}
+
+	/**
+	 * Constructs an AtomCaster to cast to the specified type
+	 *
+	 * @param type The type to Cast the visited Atom to
+	 */
+	public AtomCaster(AtomType type) {
+		this.type = type;
+	}
+
+	/**
+	 * Visiting a Real Atom to cast it to the specified type of the visitor
+	 *
+	 * @param r The visited Real to be cast
+	 * @throws IllegalAtomCast in case of an impossible cast
+	 */
+	@Override
+	public void visit(Real r) {
+		switch (type) {
+			case REAL:
+				result = r;
+				break;
+
+			case INTEGER:
+				throw new IllegalAtomCast("Impossible to cast Real to Integer");
+
+			default:
+				result = null;
+				throw new UnsupportedOperationException("Cast Not implemented");
+		}
+	}
+
+	/**
+	 * Visiting a Complex Atom to cast it to the specified type of the visitor
+	 *
+	 * @param c The visited Complex to be cast
+	 * @throws IllegalAtomCast in case of an impossible cast
+	 */
+	@Override
+	public void visit(Complex c) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+	}
+
+	/**
+	 * Visiting a Rationnal Atom to cast it to the specified type of the visitor
+	 *
+	 * @param q The visited Rationnal to be cast
+	 * @throws IllegalAtomCast in case of an impossible cast
+	 */
+	@Override
+	public void visit(Rationnal q) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+	}
+
+	/**
+	 * Visiting a Integer Atom to cast it to the specified type of the visitor
+	 *
+	 * @param i The visited IntegerAtom to be cast
+	 * @throws IllegalAtomCast in case of an impossible cast
+	 */
+	@Override
+	public void visit(IntegerAtom i) {
+		switch (type) {
+			case INTEGER:
+				result = i;
+				break;
+
+			case REAL:
+				result = new Real(i.getValue());
+				break;
+
+			default:
+				result = null;
+				throw new UnsupportedOperationException("Cast Not implemented");
+		}
+	}
+
+}

@@ -41,6 +41,10 @@ public class Evaluator extends Visitor {
 		computedValue = r;
 	}
 
+	public void visit(IntegerAtom i) {
+		computedValue = i;
+	}
+
 	@Override
 	public void visit(Complex c) {
 		// TODO Auto-generated method stub

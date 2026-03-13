@@ -41,4 +41,17 @@ public class AtomCaster extends AtomVisitor {
 		throw new UnsupportedOperationException("Unimplemented method 'visit'");
 	}
 
+	@Override
+	public void visit(IntegerAtom i) {
+		switch (type) {
+			case INTEGER:
+				result = i;
+				break;
+
+			default:
+				result = null;
+				throw new UnsupportedOperationException("Cast Not implemented");
+		}
+	}
+
 }

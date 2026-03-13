@@ -28,4 +28,11 @@ public abstract class AtomVisitor {
 	 */
 	public abstract void visit(Rationnal q);
 
+	/**
+	 * The Visitor can traverse a Rationnal number (a subtype of Expression)
+	 *
+	 * @param r The Real number being visited
+	 */
+	public abstract void visit(IntegerAtom i);
+
 }

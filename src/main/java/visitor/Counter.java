@@ -3,6 +3,7 @@ package visitor;
 import calculator.Expression;
 import calculator.operations.Operation;
 import calculator.atoms.Complex;
+import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
 
@@ -25,6 +26,12 @@ public class Counter extends Visitor {
 
 	@Override
 	public void visit(Real r) {
+		nbNbs += 1;
+		maxDepth = Math.max(maxDepth, currentDepth);
+	}
+
+	@Override
+	public void visit(IntegerAtom i) {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
 	}

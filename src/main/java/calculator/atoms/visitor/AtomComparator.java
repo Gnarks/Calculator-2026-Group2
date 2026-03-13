@@ -4,7 +4,7 @@ import calculator.atoms.*;
 
 public class AtomComparator extends AtomVisitor {
 
-	public AtomType highestType;
+	private AtomType highestType = AtomType.INTEGER;
 
 	public AtomType getResult() {
 		return highestType;
@@ -13,7 +13,7 @@ public class AtomComparator extends AtomVisitor {
 	@Override
 	public void visit(Real r) {
 		// only change the highestType if the actual one is the rationnal
-		if (highestType == AtomType.RATIONNAL || highestType == null) {
+		if (highestType == AtomType.RATIONNAL || highestType == AtomType.INTEGER) {
 			highestType = AtomType.REAL;
 		}
 
@@ -30,10 +30,13 @@ public class AtomComparator extends AtomVisitor {
 
 	@Override
 	public void visit(Rationnal r) {
-		// changes the highestType to Rationnal if it isn't set yet
-		if (highestType == null) {
+		if (highestType == AtomType.INTEGER) {
 			highestType = AtomType.RATIONNAL;
 		}
+	}
+
+	@Override
+	public void visit(IntegerAtom i) {
 	}
 
 }

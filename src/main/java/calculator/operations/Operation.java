@@ -8,6 +8,7 @@ import calculator.IllegalConstruction;
 import calculator.Notation;
 import calculator.atoms.Atom;
 import calculator.atoms.Complex;
+import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
 import visitor.Printer;
@@ -91,6 +92,8 @@ public abstract class Operation implements Expression {
 	 * @return result of computing the binary operation
 	 */
 	public abstract Real op(Complex c1, Complex c2);
+
+	public abstract IntegerAtom op(IntegerAtom integerAtom, IntegerAtom a);
 
 	/**
 	 * Abstract method representing the actual binary arithmetic operation to

@@ -5,6 +5,13 @@ import calculator.Expression;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 
+/**
+ * Atom abstract class
+ * An Atom represents a number (or an operand of operations ).
+ * The implemented number (atom) types are present in the AtomType enum
+ * 
+ * @see AtomType
+ */
 public interface Atom extends Expression {
 
 	/**
@@ -15,7 +22,7 @@ public interface Atom extends Expression {
 	 *
 	 * @param o the operation to apply
 	 * @param a the other atom
-	 * @return the result of the operation having the same type as {@value}a
+	 * @return the result of the operation having the same type as a
 	 */
 	public Atom apply(Operation o, Atom a);
 

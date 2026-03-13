@@ -9,8 +9,8 @@ import calculator.atoms.visitor.AtomVisitor;
 import visitor.Visitor;
 
 /**
- * Real is a concrete class that represents arithmetic (real) numbers,
- * which are a special kind of Expressions, just like operations are.
+ * Real is a concrete class that represents arithmetic (Real) numbers,
+ * which are Atoms, a special kind of Expressions.
  *
  * @see Expression
  * @see Operation
@@ -130,6 +130,13 @@ public class Real implements Atom {
 		return value.intValue();
 	}
 
+	/**
+	 * applies an operation between two Reals
+	 *
+	 * @param o the operation to apply
+	 * @param a the other Real
+	 * @return The result of the application of o on a and this instance
+	 */
 	@Override
 	public Real apply(Operation o, Atom a) {
 		return o.op(this, (Real) a);

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
 import calculator.atoms.Real;
+import calculator.operations.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

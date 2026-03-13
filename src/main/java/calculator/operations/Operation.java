@@ -93,7 +93,15 @@ public abstract class Operation implements Expression {
 	 */
 	public abstract Real op(Complex c1, Complex c2);
 
-	public abstract IntegerAtom op(IntegerAtom integerAtom, IntegerAtom a);
+	/**
+	 * Abstract method representing the actual binary arithmetic operation to
+	 * compute on Integer
+	 * 
+	 * @param i1 first Integer of the binary operation
+	 * @param i2 second Integer of the binary operation
+	 * @return result of computing the binary operation
+	 */
+	public abstract IntegerAtom op(IntegerAtom i1, IntegerAtom i2);
 
 	/**
 	 * Abstract method representing the actual binary arithmetic operation to

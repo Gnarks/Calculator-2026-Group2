@@ -1,5 +1,6 @@
 package calculator.atoms;
 
+import calculator.Expression;
 import calculator.atoms.visitor.AtomVisitor;
 import calculator.operations.Operation;
 import visitor.Visitor;
@@ -102,6 +103,8 @@ public class IntegerAtom implements Atom {
 	}
 
 	/**
+	 * returns the value of the integer
+	 * 
 	 * @return the value of the integer
 	 */
 	public int getValue() {

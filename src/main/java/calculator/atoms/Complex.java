@@ -4,9 +4,21 @@ import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 import visitor.Visitor;
 
+/**
+ * Complex Number type is used to represent complex e.g. 3 + 2i
+ */
 public class Complex implements Atom {
 
 	// TODO blank class : to implement
+
+	/**
+	 * TODO Complex constructor
+	 * 
+	 */
+	public Complex() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented constructor");
+	}
 
 	@Override
 	public Real apply(Operation o, Atom a) {

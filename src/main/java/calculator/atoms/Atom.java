@@ -29,7 +29,7 @@ public interface Atom extends Expression {
 	/**
 	 * accepts the specific AtomVisitor
 	 *
-	 * @param v The Atomvisitor object being passed as a parameter
+	 * @param aV The Atomvisitor object being passed as a parameter
 	 */
 	public void accept(AtomVisitor aV);
 }

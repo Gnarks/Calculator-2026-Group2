@@ -18,6 +18,8 @@ public class AtomCaster extends AtomVisitor {
 	private Atom result;
 
 	/**
+	 * returns the result of the cast of the visited to the specified type
+	 * 
 	 * @return the Result of the cast from the visited Atom to the specified type
 	 */
 	public Atom getResult() {
@@ -25,6 +27,8 @@ public class AtomCaster extends AtomVisitor {
 	}
 
 	/**
+	 * Constructs an AtomCaster to cast to the specified type
+	 *
 	 * @param type The type to Cast the visited Atom to
 	 */
 	public AtomCaster(AtomType type) {
@@ -68,7 +72,7 @@ public class AtomCaster extends AtomVisitor {
 	/**
 	 * Visiting a Rationnal Atom to cast it to the specified type of the visitor
 	 *
-	 * @param r The visited Rationnal to be cast
+	 * @param q The visited Rationnal to be cast
 	 * @throws IllegalAtomCast in case of an impossible cast
 	 */
 	@Override

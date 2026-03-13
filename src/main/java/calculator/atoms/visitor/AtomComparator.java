@@ -17,10 +17,19 @@ public class AtomComparator extends AtomVisitor {
 	private AtomType highestType = AtomType.INTEGER;
 
 	/**
+	 * returns the most englobing type visited
+	 *
 	 * @return The most englobing type visited
 	 */
 	public AtomType getResult() {
 		return highestType;
+	}
+
+	/**
+	 * Constructor of the AtomComparator visitor
+	 * 
+	 */
+	public AtomComparator() {
 	}
 
 	/**

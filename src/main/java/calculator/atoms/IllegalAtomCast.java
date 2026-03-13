@@ -9,6 +9,8 @@ public class IllegalAtomCast extends RuntimeException {
 
 	/**
 	 * Default constructor.
+	 *
+	 * @param s the string of the Exception
 	 */
 	public IllegalAtomCast(String s) {
 		super(s);

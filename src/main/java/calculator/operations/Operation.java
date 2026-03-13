@@ -6,6 +6,7 @@ import java.util.List;
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.Notation;
+import calculator.atoms.Atom;
 import calculator.atoms.Complex;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
@@ -17,7 +18,7 @@ import visitor.Visitor;
  * which are a special kind of Expressions, just like numbers are.
  *
  * @see Expression
- * @see MyNumber
+ * @see Atom
  */
 public abstract class Operation implements Expression {
 	/**

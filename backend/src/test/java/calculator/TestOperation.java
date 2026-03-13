@@ -4,6 +4,7 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
+import calculator.atoms.Real;
 import visitor.Counter;
 
 import java.util.Arrays;
@@ -16,16 +17,16 @@ class TestOperation {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		List<Expression> params1 = Arrays.asList(new MyNumber(3), new MyNumber(4), new MyNumber(5));
-		List<Expression> params2 = Arrays.asList(new MyNumber(5), new MyNumber(4));
-		List<Expression> params3 = Arrays.asList(new Plus(params1), new Minus(params2), new MyNumber(7));
+		List<Expression> params1 = Arrays.asList(new Real(3), new Real(4), new Real(5));
+		List<Expression> params2 = Arrays.asList(new Real(5), new Real(4));
+		List<Expression> params3 = Arrays.asList(new Plus(params1), new Minus(params2), new Real(7));
 		o = new Divides(params3);
 		o2 = new Divides(params3);
 	}
 
 	@Test
 	void testEquals() {
-		assertEquals(o,o2);
+		assertEquals(o, o2);
 	}
 
 	@Test

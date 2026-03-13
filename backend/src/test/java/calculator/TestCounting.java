@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import calculator.atoms.Real;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import visitor.Counter;
@@ -12,56 +15,55 @@ import visitor.Counter;
 import java.util.Arrays;
 import java.util.List;
 
-
 class TestCounting {
 
-    private int value1, value2;
-    private Expression e;
+	private int value1, value2;
+	private Expression e;
 
-    @BeforeEach
-    void setUp() {
-        value1 = 8;
-        value2 = 6;
-    }
+	@BeforeEach
+	void setUp() {
+		value1 = 8;
+		value2 = 6;
+	}
 
-    @Test
-    void testNumberCounting() {
-        e = new MyNumber(value1);
-        Counter c = new Counter();
-        e.accept(c);
-        //test whether a number has zero depth (i.e. no nested expressions)
-        assertEquals(0, c.getDepth());
-        //test whether a number contains zero operations
-        assertEquals(0, c.getNbOps());
-        //test whether a number contains 1 number
-        assertEquals(1, c.getNbNbs());
-    }
+	@Test
+	void testNumberCounting() {
+		e = new Real(value1);
+		Counter c = new Counter();
+		e.accept(c);
+		// test whether a number has zero depth (i.e. no nested expressions)
+		assertEquals(0, c.getDepth());
+		// test whether a number contains zero operations
+		assertEquals(0, c.getNbOps());
+		// test whether a number contains 1 number
+		assertEquals(1, c.getNbNbs());
+	}
 
-    @ParameterizedTest
-    @ValueSource(strings = {"*", "+", "/", "-"})
-    void testOperationCounting(String symbol) {
-        List<Expression> params = Arrays.asList(new MyNumber(value1),new MyNumber(value2));
-        try {
-            //construct another type of operation depending on the input value
-            //of the parameterised test
-            switch (symbol) {
-                case "+"	->	e = new Plus(params);
-                case "-"	->	e = new Minus(params);
-                case "*"	->	e = new Times(params);
-                case "/"	->	e = new Divides(params);
-                default		->	fail();
-            }
-        } catch (IllegalConstruction _) {
-            fail();
-        }
-        Counter c = new Counter();
-        e.accept(c);
-        //test whether a binary operation has depth 1
-        assertEquals(1, c.getDepth(), "counting depth of an Operation");
-        //test whether a binary operation contains 1 operation
-        assertEquals(1, c.getNbOps());
-        //test whether a binary operation contains 2 numbers
-        assertEquals(2, c.getNbNbs());
-    }
+	@ParameterizedTest
+	@ValueSource(strings = { "*", "+", "/", "-" })
+	void testOperationCounting(String symbol) {
+		List<Expression> params = Arrays.asList(new Real(value1), new Real(value2));
+		try {
+			// construct another type of operation depending on the input value
+			// of the parameterised test
+			switch (symbol) {
+				case "+" -> e = new Plus(params);
+				case "-" -> e = new Minus(params);
+				case "*" -> e = new Times(params);
+				case "/" -> e = new Divides(params);
+				default -> fail();
+			}
+		} catch (IllegalConstruction _) {
+			fail();
+		}
+		Counter c = new Counter();
+		e.accept(c);
+		// test whether a binary operation has depth 1
+		assertEquals(1, c.getDepth(), "counting depth of an Operation");
+		// test whether a binary operation contains 1 operation
+		assertEquals(1, c.getNbOps());
+		// test whether a binary operation contains 2 numbers
+		assertEquals(2, c.getNbNbs());
+	}
 
 }

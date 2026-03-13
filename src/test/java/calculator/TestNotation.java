@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import calculator.atoms.Real;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +38,7 @@ class TestNotation {
 		int value1 = 8;
 		int value2 = 6;
 		Operation op = null;
-		List<Expression> params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+		List<Expression> params = Arrays.asList(new Real(value1), new Real(value2));
 		try {
 			// construct another type of operation depending on the input value of the
 			// parameterised test
@@ -59,10 +61,10 @@ class TestNotation {
 		// notation of the inner operation does not affect the printing of the outer
 		// operation.
 		try {
-			List<Expression> innerParams = Arrays.asList(new MyNumber(3), new MyNumber(4));
+			List<Expression> innerParams = Arrays.asList(new Real(3), new Real(4));
 			Plus inner = new Plus(innerParams);
 
-			List<Expression> outerParams = Arrays.asList(inner, new MyNumber(2));
+			List<Expression> outerParams = Arrays.asList(inner, new Real(2));
 			Times outer = new Times(outerParams);
 
 			assertEquals("* (+ (3, 4), 2)", outer.toString(Notation.PREFIX));

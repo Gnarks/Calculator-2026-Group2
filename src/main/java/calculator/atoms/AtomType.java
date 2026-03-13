@@ -17,5 +17,10 @@ public enum AtomType {
 	/**
 	 * Rationnal number, e.g. 1/3, 5, 99/1010
 	 */
-	RATIONNAL
+	RATIONNAL,
+
+	/**
+	 * Integer e.g 3, 0, 5
+	 */
+	INTEGER
 }

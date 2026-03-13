@@ -6,6 +6,7 @@ import java.util.List;
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.atoms.Complex;
+import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
 
@@ -58,6 +59,21 @@ public final class Divides extends Operation {
 	 */
 	public Real op(Real r1, Real r2) {
 		return new Real(r1.getValue().divide(r2.getValue(), RoundingMode.HALF_UP));
+	}
+
+	/**
+	 * The actual computation of the (binary) arithmetic division of two
+	 * Integers
+	 * 
+	 * @param i1 The first IntegerAtom
+	 * @param i2 The second IntegerAtom
+	 * @return The (new) IntegerAtom that is the result of the division
+	 */
+	public IntegerAtom op(IntegerAtom i1, IntegerAtom i2) {
+		if (i2.getValue() == 0) {
+			throw new ArithmeticException("Division by zero");
+		}
+		return new IntegerAtom(i1.getValue() / i2.getValue());
 	}
 
 	@Override

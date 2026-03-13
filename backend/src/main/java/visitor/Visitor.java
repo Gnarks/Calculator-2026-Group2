@@ -35,4 +35,11 @@ public abstract class Visitor {
 	 * @param o The operation being visited
 	 */
 	public abstract void visit(Operation o);
+
+	/**
+	 * The Visitor can traverse an operation (a subtype of Expression)
+	 *
+	 * @param o The operation being visited
+	 */
+	public abstract void visit(IntegerAtom i);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.atoms.Complex;
+import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
 
@@ -54,6 +55,18 @@ public final class Minus extends Operation {
 	 */
 	public Real op(Real r1, Real r2) {
 		return new Real(r1.getValue().add(r2.getValue().negate()));
+	}
+
+	/**
+	 * The actual computation of the (binary) arithmetic subtraction of two
+	 * Integers
+	 * 
+	 * @param i1 The first IntegerAtom
+	 * @param i2 The second IntegerAtom
+	 * @return The (new) IntegerAtom that is the result of the subtraction
+	 */
+	public IntegerAtom op(IntegerAtom i1, IntegerAtom i2) {
+		return new IntegerAtom(i1.getValue() - i2.getValue());
 	}
 
 	@Override

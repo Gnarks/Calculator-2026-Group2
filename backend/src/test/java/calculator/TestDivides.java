@@ -4,6 +4,7 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
+import calculator.operations.*;
 import calculator.atoms.Real;
 
 import java.util.ArrayList;

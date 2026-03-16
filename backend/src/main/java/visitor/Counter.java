@@ -38,14 +38,14 @@ public class Counter extends Visitor {
 
 	@Override
 	public void visit(Complex c) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		nbNbs += 1;
+		maxDepth = Math.max(maxDepth, currentDepth);
 	}
 
 	@Override
 	public void visit(Rationnal q) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		nbNbs += 1;
+		maxDepth = Math.max(maxDepth, currentDepth);
 	}
 
 	/**

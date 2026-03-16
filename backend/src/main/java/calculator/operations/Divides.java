@@ -78,8 +78,11 @@ public final class Divides extends Operation {
 
 	@Override
 	public Complex op(Complex c1, Complex c2) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'op'");
+		if (c2.getValue().equals(org.apache.commons.numbers.complex.Complex.ZERO)) {
+			throw new ArithmeticException("Division by zero");
+		}
+		org.apache.commons.numbers.complex.Complex result = c1.getValue().divide(c2.getValue());
+		return new Complex(result);
 	}
 
 	@Override

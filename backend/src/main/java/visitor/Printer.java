@@ -65,8 +65,7 @@ public class Printer extends Visitor {
 
 	@Override
 	public void visit(Complex c) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		sb.append(c.toString());
 	}
 
 	@Override

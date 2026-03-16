@@ -1,12 +1,11 @@
-package visitor;
+package calculator.atoms.visitor;
 
-import calculator.operations.Operation;
 import calculator.atoms.*;
 
 /**
- * Visitor design pattern
+ * Visitor design pattern for atoms
  */
-public abstract class Visitor {
+public abstract class AtomVisitor {
 
 	/**
 	 * The Visitor can traverse a Real number (a subtype of Expression)
@@ -18,28 +17,22 @@ public abstract class Visitor {
 	/**
 	 * The Visitor can traverse a Complex number (a subtype of Expression)
 	 *
-	 * @param c The Real number being visited
+	 * @param c The Complex number being visited
 	 */
 	public abstract void visit(Complex c);
 
 	/**
 	 * The Visitor can traverse a Rationnal number (a subtype of Expression)
 	 *
-	 * @param q The Real number being visited
+	 * @param q The Rationnal number being visited
 	 */
 	public abstract void visit(Rationnal q);
 
 	/**
-	 * The Visitor can traverse an operation (a subtype of Expression)
+	 * The Visitor can traverse a Rationnal number (a subtype of Expression)
 	 *
-	 * @param o The operation being visited
-	 */
-	public abstract void visit(Operation o);
-
-	/**
-	 * The Visitor can traverse an Integer (a subtype of Expression)
-	 *
-	 * @param i The operation being visited
+	 * @param i The Rationnal number being visited
 	 */
 	public abstract void visit(IntegerAtom i);
+
 }

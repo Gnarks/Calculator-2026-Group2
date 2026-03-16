@@ -4,6 +4,9 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
+import calculator.atoms.Real;
+import calculator.operations.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,14 +20,18 @@ class TestPlus {
 
 	@BeforeEach
 	void setUp() {
-		  params = new ArrayList<>(Arrays.asList(new MyNumber(value1),new MyNumber(value2)));
-		  try { op = new Plus(params); }
-		  catch(IllegalConstruction _) { fail(); }
+		params = new ArrayList<>(Arrays.asList(new Real(value1), new Real(value2)));
+		try {
+			op = new Plus(params);
+		} catch (IllegalConstruction _) {
+			fail();
+		}
 	}
 
 	@Test
 	void testConstructor1() {
-		// It should not be possible to create a Plus expression without null parameter list
+		// It should not be possible to create a Plus expression without null parameter
+		// list
 		assertThrows(IllegalConstruction.class, () -> op = new Plus(null));
 	}
 
@@ -41,32 +48,36 @@ class TestPlus {
 
 	@Test
 	void testEquals() {
-		// Two similar expressions, constructed separately (and using different constructors) should be equal
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+		// Two similar expressions, constructed separately (and using different
+		// constructors) should be equal
+		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new Real(value1), new Real(value2)));
 		try {
 			Plus e = new Plus(p);
 			assertEquals(op, e);
 			assertEquals(e, e);
-			assertNotEquals(e, new Plus(new ArrayList<>(Arrays.asList(new MyNumber(5), new MyNumber(4)))));
+			assertNotEquals(e, new Plus(new ArrayList<>(Arrays.asList(new Real(5), new Real(4)))));
+		} catch (IllegalConstruction _) {
+			fail();
 		}
-		catch(IllegalConstruction _) { fail(); }
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	@Test
 	void testNull() {
-			assertDoesNotThrow(() -> op==null); // Direct way to to test if the null case is handled.
+		assertDoesNotThrow(() -> op == null); // Direct way to to test if the null case is handled.
 	}
 
 	@Test
 	void testHashCode() {
-		// Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+		// Two similar expressions, constructed separately (and using different
+		// constructors) should have the same hashcode
+		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new Real(value1), new Real(value2)));
 		try {
 			Plus e = new Plus(p);
 			assertEquals(e.hashCode(), op.hashCode());
+		} catch (IllegalConstruction _) {
+			fail();
 		}
-		catch(IllegalConstruction _) { fail(); }
 	}
 
 	@Test

@@ -4,6 +4,9 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
+import calculator.atoms.Real;
+import calculator.operations.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,9 +20,12 @@ class TestMinus {
 
 	@BeforeEach
 	void setUp() {
-		  params = Arrays.asList(new MyNumber(value1),new MyNumber(value2));
-		  try { op = new Minus(params); }
-		  catch(IllegalConstruction _) { fail(); }
+		params = Arrays.asList(new Real(value1), new Real(value2));
+		try {
+			op = new Minus(params);
+		} catch (IllegalConstruction _) {
+			fail();
+		}
 	}
 
 	@Test
@@ -41,30 +47,34 @@ class TestMinus {
 
 	@Test
 	void testEquals() {
-		// Two similar expressions, constructed separately (and using different constructors) should not be equal
-		List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+		// Two similar expressions, constructed separately (and using different
+		// constructors) should not be equal
+		List<Expression> p = Arrays.asList(new Real(value1), new Real(value2));
 		try {
 			Minus e = new Minus(p);
 			assertEquals(op, e);
+		} catch (IllegalConstruction _) {
+			fail();
 		}
-		catch(IllegalConstruction _) { fail(); }
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	@Test
 	void testNull() {
-		assertDoesNotThrow(() -> op==null); // Direct way to to test if the null case is handled.
+		assertDoesNotThrow(() -> op == null); // Direct way to to test if the null case is handled.
 	}
 
 	@Test
 	void testHashCode() {
-		// Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-		List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+		// Two similar expressions, constructed separately (and using different
+		// constructors) should have the same hashcode
+		List<Expression> p = Arrays.asList(new Real(value1), new Real(value2));
 		try {
 			Minus e = new Minus(p);
 			assertEquals(e.hashCode(), op.hashCode());
+		} catch (IllegalConstruction _) {
+			fail();
 		}
-		catch(IllegalConstruction _) { fail(); }
 	}
 
 	@Test

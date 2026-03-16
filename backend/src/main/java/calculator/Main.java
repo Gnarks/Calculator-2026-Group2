@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
+import calculator.atoms.Real;
+import calculator.operations.*;
+
 /**
  * A very simple calculator in Java
  * University of Mons - UMONS
@@ -17,9 +20,10 @@ public class Main {
 
 	/**
 	 * This is the main method of the application.
-	 * It provides examples of how to use it to construct and evaluate arithmetic expressions.
+	 * It provides examples of how to use it to construct and evaluate arithmetic
+	 * expressions.
 	 *
-	 * @param args	Command-line parameters are not used in this version
+	 * @param args Command-line parameters are not used in this version
 	 */
 	public static void main(String[] args) {
 
@@ -27,20 +31,20 @@ public class Main {
 		Calculator c = new Calculator();
 		Logger logger = Logger.getLogger(Main.class.getName());
 
-		try{
+		try {
 
-			e = new MyNumber(8);
+			e = new Real(8);
 			c.print(e);
 			c.eval(e);
 
 			List<Expression> params = new ArrayList<>();
-			Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
+			Collections.addAll(params, new Real(3), new Real(4), new Real(5));
 			e = new Plus(params);
 			c.printExpressionDetails(e);
 			c.eval(e);
 
 			List<Expression> params2 = new ArrayList<>();
-			Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
+			Collections.addAll(params2, new Real(5), new Real(3));
 			e = new Minus(params2);
 			c.print(e);
 			c.eval(e);
@@ -56,16 +60,15 @@ public class Main {
 			c.eval(e);
 
 			List<Expression> params4 = new ArrayList<>();
-			Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(0));
+			Collections.addAll(params4, new Plus(params), new Minus(params2), new Real(0));
 			e = new Divides(params4);
 			c.print(e);
 			c.eval(e);
 		}
 
-		catch(IllegalConstruction _) {
+		catch (IllegalConstruction _) {
 			logger.info("cannot create operations without parameters");
-		}
-		catch(ArithmeticException error) {
+		} catch (ArithmeticException error) {
 			System.out.println("Error: " + error.getMessage() + " (NaN)");
 		}
 	}

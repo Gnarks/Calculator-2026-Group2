@@ -26,6 +26,8 @@ All notable changes to this project will be documented in this file.
 - Documentation updates: README badges, .gitignore configuration.
 - Added division by zero handling
 - CI/CD code analysis and testing report.
+- Web-based GUI: Built with Vue 3
+- API Integration: Implemented the POST request structure for the /api/evaluate endpoint.
 
 ### Changed
 - Updated `.gitignore` to ignore the `target/` directory and others files.

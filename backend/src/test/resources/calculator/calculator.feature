@@ -97,3 +97,27 @@ Feature: Integer Arithmetic Expressions
       | "-" | 8| 5|     3|
       | "*" | 7| 2|    14|
       | "/" | 6| 2|     3|
+
+  Scenario: Adding two complex numbers
+    Given an integer operation '+'
+    When I provide a complex number 3.0 and 2.0
+    And I provide a complex number 1.0 and 4.0
+    Then the operation evaluates to the complex number 4.0 and 6.0
+
+  Scenario: Subtracting two complex numbers
+    Given an integer operation '-'
+    When I provide a complex number 5.0 and 5.0
+    And I provide a complex number 2.0 and 1.0
+    Then the operation evaluates to the complex number 3.0 and 4.0
+
+  Scenario: Multiplying two complex numbers
+    Given an integer operation '*'
+    When I provide a complex number 2.0 and 3.0
+    And I provide a complex number 4.0 and 5.0
+    Then the operation evaluates to the complex number -7.0 and 22.0
+
+  Scenario: Dividing two complex numbers
+    Given an integer operation '/'
+    When I provide a complex number 4.0 and 2.0
+    And I provide a complex number 1.0 and 1.0
+    Then the operation evaluates to the complex number 3.0 and -1.0

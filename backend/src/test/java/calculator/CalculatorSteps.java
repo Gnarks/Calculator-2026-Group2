@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import calculator.atoms.IntegerAtom;
+import calculator.atoms.Complex;
 import calculator.operations.*;
 
 public class CalculatorSteps {
@@ -95,6 +96,15 @@ public class CalculatorSteps {
 		op.addMoreParams(params);
 	}
 
+	@When("I provide a complex number {double} and {double}")
+	public void whenIProvideAComplexNumber(double real, double imaginary) {
+		params = new ArrayList<>();
+		params.add(new Complex(real, imaginary));
+		if (op != null) {
+			op.addMoreParams(params);
+		}
+	}
+
 	@Then("^the (.*) is (\\d+)$")
 	public void thenTheOperationIs(String s, int val) {
 		try {
@@ -114,6 +124,11 @@ public class CalculatorSteps {
 	@Then("the operation evaluates to {int}")
 	public void thenTheOperationEvaluatesTo(int val) {
 		assertEquals(new IntegerAtom(val), c.eval(op));
+	}
+
+	@Then("the operation evaluates to the complex number {double} and {double}")
+	public void thenTheOperationEvaluatesToComplex(double real, double imaginary) {
+		assertEquals(new Complex(real, imaginary), c.eval(op));
 	}
 
 	@Then("the operation throws an ArithmeticException")

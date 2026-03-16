@@ -41,7 +41,7 @@ public class Calculator {
 	 */
 	public void print(Expression e) {
 		System.out.println("The result of evaluating expression " + format(e, Notation.INFIX));
-		System.out.println("is: " + eval(e) + ".");
+		System.out.println("is: " + format(eval(e), Notation.INFIX) + ".");
 		System.out.println();
 	}
 

@@ -91,7 +91,7 @@ public abstract class Operation implements Expression {
 	 * @param c2 second Complex of the binary operation
 	 * @return result of computing the binary operation
 	 */
-	public abstract Real op(Complex c1, Complex c2);
+	public abstract Complex op(Complex c1, Complex c2);
 
 	/**
 	 * Abstract method representing the actual binary arithmetic operation to
@@ -111,7 +111,7 @@ public abstract class Operation implements Expression {
 	 * @param q2 second Rationnal of the binary operation
 	 * @return result of computing the binary operation
 	 */
-	public abstract Real op(Rationnal q1, Rationnal q2);
+	public abstract Rationnal op(Rationnal q1, Rationnal q2);
 
 	/**
 	 * Add more parameters to the existing list of parameters

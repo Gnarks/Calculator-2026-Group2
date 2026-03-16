@@ -58,13 +58,13 @@ public final class Times extends Operation {
 	}
 
 	@Override
-	public Real op(Complex c1, Complex c2) {
+	public Complex op(Complex c1, Complex c2) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'op'");
 	}
 
 	@Override
-	public Real op(Rationnal q1, Rationnal q2) {
+	public Rationnal op(Rationnal q1, Rationnal q2) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'op'");
 	}

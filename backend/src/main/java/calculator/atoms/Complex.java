@@ -1,5 +1,6 @@
 package calculator.atoms;
 
+import calculator.Expression;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 import visitor.Visitor;

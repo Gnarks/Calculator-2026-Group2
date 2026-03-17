@@ -12,6 +12,7 @@ import java.util.List;
 
 import calculator.atoms.IntegerAtom;
 import calculator.operations.*;
+import calculator.atoms.Rationnal;
 
 public class CalculatorSteps {
 
@@ -125,5 +126,19 @@ public class CalculatorSteps {
 			assertEquals("Division by zero", e.getMessage());
 		}
 	}
+
+	@When("I provide a rational number {int} and {int}")
+    public void whenIProvideARationalNumber(int numerator, int denominator) {
+        params = new ArrayList<>();
+        params.add(new Rationnal(numerator, denominator));
+        if (op != null) {
+            op.addMoreParams(params);
+        }
+    }
+
+    @Then("the operation evaluates to the rational number {int} and {int}")
+    public void thenTheOperationEvaluatesToRational(int numerator, int denominator) {
+        assertEquals(new Rationnal(numerator, denominator), c.eval(op));
+    }
 
 }

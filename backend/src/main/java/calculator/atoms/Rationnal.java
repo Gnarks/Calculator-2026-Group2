@@ -1,39 +1,89 @@
 package calculator.atoms;
 
+import calculator.Expression;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 import visitor.Visitor;
+import java.util.Objects;
 
 /**
- * TODO Rationnal number to implement
+ * Rationnal Number type is used to represent fractions e.g. 1/2
+ * @see Expression
+ * @see Operation
+ * @see Atom
  */
 public class Rationnal implements Atom {
 
-	// TODO blank class : to implement
+    private final org.apache.commons.numbers.fraction.Fraction value;
 
-	/**
-	 * TODO Rationnal Constructor
-	 */
-	public Rationnal() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented constructor");
-	}
+    /**
+     * Constructor method
+     * * @param numerator The numerator
+     * @param denominator The denominator
+     */
+    public Rationnal(int numerator, int denominator) {
+        this.value = org.apache.commons.numbers.fraction.Fraction.of(numerator, denominator);
+    }
 
-	@Override
-	public Real apply(Operation o, Atom a) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'accept'");
-	}
+    /**
+     * Constructor method for a whole number
+     * * @param value The integer value (e.g., 5 becomes 5/1)
+     */
+    public Rationnal(int value) {
+        this.value = org.apache.commons.numbers.fraction.Fraction.of(value);
+    }
 
-	@Override
-	public void accept(AtomVisitor v) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'accept'");
-	}
+    /**
+     * Constructor method from an existing Fraction object
+     * * @param value The commons-numbers Fraction object
+     */
+    public Rationnal(org.apache.commons.numbers.fraction.Fraction value) {
+        this.value = value;
+    }
 
-	@Override
-	public void accept(Visitor v) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'accept'");
-	}
+    /**
+     * getter method to obtain the value contained in the object
+     *
+     * @return The commons-numbers Fraction number contained in the object
+     */
+    public org.apache.commons.numbers.fraction.Fraction getValue() {
+        return value;
+    }
+
+    @Override
+    public Rationnal apply(Operation o, Atom a) {
+        return o.op(this, (Rationnal) a);
+    }
+
+    @Override
+    public void accept(AtomVisitor v) {
+        v.visit(this);
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (this == o) return true;
+        if (!(o instanceof Rationnal)) return false;
+        Rationnal other = (Rationnal) o;
+        return this.value.equals(other.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        if (value.getDenominator() == 1) {
+            return String.valueOf(value.getNumerator());
+        }
+        return value.getNumerator() + "/" + value.getDenominator();
+    }
 }

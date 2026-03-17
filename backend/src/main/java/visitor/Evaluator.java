@@ -53,8 +53,7 @@ public class Evaluator extends Visitor {
 
 	@Override
 	public void visit(Rationnal q) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		computedValue = q;
 	}
 
 	/**

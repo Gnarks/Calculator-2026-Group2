@@ -22,8 +22,12 @@ public class Rationnal implements Atom {
      * @param denominator The denominator
      */
     public Rationnal(int numerator, int denominator) {
+    try {
         this.value = org.apache.commons.numbers.fraction.Fraction.of(numerator, denominator);
+    } catch (ArithmeticException e) {
+        throw new IllegalArgumentException("Denominator cannot be zero", e);
     }
+}
 
     /**
      * Constructor method for a whole number

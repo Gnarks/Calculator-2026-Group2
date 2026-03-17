@@ -88,7 +88,7 @@ public final class Divides extends Operation {
             throw new ArithmeticException("Division by zero");
         }
         
-        org.apache.commons.numbers.fraction.Fraction result = q1.getValue().divideBy(q2.getValue());
+        org.apache.commons.numbers.fraction.Fraction result = q1.getValue().divide(q2.getValue());
         return new Rationnal(result);
     }
 }

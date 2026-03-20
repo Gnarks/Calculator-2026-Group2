@@ -90,4 +90,11 @@ public class Rationnal implements Atom {
         }
         return value.getNumerator() + "/" + value.getDenominator();
     }
+
+    public int getNumerator() {
+         return value.getNumerator(); 
+        }
+    public int getDenominator() {
+         return value.getDenominator();
+         }
 }

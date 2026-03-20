@@ -71,7 +71,25 @@ public class Printer extends Visitor {
 
 	@Override
 	public void visit(Rationnal q) {
-		sb.append(q.toString());
+		int num = q.getNumerator();
+		int den = q.getDenominator();
+
+		if (den == 1) {
+			sb.append(num);
+			return;
+		}
+
+		switch (notation) {
+			case PREFIX -> {
+				sb.append("/ ").append(num).append(" ").append(den);
+			}
+			case POSTFIX -> {
+				sb.append(num).append(" ").append(den).append(" /");
+			}
+			case INFIX -> {
+				sb.append(num).append("/").append(den);
+			}
+		}
 	}
 
 	/**

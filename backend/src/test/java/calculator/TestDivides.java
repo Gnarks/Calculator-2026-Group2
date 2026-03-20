@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 
 import calculator.operations.*;
 import calculator.atoms.Real;
+import calculator.atoms.Rationnal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,4 +95,31 @@ class TestDivides {
 		}
 	}
 
+	@Test
+    void testDivideRationnals() {
+        Rationnal q1 = new Rationnal(1, 2); 
+        Rationnal q2 = new Rationnal(1, 4);
+		// (1/2) / (1/4) must be equal to 2/1 
+        List<Expression> p = Arrays.asList(q1, q2);
+        try {
+            Divides d = new Divides(p);
+            Rationnal expected = new Rationnal(2, 1);
+            assertEquals(expected, d.op(q1, q2));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testDivideByZeroRationnal() {
+        Rationnal q1 = new Rationnal(value1, value2);
+        Rationnal zero = new Rationnal(0, 1);
+        List<Expression> p = Arrays.asList(q1, zero);
+        try {
+            Divides d = new Divides(p);
+            assertThrows(ArithmeticException.class, () -> d.op(q1, zero));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
 }

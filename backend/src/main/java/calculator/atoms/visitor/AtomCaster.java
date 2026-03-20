@@ -50,6 +50,10 @@ public class AtomCaster extends AtomVisitor {
 
 			case INTEGER:
 				throw new IllegalAtomCast("Impossible to cast Real to Integer");
+			
+			case RATIONNAL:
+				result = new Rationnal(org.apache.commons.numbers.fraction.Fraction.from(r.getValue().doubleValue()));
+				break;
 
 			default:
 				result = null;
@@ -77,8 +81,26 @@ public class AtomCaster extends AtomVisitor {
 	 */
 	@Override
 	public void visit(Rationnal q) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		switch (type) {
+			case RATIONNAL:
+				result = q;
+				break;
+
+			case REAL:
+				result = new Real(q.getValue().doubleValue());
+				break;
+
+			case COMPLEX:
+				result = new Complex(q.getValue().doubleValue(), 0);
+				break;
+
+			case INTEGER:
+				throw new IllegalAtomCast("Impossible to cast Rationnal to Integer");
+
+			default:
+				result = null;
+				throw new UnsupportedOperationException("Cast Not implemented");
+		}
 	}
 
 	/**
@@ -96,6 +118,10 @@ public class AtomCaster extends AtomVisitor {
 
 			case REAL:
 				result = new Real(i.getValue());
+				break;
+			
+			case RATIONNAL:
+				result = new Rationnal(i.getValue(), 1);
 				break;
 
 			default:

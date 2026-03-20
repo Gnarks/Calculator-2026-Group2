@@ -4,6 +4,7 @@ package calculator.atoms;
 import java.math.BigDecimal;
 
 import calculator.Expression;
+import calculator.IllegalConstruction;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 import visitor.Visitor;
@@ -16,7 +17,22 @@ import visitor.Visitor;
  * @see Operation
  */
 public class Real implements Atom {
+
+	/*
+	 * the actual Real value
+	 * in case of a special real value it is used to determine which special real
+	 * it represents
+	 */
 	private final BigDecimal value;
+
+	/*
+	 * A boolean flag used to know if the Real is a special value
+	 * if the flag is true, there is 3 possibilities :
+	 * value = 1 => the Real represents +\inf
+	 * value = -1 => the Real represents -\inf
+	 * value = 0 => the Real represents a NaN
+	 */
+	private boolean special = false;
 
 	/**
 	 * getter method to obtain the value contained in the object
@@ -28,6 +44,15 @@ public class Real implements Atom {
 	}
 
 	/**
+	 * getter method to obtain if the real is special
+	 * 
+	 * @return a boolean representing if the real is special
+	 */
+	public boolean isSpecial() {
+		return special;
+	}
+
+	/**
 	 * Constructor method
 	 *
 	 * @param v The BigDecimal value to be contained in the object
@@ -35,6 +60,44 @@ public class Real implements Atom {
 	public /* constructor */ Real(BigDecimal v) {
 		value = v;
 	}
+
+	/**
+	 * Constructor for special Reals
+	 *
+	 * @param v either 1
+	 * @throws IllegalConstruction
+	 */
+	private /* constructor */ Real(boolean s, int v) {
+		value = new BigDecimal(v);
+		special = s;
+	}
+
+	/**
+	 * Returns a NaN Real
+	 * 
+	 * @return A new Real number representing a NaN
+	 */
+	public static Real nan() {
+		return new Real(true, 0);
+	};
+
+	/**
+	 * Returns a Real representing +infinity
+	 * 
+	 * @return A new Real number representing +infinity
+	 */
+	public static Real plusInf() {
+		return new Real(true, 1);
+	};
+
+	/**
+	 * Returns a Real representing -infinity
+	 * 
+	 * @return A new Real number representing -infinity
+	 */
+	public static Real minusInf() {
+		return new Real(true, -1);
+	};
 
 	/**
 	 * Constructor method

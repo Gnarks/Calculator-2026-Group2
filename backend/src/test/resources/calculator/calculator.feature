@@ -100,36 +100,36 @@ Feature: Integer Arithmetic Expressions
 
 Scenario: Adding two rational numbers
     Given an integer operation "+"
-    When I provide a rational number 1 and 2
-    And I provide a rational number 1 and 3
-    Then the operation evaluates to the rational number 5 and 6
+    When I provide a rational number 1 / 2
+    And I provide a rational number 1 / 3
+    Then the operation evaluates to the rational number 5 / 6
 
   Scenario: Subtracting two rational numbers
     Given an integer operation "-"
-    When I provide a rational number 3 and 4
-    And I provide a rational number 1 and 4
-    Then the operation evaluates to the rational number 1 and 2
+    When I provide a rational number 3 / 4
+    And I provide a rational number 1 / 4
+    Then the operation evaluates to the rational number 1 / 2
 
   Scenario: Multiplying two rational numbers
     Given an integer operation "*"
-    When I provide a rational number 2 and 3
-    And I provide a rational number 3 and 4
-    Then the operation evaluates to the rational number 1 and 2
+    When I provide a rational number 2 / 3
+    And I provide a rational number 3 / 4
+    Then the operation evaluates to the rational number 1 / 2
 
   Scenario: Dividing two rational numbers
     Given an integer operation "/"
-    When I provide a rational number 1 and 2
-    And I provide a rational number 1 and 4
-    Then the operation evaluates to the rational number 2 and 1
+    When I provide a rational number 1 / 2
+    And I provide a rational number 1 / 4
+    Then the operation evaluates to the rational number 2 / 1
 
   Scenario: Automatic simplification of results
     Given an integer operation "+"
-    When I provide a rational number 2 and 4
-    And I provide a rational number 2 and 4
-    Then the operation evaluates to the rational number 1 and 1
+    When I provide a rational number 2 / 4
+    And I provide a rational number 2 / 4
+    Then the operation evaluates to the rational number 1 / 1
 
   Scenario: Dividing a rational by zero
     Given an integer operation "/"
-    When I provide a rational number 1 and 2
-    And I provide a rational number 0 and 1
+    When I provide a rational number 1 / 2
+    And I provide a rational number 0 / 1
     Then the operation throws an ArithmeticException

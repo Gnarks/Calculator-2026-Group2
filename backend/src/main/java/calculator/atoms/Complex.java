@@ -44,8 +44,6 @@ public class Complex implements Atom {
 	public org.apache.commons.numbers.complex.Complex getValue() {
 		return value;
 	}
-	// temporarily to pass the mvn tests
-	public Complex(double real, double imaginary) { }
 
 	@Override
 	public Complex apply(Operation o, Atom a) {

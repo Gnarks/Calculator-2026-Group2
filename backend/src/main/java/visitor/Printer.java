@@ -70,13 +70,13 @@ public class Printer extends Visitor {
 
 		switch (notation) {
 			case PREFIX -> {
-				sb.append("+ ").append(realPart).append(" ").append(imaginaryPart).append(" i");
+				sb.append("+ ").append(realPart).append(" ").append(imaginaryPart).append("i");
 			}
 			case POSTFIX -> {
-				sb.append(realPart).append(" ").append(imaginaryPart).append(" i +");
+				sb.append(realPart).append(" ").append(imaginaryPart).append("i +");
 			}
 			case INFIX -> {
-				sb.append(realPart).append(" + ").append(imaginaryPart).append(" i");
+				sb.append(realPart).append(" + ").append(imaginaryPart).append("i");
 			}
 		}
 	}

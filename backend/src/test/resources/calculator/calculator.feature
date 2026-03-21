@@ -100,51 +100,51 @@ Feature: Integer Arithmetic Expressions
 
   Scenario: Adding two complex numbers
     Given an integer operation '+'
-    When I provide a complex number 3.0 and 2.0
-    And I provide a complex number 1.0 and 4.0
-    Then the operation evaluates to the complex number 4.0 and 6.0
+    When I provide a complex number 3.0 and 2.0i
+    And I provide a complex number 1.0 and 4.0i
+    Then the operation evaluates to the complex number 4.0 and 6.0i
 
   Scenario: Subtracting two complex numbers
     Given an integer operation '-'
-    When I provide a complex number 5.0 and 5.0
-    And I provide a complex number 2.0 and 1.0
-    Then the operation evaluates to the complex number 3.0 and 4.0
+    When I provide a complex number 5.0 and 5.0i
+    And I provide a complex number 2.0 and 1.0i
+    Then the operation evaluates to the complex number 3.0 and 4.0i
 
   Scenario: Multiplying two complex numbers
     Given an integer operation '*'
-    When I provide a complex number 2.0 and 3.0
-    And I provide a complex number 4.0 and 5.0
-    Then the operation evaluates to the complex number -7.0 and 22.0
+    When I provide a complex number 2.0 and 3.0i
+    And I provide a complex number 4.0 and 5.0i
+    Then the operation evaluates to the complex number -7.0 and 22.0i
 
   Scenario: Dividing two complex numbers
     Given an integer operation '/'
-    When I provide a complex number 4.0 and 2.0
-    And I provide a complex number 1.0 and 1.0
-    Then the operation evaluates to the complex number 3.0 and -1.0
+    When I provide a complex number 4.0 and 2.0i
+    And I provide a complex number 1.0 and 1.0i
+    Then the operation evaluates to the complex number 3.0 and -1.0i
 
   Scenario: Adding two complex numbers
     Given an integer operation '+'
-    When I provide a complex number 3.0 and 2.0
-    And I provide a complex number 1.0 and 4.0
-    Then the operation evaluates to the complex number 4.0 and 6.0
+    When I provide a complex number 3.0 and 2.0i
+    And I provide a complex number 1.0 and 4.0i
+    Then the operation evaluates to the complex number 4.0 and 6.0i
 
   Scenario: Subtracting two complex numbers
     Given an integer operation '-'
-    When I provide a complex number 5.0 and 5.0
-    And I provide a complex number 2.0 and 1.0
-    Then the operation evaluates to the complex number 3.0 and 4.0
+    When I provide a complex number 5.0 and 5.0i
+    And I provide a complex number 2.0 and 1.0i
+    Then the operation evaluates to the complex number 3.0 and 4.0i
 
   Scenario: Multiplying two complex numbers
     Given an integer operation '*'
-    When I provide a complex number 2.0 and 3.0
-    And I provide a complex number 4.0 and 5.0
-    Then the operation evaluates to the complex number -7.0 and 22.0
+    When I provide a complex number 2.0 and 3.0i
+    And I provide a complex number 4.0 and 5.0i
+    Then the operation evaluates to the complex number -7.0 and 22.0i
 
   Scenario: Dividing two complex numbers
     Given an integer operation '/'
-    When I provide a complex number 4.0 and 2.0
-    And I provide a complex number 1.0 and 1.0
-    Then the operation evaluates to the complex number 3.0 and -1.0
+    When I provide a complex number 4.0 and 2.0i
+    And I provide a complex number 1.0 and 1.0i
+    Then the operation evaluates to the complex number 3.0 and -1.0i
 
 Scenario: Adding two rational numbers
     Given an integer operation "+"

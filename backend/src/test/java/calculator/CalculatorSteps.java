@@ -97,7 +97,7 @@ public class CalculatorSteps {
         op.addMoreParams(params);
     }
 
-	@When("I provide a complex number {double} and {double}")
+	@When("I provide a complex number {double} and {double}i")
 	public void whenIProvideAComplexNumber(double real, double imaginary) {
 		params = new ArrayList<>();
 		params.add(new Complex(real, imaginary));
@@ -127,7 +127,7 @@ public class CalculatorSteps {
         assertEquals(new IntegerAtom(val), c.eval(op));
     }
 
-	@Then("the operation evaluates to the complex number {double} and {double}")
+	@Then("the operation evaluates to the complex number {double} and {double}i")
 	public void thenTheOperationEvaluatesToComplex(double real, double imaginary) {
 		assertEquals(new Complex(real, imaginary), c.eval(op));
 	}

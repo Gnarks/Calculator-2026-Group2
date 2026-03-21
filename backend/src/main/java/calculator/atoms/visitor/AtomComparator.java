@@ -3,7 +3,7 @@ package calculator.atoms.visitor;
 import calculator.atoms.*;
 
 /**
- * AtomComparator is an AtomVisitor whose goal give the largest set of number
+ * AtomComparator is an AtomVisitor whose goal is to give the largest set of number
  * between all visited types
  * e.g. between an Integer, Real and Complex, the Complex type is the largest
  * as both the Integer and Real are included in Complexes

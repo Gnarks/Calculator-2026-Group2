@@ -71,8 +71,8 @@ public final class Minus extends Operation {
 
 	@Override
 	public Complex op(Complex c1, Complex c2) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'op'");
+		org.apache.commons.numbers.complex.Complex result = c1.getValue().subtract(c2.getValue());
+		return new Complex(result);
 	}
 
 	@Override

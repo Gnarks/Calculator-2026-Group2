@@ -5,7 +5,7 @@ import calculator.atoms.*;
 /**
  * AtomCaster is an AtomVisitor whose goal is to cast
  * the visited atom to the specified type
- * and throw errors if this cast is imossible e.g a complex to an Integer
+ * and throws errors if this cast is impossible e.g a complex to an Integer
  *
  * @see AtomVisitor
  */
@@ -55,6 +55,10 @@ public class AtomCaster extends AtomVisitor {
 				result = new Rationnal(org.apache.commons.numbers.fraction.Fraction.from(r.getValue().doubleValue()));
 				break;
 
+			case COMPLEX:
+				result = new Complex(r.getValue().doubleValue(), 0);
+				break;
+
 			default:
 				result = null;
 				throw new UnsupportedOperationException("Cast Not implemented");
@@ -69,8 +73,20 @@ public class AtomCaster extends AtomVisitor {
 	 */
 	@Override
 	public void visit(Complex c) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		switch (type) {
+			case COMPLEX:
+				result = c;
+				break;
+
+			case REAL:
+			case INTEGER:
+			case RATIONNAL:
+				throw new IllegalAtomCast("Impossible to cast Complex to " + type);
+
+			default:
+				result = null;
+				throw new UnsupportedOperationException("Cast Not implemented");
+		}
 	}
 
 	/**
@@ -122,6 +138,10 @@ public class AtomCaster extends AtomVisitor {
 			
 			case RATIONNAL:
 				result = new Rationnal(i.getValue(), 1);
+				break;
+
+			case COMPLEX:
+				result = new Complex(i.getValue(), 0);
 				break;
 
 			default:

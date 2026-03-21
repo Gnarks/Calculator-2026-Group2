@@ -47,8 +47,7 @@ public class Evaluator extends Visitor {
 
 	@Override
 	public void visit(Complex c) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		computedValue = c;
 	}
 
 	@Override

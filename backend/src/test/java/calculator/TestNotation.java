@@ -7,8 +7,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import calculator.atoms.Real;
+import calculator.atoms.Complex;
+import calculator.atoms.Rationnal;
 import calculator.operations.*;
 
+import java.beans.Transient;
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,4 +79,19 @@ class TestNotation {
 		}
 	}
 
+	@Test
+	void testNotationsComplex() {
+		// Test that the notations work for complex numbers as well.
+		Complex c1 = new Complex(3, 2);
+		Complex c2 = new Complex(1, 4);
+		List<Expression> params = Arrays.asList(c1, c2);
+		try {
+			Times op = new Times(params);
+			assertEquals("* (+ 3.0 2.0i, + 1.0 4.0i)", op.toString(Notation.PREFIX));
+			assertEquals("( 3.0 + 2.0i * 1.0 + 4.0i )", op.toString(Notation.INFIX));
+			assertEquals("(3.0 2.0i +, 1.0 4.0i +) *", op.toString(Notation.POSTFIX));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
 }

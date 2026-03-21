@@ -6,7 +6,7 @@ import calculator.atoms.visitor.AtomVisitor;
 
 /**
  * Atom abstract class
- * An Atom represents a number (or an operand of operations ).
+ * An Atom represents a number (or an operand of operations).
  * The implemented number (atom) types are present in the AtomType enum
  * 
  * @see AtomType
@@ -14,7 +14,7 @@ import calculator.atoms.visitor.AtomVisitor;
 public interface Atom extends Expression {
 
 	/**
-	 * applies an operation between two atoms of the same concrete type
+	 * Applies an operation between two atoms of the same concrete type
 	 * The function supposes that both atoms are of the same concrete type
 	 * 
 	 * @see AtomType

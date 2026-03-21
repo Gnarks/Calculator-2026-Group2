@@ -83,14 +83,6 @@ public class Rationnal implements Atom {
         return Objects.hash(value);
     }
 
-    @Override
-    public String toString() {
-        if (value.getDenominator() == 1) {
-            return String.valueOf(value.getNumerator());
-        }
-        return value.getNumerator() + "/" + value.getDenominator();
-    }
-
     public int getNumerator() {
          return value.getNumerator(); 
         }

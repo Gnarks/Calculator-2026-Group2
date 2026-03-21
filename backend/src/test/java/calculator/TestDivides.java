@@ -6,8 +6,10 @@ import org.junit.jupiter.api.*;
 
 import calculator.operations.*;
 import calculator.atoms.Real;
+import calculator.atoms.Complex;
 import calculator.atoms.Rationnal;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -95,6 +97,16 @@ class TestDivides {
 		}
 	}
 
+	@Test
+	void testDivideByZeroComplex() {
+		List<Expression> paramsWithZero = Arrays.asList(new Complex(value1, value2), new Complex(0, 0));
+		try {
+			Divides d = new Divides(paramsWithZero);
+			assertThrows(ArithmeticException.class, () -> d.op(new Complex(value1, value2), new Complex(0, 0)));
+		} catch (IllegalConstruction _) {
+			fail();
+		}
+	}
 	@Test
     void testDivideRationnals() {
         Rationnal q1 = new Rationnal(1, 2); 

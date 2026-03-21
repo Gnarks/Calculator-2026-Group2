@@ -1,42 +1,76 @@
 package calculator.atoms;
 
+import calculator.Expression;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 import visitor.Visitor;
+import java.util.Objects;
 
 /**
  * Complex Number type is used to represent complex e.g. 3 + 2i
+ * 
+ * @see Expression
+ * @see Operation
+ * @see Atom
  */
 public class Complex implements Atom {
 
-	// TODO blank class : to implement
+	private final org.apache.commons.numbers.complex.Complex value;
 
 	/**
-	 * TODO Complex constructor
+	 * Constructor method
 	 * 
+	 * @param real The real part
+	 * @param imaginary The imaginary part
 	 */
-	public Complex() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented constructor");
+	public Complex(double real, double imaginary) {
+		this.value = org.apache.commons.numbers.complex.Complex.ofCartesian(real, imaginary);
 	}
-	// temporarily to pass the mvn tests
-	public Complex(double real, double imaginary) { }
+
+	/**
+	 * Constructor method from an existing Complex object
+	 * 
+	 * @param value The commons-numbers Complex object
+	 */
+	public Complex(org.apache.commons.numbers.complex.Complex value) {
+		this.value = value;
+	}
+
+	/**
+	 * getter method to obtain the value contained in the object
+	 *
+	 * @return The commons-numbers Complex number contained in the object
+	 */
+	public org.apache.commons.numbers.complex.Complex getValue() {
+		return value;
+	}
 
 	@Override
-	public Real apply(Operation o, Atom a) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'accept'");
+	public Complex apply(Operation o, Atom a) {
+		return o.op(this, (Complex) a);
 	}
 
 	@Override
 	public void accept(AtomVisitor v) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'accept'");
+		v.visit(this);
 	}
 
 	@Override
 	public void accept(Visitor v) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'accept'");
+		v.visit(this);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) return false;
+		if (this == o) return true;
+		if (!(o instanceof Complex)) return false;
+		Complex other = (Complex) o;
+		return this.value.equals(other.getValue());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(value);
 	}
 }

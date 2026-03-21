@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import calculator.atoms.Real;
+import calculator.atoms.Complex;
 import calculator.operations.*;
 import calculator.atoms.Rationnal;
 
@@ -38,6 +39,19 @@ class TestCounting {
 		// test whether a number contains zero operations
 		assertEquals(0, c.getNbOps());
 		// test whether a number contains 1 number
+		assertEquals(1, c.getNbNbs());
+	}
+
+	@Test
+	void testComplexNumberCounting() {
+		e = new Complex(value1, value2);
+		Counter c = new Counter();
+		e.accept(c);
+		// test whether a complex number has zero depth
+		assertEquals(0, c.getDepth());
+		// test whether a complex number contains zero operations
+		assertEquals(0, c.getNbOps());
+		// test whether a complex number counts as 1 number
 		assertEquals(1, c.getNbNbs());
 	}
 
@@ -79,6 +93,27 @@ class TestCounting {
 		assertEquals(1, c.getNbOps());
 		// test whether a binary operation contains 2 numbers
 		assertEquals(2, c.getNbNbs());
+	}
+
+	@Test
+	void testComplexDeepExpressionCounting() {
+		try {
+			Expression c1 = new Complex(value1, value2);
+			Expression c2 = new Complex(value2, value1);
+			Expression times = new Times(Arrays.asList(c1, c2));
+			Expression minus = new Minus(Arrays.asList(c1, c2));
+			e = new Plus(Arrays.asList(times, minus));
+		} catch (IllegalConstruction e1) {
+			fail();
+		}
+		Counter c = new Counter();
+		e.accept(c);
+		// expected depth: 2 (Plus -> Times/Minus -> Complex)
+		assertEquals(2, c.getDepth(), "counting depth of a deeper expression");
+		// expected ops: 3 (Plus, Times, Minus)
+		assertEquals(3, c.getNbOps());
+		// expected numbers: 4 (c1, c2, c1, c2)
+		assertEquals(4, c.getNbNbs());
 	}
 
 	@Test

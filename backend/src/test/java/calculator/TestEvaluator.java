@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import calculator.atoms.Real;
+import calculator.atoms.Complex;
 import calculator.operations.*;
 import calculator.atoms.Rationnal;
 
@@ -49,6 +50,31 @@ class TestEvaluator {
 				default -> fail();
 			}
 		} catch (IllegalConstruction _) {
+			fail();
+		}
+	}
+
+	@Test
+	void testEvaluatorComplex() {
+		assertEquals(new Complex(value1, value2), calc.eval(new Complex(value1, value2)));
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "*", "+", "/", "-" })
+	void testEvaluateComplexOperations(String symbol) {
+		// value1 = 8, value2 = 6
+		Complex c1 = new Complex(value1, value2); // 8 + 6i
+		Complex c2 = new Complex(value2, value1); // 6 + 8i
+		List<Expression> params = Arrays.asList(c1, c2);
+		try {
+			switch (symbol) {
+				case "+" -> assertEquals(new Complex(14, 14), calc.eval(new Plus(params)));
+				case "-" -> assertEquals(new Complex(2, -2), calc.eval(new Minus(params)));
+				case "*" -> assertEquals(new Complex(0, 100), calc.eval(new Times(params)));
+				case "/" -> assertEquals(new Complex(0.96, -0.28), calc.eval(new Divides(params)));
+				default -> fail();
+			}
+		} catch (IllegalConstruction e) {
 			fail();
 		}
 	}

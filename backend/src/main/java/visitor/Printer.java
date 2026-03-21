@@ -65,8 +65,20 @@ public class Printer extends Visitor {
 
 	@Override
 	public void visit(Complex c) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		double realPart = c.getValue().getReal();
+		double imaginaryPart = c.getValue().getImaginary();
+
+		switch (notation) {
+			case PREFIX -> {
+				sb.append("+ ").append(realPart).append(" ").append(imaginaryPart).append("i");
+			}
+			case POSTFIX -> {
+				sb.append(realPart).append(" ").append(imaginaryPart).append("i +");
+			}
+			case INFIX -> {
+				sb.append(realPart).append(" + ").append(imaginaryPart).append("i");
+			}
+		}
 	}
 
 	@Override

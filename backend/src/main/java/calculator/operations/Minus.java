@@ -77,7 +77,7 @@ public final class Minus extends Operation {
 
 	@Override
 	public Rationnal op(Rationnal q1, Rationnal q2) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'op'");
+		org.apache.commons.numbers.fraction.Fraction result = q1.getValue().subtract(q2.getValue());
+        return new Rationnal(result);
 	}
 }

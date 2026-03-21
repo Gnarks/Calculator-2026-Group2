@@ -86,8 +86,12 @@ public final class Divides extends Operation {
 	}
 
 	@Override
-	public Rationnal op(Rationnal q1, Rationnal q2) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'op'");
-	}
+    public Rationnal op(Rationnal q1, Rationnal q2) {
+        if (q2.getValue().equals(org.apache.commons.numbers.fraction.Fraction.ZERO)) {
+            throw new ArithmeticException("Division by zero");
+        }
+        
+        org.apache.commons.numbers.fraction.Fraction result = q1.getValue().divide(q2.getValue());
+        return new Rationnal(result);
+    }
 }

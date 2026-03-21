@@ -47,7 +47,6 @@ public class Counter extends Visitor {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
 	}
-
 	/**
 	 * Visit an operation: increments the operation count, then recursively
 	 * visits all child expressions to accumulate counts.

@@ -121,3 +121,63 @@ Feature: Integer Arithmetic Expressions
     When I provide a complex number 4.0 and 2.0
     And I provide a complex number 1.0 and 1.0
     Then the operation evaluates to the complex number 3.0 and -1.0
+
+  Scenario: Adding two complex numbers
+    Given an integer operation '+'
+    When I provide a complex number 3.0 and 2.0
+    And I provide a complex number 1.0 and 4.0
+    Then the operation evaluates to the complex number 4.0 and 6.0
+
+  Scenario: Subtracting two complex numbers
+    Given an integer operation '-'
+    When I provide a complex number 5.0 and 5.0
+    And I provide a complex number 2.0 and 1.0
+    Then the operation evaluates to the complex number 3.0 and 4.0
+
+  Scenario: Multiplying two complex numbers
+    Given an integer operation '*'
+    When I provide a complex number 2.0 and 3.0
+    And I provide a complex number 4.0 and 5.0
+    Then the operation evaluates to the complex number -7.0 and 22.0
+
+  Scenario: Dividing two complex numbers
+    Given an integer operation '/'
+    When I provide a complex number 4.0 and 2.0
+    And I provide a complex number 1.0 and 1.0
+    Then the operation evaluates to the complex number 3.0 and -1.0
+
+Scenario: Adding two rational numbers
+    Given an integer operation "+"
+    When I provide a rational number 1 / 2
+    And I provide a rational number 1 / 3
+    Then the operation evaluates to the rational number 5 / 6
+
+  Scenario: Subtracting two rational numbers
+    Given an integer operation "-"
+    When I provide a rational number 3 / 4
+    And I provide a rational number 1 / 4
+    Then the operation evaluates to the rational number 1 / 2
+
+  Scenario: Multiplying two rational numbers
+    Given an integer operation "*"
+    When I provide a rational number 2 / 3
+    And I provide a rational number 3 / 4
+    Then the operation evaluates to the rational number 1 / 2
+
+  Scenario: Dividing two rational numbers
+    Given an integer operation "/"
+    When I provide a rational number 1 / 2
+    And I provide a rational number 1 / 4
+    Then the operation evaluates to the rational number 2 / 1
+
+  Scenario: Automatic simplification of results
+    Given an integer operation "+"
+    When I provide a rational number 2 / 4
+    And I provide a rational number 2 / 4
+    Then the operation evaluates to the rational number 1 / 1
+
+  Scenario: Dividing a rational by zero
+    Given an integer operation "/"
+    When I provide a rational number 1 / 2
+    And I provide a rational number 0 / 1
+    Then the operation throws an ArithmeticException

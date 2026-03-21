@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import calculator.atoms.Real;
 import calculator.atoms.Complex;
 import calculator.operations.*;
+import calculator.atoms.Rationnal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,6 +52,19 @@ class TestCounting {
 		// test whether a complex number contains zero operations
 		assertEquals(0, c.getNbOps());
 		// test whether a complex number counts as 1 number
+		assertEquals(1, c.getNbNbs());
+	}
+
+	@Test
+	void testRationnalNumberCounting() {
+		e = new Rationnal(value1, value2);
+		Counter c = new Counter();
+		e.accept(c);
+		// test whether a rational number has zero depth
+		assertEquals(0, c.getDepth());
+		// test whether a rational number contains zero operations
+		assertEquals(0, c.getNbOps());
+		// test whether a rational number counts as 1 number
 		assertEquals(1, c.getNbNbs());
 	}
 
@@ -100,6 +114,27 @@ class TestCounting {
 		assertEquals(3, c.getNbOps());
 		// expected numbers: 4 (c1, c2, c1, c2)
 		assertEquals(4, c.getNbNbs());
+	}
+
+	@Test
+	void testRationnalDeepExpressionCounting() {
+		try {
+			Expression q1 = new Rationnal(value1, value2); // 8/6
+			Expression q2 = new Rationnal(value2, value1); // 6/8
+			// Expression: (q1 / q2) * q1
+			Expression div = new Divides(Arrays.asList(q1, q2));
+			e = new Times(Arrays.asList(div, q1));
+		} catch (IllegalConstruction e1) {
+			fail();
+		}
+		Counter c = new Counter();
+		e.accept(c);
+		// expected depth: 2 (Times -> Divides -> Rationnal)
+		assertEquals(2, c.getDepth(), "counting depth of a deeper rational expression");
+		// expected ops: 2 (Times, Divides)
+		assertEquals(2, c.getNbOps());
+		// expected numbers: 3 (q1, q2, q1)
+		assertEquals(3, c.getNbNbs());
 	}
 
 }

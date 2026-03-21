@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import calculator.atoms.Real;
 import calculator.atoms.Complex;
 import calculator.operations.*;
+import calculator.atoms.Rationnal;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -71,6 +72,31 @@ class TestEvaluator {
 				case "-" -> assertEquals(new Complex(2, -2), calc.eval(new Minus(params)));
 				case "*" -> assertEquals(new Complex(0, 100), calc.eval(new Times(params)));
 				case "/" -> assertEquals(new Complex(0.96, -0.28), calc.eval(new Divides(params)));
+				default -> fail();
+			}
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testEvaluatorRationnal() {
+		assertEquals(new Rationnal(value1, value2), calc.eval(new Rationnal(value1, value2)));
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "*", "+", "/", "-" })
+	void testEvaluateRationnalOperations(String symbol) {
+		// value1 = 8, value2 = 6
+		Rationnal q1 = new Rationnal(value1, value2); // equal to 8/6 = 4/3
+		Rationnal q2 = new Rationnal(value2, value1); // equal to 6/8 = 3/4
+		List<Expression> params = Arrays.asList(q1, q2);
+		try {
+			switch (symbol) {
+				case "+" -> assertEquals(new Rationnal(25, 12), calc.eval(new Plus(params)));
+				case "-" -> assertEquals(new Rationnal(7, 12), calc.eval(new Minus(params)));
+				case "*" -> assertEquals(new Rationnal(1, 1), calc.eval(new Times(params)));
+				case "/" -> assertEquals(new Rationnal(16, 9), calc.eval(new Divides(params)));
 				default -> fail();
 			}
 		} catch (IllegalConstruction e) {

@@ -73,9 +73,4 @@ public class Complex implements Atom {
 	public int hashCode() {
 		return Objects.hash(value);
 	}
-
-	@Override
-	public String toString() {
-		return value.getReal() + " + " + value.getImaginary() + "i";
-	}
 }

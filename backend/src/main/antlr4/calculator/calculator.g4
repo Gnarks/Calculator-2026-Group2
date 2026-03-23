@@ -12,43 +12,43 @@ complete
 expressionPRE
 		// spaces version 
 		// ===================
-    : operator expressionPRE expressionPRE #PRE1 // simple operation with 2 expressions 
-    | operator LPAR expressionPRE expressionPRE+ RPAR #PRE2 // arbitrary operation with mandatory parenthesis for more then 2 expressions 
-    | LPAR expressionPRE expressionPRE+ RPAR #PRE3 // implicit multiplication for more then 2 expressions  
-    | funcname LPAR expressionPRE+ RPAR #PRE4 // mandatory parenthesis for more then 2 parameters
+    : operator expressionPRE expressionPRE #Pre2Param // simple operation with 2 expressions 
+    | operator LPAR expressionPRE expressionPRE+ RPAR #PrePlus2Param // arbitrary operation with mandatory parenthesis for more then 2 expressions 
+    | LPAR expressionPRE expressionPRE+ RPAR #PreMult // implicit multiplication for more then 2 expressions  
+    | funcname LPAR expressionPRE+ RPAR #PreFunc // mandatory parenthesis for more then 2 parameters
 		// ===================
 	
 
 	  // COMMA version
 		// ===================
-    | operator LPAR expressionPRE (COMMA expressionPRE)+ RPAR #PRE5 // arbitrary operation between 2 or more expressions 
-		| LPAR expressionPRE (COMMA expressionPRE)+ RPAR #PRE6 // implicit multiplication between 2 or more expressions  
-    | funcname LPAR expressionPRE (COMMA expressionPRE)* RPAR #PRE7 // mandatory parenthesis for more then 2 parameters
+    | operator LPAR expressionPRE (COMMA expressionPRE)+ RPAR #PrePlus2Param // arbitrary operation between 2 or more expressions 
+		| LPAR expressionPRE (COMMA expressionPRE)+ RPAR #PreMult // implicit multiplication between 2 or more expressions  
+    | funcname LPAR expressionPRE (COMMA expressionPRE)* RPAR #PreFunc // mandatory parenthesis for more then 2 parameters
 		// ===================
 
-    | atom #PRE8 // the atom for the base case
-		| funcname expressionPRE #PRE9 // simple function with only 1 parameter 
+    | atom #PreAtom // the atom for the base case
+		| funcname expressionPRE #PreFunc1Param // simple function with only 1 parameter 
 		;
 
 // post expression 
 expressionPOST
 		// spaces version 
 		// ===================
-    : expressionPOST expressionPOST operator // simple operation with 2 expressions
-		| LPAR expressionPOST expressionPOST+ RPAR operator // arbitrary operation with mandatory parenthesis for more then 2 expressions 
-		| LPAR expressionPOST expressionPOST+ RPAR // implicit multiplication for more then 2 expressions 
-    | LPAR expressionPOST+ RPAR funcname // mandatory parenthesis for more then 2 parameters 
+    : expressionPOST expressionPOST operator #Post2Param // simple operation with 2 expressions
+		| LPAR expressionPOST expressionPOST+ RPAR operator  #PostPlus2Param // arbitrary operation with mandatory parenthesis for more then 2 expressions 
+		| LPAR expressionPOST expressionPOST+ RPAR #PostMult // implicit multiplication for more then 2 expressions 
+    | LPAR expressionPOST+ RPAR funcname #PostFunc // mandatory parenthesis for more then 2 parameters 
 		// ===================
 	
 	  // COMMA version
 		// ===================
-    | LPAR expressionPOST (COMMA expressionPOST)+ RPAR operator // arbitrary operation with mandatory parenthesis for more then 2 expressions 
-		| LPAR expressionPOST (COMMA expressionPOST)+ RPAR // implicit multiplication for more then 2 expressions 
-    | LPAR expressionPOST (COMMA expressionPOST)* RPAR funcname // mandatory parenthesis for more then 2 parameters
+    | LPAR expressionPOST (COMMA expressionPOST)+ RPAR operator #PostPlus2Param // arbitrary operation with mandatory parenthesis for more then 2 expressions 
+		| LPAR expressionPOST (COMMA expressionPOST)+ RPAR #PostMult // implicit multiplication for more then 2 expressions 
+    | LPAR expressionPOST (COMMA expressionPOST)* RPAR funcname #PostFunc // mandatory parenthesis for more then 2 parameters
 		// ===================
 
-    | atom // the atom for the base case
-    | expressionPOST funcname // simple function with only 1 parameter 
+    | atom #PostAtom // the atom for the base case
+    | expressionPOST funcname #PostFunc1Param // simple function with only 1 parameter 
 		;
 
 operator
@@ -68,7 +68,7 @@ expressionIN
 // multiplication expressions
 multExp
     : powExp ((TIMES | DIV) powExp)*
-    | powExp (LPAR powExp RPAR)*
+    | powExp (LPAR powExp RPAR)* #INMult
     ;
 
 
@@ -82,9 +82,9 @@ powExp
 // - atoms with parenthesis
 // - multiplication of the form : (34)e or (59i)pi(3 +5)
 atomIN
-		: (PLUS | MINUS)* atom (constant)*
-		| (LPAR expressionIN RPAR)? atom (constant)* (LPAR expressionIN RPAR)?
-		| (LPAR expressionIN RPAR)
+		: (PLUS | MINUS)* atom (constant)* #INSignedAtom
+		| (LPAR expressionIN RPAR)? atom (constant)* (LPAR expressionIN RPAR)? #INImplicitMult
+		| (LPAR expressionIN RPAR) #INParenthesis
     | functionIN
     ;
 

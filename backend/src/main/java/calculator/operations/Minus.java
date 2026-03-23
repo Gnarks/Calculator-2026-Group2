@@ -54,6 +54,19 @@ public final class Minus extends Operation {
 	 * @return The (new) Real that is the result of the subtraction
 	 */
 	public Real op(Real r1, Real r2) {
+
+		if ((r1.isPlusInf() && r2.isPlusInf())
+				|| (r1.isMinusInf() && r2.isMinusInf())
+				|| r1.isNan() || r2.isNan()) { // inf-inf = NaN or NaN + x = NaN
+			return Real.nan();
+		}
+		if (r1.isMinusInf() || r2.isPlusInf()) { // x - inf = -inf
+			return Real.minusInf();
+		}
+		if (r1.isPlusInf() || r2.isMinusInf()) { // x + inf = +inf
+			return Real.plusInf();
+		}
+
 		return new Real(r1.getValue().add(r2.getValue().negate()));
 	}
 
@@ -78,6 +91,6 @@ public final class Minus extends Operation {
 	@Override
 	public Rationnal op(Rationnal q1, Rationnal q2) {
 		org.apache.commons.numbers.fraction.Fraction result = q1.getValue().subtract(q2.getValue());
-        return new Rationnal(result);
+		return new Rationnal(result);
 	}
 }

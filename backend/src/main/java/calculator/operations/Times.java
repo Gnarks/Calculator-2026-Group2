@@ -42,6 +42,25 @@ public final class Times extends Operation {
 	 * @return The (new) Real that is the result of the multiplication
 	 */
 	public Real op(Real r1, Real r2) {
+
+		if (r1.isNan() || r2.isNan()) // NaN * x = NaN
+			return Real.nan();
+
+		// case of inf * 0 = NaN
+		if (r1.getValue().doubleValue() == 0 && (r2.isPlusInf() || r2.isMinusInf()))
+			return Real.nan();
+
+		if (r2.getValue().doubleValue() == 0 && (r1.isPlusInf() || r1.isMinusInf()))
+			return Real.nan();
+
+		if (r1.isPlusInf() || r1.isMinusInf()) { // inf/x = +/- inf
+			// int whose sign is the resulting sign of the infinity
+			Double sign = r1.getValue().doubleValue() * r2.getValue().doubleValue();
+			if (sign > 0)
+				return Real.plusInf();
+			else
+				return Real.minusInf();
+		}
 		return new Real(r1.getValue().multiply(r2.getValue()));
 	}
 
@@ -66,6 +85,6 @@ public final class Times extends Operation {
 	@Override
 	public Rationnal op(Rationnal q1, Rationnal q2) {
 		org.apache.commons.numbers.fraction.Fraction result = q1.getValue().multiply(q2.getValue());
-        return new Rationnal(result);
+		return new Rationnal(result);
 	}
 }

@@ -6,17 +6,26 @@ import org.junit.jupiter.api.*;
 
 import calculator.atoms.Real;
 import calculator.operations.*;
+import visitor.Evaluator;
 
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class TestReal {
 
 	private final int value = 8;
 	private Real number;
+	private Real plusInf;
+	private Real minusInf;
+	private Real nan;
 
 	@BeforeEach
 	void setUp() {
 		number = new Real(value);
+		nan = Real.nan();
+		plusInf = Real.plusInf();
+		minusInf = Real.minusInf();
 	}
 
 	@Test
@@ -32,6 +41,76 @@ class TestReal {
 		try {
 			assertNotEquals(new Times(new ArrayList<>()), number);
 		} catch (IllegalConstruction _) {
+			fail();
+		}
+	}
+
+	@Test
+	void testNan() {
+		List<Expression> params = Arrays.asList(nan, new Real(value));
+		try {
+			Plus p = new Plus(params);
+			Minus m = new Minus(params);
+			Times t = new Times(params);
+			Divides d = new Divides(params);
+
+			Evaluator evaluator = new Evaluator();
+			evaluator.visit(p);
+			assertEquals(evaluator.getResult(), Real.nan());
+
+			evaluator = new Evaluator();
+			evaluator.visit(t);
+			assertEquals(evaluator.getResult(), Real.nan());
+
+			evaluator = new Evaluator();
+			evaluator.visit(m);
+			assertEquals(evaluator.getResult(), Real.nan());
+
+			evaluator = new Evaluator();
+			evaluator.visit(d);
+			assertEquals(evaluator.getResult(), Real.nan());
+
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void dividesCornerCases() {
+		List<Expression> params = Arrays.asList(minusInf, new Real(value));
+
+		try {
+			Divides d = new Divides(params);
+			Divides reversedD = new Divides(params.reversed());
+
+			Evaluator evaluator = new Evaluator();
+			evaluator.visit(d);
+
+			assertEquals(evaluator.getResult(), Real.minusInf());
+
+			evaluator = new Evaluator();
+			evaluator.visit(reversedD);
+
+			assertEquals(evaluator.getResult(), new Real(0));
+
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void timesCornerCases() {
+		List<Expression> params = Arrays.asList(minusInf, new Real(0));
+
+		try {
+			Times t = new Times(params);
+
+			Evaluator evaluator = new Evaluator();
+			evaluator.visit(t);
+
+			assertEquals(evaluator.getResult(), Real.nan());
+
+		} catch (IllegalConstruction e) {
 			fail();
 		}
 	}

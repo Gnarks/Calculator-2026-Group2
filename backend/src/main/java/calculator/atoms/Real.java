@@ -44,15 +44,6 @@ public class Real implements Atom {
 	}
 
 	/**
-	 * getter method to obtain if the real is special
-	 * 
-	 * @return a boolean representing if the real is special
-	 */
-	public boolean isSpecial() {
-		return special;
-	}
-
-	/**
 	 * Constructor method
 	 *
 	 * @param v The BigDecimal value to be contained in the object
@@ -98,6 +89,33 @@ public class Real implements Atom {
 	public static Real minusInf() {
 		return new Real(true, -1);
 	};
+
+	/**
+	 * Returns if the Real is representing -infinity
+	 * 
+	 * @return if the Real is representing -infinity
+	 */
+	public boolean isMinusInf() {
+		return special && value.doubleValue() == -1;
+	}
+
+	/**
+	 * Returns if the Real is representing +infinity
+	 * 
+	 * @return if the Real is representing +infinity
+	 */
+	public boolean isPlusInf() {
+		return special && value.doubleValue() == 1;
+	}
+
+	/**
+	 * Returns if the Real is representing NaN
+	 * 
+	 * @return if the Real is representing NaN
+	 */
+	public boolean isNan() {
+		return special && value.doubleValue() == 0;
+	}
 
 	/**
 	 * Constructor method

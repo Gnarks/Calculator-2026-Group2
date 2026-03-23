@@ -35,8 +35,14 @@ class TestComplex {
 			fail();
 		}
 
-        int otherValue2 = 8;
-        assertNotEquals(new Complex(otherValue, otherValue2), number); // Distinct real part
-        assertNotEquals(new Complex(otherValue2, otherValue), number); // Distinct imaginary part
+		int otherValue2 = 8;
+		assertNotEquals(new Complex(otherValue, otherValue2), number); // Distinct real part
+		assertNotEquals(new Complex(otherValue2, otherValue), number); // Distinct imaginary part
+	}
+
+	@Test
+	void testNaN() {
+		Complex nan = Complex.nan();
+		assertEquals(Complex.nan(), nan);
 	}
 }

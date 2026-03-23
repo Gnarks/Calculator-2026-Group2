@@ -3,11 +3,23 @@
     <h1 class="title">Calculator Cucumber</h1>
     
     <div id="calculator">
+      <div class="mini-header">
+        <div class="precision-wrap" title="Significant digits">
+          <label for="prec">Précision</label>
+          <input id="prec" type="number" v-model.number="precision" min="1" max="100">
+        </div>
+      </div>
+
       <input id="display" :value="display" readonly placeholder="0">
 
       <div id="keys">
         <button @click="clearDisplay" class="operator-btn btn-c">C</button>
+        <button @click="appendToDisplay('(')" class="sci-btn">(</button>
+        <button @click="appendToDisplay(')')" class="sci-btn">)</button>
+
         <button @click="deleteLast" class="operator-btn del-btn">DEL</button>
+        <button @click="appendToDisplay('i')" class="num-btn complex-btn">i</button>
+        <button @click="appendToDisplay('E')" class="num-btn exp-btn">E</button>
         <button @click="appendToDisplay('/')" class="operator-btn">/</button>
 
         <button @click="appendToDisplay('7')">7</button>
@@ -33,24 +45,26 @@
     </div>
 
     <div v-if="isHelpVisible" class="modal-overlay" @click="closeHelp">
-        <div class="modal-content" @click.stop>
-          <h2>Calculator Help</h2>
-          <div class="help-body">
-            <ul>
-              <li><strong>Operations:</strong> Enter your math expression (e.g., <code class="math-preview">2 + 3 * 5</code>) and press <span class="key-hint">=</span>.</li>
-              <li><strong>Editing:</strong> 
-                <ul>
-                  <li>Press <span class="key-hint">C</span> to clear the entire screen.</li>
-                  <li>Press <span class="key-hint">DEL</span> to remove the last character or reset a result.</li>
-                </ul>
-              </li>
+      <div class="modal-content" @click.stop>
+        <h2>Calculator Help</h2>
+        <div class="help-body">
+          <ul>
+            <li><strong>Operations:</strong> Enter your math expression (e.g., <code class="math-preview">2 + 3 * 5</code>) and press <span class="key-hint">=</span>.</li>
+            <li><strong>Complex Numbers:</strong> Use <span class="key-hint">i</span> for imaginary numbers (e.g., <code class="math-preview">3 + 4i</code>).</li>
+            <li><strong>Scientific Notation:</strong> Type <span class="key-hint">E</span> for powers of 10.</li>
+            <li><strong>Editing:</strong> 
+              <ul>
+                <li>Press <span class="key-hint">C</span> to clear the entire screen.</li>
+                <li>Press <span class="key-hint">DEL</span> to remove the last character.</li>
+              </ul>
+            </li>
               <li> Calculations are processed by a <strong>Java</strong> server.</li>
-            </ul>
-          </div>
-          <button class="close-modal-btn" @click="closeHelp">OK</button>
+          </ul>
         </div>
+        <button class="close-modal-btn" @click="closeHelp">OK</button>
       </div>
-      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -61,8 +75,17 @@ const display = ref('');
 const isHelpVisible = ref(false);
 const isResultState = ref(false);
 
+const precision = ref(10); 
+
+const isErrorState = () => {
+  return display.value === 'Error' || display.value === 'NaN' || display.value.includes('Infinity');
+};
+
 const appendToDisplay = (value) => {
-  if (display.value === 'Error' || isResultState.value) display.value = '';
+  if (isErrorState() || isResultState.value) {
+    display.value = '';
+    isResultState.value = false; 
+  }
   display.value += value;
 };
 
@@ -72,7 +95,7 @@ const clearDisplay = () => {
 };
 
 const deleteLast = () => {
-  if (display.value == "Error" || isResultState.value){
+  if (isErrorState() || isResultState.value){
     clearDisplay();
     return;
   }
@@ -80,34 +103,31 @@ const deleteLast = () => {
 };
 
 const calculate = async () => {
-  if (!display.value || display.value === 'Error') return;
+  if (!display.value || isErrorState()) return;
   
   try {
-      const response = await axios.post('http://localhost:8080/api/evaluate', {
-      expression: display.value
+    const response = await axios.post('http://localhost:8080/api/evaluate', {
+      expression: display.value,
+      precision: precision.value
     });
 
     if (response.data.success === 1) {
       display.value = response.data.result.toString();
       isResultState.value = true; 
     } else {
-      display.value = 'Error';
-      isResultState.value = false;
+      display.value = response.data.result || 'Error';
+      isResultState.value = true;
       console.warn("Calculation error :", response.data.result);
     }
-
   } catch (error) {
-    alert("Impossible to reach server. Please try again later");
-    console.error(error);
+    display.value = 'Error';
+    isResultState.value = true;
+    console.error("Network error:", error);
   }
 };
-const showHelp = () => {
-  isHelpVisible.value = true;
-};
 
-const closeHelp = () => {
-  isHelpVisible.value = false;
-};
+const showHelp = () => isHelpVisible.value = true;
+const closeHelp = () => isHelpVisible.value = false;
 </script>
 
 <style scoped>
@@ -133,6 +153,34 @@ const closeHelp = () => {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
   width: 90%; 
   max-width: 360px;
+}
+
+.mini-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 5%;
+  padding: 0 2%;
+}
+
+.precision-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #a1a1aa;
+}
+
+.precision-wrap input {
+  width: 45px;
+  background-color: #1a1a1a;
+  color: #4ade80;
+  border: none;
+  border-radius: 6px;
+  padding: 4px;
+  text-align: center;
+  outline: none;
+  font-weight: bold;
 }
 
 #display {
@@ -188,6 +236,11 @@ button:active { background-color: #71717a; }
 }
 
 .del-btn { font-size: clamp(0.9rem, 4vw, 1.3rem); }
+
+.sci-btn { font-size: 1.5rem; background-color: #27272a; color: #d4d4d8; }
+.sci-btn:hover { background-color: #3f3f46; }
+.exp-btn { color: #fbbf24; }
+.complex-btn { color: #c084fc; font-style: italic; font-family: serif; font-size: 2rem; }
 
 .help-btn { background-color: #3b82f6; }
 .help-btn:hover { background-color: #60a5fa; }

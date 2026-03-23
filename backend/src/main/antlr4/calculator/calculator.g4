@@ -12,22 +12,22 @@ complete
 expressionPRE
 		// spaces version 
 		// ===================
-    : operator expressionPRE expressionPRE // simple operation with 2 expressions 
-    | operator LPAR expressionPRE expressionPRE+ RPAR // arbitrary operation with mandatory parenthesis for more then 2 expressions 
-    | LPAR expressionPRE expressionPRE+ RPAR // implicit multiplication for more then 2 expressions  
-    | funcname LPAR expressionPRE+ RPAR // mandatory parenthesis for more then 2 parameters
+    : operator expressionPRE expressionPRE #PRE1 // simple operation with 2 expressions 
+    | operator LPAR expressionPRE expressionPRE+ RPAR #PRE2 // arbitrary operation with mandatory parenthesis for more then 2 expressions 
+    | LPAR expressionPRE expressionPRE+ RPAR #PRE3 // implicit multiplication for more then 2 expressions  
+    | funcname LPAR expressionPRE+ RPAR #PRE4 // mandatory parenthesis for more then 2 parameters
 		// ===================
 	
 
 	  // COMMA version
 		// ===================
-    | operator LPAR expressionPRE (COMMA expressionPRE)+ RPAR // arbitrary operation between 2 or more expressions 
-		| LPAR expressionPRE (COMMA expressionPRE)+ RPAR // implicit multiplication between 2 or more expressions  
-    | funcname LPAR expressionPRE (COMMA expressionPRE)* RPAR // mandatory parenthesis for more then 2 parameters
+    | operator LPAR expressionPRE (COMMA expressionPRE)+ RPAR #PRE5 // arbitrary operation between 2 or more expressions 
+		| LPAR expressionPRE (COMMA expressionPRE)+ RPAR #PRE6 // implicit multiplication between 2 or more expressions  
+    | funcname LPAR expressionPRE (COMMA expressionPRE)* RPAR #PRE7 // mandatory parenthesis for more then 2 parameters
 		// ===================
 
-    | atom // the atom for the base case
-		| funcname expressionPRE // simple function with only 1 parameter 
+    | atom #PRE8 // the atom for the base case
+		| funcname expressionPRE #PRE9 // simple function with only 1 parameter 
 		;
 
 // post expression 

@@ -95,14 +95,20 @@ class TestReal {
 	@Test
 	void timesCornerCases() {
 		List<Expression> params = Arrays.asList(Real.minusInf(), new Real(0));
+		List<Expression> otherParams = Arrays.asList(new Real(-5), Real.plusInf());
 
 		try {
 			Times t = new Times(params);
 
 			Evaluator evaluator = new Evaluator();
 			evaluator.visit(t);
-
 			assertEquals(evaluator.getResult(), Real.nan());
+
+			t = new Times(otherParams);
+
+			evaluator = new Evaluator();
+			evaluator.visit(t);
+			assertEquals(evaluator.getResult(), Real.minusInf());
 
 		} catch (IllegalConstruction e) {
 			fail();

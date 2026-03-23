@@ -53,7 +53,7 @@ public final class Times extends Operation {
 		if (r2.getValue().doubleValue() == 0 && (r1.isPlusInf() || r1.isMinusInf()))
 			return Real.nan();
 
-		if (r1.isPlusInf() || r1.isMinusInf()) { // inf/x = +/- inf
+		if (r1.isPlusInf() || r1.isMinusInf() || r2.isPlusInf() || r2.isMinusInf()) { // inf/x = +/- inf
 			// int whose sign is the resulting sign of the infinity
 			Double sign = r1.getValue().doubleValue() * r2.getValue().doubleValue();
 			if (sign > 0)

@@ -16,16 +16,10 @@ class TestReal {
 
 	private final int value = 8;
 	private Real number;
-	private Real plusInf;
-	private Real minusInf;
-	private Real nan;
 
 	@BeforeEach
 	void setUp() {
 		number = new Real(value);
-		nan = Real.nan();
-		plusInf = Real.plusInf();
-		minusInf = Real.minusInf();
 	}
 
 	@Test
@@ -47,7 +41,7 @@ class TestReal {
 
 	@Test
 	void testNan() {
-		List<Expression> params = Arrays.asList(nan, new Real(value));
+		List<Expression> params = Arrays.asList(Real.nan(), new Real(value));
 		try {
 			Plus p = new Plus(params);
 			Minus m = new Minus(params);
@@ -77,7 +71,7 @@ class TestReal {
 
 	@Test
 	void dividesCornerCases() {
-		List<Expression> params = Arrays.asList(minusInf, new Real(value));
+		List<Expression> params = Arrays.asList(Real.minusInf(), new Real(value));
 
 		try {
 			Divides d = new Divides(params);
@@ -100,10 +94,27 @@ class TestReal {
 
 	@Test
 	void timesCornerCases() {
-		List<Expression> params = Arrays.asList(minusInf, new Real(0));
+		List<Expression> params = Arrays.asList(Real.minusInf(), new Real(0));
 
 		try {
 			Times t = new Times(params);
+
+			Evaluator evaluator = new Evaluator();
+			evaluator.visit(t);
+
+			assertEquals(evaluator.getResult(), Real.nan());
+
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void addCornerCases() {
+		List<Expression> params = Arrays.asList(Real.plusInf(), Real.minusInf());
+
+		try {
+			Plus t = new Plus(params);
 
 			Evaluator evaluator = new Evaluator();
 			evaluator.visit(t);

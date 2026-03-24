@@ -187,7 +187,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
     public Expression visitINAddSub(INAddSubContext ctx) {
         Expression result = visit(ctx.multExp(0));
         for (int i = 1; i < ctx.multExp().size(); i++) {
-            String op = ctx.getChild(2 * i - 1).getText();
+            String op = ctx.getChild(2 * i - 1).getText();  // operator is the odd child between multExp
             List<Expression> args = List.of(result, visit(ctx.multExp(i)));
             result = buildOperation(op, args);
         }
@@ -201,7 +201,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
     public Expression visitINTimesDiv(INTimesDivContext ctx) {
         Expression result = visit(ctx.powExp(0));
         for (int i = 1; i < ctx.powExp().size(); i++) {
-            String op = ctx.getChild(2 * i - 1).getText();
+            String op = ctx.getChild(2 * i - 1).getText();  // operator is the odd child between powExp
             List<Expression> args = List.of(result, visit(ctx.powExp(i)));
             result = buildOperation(op, args);
         }
@@ -242,19 +242,24 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
     public Expression visitINSignedAtom(INSignedAtomContext ctx) {
         List<Expression> factors = new ArrayList<>();
 
-        if (ctx.MINUS().size() % 2 != 0) {
-            factors.add(new IntegerAtom(-1));
-        }
-
         factors.add(visit(ctx.atom()));
         for (int i = 0; i < ctx.constant().size(); i++) {
             factors.add(visit(ctx.constant(i)));
         }
 
+        Expression expression;
         if (factors.size() == 1) {
-            return factors.get(0);
+            expression = factors.get(0);
+        } else {
+            expression = buildOperation("*", factors);
         }
-        return buildOperation("*", factors);
+
+        // Keep each '-' from the input as an explicit unary minus equivalent: 0 - expr.
+        for (int i = 0; i < ctx.MINUS().size(); i++) {
+            expression = buildOperation("-", List.of(new IntegerAtom(0), expression));
+        }
+
+        return expression;
     }
 
     /**
@@ -365,17 +370,22 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
      */
     @Override
     public Expression visitComplexNumber(ComplexNumberContext ctx) {
-        double imaginary = 1.0;
+        List<Expression> factors = new ArrayList<>();
 
         if (ctx.number() != null) {
-            imaginary = toDouble(visit(ctx.number()));
+            factors.add(visit(ctx.number()));
         }
 
         for (int i = 0; i < ctx.constant().size(); i++) {
-            imaginary *= toDouble(visit(ctx.constant(i)));
+            factors.add(visit(ctx.constant(i)));
         }
 
-        return new Complex(0.0, imaginary);
+        factors.add(new Complex(0.0, 1.0));
+
+        if (factors.size() == 1) {
+            return factors.get(0);
+        }
+        return buildOperation("*", factors);
     }
 
     /**
@@ -383,7 +393,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
      */
     @Override
     public Expression visitConstPi(ConstPiContext ctx) {
-        return new Real(Math.PI);
+        return new Real(Math.PI);  // MAY BE CHANGE THIS BY IMPLEMENTING A PI CONSTANT IN THE CALCULATOR AND BE ABLE TO EVALUATE IT THE EVALATOR
     }
 
     /**
@@ -391,7 +401,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
      */
     @Override
     public Expression visitConstEuler(ConstEulerContext ctx) {
-        return new Real(Math.E);
+        return new Real(Math.E); // SAME THAN ABOVE
     }
 
     /**
@@ -425,16 +435,4 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
         return args;
     }
 
-    /**
-     * Convert a numeric Expression (IntegerAtom or Real) to a double value.
-     */
-    private double toDouble(Expression expression) {
-        if (expression instanceof IntegerAtom integerAtom) {
-            return integerAtom.getValue();
-        }
-        if (expression instanceof Real real) {
-            return real.getValue().doubleValue();
-        }
-        throw new IllegalArgumentException("Expected numeric atom, got: " + expression.getClass().getSimpleName());
-    }
 }

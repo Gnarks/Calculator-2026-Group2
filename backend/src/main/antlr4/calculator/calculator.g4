@@ -2,9 +2,9 @@ grammar calculator;
 // grammar used to parse the calculator's expressions
 
 complete
-    : expressionIN EOF // infix expression
-		| expressionPOST EOF // postfix expression
-		| expressionPRE EOF// prefix expression
+    : expressionIN EOF #CompleteInfix // infix expression
+    | expressionPOST EOF #CompletePostfix // postfix expression
+    | expressionPRE EOF #CompletePrefix // prefix expression
     ;
 
 
@@ -52,29 +52,29 @@ expressionPOST
 		;
 
 operator
-		:PLUS
-		|MINUS
-		|TIMES
-		|DIV
-		|POW
+    :PLUS #OpPlus
+    |MINUS #OpMinus
+    |TIMES #OpTimes
+    |DIV #OpDiv
+    |POW #OpPow
 		;
 
 // the basic expressionIN with operation priority 
 // addition expressionINs
 expressionIN
-    : multExp ((PLUS | MINUS) multExp)*
+  : multExp ((PLUS | MINUS) multExp)* #INAddSub
     ;
 
 // multiplication expressions
 multExp
-    : powExp ((TIMES | DIV) powExp)*
+  : powExp ((TIMES | DIV) powExp)* #INTimesDiv
     | powExp (LPAR powExp RPAR)* #INMult
     ;
 
 
 // exponentiation expressions
 powExp
-    : atomIN (POW atomIN)*
+  : atomIN (POW atomIN)* #INPow
     ;
 
 // upgraded atom infix taking into account :
@@ -85,42 +85,42 @@ atomIN
 		: (PLUS | MINUS)* atom (constant)* #INSignedAtom
 		| (LPAR expressionIN RPAR)? atom (constant)* (LPAR expressionIN RPAR)? #INImplicitMult
 		| (LPAR expressionIN RPAR) #INParenthesis
-    | functionIN
+    | functionIN #INFunction
     ;
 
 // atoms being either complex numbers or numbers
-atom : complex | number  ;
+atom : complex #AtomComplex | number #AtomNumber ;
 
 // any real number either being in the form of a constant (pi, e), a real (54.66) or in scientific notation (34.55E10) 
-number : constant | real | scientific ;
+number : constant #NumberConstant | real #NumberReal | scientific #NumberScientific ;
 
 // scientific notation with integer exponent
-scientific: (real | INT) E (PLUS | MINUS)? INT;
+scientific: (real | INT) E (PLUS | MINUS)? INT #ScientificNumber;
 
 // real numbers separating units from decimals with a dot
-real : INT (DOT INT)? ;
+real : INT (DOT INT)? #RealNumber;
 
 // complex numbers are formed of numbers followed by i
-complex : number? (constant)* I ;
+complex : number? (constant)* I #ComplexNumber;
 
 // constants : pi, e 
-constant : PI | EULER ;
+constant : PI #ConstPi | EULER #ConstEuler ;
 
 // functions of the form : (infix notation)
 // function (parameter1, parameter2, ...)
-functionIN : funcname LPAR expressionIN (COMMA expressionIN)* RPAR ;
+functionIN : funcname LPAR expressionIN (COMMA expressionIN)* RPAR #InfixFunctionCall;
 
 //accepted functions
 funcname
-    : COS // 1 parameter
-    | TAN // 1 parameter
-    | SIN // 1 parameter
-    | ACOS // 1 parameter
-    | ATAN // 1 parameter
-    | ASIN // 1 parameter
-    | LOG // 2 parameter : log(x, base)
-    | LN // 1 parameter
-    | SQRT // 1  
+    : COS #FnCos // 1 parameter
+    | TAN #FnTan // 1 parameter
+    | SIN #FnSin // 1 parameter
+    | ACOS #FnAcos // 1 parameter
+    | ATAN #FnAtan // 1 parameter
+    | ASIN #FnAsin // 1 parameter
+    | LOG #FnLog // 2 parameter : log(x, base)
+    | LN #FnLn // 1 parameter
+    | SQRT #FnSqrt // 1  
 		;
 
 

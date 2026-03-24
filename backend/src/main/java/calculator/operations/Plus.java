@@ -71,6 +71,9 @@ public final class Plus extends Operation {
 
 	@Override
 	public Complex op(Complex c1, Complex c2) {
+		if (c1.isNaN() || c2.isNaN()) {
+			return Complex.nan();
+		}
 		org.apache.commons.numbers.complex.Complex result = c1.getValue().add(c2.getValue());
 		return new Complex(result);
 	}

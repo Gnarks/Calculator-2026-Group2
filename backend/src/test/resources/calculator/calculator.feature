@@ -181,3 +181,21 @@ Scenario: Adding two rational numbers
     When I provide a rational number 1 / 2
     And I provide a rational number 0 / 1
     Then the operation throws an ArithmeticException
+
+  Scenario: Exponentiation of two integers
+    Given an integer operation "^"
+    When I provide a first number 5
+    And I provide a second number 3
+    Then the operation evaluates to 125
+
+  Scenario: Exponentiation of integer by zero
+    Given an integer operation "^"
+    When I provide a first number 5
+    And I provide a second number 0
+    Then the operation evaluates to 1
+
+  Scenario: Exponentiation of negative integer
+      Given an integer operation "^"
+      When I provide a first number -5
+      And I provide a second number 2
+      Then the operation evaluates to 25

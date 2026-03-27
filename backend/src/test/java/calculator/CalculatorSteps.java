@@ -42,6 +42,7 @@ public class CalculatorSteps {
                 case "-" -> op = new Minus(params);
                 case "*" -> op = new Times(params);
                 case "/" -> op = new Divides(params);
+                case "^" -> op = new Power(params);
                 default -> fail();
             }
         } catch (IllegalConstruction _) {
@@ -89,7 +90,7 @@ public class CalculatorSteps {
             fail(notation + " is not a correct notation! ");
     }
 
-    @When("^I provide a (.*) number (\\d+)$")
+    @When("^I provide a (.*) number (-?\\d+)$")
     public void whenIProvideANumber(String s, int val) {
 		// add extra parameter to the operation
         params = new ArrayList<>();

@@ -38,6 +38,34 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
         }
     }
 
+    private Expression buildFunction(String funcName, List<Expression> args) {
+        if (args.size() == 1) {
+            Expression arg = args.get(0);
+            try {
+                switch (funcName) {
+                    case "cos":
+                        return new Cosinus(arg);
+                    case "sin":
+                        return new Sinus(arg);
+                    case "tan":
+                        return new Tangente(arg);
+                    case "acos":
+                        return new Arccosinus(arg);
+                    case "asin":
+                        return new Arcsinus(arg);
+                    case "atan":
+                        return new Arctangente(arg);
+                    default:
+                        throw new UnsupportedOperationException("Function not implemented yet: " + funcName);
+                }
+            } catch (IllegalConstruction e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            throw new UnsupportedOperationException("Functions with multiple arguments are not fully implemented yet: " + funcName);
+        }
+    }
+
     /**
      * Rule: complete : expressionIN EOF #CompleteInfix
      */
@@ -99,9 +127,8 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
      *     #PreFunc
      */
     @Override
-    // TO CHANGE LATER
     public Expression visitPreFunc(PreFuncContext ctx) {
-        throw new UnsupportedOperationException("Prefix functions are not implemented yet: " + ctx.funcname().getText());
+        return buildFunction(ctx.funcname().getText(), visitPreArgs(ctx.expressionPRE()));
     }
 
     /**
@@ -116,9 +143,8 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
      * Rule: expressionPRE : funcname expressionPRE #PreFunc1Param
      */
     @Override
-    // TO CHANGE LATER
     public Expression visitPreFunc1Param(PreFunc1ParamContext ctx) {
-        throw new UnsupportedOperationException("Prefix functions are not implemented yet: " + ctx.funcname().getText());
+        return buildFunction(ctx.funcname().getText(), List.of(visit(ctx.expressionPRE())));
     }
 
     /**
@@ -158,9 +184,8 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
      *     #PostFunc
      */
     @Override
-    // TO CHANGE LATER
     public Expression visitPostFunc(PostFuncContext ctx) {
-        throw new UnsupportedOperationException("Postfix functions are not implemented yet: " + ctx.funcname().getText());
+        return buildFunction(ctx.funcname().getText(), visitPostArgs(ctx.expressionPOST()));
     }
 
     /**
@@ -175,9 +200,8 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
      * Rule: expressionPOST : expressionPOST funcname #PostFunc1Param
      */
     @Override
-    // TO CHANGE LATER
     public Expression visitPostFunc1Param(PostFunc1ParamContext ctx) {
-        throw new UnsupportedOperationException("Postfix functions are not implemented yet: " + ctx.funcname().getText());
+        return buildFunction(ctx.funcname().getText(), List.of(visit(ctx.expressionPOST())));
     }
 
     /**
@@ -408,9 +432,12 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
      * Rule: functionIN : funcname LPAR expressionIN (COMMA expressionIN)* RPAR #InfixFunctionCall
      */
     @Override
-    // TO CHANGE LATER
     public Expression visitInfixFunctionCall(InfixFunctionCallContext ctx) {
-        throw new UnsupportedOperationException("Infix functions are not implemented yet: " + ctx.funcname().getText());
+        List<Expression> args = new ArrayList<>();
+        for (calculator.calculatorParser.ExpressionINContext expCtx : ctx.expressionIN()) {
+            args.add(visit(expCtx));
+        }
+        return buildFunction(ctx.funcname().getText(), args);
     }
 
     /**

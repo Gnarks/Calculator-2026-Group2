@@ -12,6 +12,13 @@ import calculator.operations.Minus;
 import calculator.operations.Operation;
 import calculator.operations.Plus;
 import calculator.operations.Times;
+import calculator.operations.UnaryOperation;
+import calculator.operations.Cosinus;
+import calculator.operations.Sinus;
+import calculator.operations.Tangente;
+import calculator.operations.Arccosinus;
+import calculator.operations.Arcsinus;
+import calculator.operations.Arctangente;
 
 class TestParserVisitor {
 
@@ -78,5 +85,29 @@ class TestParserVisitor {
 
         assertInstanceOf(Times.class, parsed);
         assertEquals(4, parsed.getArgs().size());
+    }
+
+    @Test
+    void testInfixFunctions() {
+        assertInstanceOf(Cosinus.class, parser.parse("cos(1)"));
+        assertInstanceOf(Sinus.class, parser.parse("sin(2)"));
+        assertInstanceOf(Tangente.class, parser.parse("tan(3)"));
+        assertInstanceOf(Arccosinus.class, parser.parse("acos(1)"));
+        assertInstanceOf(Arcsinus.class, parser.parse("asin(1)"));
+        assertInstanceOf(Arctangente.class, parser.parse("atan(4)"));
+    }
+
+    @Test
+    void testPrefixFunctions() {
+        assertInstanceOf(Cosinus.class, parser.parse("cos 1")); // PreFunc1Param
+        assertInstanceOf(Sinus.class, parser.parse("sin(2)")); // PreFunc
+        assertInstanceOf(Tangente.class, parser.parse("tan 3"));
+    }
+
+    @Test
+    void testPostfixFunctions() {
+        assertInstanceOf(Cosinus.class, parser.parse("1 cos")); // PostFunc1Param
+        assertInstanceOf(Sinus.class, parser.parse("(2) sin")); // PostFunc
+        assertInstanceOf(Tangente.class, parser.parse("3 tan"));
     }
 }

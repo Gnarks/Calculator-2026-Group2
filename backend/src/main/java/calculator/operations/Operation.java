@@ -101,7 +101,7 @@ public abstract class Operation implements Expression {
 	 * @param i2 second Integer of the binary operation
 	 * @return result of computing the binary operation
 	 */
-	public abstract IntegerAtom op(IntegerAtom i1, IntegerAtom i2);
+	public abstract Atom op(IntegerAtom i1, IntegerAtom i2);
 
 	/**
 	 * Abstract method representing the actual binary arithmetic operation to
@@ -111,7 +111,7 @@ public abstract class Operation implements Expression {
 	 * @param q2 second Rationnal of the binary operation
 	 * @return result of computing the binary operation
 	 */
-	public abstract Rationnal op(Rationnal q1, Rationnal q2);
+	public abstract Atom op(Rationnal q1, Rationnal q2);
 
 	/**
 	 * Add more parameters to the existing list of parameters

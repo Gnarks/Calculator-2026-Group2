@@ -4,10 +4,8 @@ import java.util.List;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
-import calculator.atoms.Complex;
-import calculator.atoms.IntegerAtom;
-import calculator.atoms.Rationnal;
-import calculator.atoms.Real;
+import calculator.atoms.*;
+import org.apache.commons.numbers.fraction.Fraction;
 
 public final class Power extends Operation {
 
@@ -24,6 +22,7 @@ public final class Power extends Operation {
      * @param r2 the exponent
      * @return the result of the operation
      */
+    @Override
     public Real op(Real r1, Real r2) {
         double base = r1.getValue().doubleValue();
         double exp = r2.getValue().doubleValue();
@@ -60,31 +59,66 @@ public final class Power extends Operation {
      * @param i2 the exponent
      * @return the result of the operation
      */
-    public IntegerAtom op(IntegerAtom i1, IntegerAtom i2) {
-        int result;
-        if(i2.getValue() < 0) {
-            if(i1.getValue() == 0) {
-                throw new ArithmeticException("Undefined result");
-            }
-            // todo : change this
-            throw new ArithmeticException("Result not an integer");
+    @Override
+    public Real op(IntegerAtom i1, IntegerAtom i2) {
+        int base = i1.getValue();
+        int exp = i2.getValue();
+        if (base == 0 && exp < 0) {
+            return Real.nan();
         }
         try {
-           result = Math.powExact(i1.getValue(), i2.getValue());
+            if (exp < 0) {
+                long denom = Math.powExact(base, -exp);
+                return new Real(1.0 / denom);
+            } else {
+                return new Real(Math.powExact(base, exp));
+            }
         } catch (ArithmeticException e) {
             throw new ArithmeticException("Overflow");
         }
-        return new IntegerAtom(result);
     }
 
+    /**
+     * The actual exponentiation of two complex number
+     *
+     * @param c1 the base
+     * @param c2 the exponent
+     * @return the result of the exponentiation
+     */
     @Override
     public Complex op(Complex c1, Complex c2) {
         org.apache.commons.numbers.complex.Complex result = c1.getValue().pow(c2.getValue());
         return new Complex(result);
     }
 
+    /**
+     * The actual exponentiation of two rational numbers
+     *
+     * @param q1 the base
+     * @param q2 the exponent
+     * @return the result of the exponentiation
+     */
     @Override
-    public Rationnal op(Rationnal q1, Rationnal q2) {
-        return new Rationnal(6);
+    public Real op(Rationnal q1, Rationnal q2) {
+        double base = q1.getValue().doubleValue();
+        double exp = q2.getValue().doubleValue();
+
+        if(base < 0 && q2.getDenominator() % 2 == 0 || q1.getValue().equals(Fraction.ZERO) && exp < 0)
+            return Real.nan();
+
+        if(q1.getValue().equals(Fraction.ZERO) && q2.getValue().equals(Fraction.ZERO))
+            return new Real(1);
+
+        if (base < 0 && q2.getDenominator() % 2 == 1) {
+            double result = Math.pow(-base, exp);
+
+            if (q2.getNumerator() % 2 == 0) {
+                return new Real(result);
+            } else {
+                return new Real(-result);
+            }
+        }
+
+        return new Real(Math.pow(base, exp));
     }
 }

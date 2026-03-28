@@ -96,6 +96,23 @@ class TestCounting {
 	}
 
 	@Test
+	void testUnaryOperationCounting() {
+		try {
+			e = new Cosinus(new Real(value1));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+		Counter c = new Counter();
+		e.accept(c);
+		// test whether a unary operation has depth 1
+		assertEquals(1, c.getDepth(), "counting depth of a unary Operation");
+		// test whether a unary operation contains 1 operation
+		assertEquals(1, c.getNbOps());
+		// test whether a unary operation contains 1 number
+		assertEquals(1, c.getNbNbs());
+	}
+
+	@Test
 	void testComplexDeepExpressionCounting() {
 		try {
 			Expression c1 = new Complex(value1, value2);

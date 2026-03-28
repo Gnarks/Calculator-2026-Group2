@@ -33,6 +33,16 @@ class TestEvaluator {
 		assertEquals(new Real(value1), calc.eval(new Real(value1)));
 	}
 
+	@Test
+	void testEvaluateCosinus() {
+		try {
+			assertEquals(new Real(new BigDecimal(Math.cos(0))), calc.eval(new Cosinus(new Real(0))));
+			assertEquals(new Real(new BigDecimal(Math.cos(Math.PI))), calc.eval(new Cosinus(new Real(new BigDecimal(Math.PI)))));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
 	@ParameterizedTest
 	@ValueSource(strings = { "*", "+", "/", "-" })
 	void testEvaluateOperations(String symbol) {

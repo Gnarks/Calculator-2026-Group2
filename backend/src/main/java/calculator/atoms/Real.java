@@ -222,4 +222,9 @@ public class Real implements Atom {
 	public Real apply(Operation o, Atom a) {
 		return o.op(this, (Real) a);
 	}
+
+	@Override
+	public Real apply(calculator.operations.UnaryOperation o) {
+		return o.op(this);
+	}
 }

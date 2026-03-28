@@ -80,6 +80,18 @@ class TestNotation {
 	}
 
 	@Test
+	void testUnaryNotation() {
+		try {
+			Cosinus op = new Cosinus(new Real(8));
+			assertEquals("cos(8)", op.toString(Notation.PREFIX));
+			assertEquals("cos(8)", op.toString(Notation.INFIX));
+			assertEquals("(8)cos", op.toString(Notation.POSTFIX));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
 	void testNotationsComplex() {
 		// Test that the notations work for complex numbers as well.
 		Complex c1 = new Complex(3, 2);

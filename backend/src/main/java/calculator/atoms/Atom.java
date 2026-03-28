@@ -26,6 +26,14 @@ public interface Atom extends Expression {
 	public Atom apply(Operation o, Atom a);
 
 	/**
+	 * Applies an operation on the atom
+	 *
+	 * @param o the unary operation to apply
+	 * @return the result of the operation
+	 */
+	public Atom apply(calculator.operations.UnaryOperation o);
+
+	/**
 	 * accepts the specific AtomVisitor
 	 *
 	 * @param aV The Atomvisitor object being passed as a parameter

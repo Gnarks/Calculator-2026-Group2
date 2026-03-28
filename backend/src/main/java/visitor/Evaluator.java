@@ -93,4 +93,10 @@ public class Evaluator extends Visitor {
 		computedValue = result;
 	}
 
+	@Override
+	public void visit(calculator.operations.UnaryOperation o) {
+		o.getArg().accept(this);
+		computedValue = computedValue.apply(o);
+	}
+
 }

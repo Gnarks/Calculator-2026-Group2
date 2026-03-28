@@ -60,6 +60,11 @@ public class Rationnal implements Atom {
     }
 
     @Override
+    public Rationnal apply(calculator.operations.UnaryOperation o) {
+        return o.op(this);
+    }
+
+    @Override
     public void accept(AtomVisitor v) {
         v.visit(this);
     }

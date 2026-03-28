@@ -43,6 +43,18 @@ public final class Plus extends Operation {
 	 * @return The (new) Real that is the result of the addition
 	 */
 	public Real op(Real r1, Real r2) {
+		if ((r1.isPlusInf() && r2.isMinusInf())
+				|| (r1.isMinusInf() && r2.isPlusInf())
+				|| r1.isNan() || r2.isNan()) {
+			return Real.nan(); // inf-inf = NaN or NaN +x = NaN
+		}
+		if (r1.isMinusInf() || r2.isMinusInf()) { // x - inf = -inf
+			return Real.minusInf();
+		}
+		if (r1.isPlusInf() || r2.isPlusInf()) { // x + inf = +inf
+			return Real.plusInf();
+		}
+
 		return new Real(r1.getValue().add(r2.getValue()));
 	}
 
@@ -59,6 +71,9 @@ public final class Plus extends Operation {
 
 	@Override
 	public Complex op(Complex c1, Complex c2) {
+		if (c1.isNaN() || c2.isNaN()) {
+			return Complex.nan();
+		}
 		org.apache.commons.numbers.complex.Complex result = c1.getValue().add(c2.getValue());
 		return new Complex(result);
 	}
@@ -66,6 +81,6 @@ public final class Plus extends Operation {
 	@Override
 	public Rationnal op(Rationnal q1, Rationnal q2) {
 		org.apache.commons.numbers.fraction.Fraction result = q1.getValue().add(q2.getValue());
-        return new Rationnal(result);
+		return new Rationnal(result);
 	}
 }

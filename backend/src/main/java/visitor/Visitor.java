@@ -42,4 +42,11 @@ public abstract class Visitor {
 	 * @param i The operation being visited
 	 */
 	public abstract void visit(IntegerAtom i);
+
+	/**
+	 * The Visitor can traverse a unary operation (a subtype of Expression)
+	 *
+	 * @param o The unary operation being visited
+	 */
+	public abstract void visit(calculator.operations.UnaryOperation o);
 }

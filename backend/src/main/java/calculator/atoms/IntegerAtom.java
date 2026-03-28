@@ -103,6 +103,17 @@ public class IntegerAtom implements Atom {
 	}
 
 	/**
+	 * applies a unary operation to the IntegerAtom
+	 *
+	 * @param o the operation to apply
+	 * @return The result of the application
+	 */
+	@Override
+	public IntegerAtom apply(calculator.operations.UnaryOperation o) {
+		return o.op(this);
+	}
+
+	/**
 	 * returns the value of the integer
 	 * 
 	 * @return the value of the integer

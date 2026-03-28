@@ -50,12 +50,19 @@ public class AtomCaster extends AtomVisitor {
 
 			case INTEGER:
 				throw new IllegalAtomCast("Impossible to cast Real to Integer");
-			
+
 			case RATIONNAL:
+				if (r.isNan() || r.isPlusInf() || r.isMinusInf()) {
+					throw new IllegalAtomCast("Impossible to cast NaN or Infinity Real to Rationnal");
+				}
 				result = new Rationnal(org.apache.commons.numbers.fraction.Fraction.from(r.getValue().doubleValue()));
 				break;
 
 			case COMPLEX:
+				if (r.isNan()) {
+					result = Complex.nan();
+					break;
+				}
 				result = new Complex(r.getValue().doubleValue(), 0);
 				break;
 
@@ -135,7 +142,7 @@ public class AtomCaster extends AtomVisitor {
 			case REAL:
 				result = new Real(i.getValue());
 				break;
-			
+
 			case RATIONNAL:
 				result = new Rationnal(i.getValue(), 1);
 				break;

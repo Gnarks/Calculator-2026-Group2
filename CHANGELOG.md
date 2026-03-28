@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- Grammar ANTLR for the calculator, supporting infix, prefix and postfix notations.
+- Parser and Visitor for the grammar, allowing to create an Expression tree from a string input.
+- Support for Unary operations
+- Trigonometric functions: sine, cosine, tangent and their inverses.
 
 ### Changed
+- update dependencies (thanks to dependabot)
 
 ## Fixed
 - In case of a usage of several notations inside an expression (infix, prefix and postfix), the expression is considered as the type of the top-level.

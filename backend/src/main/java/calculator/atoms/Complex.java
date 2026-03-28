@@ -20,7 +20,7 @@ public class Complex implements Atom {
 	/**
 	 * Constructor method
 	 * 
-	 * @param real The real part
+	 * @param real      The real part
 	 * @param imaginary The imaginary part
 	 */
 	public Complex(double real, double imaginary) {
@@ -34,6 +34,25 @@ public class Complex implements Atom {
 	 */
 	public Complex(org.apache.commons.numbers.complex.Complex value) {
 		this.value = value;
+	}
+
+	/**
+	 * Returns a Complex representing a NaN
+	 *
+	 * @return a NaN Complex
+	 */
+	public static Complex nan() {
+		return new Complex(org.apache.commons.numbers.complex.Complex.ofCartesian(Double.NaN, Double.NaN));
+	}
+
+	/**
+	 * Returns if a complex is a NaN
+	 *
+	 * @return true iff the complex represents a NaN
+	 */
+	public boolean isNaN() {
+		return value.isNaN();
+
 	}
 
 	/**
@@ -51,6 +70,11 @@ public class Complex implements Atom {
 	}
 
 	@Override
+	public Complex apply(calculator.operations.UnaryOperation o) {
+		return o.op(this);
+	}
+
+	@Override
 	public void accept(AtomVisitor v) {
 		v.visit(this);
 	}
@@ -62,9 +86,12 @@ public class Complex implements Atom {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) return false;
-		if (this == o) return true;
-		if (!(o instanceof Complex)) return false;
+		if (o == null)
+			return false;
+		if (this == o)
+			return true;
+		if (!(o instanceof Complex))
+			return false;
 		Complex other = (Complex) o;
 		return this.value.equals(other.getValue());
 	}

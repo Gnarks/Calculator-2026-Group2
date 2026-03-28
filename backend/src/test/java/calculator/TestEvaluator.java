@@ -43,6 +43,53 @@ class TestEvaluator {
 		}
 	}
 
+	@Test
+	void testEvaluateSinus() {
+		try {
+			assertEquals(new Real(new BigDecimal(Math.sin(0))), calc.eval(new Sinus(new Real(0))));
+			assertEquals(new Real(new BigDecimal(Math.sin(Math.PI))), calc.eval(new Sinus(new Real(new BigDecimal(Math.PI)))));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testEvaluateTangente() {
+		try {
+			assertEquals(new Real(new BigDecimal(Math.tan(0))), calc.eval(new Tangente(new Real(0))));
+			assertEquals(new Real(new BigDecimal(Math.tan(Math.PI / 4))), calc.eval(new Tangente(new Real(new BigDecimal(Math.PI / 4)))));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testEvaluateArcsinus() {
+		try {
+			assertEquals(new Real(new BigDecimal(Math.asin(0))), calc.eval(new Arcsinus(new Real(0))));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testEvaluateArccosinus() {
+		try {
+			assertEquals(new Real(new BigDecimal(Math.acos(0))), calc.eval(new Arccosinus(new Real(0))));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testEvaluateArctangente() {
+		try {
+			assertEquals(new Real(new BigDecimal(Math.atan(0))), calc.eval(new Arctangente(new Real(0))));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
 	@ParameterizedTest
 	@ValueSource(strings = { "*", "+", "/", "-" })
 	void testEvaluateOperations(String symbol) {

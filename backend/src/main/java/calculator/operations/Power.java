@@ -27,6 +27,7 @@ public final class Power extends Operation {
         double base = r1.getValue().doubleValue();
         double exp = r2.getValue().doubleValue();
 
+        // undefined with negative base and irrational exponent or rational with even denominator
         if (r1.isNan() || r2.isNan() || base < 0)
             return Real.nan();
 
@@ -108,11 +109,10 @@ public final class Power extends Operation {
         double base = q1.getValue().doubleValue();
         double exp = q2.getValue().doubleValue();
 
-        if(base < 0 && q2.getDenominator() % 2 == 0 || q1.getValue().equals(Fraction.ZERO) && exp < 0)
+        if(base < 0 && q2.getDenominator() % 2 == 0
+                || q1.getValue().equals(Fraction.ZERO) && exp < 0
+                || q1.getValue().equals(Fraction.ZERO) && q2.getValue().equals(Fraction.ZERO))
             return Real.nan();
-
-        if(q1.getValue().equals(Fraction.ZERO) && q2.getValue().equals(Fraction.ZERO))
-            return new Real(1);
 
         if (base < 0 && q2.getDenominator() % 2 == 1) {
             double result = Math.pow(-base, exp);

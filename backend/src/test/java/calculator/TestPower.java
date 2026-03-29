@@ -183,14 +183,14 @@ public class TestPower {
             fail();
         }
     }
-
+    
     @Test
-    void testRatZeroExpRatZero() {
-        Rationnal r = new Rationnal(Fraction.of(0, 0));
+    void testRatZeroExpRatZero_isNaN() {
+        Real r = new Real(0);
         List<Expression> p = Arrays.asList(r, r);
         try {
             Power pow = new Power(p);
-            assertEquals(new Real(1), pow.op(r, r));
+            assertEquals(Real.nan(), pow.op(r, r));
         } catch (IllegalConstruction _) {
             fail();
         }
@@ -218,6 +218,19 @@ public class TestPower {
             Power pow = new Power(p);
             assertEquals(new Real(-1.144714243).getValue().doubleValue(), pow.op(r1, r2).getValue().doubleValue(),
                     1e-9);
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testNegRatExpRatEqOne() {
+        Rationnal r1 = new Rationnal(Fraction.of(-2, 2));
+        Rationnal r2 = new Rationnal(Fraction.of(2, 2));
+        List<Expression> p = Arrays.asList(r1, r2);
+        try {
+            Power pow = new Power(p);
+            assertEquals(new Real(-1), pow.op(r1, r2));
         } catch (IllegalConstruction _) {
             fail();
         }

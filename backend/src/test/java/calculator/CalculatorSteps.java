@@ -2,6 +2,7 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.atoms.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,10 +11,7 @@ import io.cucumber.java.en.When;
 import java.util.ArrayList;
 import java.util.List;
 
-import calculator.atoms.IntegerAtom;
-import calculator.atoms.Complex;
 import calculator.operations.*;
-import calculator.atoms.Rationnal;
 
 public class CalculatorSteps {
 
@@ -42,7 +40,7 @@ public class CalculatorSteps {
                 case "-" -> op = new Minus(params);
                 case "*" -> op = new Times(params);
                 case "/" -> op = new Divides(params);
-                case "^" -> op = new Power(params);
+                case "**" -> op = new Power(params);
                 default -> fail();
             }
         } catch (IllegalConstruction _) {
@@ -107,17 +105,28 @@ public class CalculatorSteps {
 		}
 	}
 
+    @When("I provide a real number {double}")
+    public void whenIProvideARealNumber(double real) {
+        params = new ArrayList<>();
+        params.add(new Real(real));
+        if (op != null) {
+            op.addMoreParams(params);
+        }
+    }
+
     @Then("^the (.*) is (\\d+)$")
     public void thenTheOperationIs(String s, int val) {
         try {
+            Atom expected;
             switch (s) {
-                case "sum" -> op = new Plus(params);
-                case "product" -> op = new Times(params);
-                case "quotient" -> op = new Divides(params);
-                case "difference" -> op = new Minus(params);
-                default -> fail();
+                case "sum" -> { op = new Plus(params); expected = new IntegerAtom(val); }
+                case "product" -> { op = new Times(params); expected = new IntegerAtom(val); }
+                case "quotient" -> { op = new Divides(params); expected = new IntegerAtom(val); }
+                case "difference" -> { op = new Minus(params); expected = new IntegerAtom(val); }
+                case "exponentiation" -> { op = new Power(params); expected = new Real(val); }
+                default -> { fail(); return; }
             }
-            assertEquals(new IntegerAtom(val), c.eval(op));
+            assertEquals(expected, c.eval(op));
         } catch (IllegalConstruction _) {
             fail();
         }
@@ -155,6 +164,17 @@ public class CalculatorSteps {
     @Then("the operation evaluates to the rational number {int} \\/ {int}")
     public void thenTheOperationEvaluatesToRational(int numerator, int denominator) {
         assertEquals(new Rationnal(numerator, denominator), c.eval(op));
+    }
+
+    @Then("the operation evaluates to the real number {double}")
+    public void thenTheOperationEvaluatesToReal(double real) {
+        Real result = (Real) c.eval(op);
+        assertEquals(real, result.getValue().doubleValue(), 1e-7);
+    }
+
+    @Then("the operation is not possible")
+    public void thenTheOperationIsNotPossible() {
+        assertThrows(ArithmeticException.class, () -> c.eval(op));
     }
 
 }

@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
@@ -413,6 +414,20 @@ public class TestPower {
         try {
             Power pow = new Power(p);
             assertEquals(Real.nan(), pow.op(r1, r2));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    // COMPLEX
+    @Test
+    void testComplexExpComplex_throwsException() {
+        Complex c1 = new Complex(3, 2);
+        Complex c2 = new Complex(2, 1);
+        List<Expression> p = Arrays.asList(c1, c2);
+        try {
+            Power pow = new Power(p);
+            assertThrows(ArithmeticException.class, () -> pow.op(c1, c2));
         } catch (IllegalConstruction _) {
             fail();
         }

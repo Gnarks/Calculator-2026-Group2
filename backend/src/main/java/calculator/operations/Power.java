@@ -11,7 +11,7 @@ public final class Power extends Operation {
 
     public Power(List<Expression> elist) throws IllegalConstruction {
         super(elist);
-        symbol = "^";
+        symbol = "**";
         neutral = 1;
     }
 
@@ -85,16 +85,15 @@ public final class Power extends Operation {
     }
 
     /**
-     * The actual exponentiation of two complex number
+     * The exponentiation of complex numbers
      *
      * @param c1 the base
      * @param c2 the exponent
-     * @return the result of the exponentiation
+     * @throws ArithmeticException since the exponentiation of complex numbers is impossible
      */
     @Override
     public Complex op(Complex c1, Complex c2) {
-        org.apache.commons.numbers.complex.Complex result = c1.getValue().pow(c2.getValue());
-        return new Complex(result);
+        throw new ArithmeticException("The exponentiation of two complex numbers is impossible");
     }
 
     /**

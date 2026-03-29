@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Parser and Visitor for the grammar, allowing to create an Expression tree from a string input.
 - Support for Unary operations
 - Trigonometric functions: sine, cosine, tangent and their inverses.
+- Command-line interface (CLI): commmand help, exit and eval.-
 
 ### Changed
 - update dependencies (thanks to dependabot)

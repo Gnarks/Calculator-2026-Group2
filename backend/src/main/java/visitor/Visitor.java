@@ -1,6 +1,7 @@
 package visitor;
 
 import calculator.operations.Operation;
+import calculator.operations.UnaryOperation;
 import calculator.atoms.*;
 
 /**
@@ -48,5 +49,5 @@ public abstract class Visitor {
 	 *
 	 * @param o The unary operation being visited
 	 */
-	public abstract void visit(calculator.operations.UnaryOperation o);
+	public abstract void visit(UnaryOperation o);
 }

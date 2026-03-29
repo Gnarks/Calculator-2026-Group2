@@ -42,15 +42,15 @@ public class Main {
 		boolean running = true;
         while (running) {
             System.out.print("calc> ");
-            String input = scanner.nextLine().trim();
+            String input = scanner.nextLine().trim();  // Trim input to handle extra spaces
             
             if (input.isEmpty()) continue;
             
-            String[] parts = input.split(" ", 2);
-            String commandName = parts[0].toLowerCase();
-            String arguments = parts.length > 1 ? parts[1] : "";
+            String[] parts = input.split(" ", 2);  // Split to get command (first word)
+            String commandName = parts[0].toLowerCase(); // Command names are case-insensitive
+            String arguments = parts.length > 1 ? parts[1] : "";  // The rest of the input is considered as arguments
             
-            CLICommand command = commands.get(commandName);
+            CLICommand command = commands.get(commandName);  // = null if command not found (or not eval at the beginning of the input)
             
             if (command != null) {
                 running = command.execute(arguments);

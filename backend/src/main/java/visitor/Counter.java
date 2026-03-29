@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.Expression;
 import calculator.operations.Operation;
+import calculator.operations.UnaryOperation;
 import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
@@ -64,7 +65,7 @@ public class Counter extends Visitor {
 	}
 
 	@Override
-	public void visit(calculator.operations.UnaryOperation o) {
+	public void visit(UnaryOperation o) {
 		nbOps++;
 		currentDepth++;
 		o.getArg().accept(this);

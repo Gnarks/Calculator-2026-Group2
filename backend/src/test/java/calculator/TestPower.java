@@ -290,20 +290,6 @@ public class TestPower {
     }
 
     @Test
-    void testRealExpMinusInf() {
-        Real r1 = new Real(3.254);
-        Real r2 = Real.plusInf();
-        List<Expression> p = Arrays.asList(r1, r2);
-        try {
-            Power pow = new Power(p);
-            assertEquals(Real.plusInf(), pow.op(r1, r2));
-        } catch (IllegalConstruction _) {
-            fail();
-        }
-    }
-
-
-    @Test
     void testOneExpPlusInf() {
         Real r1 = new Real(1);
         Real r2 = Real.plusInf();
@@ -317,13 +303,13 @@ public class TestPower {
     }
 
     @Test
-    void testMinusInfExpMinInf_isNaN() {
-        Real r1 = Real.minusInf();
-        Real r2 = Real.minusInf();
+    void testZeroExpPlusInf() {
+        Real r1 = new Real(0);
+        Real r2 = Real.plusInf();
         List<Expression> p = Arrays.asList(r1, r2);
         try {
             Power pow = new Power(p);
-            assertEquals(Real.nan(), pow.op(r1, r2));
+            assertEquals(new Real(0), pow.op(r1, r2));
         } catch (IllegalConstruction _) {
             fail();
         }
@@ -356,7 +342,71 @@ public class TestPower {
     }
 
     @Test
-    void testExpNaN() {
+    void testZeroExpNegReal() {
+        Real r1 = new Real(0);
+        Real r2 = new Real(-2.364);
+        List<Expression> p = Arrays.asList(r1, r2);
+        try {
+            Power pow = new Power(p);
+            assertEquals(Real.plusInf(), pow.op(r1, r2));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testZeroExpZero_isNaN() {
+        Real r = new Real(0);
+        List<Expression> p = Arrays.asList(r, r);
+        try {
+            Power pow = new Power(p);
+            assertEquals(Real.nan(), pow.op(r, r));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testMinusInfExpMinInf_isNaN() {
+        Real r1 = Real.minusInf();
+        Real r2 = Real.minusInf();
+        List<Expression> p = Arrays.asList(r1, r2);
+        try {
+            Power pow = new Power(p);
+            assertEquals(Real.nan(), pow.op(r1, r2));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testRealExpMinusInf() {
+        Real r1 = new Real(3.254);
+        Real r2 = Real.minusInf();
+        List<Expression> p = Arrays.asList(r1, r2);
+        try {
+            Power pow = new Power(p);
+            assertEquals(new Real(0), pow.op(r1, r2));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testRealBetweenZeroAndOneExpMinusInf() {
+        Real r1 = new Real(0.2564);
+        Real r2 = Real.minusInf();
+        List<Expression> p = Arrays.asList(r1, r2);
+        try {
+            Power pow = new Power(p);
+            assertEquals(Real.plusInf(), pow.op(r1, r2));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testNaNExpNaN() {
         Real r1 = Real.nan();
         Real r2 = Real.nan();
         List<Expression> p = Arrays.asList(r1, r2);

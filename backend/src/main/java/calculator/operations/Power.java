@@ -30,24 +30,30 @@ public final class Power extends Operation {
         if (r1.isNan() || r2.isNan() || base < 0)
             return Real.nan();
 
-        if(r2.isPlusInf()) {
-            if(r1.isMinusInf() || 0 < base && base < 1)
+        if(base == 1)
+            return new Real(1);
+
+        if(base == 0) {
+            if(exp < 0) {
+                return Real.plusInf();
+            } else if(exp == 0) {
+                return Real.nan();
+            } else {
                 return new Real(0);
-            if(base == 1)
-                return new Real(1);
+            }
+        }
+
+        if(r2.isPlusInf()) {
+            if(0 < base && base < 1)
+                return new Real(0);
             return Real.plusInf();
         }
 
         if(r2.isMinusInf()) {
             if(0 < base && base < 1)
                 return Real.plusInf();
-            if(base == 1)
-                return new Real(1);
             return new Real(0);
         }
-
-        if(exp < 0 && base == 0)
-            return Real.plusInf();
 
         return new Real(Math.pow(base, exp));
     }

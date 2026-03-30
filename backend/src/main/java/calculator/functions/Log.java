@@ -1,6 +1,5 @@
 package calculator.functions;
 
-import java.awt.List;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;

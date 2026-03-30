@@ -55,7 +55,7 @@ public class Rationnal implements Atom {
     }
 
     @Override
-    public Rationnal apply(Operation o, Atom a) {
+    public Atom apply(Operation o, Atom a) {
         return o.op(this, (Rationnal) a);
     }
 

@@ -98,7 +98,7 @@ public class IntegerAtom implements Atom {
 	 * @param a the other IntegerAtom
 	 * @return The result of the application of o on a and this instance
 	 */
-	public IntegerAtom apply(Operation o, Atom a) {
+	public Atom apply(Operation o, Atom a) {
 		return o.op(this, (IntegerAtom) a);
 	}
 

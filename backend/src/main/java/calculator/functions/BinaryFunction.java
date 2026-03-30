@@ -66,4 +66,39 @@ public abstract class BinaryFunction {
 		v.visit(this);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+			return false;
+		if (this == o)
+			return true;
+		if (getClass() != o.getClass())
+			return false;
+		BinaryFunction other = (BinaryFunction) o;
+		return this.firstArg.equals(other.getFirstArg()) && this.secondArg.equals(other.getSecondArg());
+	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
+
+	public Expression getFirstArg() {
+		return firstArg;
+	}
+
+	public void setFirstArg(Expression firstArg) {
+		this.firstArg = firstArg;
+	}
+
+	public Expression getSecondArg() {
+		return secondArg;
+	}
+
+	public void setSecondArg(Expression secondArg) {
+		this.secondArg = secondArg;
+	}
 }

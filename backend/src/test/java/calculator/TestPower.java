@@ -183,7 +183,7 @@ public class TestPower {
             fail();
         }
     }
-    
+
     @Test
     void testRatZeroExpRatZero_isNaN() {
         Real r = new Real(0);
@@ -285,6 +285,47 @@ public class TestPower {
         try {
             Power pow = new Power(p);
             assertEquals(Real.nan(), pow.op(r1, r2));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testNegRealExpRatWithEvenDenom_isNaN() {
+        Real r1 = new Real(-3.254);
+        Real r2 = new Real(2.1);
+        List<Expression> p = Arrays.asList(r1, r2);
+        try {
+            Power pow = new Power(p);
+            assertEquals(Real.nan(), pow.op(r1, r2));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testNegRealExpInteger() {
+        Real r1 = new Real(-2.3652);
+        Real r2 = new Real(2);
+        List<Expression> p = Arrays.asList(r1, r2);
+        try {
+            Power pow = new Power(p);
+            assertEquals(new Real(5.59417104).getValue().doubleValue(), pow.op(r1, r2).getValue().doubleValue(),
+                    1e-9);
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testNegRealExpRatWithOddDenom() {
+        Real r1 = new Real(-2.365);
+        Real r2 = new Real(2.2);
+        List<Expression> p = Arrays.asList(r1, r2);
+        try {
+            Power pow = new Power(p);
+            assertEquals(new Real(-6.643983101).getValue().doubleValue(), pow.op(r1, r2).getValue().doubleValue(),
+                    1e-9);
         } catch (IllegalConstruction _) {
             fail();
         }

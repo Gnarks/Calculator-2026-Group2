@@ -1,5 +1,6 @@
 package calculator.operations;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import calculator.Expression;
@@ -27,12 +28,8 @@ public final class Power extends Operation {
         double base = r1.getValue().doubleValue();
         double exp = r2.getValue().doubleValue();
 
-        // undefined with negative base and irrational exponent or rational with even denominator
-        if (r1.isNan() || r2.isNan() || base < 0)
+        if (r1.isNan() || r2.isNan())
             return Real.nan();
-
-        if(base == 1)
-            return new Real(1);
 
         if(base == 0) {
             if(exp < 0) {
@@ -45,6 +42,8 @@ public final class Power extends Operation {
         }
 
         if(r2.isPlusInf()) {
+            if(r1.isMinusInf())
+                return Real.nan();
             if(0 < base && base < 1)
                 return new Real(0);
             return Real.plusInf();
@@ -56,7 +55,57 @@ public final class Power extends Operation {
             return new Real(0);
         }
 
+        // if negative base, result undefined is irrational exponent or rational exponent with even denominator
+        if(base < 0) {
+            if(Fraction.from(exp).getDenominator() %2 == 1)
+                return new Real(computePowerRationalWithOddDenom(base, exp));
+            if(!isResultDefined(r2))
+                return Real.nan();
+        }
+
+        if(base == 1)
+            return new Real(1);
+
         return new Real(Math.pow(base, exp));
+    }
+
+    /**
+     * Checks if the result of an exponentiation between two reals is defined when the base equals zero.
+     * It is defined if the exponent is an integer or a rational with even base.
+     *
+     * @param r the exponent
+     * @return true if the result is defined
+     */
+    private boolean isResultDefined(Real r) {
+        double exp = r.getValue().doubleValue();
+        Fraction expFrac = Fraction.from(exp);
+        return (isIntegerValue(r.getValue()) || expFrac.getDenominator() %2 == 1);
+    }
+
+    /**
+     * Checks if a BigDecimal is an integer.
+     *
+     * @param bd the BigDecimal we want to check
+     * @return true if the BigDecimal is an integer
+     */
+    private boolean isIntegerValue(BigDecimal bd) {
+        return bd.stripTrailingZeros().scale() <= 0;
+    }
+
+    /**
+     * Computes an exponentiation with the form a**(p/q) = (a**(1/q))**p
+     *
+     * @param base the base
+     * @param exp the exponent
+     * @return the result of the exponentiation
+     */
+    private double computePowerRationalWithOddDenom(double base, double exp) {
+        Fraction expFrac = Fraction.from(exp);
+        int num = expFrac.getNumerator();
+        int denom = expFrac.getDenominator();
+
+        double root = -(Math.pow(Math.abs(base), 1.0 / denom));
+        return Math.pow(root, num);
     }
 
     /**

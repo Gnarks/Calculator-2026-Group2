@@ -4,6 +4,7 @@ import calculator.Notation;
 
 import calculator.operations.Operation;
 import calculator.atoms.*;
+import calculator.functions.BinaryFunction;
 import calculator.functions.UnaryFunction;
 import calculator.Expression;
 
@@ -178,6 +179,12 @@ public class Printer extends Visitor {
 	 */
 	public String getResult() {
 		return sb.toString();
+	}
+
+	@Override
+	public void visit(BinaryFunction f) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'visit'");
 	}
 
 }

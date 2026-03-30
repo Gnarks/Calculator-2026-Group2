@@ -73,6 +73,12 @@ public class Counter extends Visitor {
 		currentDepth--;
 	}
 
+	@Override
+	public void visit(BinaryFunction f) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+	}
+
 	/**
 	 * Gets the number of operations.
 	 * 

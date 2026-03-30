@@ -45,9 +45,16 @@ public abstract class Visitor {
 	public abstract void visit(IntegerAtom i);
 
 	/**
-	 * The Visitor can traverse a unary operation (a subtype of Expression)
+	 * The Visitor can traverse an unary function (a subtype of Expression)
 	 *
-	 * @param o The unary operation being visited
+	 * @param f The unary function being visited
 	 */
-	public abstract void visit(UnaryFunction o);
+	public abstract void visit(UnaryFunction f);
+
+	/**
+	 * The Visitor can traverse a binary function (a subtype of Expression)
+	 *
+	 * @param f The binary function being visited
+	 */
+	public abstract void visit(BinaryFunction f);
 }

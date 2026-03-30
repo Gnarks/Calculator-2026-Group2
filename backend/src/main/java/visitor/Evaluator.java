@@ -5,6 +5,7 @@ import calculator.operations.Operation;
 import calculator.atoms.*;
 import calculator.atoms.visitor.AtomCaster;
 import calculator.atoms.visitor.AtomComparator;
+import calculator.functions.BinaryFunction;
 import calculator.functions.UnaryFunction;
 
 import java.util.ArrayList;
@@ -98,6 +99,12 @@ public class Evaluator extends Visitor {
 	public void visit(UnaryFunction o) {
 		o.getArg().accept(this);
 		computedValue = computedValue.apply(o);
+	}
+
+	@Override
+	public void visit(BinaryFunction f) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'visit'");
 	}
 
 }

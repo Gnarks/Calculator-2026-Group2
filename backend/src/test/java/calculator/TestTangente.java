@@ -5,11 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
-import calculator.operations.Tangente;
-import calculator.operations.Plus;
+import calculator.functions.Tangente;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 class TestTangente {
 
@@ -27,7 +25,6 @@ class TestTangente {
 		}
 	}
 
-
 	@Test
 	void testEquals() {
 		try {
@@ -39,7 +36,7 @@ class TestTangente {
 	}
 
 	@Test
-    void testCompute() {
-        assertEquals(new Real(new BigDecimal(Math.tan(value1))), op.op(param));
-    }
+	void testCompute() {
+		assertEquals(new Real(new BigDecimal(Math.tan(value1))), op.op(param));
+	}
 }

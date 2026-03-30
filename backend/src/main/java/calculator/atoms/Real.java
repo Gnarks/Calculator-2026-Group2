@@ -7,6 +7,7 @@ import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
+import calculator.functions.UnaryOperation;
 import visitor.Visitor;
 
 /**
@@ -224,7 +225,7 @@ public class Real implements Atom {
 	}
 
 	@Override
-	public Real apply(calculator.operations.UnaryOperation o) {
+	public Real apply(UnaryOperation o) {
 		return o.op(this);
 	}
 }

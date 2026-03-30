@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.operations.Operation;
 import calculator.atoms.*;
+import calculator.functions.*;
 
 /**
  * Visitor design pattern
@@ -48,5 +49,5 @@ public abstract class Visitor {
 	 *
 	 * @param o The unary operation being visited
 	 */
-	public abstract void visit(calculator.operations.UnaryOperation o);
+	public abstract void visit(UnaryOperation o);
 }

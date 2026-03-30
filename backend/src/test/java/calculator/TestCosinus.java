@@ -5,12 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
-import calculator.operations.Cosinus;
-import calculator.operations.Plus;
+import calculator.functions.Cosinus;
 
-import java.beans.Transient;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 class TestCosinus {
 
@@ -45,8 +42,8 @@ class TestCosinus {
 	}
 
 	@Test
-    void testCompute() {
-        assertEquals(new Real(new BigDecimal(Math.cos(value1))), op.op(param));
-    }
+	void testCompute() {
+		assertEquals(new Real(new BigDecimal(Math.cos(value1))), op.op(param));
+	}
 
 }

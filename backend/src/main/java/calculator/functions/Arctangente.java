@@ -1,4 +1,4 @@
-package calculator.operations;
+package calculator.functions;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
@@ -54,7 +54,8 @@ public final class Arctangente extends UnaryOperation {
 	@Override
 	public Rationnal op(Rationnal q) {
 		double atanVal = Math.atan(q.getValue().doubleValue());
-		org.apache.commons.numbers.fraction.Fraction result = org.apache.commons.numbers.fraction.Fraction.from(atanVal);
+		org.apache.commons.numbers.fraction.Fraction result = org.apache.commons.numbers.fraction.Fraction
+				.from(atanVal);
 		return new Rationnal(result);
 	}
 }

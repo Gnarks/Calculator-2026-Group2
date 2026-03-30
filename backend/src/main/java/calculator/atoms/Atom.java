@@ -3,6 +3,7 @@ package calculator.atoms;
 import calculator.Expression;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
+import calculator.functions.UnaryOperation;
 
 /**
  * Atom abstract class
@@ -31,7 +32,7 @@ public interface Atom extends Expression {
 	 * @param o the unary operation to apply
 	 * @return the result of the operation
 	 */
-	public Atom apply(calculator.operations.UnaryOperation o);
+	public Atom apply(calculator.functions.UnaryOperation o);
 
 	/**
 	 * accepts the specific AtomVisitor

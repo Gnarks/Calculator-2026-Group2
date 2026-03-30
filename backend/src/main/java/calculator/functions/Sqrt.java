@@ -1,4 +1,4 @@
-package calculator.operations;
+package calculator.functions;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
@@ -51,7 +51,8 @@ public final class Sqrt extends UnaryOperation {
 			throw new IllegalArgumentException("Square root of negative number");
 		}
 		double sqrtVal = Math.sqrt(q.getValue().doubleValue());
-		org.apache.commons.numbers.fraction.Fraction result = org.apache.commons.numbers.fraction.Fraction.from(sqrtVal);
+		org.apache.commons.numbers.fraction.Fraction result = org.apache.commons.numbers.fraction.Fraction
+				.from(sqrtVal);
 		return new Rationnal(result);
 	}
 }

@@ -4,6 +4,7 @@ import calculator.Expression;
 import calculator.atoms.visitor.AtomVisitor;
 import calculator.operations.Operation;
 import visitor.Visitor;
+import calculator.functions.*;
 
 /**
  * IntegerAtom is a concrete class that represents arithmetic (integer) numbers,
@@ -109,7 +110,7 @@ public class IntegerAtom implements Atom {
 	 * @return The result of the application
 	 */
 	@Override
-	public IntegerAtom apply(calculator.operations.UnaryOperation o) {
+	public IntegerAtom apply(UnaryOperation o) {
 		return o.op(this);
 	}
 

@@ -1,4 +1,4 @@
-package calculator.operations;
+package calculator.functions;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;

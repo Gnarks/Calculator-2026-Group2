@@ -5,11 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
-import calculator.operations.Sqrt;
-import calculator.operations.Plus;
+import calculator.functions.Sqrt;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 class TestSqrt {
 
@@ -27,7 +25,6 @@ class TestSqrt {
 		}
 	}
 
-
 	@Test
 	void testEquals() {
 		try {
@@ -39,7 +36,7 @@ class TestSqrt {
 	}
 
 	@Test
-    void testCompute() {
-        assertEquals(new Real(new BigDecimal(Math.sqrt(value1))), op.op(param));
-    }
+	void testCompute() {
+		assertEquals(new Real(new BigDecimal(Math.sqrt(value1))), op.op(param));
+	}
 }

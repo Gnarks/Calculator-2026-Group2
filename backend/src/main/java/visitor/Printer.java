@@ -4,6 +4,7 @@ import calculator.Notation;
 
 import calculator.operations.Operation;
 import calculator.atoms.*;
+import calculator.functions.UnaryOperation;
 import calculator.Expression;
 
 /**
@@ -135,7 +136,7 @@ public class Printer extends Visitor {
 	}
 
 	@Override
-	public void visit(calculator.operations.UnaryOperation o) {
+	public void visit(UnaryOperation o) {
 		switch (notation) {
 			case PREFIX, INFIX -> {
 				sb.append(o.getSymbol()).append("(");

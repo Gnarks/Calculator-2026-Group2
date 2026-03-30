@@ -1,4 +1,4 @@
-package calculator.operations;
+package calculator.functions;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
@@ -11,7 +11,8 @@ import visitor.Printer;
 import visitor.Visitor;
 
 /**
- * UnaryOperation is an abstract class that represents unary arithmetic operations,
+ * UnaryOperation is an abstract class that represents unary arithmetic
+ * operations,
  * which are a special kind of Expressions, just like binary operations are.
  */
 public abstract class UnaryOperation implements Expression {
@@ -91,9 +92,12 @@ public abstract class UnaryOperation implements Expression {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) return false;
-		if (this == o) return true;
-		if (getClass() != o.getClass()) return false;
+		if (o == null)
+			return false;
+		if (this == o)
+			return true;
+		if (getClass() != o.getClass())
+			return false;
 		UnaryOperation other = (UnaryOperation) o;
 		return this.arg.equals(other.getArg());
 	}

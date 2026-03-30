@@ -5,11 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
-import calculator.operations.Ln;
-import calculator.operations.Plus;
+import calculator.functions.Ln;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 class TestLn {
 
@@ -27,7 +25,6 @@ class TestLn {
 		}
 	}
 
-
 	@Test
 	void testEquals() {
 		try {
@@ -39,7 +36,7 @@ class TestLn {
 	}
 
 	@Test
-    void testCompute() {
-        assertEquals(new Real(new BigDecimal(Math.log(value1))), op.op(param));
-    }
+	void testCompute() {
+		assertEquals(new Real(new BigDecimal(Math.log(value1))), op.op(param));
+	}
 }

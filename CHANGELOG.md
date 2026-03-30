@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Support for Unary operations
 - Trigonometric functions: sine, cosine, tangent and their inverses.
+- Others functions: logarithm, square root.
 
 ### Changed
 - update dependencies (thanks to dependabot)

@@ -11,7 +11,7 @@ import calculator.atoms.Real;
  * This class represents the arithmetic unary operation "atan".
  * The class extends an abstract superclass UnaryOperation.
  */
-public final class Arctangente extends UnaryOperation {
+public final class Arctangente extends UnaryFunction {
 
 	/**
 	 * Class constructor specifying an Expression to apply the arctangent function.

@@ -71,7 +71,7 @@ public class Complex implements Atom {
 	}
 
 	@Override
-	public Complex apply(UnaryOperation o) {
+	public Complex apply(UnaryFunction o) {
 		return o.op(this);
 	}
 

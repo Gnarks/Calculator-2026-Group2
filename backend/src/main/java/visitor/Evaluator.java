@@ -5,7 +5,7 @@ import calculator.operations.Operation;
 import calculator.atoms.*;
 import calculator.atoms.visitor.AtomCaster;
 import calculator.atoms.visitor.AtomComparator;
-import calculator.functions.UnaryOperation;
+import calculator.functions.UnaryFunction;
 
 import java.util.ArrayList;
 
@@ -95,7 +95,7 @@ public class Evaluator extends Visitor {
 	}
 
 	@Override
-	public void visit(UnaryOperation o) {
+	public void visit(UnaryFunction o) {
 		o.getArg().accept(this);
 		computedValue = computedValue.apply(o);
 	}

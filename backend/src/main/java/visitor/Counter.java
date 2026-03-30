@@ -66,7 +66,7 @@ public class Counter extends Visitor {
 	}
 
 	@Override
-	public void visit(UnaryOperation o) {
+	public void visit(UnaryFunction o) {
 		nbOps++;
 		currentDepth++;
 		o.getArg().accept(this);

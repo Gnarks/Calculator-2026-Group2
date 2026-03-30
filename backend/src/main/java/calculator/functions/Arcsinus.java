@@ -11,7 +11,7 @@ import calculator.atoms.Real;
  * This class represents the arithmetic unary operation "asin".
  * The class extends an abstract superclass UnaryOperation.
  */
-public final class Arcsinus extends UnaryOperation {
+public final class Arcsinus extends UnaryFunction {
 
 	/**
 	 * Class constructor specifying an Expression to apply the arcsine function.

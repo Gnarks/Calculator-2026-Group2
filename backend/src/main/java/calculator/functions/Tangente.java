@@ -11,7 +11,7 @@ import calculator.atoms.Real;
  * This class represents the arithmetic unary operation "tan".
  * The class extends an abstract superclass UnaryOperation.
  */
-public final class Tangente extends UnaryOperation {
+public final class Tangente extends UnaryFunction {
 
 	/**
 	 * Class constructor specifying an Expression to apply the tangent function.

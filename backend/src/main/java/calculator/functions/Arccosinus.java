@@ -11,7 +11,7 @@ import calculator.atoms.Real;
  * This class represents the arithmetic unary operation "acos".
  * The class extends an abstract superclass UnaryOperation.
  */
-public final class Arccosinus extends UnaryOperation {
+public final class Arccosinus extends UnaryFunction {
 
 	/**
 	 * Class constructor specifying an Expression to apply the arccosine function.

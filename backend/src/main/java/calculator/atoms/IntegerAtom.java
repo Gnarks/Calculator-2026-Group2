@@ -110,7 +110,7 @@ public class IntegerAtom implements Atom {
 	 * @return The result of the application
 	 */
 	@Override
-	public IntegerAtom apply(UnaryOperation o) {
+	public IntegerAtom apply(UnaryFunction o) {
 		return o.op(this);
 	}
 

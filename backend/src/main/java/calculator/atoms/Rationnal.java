@@ -3,7 +3,7 @@ package calculator.atoms;
 import calculator.Expression;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
-import calculator.functions.UnaryOperation;
+import calculator.functions.UnaryFunction;
 import visitor.Visitor;
 import java.util.Objects;
 
@@ -63,7 +63,7 @@ public class Rationnal implements Atom {
 	}
 
 	@Override
-	public Rationnal apply(UnaryOperation o) {
+	public Rationnal apply(UnaryFunction o) {
 		return o.op(this);
 	}
 

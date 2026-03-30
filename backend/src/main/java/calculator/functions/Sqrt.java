@@ -11,7 +11,7 @@ import calculator.atoms.Real;
  * This class represents the square root unary operation "sqrt".
  * The class extends an abstract superclass UnaryOperation.
  */
-public final class Sqrt extends UnaryOperation {
+public final class Sqrt extends UnaryFunction {
 
 	public Sqrt(Expression arg) throws IllegalConstruction {
 		super(arg);

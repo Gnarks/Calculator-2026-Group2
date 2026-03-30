@@ -11,7 +11,7 @@ import calculator.atoms.Real;
  * This class represents the natural logarithm unary operation "ln".
  * The class extends an abstract superclass UnaryOperation.
  */
-public final class Ln extends UnaryOperation {
+public final class Ln extends UnaryFunction {
 
 	public Ln(Expression arg) throws IllegalConstruction {
 		super(arg);

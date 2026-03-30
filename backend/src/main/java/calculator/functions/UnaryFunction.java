@@ -15,7 +15,7 @@ import visitor.Visitor;
  * operations,
  * which are a special kind of Expressions, just like binary operations are.
  */
-public abstract class UnaryOperation implements Expression {
+public abstract class UnaryFunction implements Expression {
 	/**
 	 * The expression passed as an argument to the arithmetic operation
 	 */
@@ -32,7 +32,7 @@ public abstract class UnaryOperation implements Expression {
 	 * @param arg The expression passed as argument to the arithmetic operation
 	 * @throws IllegalConstruction Exception thrown if a null argument is passed
 	 */
-	protected /* constructor */ UnaryOperation(Expression arg)
+	protected /* constructor */ UnaryFunction(Expression arg)
 			throws IllegalConstruction {
 		if (arg == null) {
 			throw new IllegalConstruction();
@@ -98,7 +98,7 @@ public abstract class UnaryOperation implements Expression {
 			return true;
 		if (getClass() != o.getClass())
 			return false;
-		UnaryOperation other = (UnaryOperation) o;
+		UnaryFunction other = (UnaryFunction) o;
 		return this.arg.equals(other.getArg());
 	}
 

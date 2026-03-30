@@ -49,5 +49,5 @@ public abstract class Visitor {
 	 *
 	 * @param o The unary operation being visited
 	 */
-	public abstract void visit(UnaryOperation o);
+	public abstract void visit(UnaryFunction o);
 }

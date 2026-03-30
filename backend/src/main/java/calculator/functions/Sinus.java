@@ -11,7 +11,7 @@ import calculator.atoms.Real;
  * This class represents the arithmetic unary operation "sin".
  * The class extends an abstract superclass UnaryOperation.
  */
-public final class Sinus extends UnaryOperation {
+public final class Sinus extends UnaryFunction {
 
 	/**
 	 * Class constructor specifying an Expression to apply the sine function.

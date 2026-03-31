@@ -10,4 +10,5 @@ public class EvaluationResponse {
     private int success;
 
     private String result;
+
 }

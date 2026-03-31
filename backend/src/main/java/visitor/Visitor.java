@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.operations.Operation;
 import calculator.atoms.*;
+import calculator.functions.*;
 
 /**
  * Visitor design pattern
@@ -42,4 +43,18 @@ public abstract class Visitor {
 	 * @param i The operation being visited
 	 */
 	public abstract void visit(IntegerAtom i);
+
+	/**
+	 * The Visitor can traverse an unary function (a subtype of Expression)
+	 *
+	 * @param f The unary function being visited
+	 */
+	public abstract void visit(UnaryFunction f);
+
+	/**
+	 * The Visitor can traverse a binary function (a subtype of Expression)
+	 *
+	 * @param f The binary function being visited
+	 */
+	public abstract void visit(BinaryFunction f);
 }

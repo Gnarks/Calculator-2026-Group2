@@ -5,8 +5,12 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- Support for Unary operations
+- Trigonometric functions: sine, cosine, tangent and their inverses.
+- Others functions: logarithm, square root.
 
 ### Changed
+- update dependencies (thanks to dependabot)
 
 ## Fixed
 - In case of a usage of several notations inside an expression (infix, prefix and postfix), the expression is considered as the type of the top-level.

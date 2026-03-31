@@ -5,6 +5,8 @@ import calculator.operations.Operation;
 import calculator.atoms.*;
 import calculator.atoms.visitor.AtomCaster;
 import calculator.atoms.visitor.AtomComparator;
+import calculator.functions.BinaryFunction;
+import calculator.functions.UnaryFunction;
 
 import java.util.ArrayList;
 
@@ -91,6 +93,35 @@ public class Evaluator extends Visitor {
 		}
 		// store the accumulated result
 		computedValue = result;
+	}
+
+	@Override
+	public void visit(UnaryFunction o) {
+		o.getArg().accept(this);
+		computedValue = computedValue.apply(o);
+	}
+
+	@Override
+	public void visit(BinaryFunction f) {
+		f.getFirstArg().accept(this);
+		Atom firstValue = computedValue;
+
+		f.getSecondArg().accept(this);
+		Atom secondValue = computedValue;
+
+		// Cast both operands to a compatible atom type before applying the function.
+		AtomComparator atomComp = new AtomComparator();
+		firstValue.accept(atomComp);
+		secondValue.accept(atomComp);
+
+		AtomCaster atomCaster = new AtomCaster(atomComp.getResult());
+		firstValue.accept(atomCaster);
+		firstValue = atomCaster.getResult();
+
+		secondValue.accept(atomCaster);
+		secondValue = atomCaster.getResult();
+
+		computedValue = firstValue.apply(f, secondValue);
 	}
 
 }

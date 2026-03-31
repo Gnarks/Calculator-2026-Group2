@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import calculator.atoms.Real;
+import calculator.functions.Cosinus;
 import calculator.atoms.Complex;
 import calculator.operations.*;
 import calculator.atoms.Rationnal;
@@ -93,6 +94,23 @@ class TestCounting {
 		assertEquals(1, c.getNbOps());
 		// test whether a binary operation contains 2 numbers
 		assertEquals(2, c.getNbNbs());
+	}
+
+	@Test
+	void testUnaryOperationCounting() {
+		try {
+			e = new Cosinus(new Real(value1));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+		Counter c = new Counter();
+		e.accept(c);
+		// test whether a unary operation has depth 1
+		assertEquals(1, c.getDepth(), "counting depth of a unary Operation");
+		// test whether a unary operation contains 1 operation
+		assertEquals(1, c.getNbOps());
+		// test whether a unary operation contains 1 number
+		assertEquals(1, c.getNbNbs());
 	}
 
 	@Test

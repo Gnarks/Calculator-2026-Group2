@@ -5,6 +5,7 @@ import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 import visitor.Visitor;
 import java.util.Objects;
+import calculator.functions.*;
 
 /**
  * Complex Number type is used to represent complex e.g. 3 + 2i
@@ -70,6 +71,16 @@ public class Complex implements Atom {
 	}
 
 	@Override
+	public Atom apply(BinaryFunction f, Atom a) {
+		return f.op(this, (Complex) a);
+	}
+
+	@Override
+	public Complex apply(UnaryFunction o) {
+		return o.op(this);
+	}
+
+	@Override
 	public void accept(AtomVisitor v) {
 		v.visit(this);
 	}
@@ -95,4 +106,5 @@ public class Complex implements Atom {
 	public int hashCode() {
 		return Objects.hash(value);
 	}
+
 }

@@ -7,11 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import calculator.atoms.Real;
+import calculator.functions.Cosinus;
 import calculator.atoms.Complex;
-import calculator.atoms.Rationnal;
 import calculator.operations.*;
-
-import java.beans.Transient;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,6 +72,18 @@ class TestNotation {
 			assertEquals("* (+ (3, 4), 2)", outer.toString(Notation.PREFIX));
 			assertEquals("( ( 3 + 4 ) * 2 )", outer.toString(Notation.INFIX));
 			assertEquals("((3, 4) +, 2) *", outer.toString(Notation.POSTFIX));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testUnaryNotation() {
+		try {
+			Cosinus op = new Cosinus(new Real(8));
+			assertEquals("cos(8)", op.toString(Notation.PREFIX));
+			assertEquals("cos(8)", op.toString(Notation.INFIX));
+			assertEquals("(8)cos", op.toString(Notation.POSTFIX));
 		} catch (IllegalConstruction e) {
 			fail();
 		}

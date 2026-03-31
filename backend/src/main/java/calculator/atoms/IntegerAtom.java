@@ -114,6 +114,11 @@ public class IntegerAtom implements Atom {
 		return o.op(this);
 	}
 
+	@Override
+	public Atom apply(BinaryFunction f, Atom a) {
+		return f.op(this, (IntegerAtom) a);
+	}
+
 	/**
 	 * returns the value of the integer
 	 * 

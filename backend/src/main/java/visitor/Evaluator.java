@@ -121,17 +121,7 @@ public class Evaluator extends Visitor {
 		secondValue.accept(atomCaster);
 		secondValue = atomCaster.getResult();
 
-		if (firstValue instanceof Real && secondValue instanceof Real) {
-			computedValue = f.op((Real) firstValue, (Real) secondValue);
-		} else if (firstValue instanceof Complex && secondValue instanceof Complex) {
-			computedValue = f.op((Complex) firstValue, (Complex) secondValue);
-		} else if (firstValue instanceof IntegerAtom && secondValue instanceof IntegerAtom) {
-			computedValue = f.op((IntegerAtom) firstValue, (IntegerAtom) secondValue);
-		} else if (firstValue instanceof Rationnal && secondValue instanceof Rationnal) {
-			computedValue = f.op((Rationnal) firstValue, (Rationnal) secondValue);
-		} else {
-			throw new IllegalStateException("Unsupported atom types for binary function evaluation");
-		}
+		computedValue = firstValue.apply(f, secondValue);
 	}
 
 }

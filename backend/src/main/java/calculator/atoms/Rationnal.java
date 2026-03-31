@@ -3,6 +3,7 @@ package calculator.atoms;
 import calculator.Expression;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
+import calculator.functions.BinaryFunction;
 import calculator.functions.UnaryFunction;
 import visitor.Visitor;
 import java.util.Objects;
@@ -60,6 +61,11 @@ public class Rationnal implements Atom {
 	@Override
 	public Atom apply(Operation o, Atom a) {
 		return o.op(this, (Rationnal) a);
+	}
+
+	@Override
+	public Atom apply(BinaryFunction f, Atom a) {
+		return f.op(this, (Rationnal) a);
 	}
 
 	@Override

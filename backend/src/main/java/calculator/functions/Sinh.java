@@ -8,13 +8,14 @@ import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
 
 /**
- * This class represents the arithmetic unary operation "sin".
+ * This class represents the arithmetic unary operation "sinh".
  * The class extends an abstract superclass UnaryOperation.
  */
 public final class Sinh extends UnaryFunction {
 
 	/**
-	 * Class constructor specifying an Expression to apply the sine function.
+	 * Class constructor specifying an Expression to apply the hyperbolic sine
+	 * function.
 	 *
 	 * @param arg The Expression to apply the operation on
 	 * @throws IllegalConstruction If a null argument is passed

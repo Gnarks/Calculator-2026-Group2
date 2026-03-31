@@ -183,8 +183,22 @@ public class Printer extends Visitor {
 
 	@Override
 	public void visit(BinaryFunction f) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		switch (notation) {
+			case PREFIX, INFIX -> {
+				sb.append(f.getSymbol()).append("(");
+				f.getFirstArg().accept(this);
+				sb.append(", ");
+				f.getSecondArg().accept(this);
+				sb.append(")");
+			}
+			case POSTFIX -> {
+				sb.append("(");
+				f.getFirstArg().accept(this);
+				sb.append(", ");
+				f.getSecondArg().accept(this);
+				sb.append(")").append(f.getSymbol());
+			}
+		}
 	}
 
 }

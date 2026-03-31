@@ -5,7 +5,6 @@ import calculator.Expression;
 import calculator.antlr.Parser;
 import calculator.api.dto.EvaluationResponse;
 import calculator.atoms.Atom;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

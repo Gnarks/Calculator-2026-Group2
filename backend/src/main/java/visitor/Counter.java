@@ -75,8 +75,11 @@ public class Counter extends Visitor {
 
 	@Override
 	public void visit(BinaryFunction f) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'visit'");
+		nbOps++;
+		currentDepth++;
+		f.getFirstArg().accept(this);
+		f.getSecondArg().accept(this);
+		currentDepth--;
 	}
 
 	/**

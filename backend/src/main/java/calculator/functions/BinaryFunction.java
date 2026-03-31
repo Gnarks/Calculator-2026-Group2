@@ -5,7 +5,7 @@ import calculator.Expression;
 import calculator.atoms.*;
 import visitor.Visitor;
 
-public abstract class BinaryFunction {
+public abstract class BinaryFunction implements Expression {
 
 	protected String symbol;
 	private Expression firstArg;

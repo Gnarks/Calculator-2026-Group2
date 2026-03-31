@@ -64,6 +64,9 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 *  [JaCoCo](https://www.jacoco.org) - a code coverage library for Java
 *  [JavaDoc](https://docs.oracle.com/en/java/javase/21/javadoc/javadoc.html) - a code documentation tool for Java
 
+## Frontend web interface 
+To launch the web interface, navigate to the frontend directory with `cd frontend` and run the command `npm run dev` to start the development server.
+
 ## Versions
 
 We use [SemVer](http://semver.org/) for semantic versioning. For the versions available, see the [tags on this repository](https://github.com/Gnarks/Calculator-2026-Group2/tags). 

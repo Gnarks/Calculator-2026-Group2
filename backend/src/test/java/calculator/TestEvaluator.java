@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import calculator.atoms.Real;
+import calculator.functions.*;
 import calculator.atoms.Complex;
 import calculator.operations.*;
 import calculator.atoms.Rationnal;
@@ -37,7 +38,8 @@ class TestEvaluator {
 	void testEvaluateCosinus() {
 		try {
 			assertEquals(new Real(new BigDecimal(Math.cos(0))), calc.eval(new Cosinus(new Real(0))));
-			assertEquals(new Real(new BigDecimal(Math.cos(Math.PI))), calc.eval(new Cosinus(new Real(new BigDecimal(Math.PI)))));
+			assertEquals(new Real(new BigDecimal(Math.cos(Math.PI))),
+					calc.eval(new Cosinus(new Real(new BigDecimal(Math.PI)))));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -47,7 +49,8 @@ class TestEvaluator {
 	void testEvaluateSinus() {
 		try {
 			assertEquals(new Real(new BigDecimal(Math.sin(0))), calc.eval(new Sinus(new Real(0))));
-			assertEquals(new Real(new BigDecimal(Math.sin(Math.PI))), calc.eval(new Sinus(new Real(new BigDecimal(Math.PI)))));
+			assertEquals(new Real(new BigDecimal(Math.sin(Math.PI))),
+					calc.eval(new Sinus(new Real(new BigDecimal(Math.PI)))));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -57,7 +60,8 @@ class TestEvaluator {
 	void testEvaluateTangente() {
 		try {
 			assertEquals(new Real(new BigDecimal(Math.tan(0))), calc.eval(new Tangente(new Real(0))));
-			assertEquals(new Real(new BigDecimal(Math.tan(Math.PI / 4))), calc.eval(new Tangente(new Real(new BigDecimal(Math.PI / 4)))));
+			assertEquals(new Real(new BigDecimal(Math.tan(Math.PI / 4))),
+					calc.eval(new Tangente(new Real(new BigDecimal(Math.PI / 4)))));
 		} catch (IllegalConstruction e) {
 			fail();
 		}

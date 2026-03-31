@@ -9,6 +9,7 @@ import calculator.IllegalConstruction;
 import calculator.atoms.*;
 import calculator.calculatorBaseVisitor;
 import calculator.calculatorParser.*;
+import calculator.functions.*;
 import calculator.operations.*;
 
 /**
@@ -30,6 +31,8 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
                     return new Times(args);
                 case "/":
                     return new Divides(args);
+                case "**":
+                    return new Power(args);
                 default:
                     throw new IllegalArgumentException("Unknown operator: " + opString);
             }
@@ -55,15 +58,27 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
                         return new Arcsinus(arg);
                     case "atan":
                         return new Arctangente(arg);
+                    case "sqrt":
+                        return new Sqrt(arg);
+                    case "ln":
+                        return new Ln(arg);
                     default:
                         throw new UnsupportedOperationException("Function not implemented yet: " + funcName);
                 }
             } catch (IllegalConstruction e) {
                 throw new RuntimeException(e);
             }
-        } else {
-            throw new UnsupportedOperationException("Functions with multiple arguments are not fully implemented yet: " + funcName);
         }
+
+        if ("log".equals(funcName) && args.size() == 2) {
+            try {
+                return new Log(args.get(0), args.get(1));
+            } catch (IllegalConstruction e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        throw new UnsupportedOperationException("Invalid number of arguments for function " + funcName + ": " + args.size());
     }
 
     /**
@@ -251,12 +266,18 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
      * Rule: powExp : atomIN (POW atomIN)* #INPow
      */
     @Override
-    // TO CHANGE LATER
     public Expression visitINPow(INPowContext ctx) {
-        if (ctx.atomIN().size() == 1) {
+        int atomCount = ctx.atomIN().size();
+        if (atomCount == 1) {
             return visit(ctx.atomIN(0));
         }
-        throw new UnsupportedOperationException("Power operator is not implemented yet: " + ctx.getText());
+
+        // Right-associative folding: a**b**c = a**(b**c).
+        Expression result = visit(ctx.atomIN(atomCount - 1));
+        for (int i = atomCount - 2; i >= 0; i--) {
+            result = buildOperation("**", List.of(visit(ctx.atomIN(i)), result));
+        }
+        return result;
     }
 
     /**

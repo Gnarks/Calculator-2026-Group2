@@ -5,6 +5,8 @@ import calculator.Notation;
 import calculator.operations.Operation;
 import calculator.operations.UnaryOperation;
 import calculator.atoms.*;
+import calculator.functions.BinaryFunction;
+import calculator.functions.UnaryFunction;
 import calculator.Expression;
 
 /**
@@ -136,7 +138,7 @@ public class Printer extends Visitor {
 	}
 
 	@Override
-	public void visit(UnaryOperation o) {
+	public void visit(UnaryFunction o) {
 		switch (notation) {
 			case PREFIX, INFIX -> {
 				sb.append(o.getSymbol()).append("(");
@@ -178,6 +180,26 @@ public class Printer extends Visitor {
 	 */
 	public String getResult() {
 		return sb.toString();
+	}
+
+	@Override
+	public void visit(BinaryFunction f) {
+		switch (notation) {
+			case PREFIX, INFIX -> {
+				sb.append(f.getSymbol()).append("(");
+				f.getFirstArg().accept(this);
+				sb.append(", ");
+				f.getSecondArg().accept(this);
+				sb.append(")");
+			}
+			case POSTFIX -> {
+				sb.append("(");
+				f.getFirstArg().accept(this);
+				sb.append(", ");
+				f.getSecondArg().accept(this);
+				sb.append(")").append(f.getSymbol());
+			}
+		}
 	}
 
 }

@@ -3,22 +3,15 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
+import java.beans.Transient;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.antlr.Parser;
 import calculator.atoms.IntegerAtom;
-import calculator.operations.Minus;
-import calculator.operations.Operation;
-import calculator.operations.Plus;
-import calculator.operations.Times;
-import calculator.operations.UnaryOperation;
-import calculator.operations.Cosinus;
-import calculator.operations.Sinus;
-import calculator.operations.Tangente;
-import calculator.operations.Arccosinus;
-import calculator.operations.Arcsinus;
-import calculator.operations.Arctangente;
+import calculator.operations.*;
+import calculator.functions.*;
 
 class TestParserVisitor {
 
@@ -109,5 +102,13 @@ class TestParserVisitor {
         assertInstanceOf(Cosinus.class, parser.parse("1 cos")); // PostFunc1Param
         assertInstanceOf(Sinus.class, parser.parse("(2) sin")); // PostFunc
         assertInstanceOf(Tangente.class, parser.parse("3 tan"));
+    }
+
+    @Test
+    void testParseFunctions() {
+        assertInstanceOf(Sqrt.class, parser.parse("sqrt(4)"));
+        assertInstanceOf(Ln.class, parser.parse("ln(2)"));
+        assertInstanceOf(Log.class, parser.parse("log(2, 10)"));
+        assertInstanceOf(Power.class, parser.parse("2**3"));
     }
 }

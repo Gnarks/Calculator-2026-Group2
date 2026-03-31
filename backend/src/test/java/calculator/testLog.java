@@ -5,21 +5,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
-import calculator.functions.Tangente;
+import calculator.functions.Log;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
-class TestTangente {
+class TestLog {
 
-	private final int value1 = 0;
-	private Tangente op;
-	private Real param;
+	private final Real base = new Real(2);
+	private final Real n = new Real(2);
+	private Log op;
 
 	@BeforeEach
 	void setUp() {
-		param = new Real(value1);
 		try {
-			op = new Tangente(param);
+			op = new Log(base, n);
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -28,7 +28,7 @@ class TestTangente {
 	@Test
 	void testEquals() {
 		try {
-			Tangente e = new Tangente(new Real(value1));
+			Log e = new Log(base, n);
 			assertEquals(op, e);
 		} catch (IllegalConstruction e) {
 			fail();
@@ -37,6 +37,7 @@ class TestTangente {
 
 	@Test
 	void testCompute() {
-		assertEquals(new Real(new BigDecimal(Math.tan(value1))), op.op(param));
+		// tests equality without precision
+		assertEquals(new BigDecimal(1).compareTo(op.op(base, n).getValue()), 0);
 	}
 }

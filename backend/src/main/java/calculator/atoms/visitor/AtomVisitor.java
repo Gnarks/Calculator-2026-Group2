@@ -31,7 +31,7 @@ public abstract class AtomVisitor {
 	/**
 	 * The Visitor can traverse a Rationnal number (a subtype of Expression)
 	 *
-	 * @param i The Rationnal number being visited
+	 * @param i The Integer number being visited
 	 */
 	public abstract void visit(IntegerAtom i);
 

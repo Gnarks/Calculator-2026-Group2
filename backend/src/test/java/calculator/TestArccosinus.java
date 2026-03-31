@@ -5,11 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
-import calculator.operations.Arccosinus;
-import calculator.operations.Plus;
+import calculator.functions.Arccosinus;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 class TestArccosinus {
 
@@ -38,7 +36,7 @@ class TestArccosinus {
 	}
 
 	@Test
-    void testCompute() {
-        assertEquals(new Real(new BigDecimal(Math.acos(value1))), op.op(param));
-    }
+	void testCompute() {
+		assertEquals(new Real(new BigDecimal(Math.acos(value1))), op.op(param));
+	}
 }

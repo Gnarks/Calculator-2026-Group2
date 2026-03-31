@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import calculator.atoms.Real;
+import calculator.functions.Cosinus;
 import calculator.atoms.Complex;
 import calculator.operations.*;
 import calculator.atoms.Rationnal;

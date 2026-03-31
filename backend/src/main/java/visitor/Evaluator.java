@@ -6,6 +6,8 @@ import calculator.operations.UnaryOperation;
 import calculator.atoms.*;
 import calculator.atoms.visitor.AtomCaster;
 import calculator.atoms.visitor.AtomComparator;
+import calculator.functions.BinaryFunction;
+import calculator.functions.UnaryFunction;
 
 import java.util.ArrayList;
 
@@ -95,9 +97,42 @@ public class Evaluator extends Visitor {
 	}
 
 	@Override
-	public void visit(UnaryOperation o) {
+	public void visit(UnaryFunction o) {
 		o.getArg().accept(this);
 		computedValue = computedValue.apply(o);
+	}
+
+	@Override
+	public void visit(BinaryFunction f) {
+		f.getFirstArg().accept(this);
+		Atom firstValue = computedValue;
+
+		f.getSecondArg().accept(this);
+		Atom secondValue = computedValue;
+
+		// Cast both operands to a compatible atom type before applying the function.
+		AtomComparator atomComp = new AtomComparator();
+		firstValue.accept(atomComp);
+		secondValue.accept(atomComp);
+
+		AtomCaster atomCaster = new AtomCaster(atomComp.getResult());
+		firstValue.accept(atomCaster);
+		firstValue = atomCaster.getResult();
+
+		secondValue.accept(atomCaster);
+		secondValue = atomCaster.getResult();
+
+		if (firstValue instanceof Real && secondValue instanceof Real) {
+			computedValue = f.op((Real) firstValue, (Real) secondValue);
+		} else if (firstValue instanceof Complex && secondValue instanceof Complex) {
+			computedValue = f.op((Complex) firstValue, (Complex) secondValue);
+		} else if (firstValue instanceof IntegerAtom && secondValue instanceof IntegerAtom) {
+			computedValue = f.op((IntegerAtom) firstValue, (IntegerAtom) secondValue);
+		} else if (firstValue instanceof Rationnal && secondValue instanceof Rationnal) {
+			computedValue = f.op((Rationnal) firstValue, (Rationnal) secondValue);
+		} else {
+			throw new IllegalStateException("Unsupported atom types for binary function evaluation");
+		}
 	}
 
 }

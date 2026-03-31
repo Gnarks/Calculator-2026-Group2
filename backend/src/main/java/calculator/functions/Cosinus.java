@@ -1,4 +1,4 @@
-package calculator.operations;
+package calculator.functions;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
@@ -11,7 +11,7 @@ import calculator.atoms.Real;
  * This class represents the arithmetic unary operation "cos".
  * The class extends an abstract superclass UnaryOperation.
  */
-public final class Cosinus extends UnaryOperation {
+public final class Cosinus extends UnaryFunction {
 
 	/**
 	 * Class constructor specifying an Expression to apply the cosine function.

@@ -1,18 +1,23 @@
 package calculator.api;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import calculator.api.dto.EvaluationResponse;
+import calculator.api.dto.ExpressionDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class EvaluationController {
+
+    @Autowired
+    private EvaluationService evaluationService;
 
     @PostMapping("/evaluate")
     public EvaluationResponse evaluateExpression(@RequestBody ExpressionDTO expression) {
         String expr = expression.getExpression();
-        return new EvaluationResponse(1, "");
+        String result = evaluationService.evaluate(expr);
+        return new EvaluationResponse(1, result);
     }
 
 }

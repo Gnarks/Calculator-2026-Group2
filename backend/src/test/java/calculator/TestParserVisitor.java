@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import calculator.antlr.Parser;
 import calculator.atoms.IntegerAtom;
 import calculator.operations.*;
+import calculator.functions.*;
 
 class TestParserVisitor {
 

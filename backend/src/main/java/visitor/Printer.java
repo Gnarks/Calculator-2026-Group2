@@ -3,7 +3,6 @@ package visitor;
 import calculator.Notation;
 
 import calculator.operations.Operation;
-import calculator.operations.UnaryOperation;
 import calculator.atoms.*;
 import calculator.functions.BinaryFunction;
 import calculator.functions.UnaryFunction;

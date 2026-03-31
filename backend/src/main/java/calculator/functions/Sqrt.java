@@ -9,7 +9,7 @@ import calculator.atoms.Real;
 
 /**
  * This class represents the square root unary operation "sqrt".
- * The class extends an abstract superclass UnaryOperation.
+ * The class extends an abstract superclass UnaryFunction.
  */
 public final class Sqrt extends UnaryFunction {
 

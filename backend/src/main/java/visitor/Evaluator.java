@@ -2,7 +2,6 @@ package visitor;
 
 import calculator.Expression;
 import calculator.operations.Operation;
-import calculator.operations.UnaryOperation;
 import calculator.atoms.*;
 import calculator.atoms.visitor.AtomCaster;
 import calculator.atoms.visitor.AtomComparator;

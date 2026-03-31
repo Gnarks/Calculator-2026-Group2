@@ -1,7 +1,6 @@
 package visitor;
 
 import calculator.operations.Operation;
-import calculator.operations.UnaryOperation;
 import calculator.atoms.*;
 import calculator.functions.*;
 

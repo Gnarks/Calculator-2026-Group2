@@ -2,7 +2,6 @@ package visitor;
 
 import calculator.Expression;
 import calculator.operations.Operation;
-import calculator.operations.UnaryOperation;
 import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;

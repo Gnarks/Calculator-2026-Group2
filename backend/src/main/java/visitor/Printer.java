@@ -4,6 +4,8 @@ import calculator.Notation;
 
 import calculator.operations.Operation;
 import calculator.atoms.*;
+import calculator.functions.BinaryFunction;
+import calculator.functions.UnaryFunction;
 import calculator.Expression;
 
 /**
@@ -135,7 +137,7 @@ public class Printer extends Visitor {
 	}
 
 	@Override
-	public void visit(calculator.operations.UnaryOperation o) {
+	public void visit(UnaryFunction o) {
 		switch (notation) {
 			case PREFIX, INFIX -> {
 				sb.append(o.getSymbol()).append("(");
@@ -177,6 +179,12 @@ public class Printer extends Visitor {
 	 */
 	public String getResult() {
 		return sb.toString();
+	}
+
+	@Override
+	public void visit(BinaryFunction f) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'visit'");
 	}
 
 }

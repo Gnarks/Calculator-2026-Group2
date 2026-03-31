@@ -5,36 +5,30 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
-import calculator.functions.Cosinus;
+import calculator.functions.Ln;
 
 import java.math.BigDecimal;
 
-class TestCosinus {
+class TestLn {
 
-	private final int value1 = 0;
-	private Cosinus op;
+	private final int value1 = 2;
+	private Ln op;
 	private Real param;
 
 	@BeforeEach
 	void setUp() {
 		param = new Real(value1);
 		try {
-			op = new Cosinus(param);
+			op = new Ln(param);
 		} catch (IllegalConstruction e) {
 			fail();
 		}
 	}
 
 	@Test
-	void testConstructor1() {
-		// It should not be possible to create an expression with null parameter
-		assertThrows(IllegalConstruction.class, () -> op = new Cosinus(null));
-	}
-
-	@Test
 	void testEquals() {
 		try {
-			Cosinus e = new Cosinus(new Real(value1));
+			Ln e = new Ln(new Real(value1));
 			assertEquals(op, e);
 		} catch (IllegalConstruction e) {
 			fail();
@@ -43,7 +37,6 @@ class TestCosinus {
 
 	@Test
 	void testCompute() {
-		assertEquals(new Real(new BigDecimal(Math.cos(value1))), op.op(param));
+		assertEquals(new Real(new BigDecimal(Math.log(value1))), op.op(param));
 	}
-
 }

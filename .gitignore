@@ -13,3 +13,4 @@ target/
 
 # ANTLR generated files
 .antlr/
+backend/.idea/*

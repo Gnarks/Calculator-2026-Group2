@@ -1,4 +1,4 @@
-package calculator.operations;
+package calculator.functions;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
@@ -11,7 +11,7 @@ import calculator.atoms.Real;
  * This class represents the arithmetic unary operation "atan".
  * The class extends an abstract superclass UnaryOperation.
  */
-public final class Arctangente extends UnaryOperation {
+public final class Arctangente extends UnaryFunction {
 
 	/**
 	 * Class constructor specifying an Expression to apply the arctangent function.
@@ -54,7 +54,8 @@ public final class Arctangente extends UnaryOperation {
 	@Override
 	public Rationnal op(Rationnal q) {
 		double atanVal = Math.atan(q.getValue().doubleValue());
-		org.apache.commons.numbers.fraction.Fraction result = org.apache.commons.numbers.fraction.Fraction.from(atanVal);
+		org.apache.commons.numbers.fraction.Fraction result = org.apache.commons.numbers.fraction.Fraction
+				.from(atanVal);
 		return new Rationnal(result);
 	}
 }

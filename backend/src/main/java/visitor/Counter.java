@@ -6,6 +6,7 @@ import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
+import calculator.functions.*;
 
 /**
  * Counter is a visitor that counts the numbers, operations,
@@ -47,6 +48,7 @@ public class Counter extends Visitor {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
 	}
+
 	/**
 	 * Visit an operation: increments the operation count, then recursively
 	 * visits all child expressions to accumulate counts.
@@ -64,11 +66,17 @@ public class Counter extends Visitor {
 	}
 
 	@Override
-	public void visit(calculator.operations.UnaryOperation o) {
+	public void visit(UnaryFunction o) {
 		nbOps++;
 		currentDepth++;
 		o.getArg().accept(this);
 		currentDepth--;
+	}
+
+	@Override
+	public void visit(BinaryFunction f) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'visit'");
 	}
 
 	/**

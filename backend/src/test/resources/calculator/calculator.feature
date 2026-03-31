@@ -36,6 +36,12 @@ Feature: Integer Arithmetic Expressions
     And I provide a second number 5
     Then the operation evaluates to 1
 
+  Scenario: Exponentiation of two integer numbers
+    Given an integer operation '**'
+    When I provide a first number 3
+    And I provide a first number 2
+    Then the operation evaluates to the real number 9
+
   Scenario: Dividing a number by zero
     Given an integer operation '/'
     When I provide a first number 8
@@ -58,6 +64,7 @@ Feature: Integer Arithmetic Expressions
     And the product is 32
     And the difference is 4
     And the quotient is 2
+    And the exponentiation is 4096
 
   # A scenario outline (or template) is a scenario that is parameterised
   # with different values. The outline comes with a set of examples.
@@ -146,6 +153,12 @@ Feature: Integer Arithmetic Expressions
     And I provide a complex number 1.0 and 1.0i
     Then the operation evaluates to the complex number 3.0 and -1.0i
 
+  Scenario: Exponentiation of two complex numbers
+    Given an integer operation "**"
+    When I provide a complex number 3.0 and 2.0i
+    And I provide a complex number 2.0 and 1.0i
+    Then the operation is not possible
+
 Scenario: Adding two rational numbers
     Given an integer operation "+"
     When I provide a rational number 1 / 2
@@ -170,6 +183,12 @@ Scenario: Adding two rational numbers
     And I provide a rational number 1 / 4
     Then the operation evaluates to the rational number 2 / 1
 
+  Scenario: Exponentiation of two rational numbers
+    Given an integer operation "**"
+    When I provide a rational number 1 / 2
+    And I provide a rational number 1 / 4
+    Then the operation evaluates to the real number 0.8408964153
+
   Scenario: Automatic simplification of results
     Given an integer operation "+"
     When I provide a rational number 2 / 4
@@ -181,3 +200,9 @@ Scenario: Adding two rational numbers
     When I provide a rational number 1 / 2
     And I provide a rational number 0 / 1
     Then the operation throws an ArithmeticException
+
+  Scenario: Exponentiation of two real numbers
+    Given an integer operation "**"
+    When I provide a real number 3.234
+    And I provide a real number 2.67
+    Then the operation evaluates to the real number 22.96179533

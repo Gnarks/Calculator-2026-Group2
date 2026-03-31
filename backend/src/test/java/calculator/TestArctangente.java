@@ -5,11 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
-import calculator.operations.Arctangente;
-import calculator.operations.Plus;
+import calculator.functions.Arctangente;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 class TestArctangente {
 
@@ -38,7 +36,7 @@ class TestArctangente {
 	}
 
 	@Test
-    void testCompute() {
-        assertEquals(new Real(new BigDecimal(Math.atan(value1))), op.op(param));
-    }
+	void testCompute() {
+		assertEquals(new Real(new BigDecimal(Math.atan(value1))), op.op(param));
+	}
 }

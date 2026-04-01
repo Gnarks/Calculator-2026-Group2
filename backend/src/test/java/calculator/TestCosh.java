@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
 import calculator.functions.Cosh;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 
@@ -37,6 +38,8 @@ class TestCosh {
 
 	@Test
 	void testCompute() {
-		assertEquals(new Real(new BigDecimal(Math.cosh(value1))), op.op(param));
+		BigDecimal bd = new BigDecimal(value1);
+		BigDecimal cosh = BigDecimalMath.cosh(bd, Real.context);
+		assertEquals(new Real(cosh), op.op(param));
 	}
 }

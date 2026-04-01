@@ -10,6 +10,7 @@ import calculator.atoms.Real;
 import calculator.functions.*;
 import calculator.atoms.Complex;
 import calculator.operations.*;
+import ch.obermuhlner.math.big.BigDecimalMath;
 import calculator.atoms.Rationnal;
 
 import java.math.BigDecimal;
@@ -37,9 +38,15 @@ class TestEvaluator {
 	@Test
 	void testEvaluateCosinus() {
 		try {
-			assertEquals(new Real(new BigDecimal(Math.cos(0))), calc.eval(new Cosinus(new Real(0))));
-			assertEquals(new Real(new BigDecimal(Math.cos(Math.PI))),
-					calc.eval(new Cosinus(new Real(new BigDecimal(Math.PI)))));
+
+			BigDecimal bd = BigDecimal.valueOf(Math.PI / 4);
+			BigDecimal cos = BigDecimalMath.cos(bd, Real.context);
+			assertEquals(new Real(cos), calc.eval(new Cosinus(new Real(Math.PI / 4))));
+
+			bd = new BigDecimal(0);
+			cos = BigDecimalMath.cos(bd, Real.context);
+			assertEquals(new Real(cos), calc.eval(new Cosinus(new Real(0))));
+
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -48,9 +55,13 @@ class TestEvaluator {
 	@Test
 	void testEvaluateSinus() {
 		try {
-			assertEquals(new Real(new BigDecimal(Math.sin(0))), calc.eval(new Sinus(new Real(0))));
-			assertEquals(new Real(new BigDecimal(Math.sin(Math.PI))),
-					calc.eval(new Sinus(new Real(new BigDecimal(Math.PI)))));
+			BigDecimal bd = BigDecimal.valueOf(Math.PI / 4);
+			BigDecimal sin = BigDecimalMath.sin(bd, Real.context);
+			assertEquals(new Real(sin), calc.eval(new Sinus(new Real(Math.PI / 4))));
+
+			bd = new BigDecimal(0);
+			sin = BigDecimalMath.sin(bd, Real.context);
+			assertEquals(new Real(sin), calc.eval(new Sinus(new Real(0))));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -59,9 +70,13 @@ class TestEvaluator {
 	@Test
 	void testEvaluateTangente() {
 		try {
-			assertEquals(new Real(new BigDecimal(Math.tan(0))), calc.eval(new Tangente(new Real(0))));
-			assertEquals(new Real(new BigDecimal(Math.tan(Math.PI / 4))),
-					calc.eval(new Tangente(new Real(new BigDecimal(Math.PI / 4)))));
+			BigDecimal bd = BigDecimal.valueOf(Math.PI / 4);
+			BigDecimal tan = BigDecimalMath.tan(bd, Real.context);
+			assertEquals(new Real(tan), calc.eval(new Tangente(new Real(Math.PI / 4))));
+
+			bd = new BigDecimal(0);
+			tan = BigDecimalMath.tan(bd, Real.context);
+			assertEquals(new Real(tan), calc.eval(new Tangente(new Real(0))));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -70,7 +85,14 @@ class TestEvaluator {
 	@Test
 	void testEvaluateArcsinus() {
 		try {
-			assertEquals(new Real(new BigDecimal(Math.asin(0))), calc.eval(new Arcsinus(new Real(0))));
+			BigDecimal bd = new BigDecimal(0.5);
+			BigDecimal asin = BigDecimalMath.asin(bd, Real.context);
+			assertEquals(new Real(asin), calc.eval(new Arcsinus(new Real(0.5))));
+
+			bd = new BigDecimal(0);
+			asin = BigDecimalMath.asin(bd, Real.context);
+			assertEquals(new Real(asin), calc.eval(new Arcsinus(new Real(0))));
+
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -79,7 +101,13 @@ class TestEvaluator {
 	@Test
 	void testEvaluateArccosinus() {
 		try {
-			assertEquals(new Real(new BigDecimal(Math.acos(0))), calc.eval(new Arccosinus(new Real(0))));
+			BigDecimal bd = new BigDecimal(0.5);
+			BigDecimal acos = BigDecimalMath.acos(bd, Real.context);
+			assertEquals(new Real(acos), calc.eval(new Arccosinus(new Real(0.5))));
+
+			bd = new BigDecimal(0);
+			acos = BigDecimalMath.acos(bd, Real.context);
+			assertEquals(new Real(acos), calc.eval(new Arccosinus(new Real(0))));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -88,7 +116,13 @@ class TestEvaluator {
 	@Test
 	void testEvaluateArctangente() {
 		try {
-			assertEquals(new Real(new BigDecimal(Math.atan(0))), calc.eval(new Arctangente(new Real(0))));
+			BigDecimal bd = new BigDecimal(0.5);
+			BigDecimal atan = BigDecimalMath.atan(bd, Real.context);
+			assertEquals(new Real(atan), calc.eval(new Arctangente(new Real(0.5))));
+
+			bd = new BigDecimal(0);
+			atan = BigDecimalMath.atan(bd, Real.context);
+			assertEquals(new Real(atan), calc.eval(new Arctangente(new Real(0))));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -106,7 +140,7 @@ class TestEvaluator {
 				case "-" -> assertEquals(new Real(value1 - value2), calc.eval(new Minus(params)));
 				case "*" -> assertEquals(new Real(value1 * value2), calc.eval(new Times(params)));
 				case "/" ->
-					assertEquals(new Real(new BigDecimal(value1).divide(new BigDecimal(value2), RoundingMode.HALF_UP)),
+					assertEquals(new Real(new BigDecimal(value1).divide(new BigDecimal(value2), Real.context)),
 							calc.eval(new Divides(params)));
 				default -> fail();
 			}

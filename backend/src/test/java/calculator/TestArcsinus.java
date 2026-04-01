@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
 import calculator.functions.Arcsinus;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 
@@ -37,6 +38,8 @@ class TestArcsinus {
 
 	@Test
 	void testCompute() {
-		assertEquals(new Real(new BigDecimal(Math.asin(value1))), op.op(param));
+		BigDecimal bd = new BigDecimal(value1);
+		BigDecimal aSin = BigDecimalMath.asin(bd, Real.context);
+		assertEquals(new Real(aSin), op.op(param));
 	}
 }

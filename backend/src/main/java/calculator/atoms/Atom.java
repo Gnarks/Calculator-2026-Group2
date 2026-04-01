@@ -53,4 +53,6 @@ public interface Atom extends Expression {
 	 * @param aV The Atomvisitor object being passed as a parameter
 	 */
 	public void accept(AtomVisitor aV);
+
+	public String toString();
 }

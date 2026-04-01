@@ -88,6 +88,9 @@ class TestParserVisitor {
         assertInstanceOf(Arccosinus.class, parser.parse("acos(1)"));
         assertInstanceOf(Arcsinus.class, parser.parse("asin(1)"));
         assertInstanceOf(Arctangente.class, parser.parse("atan(4)"));
+        assertInstanceOf(Cosh.class, parser.parse("cosh(1)"));
+        assertInstanceOf(Sinh.class, parser.parse("sinh(2)"));
+        assertInstanceOf(Tanh.class, parser.parse("tanh(3)"));
     }
 
     @Test
@@ -95,6 +98,9 @@ class TestParserVisitor {
         assertInstanceOf(Cosinus.class, parser.parse("cos 1")); // PreFunc1Param
         assertInstanceOf(Sinus.class, parser.parse("sin(2)")); // PreFunc
         assertInstanceOf(Tangente.class, parser.parse("tan 3"));
+        assertInstanceOf(Cosh.class, parser.parse("cosh 1"));
+        assertInstanceOf(Sinh.class, parser.parse("sinh(2)"));
+        assertInstanceOf(Tanh.class, parser.parse("tanh 3"));
     }
 
     @Test
@@ -102,6 +108,9 @@ class TestParserVisitor {
         assertInstanceOf(Cosinus.class, parser.parse("1 cos")); // PostFunc1Param
         assertInstanceOf(Sinus.class, parser.parse("(2) sin")); // PostFunc
         assertInstanceOf(Tangente.class, parser.parse("3 tan"));
+        assertInstanceOf(Cosh.class, parser.parse("1 cosh"));
+        assertInstanceOf(Sinh.class, parser.parse("(2) sinh"));
+        assertInstanceOf(Tanh.class, parser.parse("3 tanh"));
     }
 
     @Test

@@ -3,6 +3,7 @@ package calculator.atoms;
 import calculator.Expression;
 import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
+import calculator.functions.BinaryFunction;
 import calculator.functions.UnaryFunction;
 
 /**
@@ -25,6 +26,18 @@ public interface Atom extends Expression {
 	 * @return the result of the operation having the same type as a
 	 */
 	public Atom apply(Operation o, Atom a);
+
+	/**
+	 * Applies an Binary between two atoms of the same concrete type
+	 * The function supposes that both atoms are of the same concrete type
+	 * 
+	 * @see AtomType
+	 *
+	 * @param f the binary function to with this atom as first parameter
+	 * @param a the other atom
+	 * @return the result of the operation having the same type as a
+	 */
+	public Atom apply(BinaryFunction f, Atom a);
 
 	/**
 	 * Applies an operation on the atom

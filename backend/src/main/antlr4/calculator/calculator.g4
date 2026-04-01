@@ -120,7 +120,10 @@ funcname
     | ASIN #FnAsin // 1 parameter
     | LOG #FnLog // 2 parameter : log(x, base)
     | LN #FnLn // 1 parameter
-    | SQRT #FnSqrt // 1  
+    | SQRT #FnSqrt // 1 parameter
+    | COSH #FnCosh // 1 parameter
+    | SINH #FnSinh // 1 parameter
+    | TANH #FnTanh // 1 parameter
 		;
 
 
@@ -130,6 +133,9 @@ TAN : 'tan' ;
 ACOS : 'acos' ;
 ASIN : 'asin' ;
 ATAN : 'atan' ;
+COSH : 'cosh' ;
+SINH : 'sinh' ;
+TANH : 'tanh' ;
 LN : 'ln' ;
 LOG : 'log' ;
 SQRT : 'sqrt' ;

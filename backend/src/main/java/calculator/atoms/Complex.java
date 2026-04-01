@@ -71,6 +71,11 @@ public class Complex implements Atom {
 	}
 
 	@Override
+	public Atom apply(BinaryFunction f, Atom a) {
+		return f.op(this, (Complex) a);
+	}
+
+	@Override
 	public Complex apply(UnaryFunction o) {
 		return o.op(this);
 	}
@@ -101,4 +106,5 @@ public class Complex implements Atom {
 	public int hashCode() {
 		return Objects.hash(value);
 	}
+
 }

@@ -11,13 +11,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class EvaluationService {
 
-    public EvaluationResponse evaluate(String expression) {
-        if(expression == null || expression.isEmpty())
+    public EvaluationResponse evaluate(String args) {
+        if(args == null || args.isEmpty())
             return new EvaluationResponse(0, "");
         Parser parser = new Parser();
-        Expression e = parser.parse(expression);
-        Calculator c = new Calculator();
-        Atom result = c.eval(e);
+        Expression expression = parser.parse(args);
+        Calculator calculator = new Calculator();
+        Atom result;
+        try {
+            result = calculator.eval(expression);
+        } catch (ArithmeticException _) {
+            return new EvaluationResponse(0, "");
+        }
         return new EvaluationResponse(1, result.toString());
     }
 

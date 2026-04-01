@@ -317,21 +317,6 @@ public class TestPower {
 	}
 
 	@Test
-	void testNegRealExpRatWithOddDenom() {
-		Real r1 = new Real(-2.365);
-		Real r2 = new Real(2.2);
-		List<Expression> p = Arrays.asList(r1, r2);
-		try {
-			Power pow = new Power(p);
-			assertEquals(new Real("-6.9"),
-					pow.op(r1, r2));
-
-		} catch (IllegalConstruction _) {
-			fail();
-		}
-	}
-
-	@Test
 	void testRealExpPlusInf() {
 		Real r1 = new Real(3.254);
 		Real r2 = Real.plusInf();

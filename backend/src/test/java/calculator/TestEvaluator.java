@@ -14,7 +14,6 @@ import ch.obermuhlner.math.big.BigDecimalMath;
 import calculator.atoms.Rationnal;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 

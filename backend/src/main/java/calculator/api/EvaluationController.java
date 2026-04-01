@@ -2,7 +2,6 @@ package calculator.api;
 
 import calculator.api.dto.EvaluationResponse;
 import calculator.api.dto.ExpressionDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,13 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class EvaluationController {
 
-    @Autowired
-    private EvaluationService evaluationService;
+    private final EvaluationService evaluationService;
+
+    public EvaluationController(EvaluationService evaluationService) {
+        this.evaluationService = evaluationService;
+    }
 
     @PostMapping("/evaluate")
     public EvaluationResponse evaluateExpression(@RequestBody ExpressionDTO expression) {
-        String expr = expression.getExpression();
-        return evaluationService.evaluate(expr);
+        return evaluationService.evaluate(expression.getExpression());
     }
 
 }

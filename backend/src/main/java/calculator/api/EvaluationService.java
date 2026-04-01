@@ -11,18 +11,17 @@ import org.springframework.stereotype.Service;
 public class EvaluationService {
 
     public EvaluationResponse evaluate(String args) {
-        if(args == null || args.isEmpty())
+        if(args == null || args.isBlank())
             return new EvaluationResponse(0, "");
-        Parser parser = new Parser();
-        Expression expression = parser.parse(args);
-        Calculator calculator = new Calculator();
-        Atom result;
         try {
-            result = calculator.eval(expression);
+            Parser parser = new Parser();
+            Expression expression = parser.parse(args);
+            Calculator calculator = new Calculator();
+            Atom result = calculator.eval(expression);
+            return new EvaluationResponse(1, result.toString());
         } catch (Exception _) {
             return new EvaluationResponse(0, "");
         }
-        return new EvaluationResponse(1, result.toString());
     }
 
 }

@@ -19,7 +19,7 @@ public class EvaluationService {
         Atom result;
         try {
             result = calculator.eval(expression);
-        } catch (ArithmeticException _) {
+        } catch (Exception _) {
             return new EvaluationResponse(0, "");
         }
         return new EvaluationResponse(1, result.toString());

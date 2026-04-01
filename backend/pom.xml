@@ -110,14 +110,22 @@
 			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webmvc -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webmvc-test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<version>4.0.5</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -166,7 +174,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.6.3</version>
 				<configuration>
-					<mainClass>calculator.Main</mainClass>
+					<mainClass>calculator.CalculatorApplication</mainClass>
 				</configuration>
 			</plugin>
 

@@ -54,5 +54,4 @@ public interface Atom extends Expression {
 	 */
 	public void accept(AtomVisitor aV);
 
-	public String toString();
 }

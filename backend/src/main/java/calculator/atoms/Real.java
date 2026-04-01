@@ -23,6 +23,7 @@ import visitor.Visitor;
 public class Real implements Atom {
 
 	public static int scale = 64;
+	public static MathContext context = new MathContext(scale + 1, RoundingMode.HALF_EVEN);
 
 	/*
 	 * the actual Real value
@@ -55,8 +56,8 @@ public class Real implements Atom {
 	 * @param s The string to be represented in the Real
 	 */
 	public /* constructor */ Real(String s) {
-		BigDecimal temp = new BigDecimal(s, new MathContext(0, RoundingMode.HALF_EVEN));
-		value = temp.setScale(Real.scale);
+		BigDecimal temp = new BigDecimal(s, context);
+		value = temp.setScale(Real.scale, RoundingMode.HALF_EVEN);
 	}
 
 	/**
@@ -204,7 +205,7 @@ public class Real implements Atom {
 			return false;
 		}
 		// return the equality between BigDecimals
-		return this.value.equals(((Real) o).getValue());
+		return this.value.equals(((Real) o).getValue()) && special == ((Real) o).special;
 		// return this.value.compareTo(((Real) o).value) == 0;
 	}
 

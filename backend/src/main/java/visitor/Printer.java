@@ -57,7 +57,7 @@ public class Printer extends Visitor {
 	 */
 	@Override
 	public void visit(Real r) {
-		sb.append(r.getValue());
+		sb.append(r.getValue().stripTrailingZeros());
 	}
 
 	@Override

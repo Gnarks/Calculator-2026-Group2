@@ -1,11 +1,14 @@
 package calculator.functions;
 
+import java.math.BigDecimal;
+
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 /**
  * This class represents the arithmetic unary operation "acos".
@@ -29,11 +32,13 @@ public final class Arccosinus extends UnaryFunction {
 		if (r.isNan() || r.isMinusInf() || r.isPlusInf()) {
 			return Real.nan();
 		}
-		double acosVal = Math.acos(r.getValue().doubleValue());
-		if (Double.isNaN(acosVal)) {
+
+		if (r.getValue().compareTo(new BigDecimal(-1)) <= -1 // r < -1
+				|| r.getValue().compareTo(new BigDecimal(1)) >= 1) // r > 1
 			return Real.nan();
-		}
-		return new Real(new java.math.BigDecimal(acosVal));
+
+		BigDecimal acosVal = BigDecimalMath.acos(r.getValue(), Real.context);
+		return new Real(acosVal);
 	}
 
 	@Override

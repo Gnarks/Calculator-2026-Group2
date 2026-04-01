@@ -1,11 +1,14 @@
 package calculator.functions;
 
+import java.math.BigDecimal;
+
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 /**
  * This class represents the arithmetic unary operation "cosh".
@@ -30,8 +33,9 @@ public final class Cosh extends UnaryFunction {
 		if (r.isNan() || r.isMinusInf() || r.isPlusInf()) {
 			return Real.nan();
 		}
-		double sinVal = Math.cosh(r.getValue().doubleValue());
-		return new Real(new java.math.BigDecimal(sinVal));
+
+		BigDecimal val = BigDecimalMath.cosh(r.getValue(), Real.context);
+		return new Real(val);
 	}
 
 	@Override

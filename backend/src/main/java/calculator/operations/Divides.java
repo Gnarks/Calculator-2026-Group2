@@ -92,7 +92,7 @@ public final class Divides extends Operation {
 				return Real.minusInf();
 		}
 
-		return new Real(r1.getValue().divide(r2.getValue(), RoundingMode.HALF_UP));
+		return new Real(r1.getValue().divide(r2.getValue(), Real.context));
 	}
 
 	/**

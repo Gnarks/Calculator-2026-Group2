@@ -107,4 +107,6 @@ public class Complex implements Atom {
 		return Objects.hash(value);
 	}
 
+	public String toString() {return value.toString(); }
+
 }

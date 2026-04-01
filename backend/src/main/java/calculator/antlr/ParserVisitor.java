@@ -58,6 +58,12 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
                         return new Arcsinus(arg);
                     case "atan":
                         return new Arctangente(arg);
+                    case "cosh":
+                        return new Cosh(arg);
+                    case "sinh":
+                        return new Sinh(arg);
+                    case "tanh":
+                        return new Tanh(arg);
                     case "sqrt":
                         return new Sqrt(arg);
                     case "ln":

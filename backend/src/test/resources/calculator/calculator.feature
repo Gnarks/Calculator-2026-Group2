@@ -1,0 +1,208 @@
+Feature: Integer Arithmetic Expressions
+  This feature provides a range of scenarios corresponding to the
+  intended external behaviour of arithmetic expressions on integers.
+
+  # This is just a comment.
+  # You can start with a Background: that will be run before executing each scenario.
+
+  Background:
+    Given I initialise a calculator
+
+  # Each scenario can be seen as a test that can be executed with JUnit,
+  # provided that each of the steps (Given, When, And and Then) are
+  # implemented in a Java mapping file (CalculatorSteps.Java)
+
+  Scenario: Adding two integer numbers
+    Given an integer operation '+'
+    When I provide a first number 4
+    And I provide a second number 5
+    Then the operation evaluates to 9
+
+  Scenario: Subtracting two integer numbers
+    Given an integer operation '-'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 2
+
+  Scenario: Multiplying two integer numbers
+    Given an integer operation '*'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 35
+
+  Scenario: Dividing two integer numbers
+    Given an integer operation '/'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 1
+
+  Scenario: Exponentiation of two integer numbers
+    Given an integer operation '**'
+    When I provide a first number 3
+    And I provide a first number 2
+    Then the operation evaluates to the real number 9
+
+  Scenario: Dividing a number by zero
+    Given an integer operation '/'
+    When I provide a first number 8
+    And I provide a second number 0
+    Then the operation throws an ArithmeticException
+
+  Scenario: Printing the sum of two integer numbers
+    Given the sum of two numbers 8 and 6
+    Then its INFIX notation is ( 8 + 6 )
+    And its PREFIX notation is + (8, 6)
+    And its POSTFIX notation is (8, 6) +
+
+  # This is an example of a scenario in which we provide a list of numbers as input.
+  # (In fact, this is not entirely true, since what is given as input is a table of
+  # strings. In this case, the table is of dimension 1 * 3 (1 line and three columns).
+  Scenario: Evaluation arithmetic operations over a list of integer numbers
+    Given the following list of integer numbers
+      | 8 | 2 | 2 |
+    Then the sum is 12
+    And the product is 32
+    And the difference is 4
+    And the quotient is 2
+    And the exponentiation is 4096
+
+  # A scenario outline (or template) is a scenario that is parameterised
+  # with different values. The outline comes with a set of examples.
+  # The scenario will be executed with each of the provided inputs.
+  Scenario Outline: Adding two integer numbers
+    Given an integer operation '+'
+    When I provide a first number <n1>
+    And I provide a second number <n2>
+    Then the operation evaluates to <result>
+
+    Examples:
+      |n1|n2|result|
+      |4|5|9|
+      |5|3|8|
+
+  Scenario Outline: Dividing two integer numbers
+    Given an integer operation '/'
+    When I provide a first number <n1>
+    And I provide a second number <n2>
+    Then the operation evaluates to <result>
+
+    Examples:
+      |n1|n2|result|
+      |35|5|7|
+      |7|5|1|
+      |5|7|0|
+
+  Scenario Outline: Evaluating arithmetic operations with two integer parameters
+    Given an integer operation <op>
+    When I provide a first number <n1>
+    And I provide a second number <n2>
+    Then the operation evaluates to <result>
+
+    Examples:
+      | op  |n1|n2|result|
+      | "+" | 4| 5|     9|
+      | "-" | 8| 5|     3|
+      | "*" | 7| 2|    14|
+      | "/" | 6| 2|     3|
+
+  Scenario: Adding two complex numbers
+    Given an integer operation '+'
+    When I provide a complex number 3.0 and 2.0i
+    And I provide a complex number 1.0 and 4.0i
+    Then the operation evaluates to the complex number 4.0 and 6.0i
+
+  Scenario: Subtracting two complex numbers
+    Given an integer operation '-'
+    When I provide a complex number 5.0 and 5.0i
+    And I provide a complex number 2.0 and 1.0i
+    Then the operation evaluates to the complex number 3.0 and 4.0i
+
+  Scenario: Multiplying two complex numbers
+    Given an integer operation '*'
+    When I provide a complex number 2.0 and 3.0i
+    And I provide a complex number 4.0 and 5.0i
+    Then the operation evaluates to the complex number -7.0 and 22.0i
+
+  Scenario: Dividing two complex numbers
+    Given an integer operation '/'
+    When I provide a complex number 4.0 and 2.0i
+    And I provide a complex number 1.0 and 1.0i
+    Then the operation evaluates to the complex number 3.0 and -1.0i
+
+  Scenario: Adding two complex numbers
+    Given an integer operation '+'
+    When I provide a complex number 3.0 and 2.0i
+    And I provide a complex number 1.0 and 4.0i
+    Then the operation evaluates to the complex number 4.0 and 6.0i
+
+  Scenario: Subtracting two complex numbers
+    Given an integer operation '-'
+    When I provide a complex number 5.0 and 5.0i
+    And I provide a complex number 2.0 and 1.0i
+    Then the operation evaluates to the complex number 3.0 and 4.0i
+
+  Scenario: Multiplying two complex numbers
+    Given an integer operation '*'
+    When I provide a complex number 2.0 and 3.0i
+    And I provide a complex number 4.0 and 5.0i
+    Then the operation evaluates to the complex number -7.0 and 22.0i
+
+  Scenario: Dividing two complex numbers
+    Given an integer operation '/'
+    When I provide a complex number 4.0 and 2.0i
+    And I provide a complex number 1.0 and 1.0i
+    Then the operation evaluates to the complex number 3.0 and -1.0i
+
+  Scenario: Exponentiation of two complex numbers
+    Given an integer operation "**"
+    When I provide a complex number 3.0 and 2.0i
+    And I provide a complex number 2.0 and 1.0i
+    Then the operation is not possible
+
+Scenario: Adding two rational numbers
+    Given an integer operation "+"
+    When I provide a rational number 1 / 2
+    And I provide a rational number 1 / 3
+    Then the operation evaluates to the rational number 5 / 6
+
+  Scenario: Subtracting two rational numbers
+    Given an integer operation "-"
+    When I provide a rational number 3 / 4
+    And I provide a rational number 1 / 4
+    Then the operation evaluates to the rational number 1 / 2
+
+  Scenario: Multiplying two rational numbers
+    Given an integer operation "*"
+    When I provide a rational number 2 / 3
+    And I provide a rational number 3 / 4
+    Then the operation evaluates to the rational number 1 / 2
+
+  Scenario: Dividing two rational numbers
+    Given an integer operation "/"
+    When I provide a rational number 1 / 2
+    And I provide a rational number 1 / 4
+    Then the operation evaluates to the rational number 2 / 1
+
+  Scenario: Exponentiation of two rational numbers
+    Given an integer operation "**"
+    When I provide a rational number 1 / 2
+    And I provide a rational number 1 / 4
+    Then the operation evaluates to the real number 0.9
+
+  Scenario: Automatic simplification of results
+    Given an integer operation "+"
+    When I provide a rational number 2 / 4
+    And I provide a rational number 2 / 4
+    Then the operation evaluates to the rational number 1 / 1
+
+  Scenario: Dividing a rational by zero
+    Given an integer operation "/"
+    When I provide a rational number 1 / 2
+    And I provide a rational number 0 / 1
+    Then the operation throws an ArithmeticException
+
+  Scenario: Exponentiation of two real numbers
+    Given an integer operation "**"
+    When I provide a real number 3.234
+    And I provide a real number 2.67
+    Then the operation evaluates to the real number 23.1

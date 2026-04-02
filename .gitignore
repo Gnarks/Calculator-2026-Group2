@@ -10,3 +10,7 @@ target/
 *.classpath
 *.settings/*
 *.settings
+
+# ANTLR generated files
+.antlr/
+backend/.idea/*

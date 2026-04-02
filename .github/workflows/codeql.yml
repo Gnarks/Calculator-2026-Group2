@@ -37,7 +37,7 @@ jobs:
         languages: 'java-kotlin'
         
     - name: Compile Java source code with Maven
-      run: mvn -B compile --file pom.xml
+      run: mvn -B compile --file backend/pom.xml
       # unit tests are not run as part of this workflow, since they are not required for the CodeQL security analysis
 
     - name: Perform CodeQL Analysis

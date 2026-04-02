@@ -2,6 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
+
 ## [Unreleased]
 
 ### Added
@@ -9,6 +10,24 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 ### Fixed
+
+## [v1.0.0]
+
+### Added
+- Handling of different number types (Real, Complex, Rational, Integer)
+- power operations (**)
+- Grammar ANTLR for the calculator, supporting infix, prefix and postfix notations.
+- Parser and Visitor for the grammar, allowing to create an Expression tree from a string input.
+- Support for unary and binary functions
+- Trigonometric functions: sine, cosine, tangent with their inverses and hyperbolic variants.
+- Others functions: logarithm, square root.
+
+### Changed
+- update dependencies (thanks to dependabot)
+
+### Fixed
+- In case of a usage of several notations inside an expression (infix, prefix and postfix), the expression is considered as the type of the top-level.
+- Removal of the notation field in the class Operation. Now, the notation is only used when we use the Printer Visitor.
 
 
 
@@ -24,7 +43,10 @@ All notable changes to this project will be documented in this file.
 - Documentation updates: README badges, .gitignore configuration.
 - Added division by zero handling
 - CI/CD code analysis and testing report.
+- Web-based GUI: Built with Vue 3
+- API Integration: Implemented the POST request structure for the /api/evaluate endpoint.
 
 ### Changed
 - Updated `.gitignore` to ignore the `target/` directory and others files.
-- Updated dependencies of Junit and Cucumner to the latest version (6.0.2 and 7.34.2 respectively).
+- Updated dependencies of Junit and Cucumber to the latest version (6.0.2 and 7.34.2 respectively).
+

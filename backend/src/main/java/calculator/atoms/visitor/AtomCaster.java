@@ -1,5 +1,7 @@
 package calculator.atoms.visitor;
 
+import java.math.BigDecimal;
+
 import calculator.atoms.*;
 
 /**
@@ -110,7 +112,10 @@ public class AtomCaster extends AtomVisitor {
 				break;
 
 			case REAL:
-				result = new Real(q.getValue().doubleValue());
+				BigDecimal num = new BigDecimal(q.getNumerator());
+				BigDecimal denom = new BigDecimal(q.getDenominator());
+				result = new Real(num.divide(denom, Real.context));
+
 				break;
 
 			case COMPLEX:

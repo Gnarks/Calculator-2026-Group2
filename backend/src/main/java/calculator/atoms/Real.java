@@ -2,6 +2,8 @@
 package calculator.atoms;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
@@ -19,6 +21,9 @@ import visitor.Visitor;
  * @see Operation
  */
 public class Real implements Atom {
+
+	public static int scale = 64;
+	public static MathContext context = new MathContext(scale + 1, RoundingMode.HALF_EVEN);
 
 	/*
 	 * the actual Real value
@@ -46,12 +51,42 @@ public class Real implements Atom {
 	}
 
 	/**
+	 * Constructor method for a string
+	 *
+	 * @param s The string to be represented in the Real
+	 */
+	public /* constructor */ Real(String s) {
+		BigDecimal temp = new BigDecimal(s, context);
+		value = temp.setScale(Real.scale, RoundingMode.HALF_EVEN);
+	}
+
+	/**
+	 * Constructor method for a BigDecimal
+	 *
+	 * @param d the BigDecimal to be represented in the Real
+	 */
+	public /* constructor */ Real(BigDecimal d) {
+		value = d.setScale(Real.scale, RoundingMode.HALF_EVEN);
+	}
+
+	/**
+	 * Constructor method for a double
+	 *
+	 * @param d The double to be represented in the Real
+	 */
+	public /* constructor */ Real(double d) {
+		BigDecimal temp = BigDecimal.valueOf(d);
+		value = temp.setScale(Real.scale, RoundingMode.HALF_EVEN);
+	}
+
+	/**
 	 * Constructor method
 	 *
-	 * @param v The BigDecimal value to be contained in the object
+	 * @param i The int value to be contained in the object
 	 */
-	public /* constructor */ Real(BigDecimal v) {
-		value = v;
+	public /* constructor */ Real(int i) {
+		BigDecimal temp = BigDecimal.valueOf(i);
+		value = temp.setScale(Real.scale, RoundingMode.HALF_EVEN);
 	}
 
 	/**
@@ -61,7 +96,8 @@ public class Real implements Atom {
 	 * @throws IllegalConstruction
 	 */
 	private /* constructor */ Real(boolean s, int v) {
-		value = new BigDecimal(v);
+		BigDecimal temp = BigDecimal.valueOf(v);
+		value = temp.setScale(Real.scale, RoundingMode.HALF_EVEN);
 		special = s;
 	}
 
@@ -120,33 +156,6 @@ public class Real implements Atom {
 	}
 
 	/**
-	 * Constructor method
-	 *
-	 * @param v The double value to be contained in the object
-	 */
-	public /* constructor */ Real(double v) {
-		value = new BigDecimal(v);
-	}
-
-	/**
-	 * Constructor method
-	 *
-	 * @param v The int value to be contained in the object
-	 */
-	public /* constructor */ Real(int v) {
-		value = new BigDecimal(v);
-	}
-
-	/**
-	 * Constructor method
-	 *
-	 * @param v The float value to be contained in the object
-	 */
-	public /* constructor */ Real(float v) {
-		value = new BigDecimal(v);
-	}
-
-	/**
 	 * accept method to implement the visitor design pattern to traverse arithmetic
 	 * expressions.
 	 * Each real number will pass itself to the Atomvisitor object to get processed
@@ -196,7 +205,8 @@ public class Real implements Atom {
 			return false;
 		}
 		// return the equality between BigDecimals
-		return this.value.equals(((Real) o).value);
+		return this.value.equals(((Real) o).getValue()) && special == ((Real) o).special;
+		// return this.value.compareTo(((Real) o).value) == 0;
 	}
 
 	/**

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
 import calculator.functions.Ln;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 
@@ -37,6 +38,8 @@ class TestLn {
 
 	@Test
 	void testCompute() {
-		assertEquals(new Real(new BigDecimal(Math.log(value1))), op.op(param));
+		BigDecimal bd = new BigDecimal(value1);
+		BigDecimal ln = BigDecimalMath.log(bd, Real.context);
+		assertEquals(new Real(ln), op.op(param));
 	}
 }

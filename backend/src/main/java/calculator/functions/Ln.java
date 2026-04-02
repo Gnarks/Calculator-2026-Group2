@@ -1,11 +1,14 @@
 package calculator.functions;
 
+import java.math.BigDecimal;
+
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 /**
  * This class represents the natural logarithm unary operation "ln".
@@ -29,8 +32,9 @@ public final class Ln extends UnaryFunction {
 		if (r.isPlusInf()) {
 			return Real.plusInf();
 		}
-		double lnVal = Math.log(r.getValue().doubleValue());
-		return new Real(new java.math.BigDecimal(lnVal));
+
+		BigDecimal val = BigDecimalMath.log(r.getValue(), Real.context);
+		return new Real(val);
 	}
 
 	@Override

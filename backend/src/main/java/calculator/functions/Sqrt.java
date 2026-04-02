@@ -1,11 +1,14 @@
 package calculator.functions;
 
+import java.math.BigDecimal;
+
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 /**
  * This class represents the square root unary operation "sqrt".
@@ -26,8 +29,8 @@ public final class Sqrt extends UnaryFunction {
 		if (r.isPlusInf()) {
 			return Real.plusInf();
 		}
-		double sqrtVal = Math.sqrt(r.getValue().doubleValue());
-		return new Real(new java.math.BigDecimal(sqrtVal));
+		BigDecimal val = BigDecimalMath.sqrt(r.getValue(), Real.context);
+		return new Real(val);
 	}
 
 	@Override

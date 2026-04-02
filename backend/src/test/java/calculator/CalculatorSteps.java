@@ -15,86 +15,86 @@ import calculator.operations.*;
 
 public class CalculatorSteps {
 
-    private ArrayList<Expression> params;
-    private Operation op;
-    private Calculator c;
+	private ArrayList<Expression> params;
+	private Operation op;
+	private Calculator c;
 
-    @Before
-    public void resetMemoryBeforeEachScenario() {
-        params = null;
-        op = null;
-    }
+	@Before
+	public void resetMemoryBeforeEachScenario() {
+		params = null;
+		op = null;
+	}
 
-    @Given("I initialise a calculator")
-    public void givenIInitialiseACalculator() {
-        c = new Calculator();
-    }
+	@Given("I initialise a calculator")
+	public void givenIInitialiseACalculator() {
+		c = new Calculator();
+	}
 
-    @Given("an integer operation {string}")
-    public void givenAnIntegerOperation(String s) {
+	@Given("an integer operation {string}")
+	public void givenAnIntegerOperation(String s) {
 		// Write code here that turns the phrase above into concrete actions
-        params = new ArrayList<>(); // create an empty set of parameters to be filled in
-        try {
-            switch (s) {
-                case "+" -> op = new Plus(params);
-                case "-" -> op = new Minus(params);
-                case "*" -> op = new Times(params);
-                case "/" -> op = new Divides(params);
-                case "**" -> op = new Power(params);
-                default -> fail();
-            }
-        } catch (IllegalConstruction _) {
-            fail();
-        }
-    }
+		params = new ArrayList<>(); // create an empty set of parameters to be filled in
+		try {
+			switch (s) {
+				case "+" -> op = new Plus(params);
+				case "-" -> op = new Minus(params);
+				case "*" -> op = new Times(params);
+				case "/" -> op = new Divides(params);
+				case "**" -> op = new Power(params);
+				default -> fail();
+			}
+		} catch (IllegalConstruction _) {
+			fail();
+		}
+	}
 
 	// The following example shows how to use a DataTable provided as input.
 	// The example looks slightly complex, since DataTables can take as input
 	// tables in two dimensions, i.e. rows and lines. This is why the input
 	// is a list of lists.
-    @Given("the following list of integer numbers")
-    public void givenTheFollowingListOfNumbers(List<List<String>> numbers) {
-        params = new ArrayList<>();
+	@Given("the following list of integer numbers")
+	public void givenTheFollowingListOfNumbers(List<List<String>> numbers) {
+		params = new ArrayList<>();
 		// Since we only use one line of input, we use get(0) to take the first line of
 		// the list,
 		// which is a list of strings, that we will manually convert to integers:
-        numbers.get(0).forEach(n -> params.add(new IntegerAtom(Integer.parseInt(n))));
-        params.forEach(n -> System.out.println("value =" + n));
-        op = null;
-    }
+		numbers.get(0).forEach(n -> params.add(new IntegerAtom(Integer.parseInt(n))));
+		params.forEach(n -> System.out.println("value =" + n));
+		op = null;
+	}
 
 	// The string in the Given annotation shows how to use regular expressions...
 	// In this example, the notation d+ is used to represent numbers, i.e. nonempty
 	// sequences of digits
-    @Given("^the sum of two numbers (\\d+) and (\\d+)$")
+	@Given("^the sum of two numbers (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
-    public void givenTheSum(int n1, int n2) {
-        try {
-            params = new ArrayList<>();
-            params.add(new IntegerAtom(n1));
-            params.add(new IntegerAtom(n2));
-            op = new Plus(params);
-        } catch (IllegalConstruction _) {
-            fail();
-        }
-    }
+	public void givenTheSum(int n1, int n2) {
+		try {
+			params = new ArrayList<>();
+			params.add(new IntegerAtom(n1));
+			params.add(new IntegerAtom(n2));
+			op = new Plus(params);
+		} catch (IllegalConstruction _) {
+			fail();
+		}
+	}
 
-    @Then("^its (.*) notation is (.*)$")
-    public void thenItsNotationIs(String notation, String s) {
-        if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
-            assertEquals(s, op.toString(Notation.valueOf(notation)));
-        } else
-            fail(notation + " is not a correct notation! ");
-    }
+	@Then("^its (.*) notation is (.*)$")
+	public void thenItsNotationIs(String notation, String s) {
+		if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
+			assertEquals(s, op.toString(Notation.valueOf(notation)));
+		} else
+			fail(notation + " is not a correct notation! ");
+	}
 
-    @When("^I provide a (.*) number (-?\\d+)$")
-    public void whenIProvideANumber(String s, int val) {
+	@When("^I provide a (.*) number (-?\\d+)$")
+	public void whenIProvideANumber(String s, int val) {
 		// add extra parameter to the operation
-        params = new ArrayList<>();
-        params.add(new IntegerAtom(val));
-        op.addMoreParams(params);
-    }
+		params = new ArrayList<>();
+		params.add(new IntegerAtom(val));
+		op.addMoreParams(params);
+	}
 
 	@When("I provide a complex number {double} and {double}i")
 	public void whenIProvideAComplexNumber(double real, double imaginary) {
@@ -105,76 +105,95 @@ public class CalculatorSteps {
 		}
 	}
 
-    @When("I provide a real number {double}")
-    public void whenIProvideARealNumber(double real) {
-        params = new ArrayList<>();
-        params.add(new Real(real));
-        if (op != null) {
-            op.addMoreParams(params);
-        }
-    }
+	@When("I provide a real number {double}")
+	public void whenIProvideARealNumber(double real) {
+		params = new ArrayList<>();
+		params.add(new Real(real));
+		if (op != null) {
+			op.addMoreParams(params);
+		}
+	}
 
-    @Then("^the (.*) is (\\d+)$")
-    public void thenTheOperationIs(String s, int val) {
-        try {
-            Atom expected;
-            switch (s) {
-                case "sum" -> { op = new Plus(params); expected = new IntegerAtom(val); }
-                case "product" -> { op = new Times(params); expected = new IntegerAtom(val); }
-                case "quotient" -> { op = new Divides(params); expected = new IntegerAtom(val); }
-                case "difference" -> { op = new Minus(params); expected = new IntegerAtom(val); }
-                case "exponentiation" -> { op = new Power(params); expected = new Real(val); }
-                default -> { fail(); return; }
-            }
-            assertEquals(expected, c.eval(op));
-        } catch (IllegalConstruction _) {
-            fail();
-        }
-    }
+	@Then("^the (.*) is (\\d+)$")
+	public void thenTheOperationIs(String s, int val) {
+		try {
+			Atom expected;
+			switch (s) {
+				case "sum" -> {
+					op = new Plus(params);
+					expected = new IntegerAtom(val);
+				}
+				case "product" -> {
+					op = new Times(params);
+					expected = new IntegerAtom(val);
+				}
+				case "quotient" -> {
+					op = new Divides(params);
+					expected = new IntegerAtom(val);
+				}
+				case "difference" -> {
+					op = new Minus(params);
+					expected = new IntegerAtom(val);
+				}
+				case "exponentiation" -> {
+					op = new Power(params);
+					expected = new Real(val);
+				}
+				default -> {
+					fail();
+					return;
+				}
+			}
+			assertEquals(expected, c.eval(op));
+		} catch (IllegalConstruction _) {
+			fail();
+		}
+	}
 
-    @Then("the operation evaluates to {int}")
-    public void thenTheOperationEvaluatesTo(int val) {
-        assertEquals(new IntegerAtom(val), c.eval(op));
-    }
+	@Then("the operation evaluates to {int}")
+	public void thenTheOperationEvaluatesTo(int val) {
+		assertEquals(new IntegerAtom(val), c.eval(op));
+	}
 
 	@Then("the operation evaluates to the complex number {double} and {double}i")
 	public void thenTheOperationEvaluatesToComplex(double real, double imaginary) {
 		assertEquals(new Complex(real, imaginary), c.eval(op));
 	}
 
-    @Then("the operation throws an ArithmeticException")
-    public void thenTheOperationThrowsAnArithmeticException() {
-        try {
-            c.eval(op);
-            fail("should have thrown an ArithmeticException");
-        } catch (ArithmeticException e) {
-            assertEquals("Division by zero", e.getMessage());
-        }
-    }
+	@Then("the operation throws an ArithmeticException")
+	public void thenTheOperationThrowsAnArithmeticException() {
+		try {
+			c.eval(op);
+			fail("should have thrown an ArithmeticException");
+		} catch (ArithmeticException e) {
+			assertEquals("Division by zero", e.getMessage());
+		}
+	}
 
-    @When("I provide a rational number {int} \\/ {int}")
-    public void whenIProvideARationalNumber(int numerator, int denominator) {
-        params = new ArrayList<>(); 
-        params.add(new Rationnal(numerator, denominator));
-        if (op != null) {
-            op.addMoreParams(params);
-        }
-    }
+	@When("I provide a rational number {int} \\/ {int}")
+	public void whenIProvideARationalNumber(int numerator, int denominator) {
+		params = new ArrayList<>();
+		params.add(new Rationnal(numerator, denominator));
+		if (op != null) {
+			op.addMoreParams(params);
+		}
+	}
 
-    @Then("the operation evaluates to the rational number {int} \\/ {int}")
-    public void thenTheOperationEvaluatesToRational(int numerator, int denominator) {
-        assertEquals(new Rationnal(numerator, denominator), c.eval(op));
-    }
+	@Then("the operation evaluates to the rational number {int} \\/ {int}")
+	public void thenTheOperationEvaluatesToRational(int numerator, int denominator) {
+		assertEquals(new Rationnal(numerator, denominator), c.eval(op));
+	}
 
-    @Then("the operation evaluates to the real number {double}")
-    public void thenTheOperationEvaluatesToReal(double real) {
-        Real result = (Real) c.eval(op);
-        assertEquals(real, result.getValue().doubleValue(), 1e-7);
-    }
+	@Then("the operation evaluates to the real number {double}")
+	public void thenTheOperationEvaluatesToReal(double real) {
+		Real expected = new Real(real);
+		Real result = (Real) c.eval(op);
+		assertEquals(expected, result);
+	}
 
-    @Then("the operation is not possible")
-    public void thenTheOperationIsNotPossible() {
-        assertThrows(ArithmeticException.class, () -> c.eval(op));
-    }
+	@Then("the operation is not possible")
+	public void thenTheOperationIsNotPossible() {
+		assertThrows(ArithmeticException.class, () -> c.eval(op));
+	}
 
 }

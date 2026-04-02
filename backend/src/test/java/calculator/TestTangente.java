@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
 import calculator.functions.Tangente;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 
@@ -37,6 +38,8 @@ class TestTangente {
 
 	@Test
 	void testCompute() {
-		assertEquals(new Real(new BigDecimal(Math.tan(value1))), op.op(param));
+		BigDecimal bd = new BigDecimal(value1);
+		BigDecimal tan = BigDecimalMath.tan(bd, Real.context);
+		assertEquals(new Real(tan), op.op(param));
 	}
 }

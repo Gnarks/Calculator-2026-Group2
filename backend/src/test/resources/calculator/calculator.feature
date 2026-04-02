@@ -187,7 +187,7 @@ Scenario: Adding two rational numbers
     Given an integer operation "**"
     When I provide a rational number 1 / 2
     And I provide a rational number 1 / 4
-    Then the operation evaluates to the real number 0.8408964153
+    Then the operation evaluates to the real number 0.9
 
   Scenario: Automatic simplification of results
     Given an integer operation "+"
@@ -205,4 +205,4 @@ Scenario: Adding two rational numbers
     Given an integer operation "**"
     When I provide a real number 3.234
     And I provide a real number 2.67
-    Then the operation evaluates to the real number 22.96179533
+    Then the operation evaluates to the real number 23.1

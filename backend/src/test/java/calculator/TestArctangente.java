@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
 import calculator.functions.Arctangente;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 
@@ -37,6 +38,8 @@ class TestArctangente {
 
 	@Test
 	void testCompute() {
-		assertEquals(new Real(new BigDecimal(Math.atan(value1))), op.op(param));
+		BigDecimal bd = new BigDecimal(value1);
+		BigDecimal aTan = BigDecimalMath.atan(bd, Real.context);
+		assertEquals(new Real(aTan), op.op(param));
 	}
 }

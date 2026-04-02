@@ -35,6 +35,7 @@
 		<maven.compiler.proc>full</maven.compiler.proc>
 		<maven.surefire.version>3.5.5</maven.surefire.version>
 		<maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+		<antlr.version>4.13.2</antlr.version>
 
 	</properties>
 
@@ -60,6 +61,12 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr4-runtime</artifactId>
+			<version>${antlr.version}</version>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-numbers-complex</artifactId>
@@ -103,6 +110,22 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.antlr</groupId>
+				<artifactId>antlr4-maven-plugin</artifactId>
+				<version>${antlr.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>antlr4</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<visitor>true</visitor>
+					<listener>false</listener>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

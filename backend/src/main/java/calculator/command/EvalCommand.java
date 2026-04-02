@@ -28,6 +28,8 @@ public class EvalCommand implements CLICommand {
 
             System.out.println(args + " = " + c.format(result, Notation.INFIX));
 
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid expression: " + e.getMessage());
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error evaluating expression: {0}", e.getMessage());
         }

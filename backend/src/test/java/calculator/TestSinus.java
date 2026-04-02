@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
 import calculator.functions.Sinus;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 
@@ -37,6 +38,8 @@ class TestSinus {
 
 	@Test
 	void testCompute() {
-		assertEquals(new Real(new BigDecimal(Math.sin(value1))), op.op(param));
+		BigDecimal bd = new BigDecimal(value1);
+		BigDecimal sin = BigDecimalMath.sin(bd, Real.context);
+		assertEquals(new Real(sin), op.op(param));
 	}
 }

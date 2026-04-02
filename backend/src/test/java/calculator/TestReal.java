@@ -131,4 +131,33 @@ class TestReal {
 			fail();
 		}
 	}
+
+	@Test
+	void testScale() {
+		// equals to 0.001
+		Real su = new Real(0.001);
+		Real.scale = 2;
+		// equals to 0.00 due to scale change
+		Real s1 = new Real(0.001);
+
+		// reset scale to default
+		Real.scale = 64;
+		assertNotEquals(su, s1);
+	}
+
+	@Test
+	void testRounding() {
+		// equals to 0.010000000 (with 63 0's)
+		Real s1 = new Real("0.1");
+		Real.scale = 1;
+		// equals to 0.00 due to scale change
+		Real s99 = new Real(0.099);
+
+		// shouldn't be equal du to different scales
+		assertNotEquals(s1, s99);
+
+		// with new scale = 0.1
+		s1 = new Real("0.1");
+		assertEquals(s1, s99);
+	}
 }

@@ -1,11 +1,14 @@
 package calculator.functions;
 
+import java.math.BigDecimal;
+
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 /**
  * This class represents the arithmetic unary operation "sinh".
@@ -30,8 +33,8 @@ public final class Sinh extends UnaryFunction {
 		if (r.isNan() || r.isMinusInf() || r.isPlusInf()) {
 			return Real.nan();
 		}
-		double sinVal = Math.sinh(r.getValue().doubleValue());
-		return new Real(new java.math.BigDecimal(sinVal));
+		BigDecimal val = BigDecimalMath.sinh(r.getValue(), Real.context);
+		return new Real(val);
 	}
 
 	@Override

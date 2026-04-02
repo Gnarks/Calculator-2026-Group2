@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 import calculator.atoms.Real;
 import calculator.functions.Log;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-
 class TestLog {
 
 	private final Real base = new Real(2);
@@ -37,7 +34,6 @@ class TestLog {
 
 	@Test
 	void testCompute() {
-		// tests equality without precision
-		assertEquals(new BigDecimal(1).compareTo(op.op(base, n).getValue()), 0);
+		assertEquals(op.op(base, n), new Real(1));
 	}
 }

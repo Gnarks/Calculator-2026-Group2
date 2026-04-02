@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import calculator.atoms.Real;
 import calculator.functions.Sinh;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 
@@ -37,6 +38,8 @@ class TestSinh {
 
 	@Test
 	void testCompute() {
-		assertEquals(new Real(new BigDecimal(Math.sinh(value1))), op.op(param));
+		BigDecimal bd = new BigDecimal(value1);
+		BigDecimal sinh = BigDecimalMath.sinh(bd, Real.context);
+		assertEquals(new Real(sinh), op.op(param));
 	}
 }

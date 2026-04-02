@@ -1,11 +1,14 @@
 package calculator.functions;
 
+import java.math.BigDecimal;
+
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.atoms.Complex;
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 /**
  * This class represents the arithmetic unary operation "atan".
@@ -35,8 +38,9 @@ public final class Arctangente extends UnaryFunction {
 		if (r.isMinusInf()) {
 			return new Real(new java.math.BigDecimal(-Math.PI / 2));
 		}
-		double atanVal = Math.atan(r.getValue().doubleValue());
-		return new Real(new java.math.BigDecimal(atanVal));
+
+		BigDecimal val = BigDecimalMath.atan(r.getValue(), Real.context);
+		return new Real(val);
 	}
 
 	@Override

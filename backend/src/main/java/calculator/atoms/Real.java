@@ -246,5 +246,5 @@ public class Real implements Atom {
 	}
 
 	@Override
-	public 	String toString() { return value.toString(); }
+	public String toString() { return value.stripTrailingZeros().toPlainString(); }
 }

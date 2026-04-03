@@ -2,22 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [v2.0.0]
 
 ### Added
+- REST API and GUI 
+
+## [v1.2.0]
+
+### Added
+- Command-line interface (CLI): commmand help, exit and eval.
+
+## [v1.0.1]
+
+### Fixed
+- Log precision error with Reals
+
+## [v1.0.0]
+
+### Added
+- Handling of different number types (Real, Complex, Rational, Integer)
+- power operations (**)
 - Grammar ANTLR for the calculator, supporting infix, prefix and postfix notations.
 - Parser and Visitor for the grammar, allowing to create an Expression tree from a string input.
-- Support for Unary operations
-- Trigonometric functions: sine, cosine, tangent and their inverses.
+- Support for unary and binary functions
+- Trigonometric functions: sine, cosine, tangent with their inverses and hyperbolic variants.
 - Others functions: logarithm, square root.
 - Power operator
-- REST API
-- Command-line interface (CLI): commmand help, exit and eval.-
 
 ### Changed
 - update dependencies (thanks to dependabot)
 
-## Fixed
+### Fixed
 - In case of a usage of several notations inside an expression (infix, prefix and postfix), the expression is considered as the type of the top-level.
 - Removal of the notation field in the class Operation. Now, the notation is only used when we use the Printer Visitor.
 

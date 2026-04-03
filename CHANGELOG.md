@@ -2,14 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-
 ## [Unreleased]
 
-### Added
-
-### Changed
+## [v1.0.1]
 
 ### Fixed
+- Log precision error with Reals
 
 ## [v1.0.0]
 

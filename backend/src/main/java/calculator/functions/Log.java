@@ -85,10 +85,10 @@ public class Log extends BinaryFunction {
 			throw new IllegalArgumentException("Logarithm of negative number");
 		}
 
-		BigDecimal logBase = BigDecimalMath.log(new BigDecimal(base.getValue()), MathContext.UNLIMITED);
-		BigDecimal logN = BigDecimalMath.log(new BigDecimal(n.getValue()), MathContext.UNLIMITED);
+		BigDecimal logBase = BigDecimalMath.log(new BigDecimal(base.getValue()), Real.context);
+		BigDecimal logN = BigDecimalMath.log(new BigDecimal(n.getValue()), Real.context);
 
-		return new Real(logN.divide(logBase));
+		return new Real(logN.divide(logBase, Real.context));
 
 	}
 
@@ -100,9 +100,9 @@ public class Log extends BinaryFunction {
 		}
 
 		// uses the log_b(n) = log_e(n)/log_e(b)
-		BigDecimal logBase = BigDecimalMath.log(new BigDecimal(base.getValue().doubleValue()), MathContext.UNLIMITED);
-		BigDecimal logN = BigDecimalMath.log(new BigDecimal(n.getValue().doubleValue()), MathContext.UNLIMITED);
+		BigDecimal logBase = BigDecimalMath.log(new BigDecimal(base.getValue().doubleValue()), Real.context);
+		BigDecimal logN = BigDecimalMath.log(new BigDecimal(n.getValue().doubleValue()), Real.context);
 
-		return new Real(logN.divide(logBase));
+		return new Real(logN.divide(logBase, Real.context));
 	}
 }

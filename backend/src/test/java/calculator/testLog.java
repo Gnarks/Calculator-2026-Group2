@@ -11,8 +11,6 @@ import org.junit.jupiter.api.Test;
 import calculator.atoms.Real;
 import calculator.functions.Log;
 
-import java.math.BigDecimal;
-
 class TestLog {
 
 	private final Real base = new Real(2);
@@ -67,4 +65,5 @@ class TestLog {
 			fail();
 		}
 	}
+	
 }

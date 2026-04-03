@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.atoms.IntegerAtom;
 import calculator.atoms.Rationnal;
-import ch.obermuhlner.math.big.BigDecimalMath;
 import org.apache.commons.numbers.fraction.Fraction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

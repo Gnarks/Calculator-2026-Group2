@@ -1,0 +1,30 @@
+======================================================================
+                         CALCULATOR HELP
+======================================================================
+Welcome to the Calculator! This tool allows you to evaluate arithmetic
+expressions directly from the command line.
+
+USAGE:
+  calc> <expression>          Evaluates the mathematical expression.
+  calc> eval <expression>     (Same as above)
+  calc> help                  Displays this help message.
+  calc> exit                  Exits the calculator.
+
+AVAILABLE OPERATORS:
+  +   Addition                 -   Subtraction
+  *   Multiplication           /   Division
+  **  Power
+
+AVAILABLE FUNCTIONS:
+  sin(x), cos(x), tan(x)       Trigonometric functions
+  asin(x), acos(x), atan(x)    Inverse trigonometric functions
+  sinh(x), cosh(x), tanh(x)    Hyperbolic functions
+  ln(x), log(x)                Natural and base-10 logarithms
+  sqrt(x)                      Square root
+
+CONSTANTS & NUMBERS:
+  pi                           Archimedes' constant (3.1415...)
+  e                            Euler's number (2.7182...)
+  i                            Imaginary unit
+  Integers and decimals are supported (e.g. 42, 3.14)
+======================================================================

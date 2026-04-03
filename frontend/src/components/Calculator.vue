@@ -126,6 +126,7 @@ const calculate = async () => {
 
   } catch (error) {
     alert("Impossible to reach server. Please try again later");
+    display.value = 'Error';
     console.error(error);
   }
 };

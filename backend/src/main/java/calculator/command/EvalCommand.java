@@ -9,30 +9,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EvalCommand implements CLICommand {
-    
-    private static final Logger LOGGER = Logger.getLogger(EvalCommand.class.getName());
 
-    @Override
-    public boolean execute(String args) {
-        try {
-            if (args == null || args.trim().isEmpty()) {
-                LOGGER.warning("No expression provided.");
-                return true;
-            }
+	private static final Logger LOGGER = Logger.getLogger(EvalCommand.class.getName());
 
-            Parser parser = new Parser();
-            Expression e = parser.parse(args);
+	@Override
+	public boolean execute(String args) {
+		try {
+			if (args == null || args.trim().isEmpty()) {
+				LOGGER.warning("No expression provided.");
+				return true;
+			}
 
-            Calculator c = new Calculator();
-            Atom result = c.eval(e);
+			Parser parser = new Parser();
+			Expression e = parser.parse(args);
 
-            System.out.println(args + " = " + c.format(result, Notation.INFIX));
+			Calculator c = new Calculator();
+			Atom result = c.eval(e);
 
-        } catch (IllegalArgumentException e) {
-            System.err.println("Invalid expression: " + e.getMessage());
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error evaluating expression: {0}", e.getMessage());
-        }
-        return true;
-    }
+			System.out.println(args + " = " + c.format(result, Notation.INFIX));
+
+		} catch (IllegalArgumentException e) {
+			LOGGER.log(Level.SEVERE, "Invalid expression: " + e.getMessage());
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Error evaluating expression: {0}", e.getMessage());
+		}
+		return true;
+	}
 }

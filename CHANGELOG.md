@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.2.0]
+
+### Added
+- Command-line interface (CLI): commmand help, exit and eval.
+
 ## [v1.0.1]
 
 ### Fixed
@@ -19,7 +24,6 @@ All notable changes to this project will be documented in this file.
 - Support for unary and binary functions
 - Trigonometric functions: sine, cosine, tangent with their inverses and hyperbolic variants.
 - Others functions: logarithm, square root.
-- Command-line interface (CLI): commmand help, exit and eval.-
 
 ### Changed
 - update dependencies (thanks to dependabot)

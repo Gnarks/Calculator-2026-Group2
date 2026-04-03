@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Support for Unary operations
 - Trigonometric functions: sine, cosine, tangent and their inverses.
 - Others functions: logarithm, square root.
+- Command-line interface (CLI): commmand help, exit and eval.-
 
 ### Changed
 - update dependencies (thanks to dependabot)

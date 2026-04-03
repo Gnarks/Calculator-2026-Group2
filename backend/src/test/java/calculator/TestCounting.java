@@ -97,7 +97,7 @@ class TestCounting {
 	}
 
 	@Test
-	void testUnaryOperationCounting() {
+	void testUnaryFunctionCounting() {
 		try {
 			e = new Cosinus(new Real(value1));
 		} catch (IllegalConstruction e) {
@@ -105,11 +105,11 @@ class TestCounting {
 		}
 		Counter c = new Counter();
 		e.accept(c);
-		// test whether a unary operation has depth 1
-		assertEquals(1, c.getDepth(), "counting depth of a unary Operation");
-		// test whether a unary operation contains 1 operation
+		// test whether a unary function has depth 1
+		assertEquals(1, c.getDepth(), "counting depth of a unary Function");
+		// test whether a unary function contains 1 function
 		assertEquals(1, c.getNbOps());
-		// test whether a unary operation contains 1 number
+		// test whether a unary function contains 1 number
 		assertEquals(1, c.getNbNbs());
 	}
 

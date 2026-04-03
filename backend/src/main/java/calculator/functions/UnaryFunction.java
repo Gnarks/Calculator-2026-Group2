@@ -11,7 +11,7 @@ import visitor.Printer;
 import visitor.Visitor;
 
 /**
- * UnaryOperation is an abstract class that represents unary arithmetic
+ * UnaryFunction is an abstract class that represents unary arithmetic
  * operations,
  * which are a special kind of Expressions, just like binary operations are.
  */

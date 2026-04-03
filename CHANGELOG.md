@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.2.0]
+
+### Added
+- Command-line interface (CLI): commmand help, exit and eval.
+
 ## [v1.0.1]
 
 ### Fixed

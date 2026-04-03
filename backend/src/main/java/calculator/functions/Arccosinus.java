@@ -12,7 +12,7 @@ import ch.obermuhlner.math.big.BigDecimalMath;
 
 /**
  * This class represents the arithmetic unary operation "acos".
- * The class extends an abstract superclass UnaryOperation.
+ * The class extends an abstract superclass UnaryFunction.
  */
 public final class Arccosinus extends UnaryFunction {
 

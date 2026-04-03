@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [v2.0.0]
+
+### Added
+- REST API and GUI 
 
 ## [v1.2.0]
 
@@ -24,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - Support for unary and binary functions
 - Trigonometric functions: sine, cosine, tangent with their inverses and hyperbolic variants.
 - Others functions: logarithm, square root.
+- Power operator
 
 ### Changed
 - update dependencies (thanks to dependabot)

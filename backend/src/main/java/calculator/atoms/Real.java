@@ -244,4 +244,7 @@ public class Real implements Atom {
 	public Real apply(UnaryFunction o) {
 		return o.op(this);
 	}
+
+	@Override
+	public String toString() { return value.stripTrailingZeros().toPlainString(); }
 }

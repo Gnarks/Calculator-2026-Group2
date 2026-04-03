@@ -107,4 +107,8 @@ public class Rationnal implements Atom {
 	public int getDenominator() {
 		return value.getDenominator();
 	}
+
+	@Override
+	public String toString(){ return value.toString(); };
+
 }

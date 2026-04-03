@@ -51,14 +51,23 @@ class TestEvalCommand {
 	void testExecuteWithEmptyString() {
 		boolean result = evalCommand.execute("");
 		assertTrue(result);
-		assertTrue(outputStreamCaptor.toString().trim().isEmpty());
+		testLogHandler.flush();
+		assertTrue(result);
+
+		String capturedErr = errStreamCaptor.toString();
+		assertTrue(capturedErr.contains("No expression provided."));
 	}
 
 	@Test
 	void testExecuteWithNull() {
 		boolean result = evalCommand.execute(null);
 		assertTrue(result);
-		assertTrue(outputStreamCaptor.toString().trim().isEmpty());
+
+		testLogHandler.flush();
+		assertTrue(result);
+
+		String capturedErr = errStreamCaptor.toString();
+		assertTrue(capturedErr.contains("No expression provided."));
 	}
 
 	@Test

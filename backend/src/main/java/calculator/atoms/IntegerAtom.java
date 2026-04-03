@@ -127,4 +127,8 @@ public class IntegerAtom implements Atom {
 	public int getValue() {
 		return value;
 	}
+
+	@Override
+	public String toString() { return Integer.toString(value); }
+
 }

@@ -90,7 +90,8 @@ const isHelpVisible = ref(false);
 const isResultState = ref(false);
 
 const appendToDisplay = (value) => {
-  if (display.value === 'Error' || isResultState.value) display.value = '';
+  if (isResultState.value) return; 
+  if (display.value === 'Error') display.value = '';
   display.value += value;
 };
 

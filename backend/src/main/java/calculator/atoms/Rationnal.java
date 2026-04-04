@@ -109,6 +109,6 @@ public class Rationnal implements Atom {
 	}
 
 	@Override
-	public String toString(){ return value.toString().replaceAll("\\s+",""); }
+	public String toString(){ return value.toString().replaceAll("\\s",""); }
 
 }

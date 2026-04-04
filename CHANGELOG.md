@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- DockerFile to run backend
+- DockerFile to run frontend
+- DockerCompose to run the backend and frontend and expose the application
+
+### Changed
+- README: added information about the way to start the web-app with docker compose
 
 ## [v2.0.0]
 

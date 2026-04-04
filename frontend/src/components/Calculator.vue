@@ -109,7 +109,10 @@ const deleteLast = () => {
 
 const calculate = async () => {
   if (!display.value || display.value === 'Error') return;
-  
+
+	// if in production : request on /api
+	if (import.meta.env.PROD){
+	  
   try {
       const response = await axios.post('/api/evaluate',
     {
@@ -135,6 +138,32 @@ const calculate = async () => {
     display.value = 'Error';
     console.error(error);
   }
+	}
+	// otherwise (in dev) request on localhost without https
+	else {
+	  try {
+	     const response = await axios.post('http://localhost:1523/api/evaluate',
+		   {
+			  expression: display.value
+			},
+		);
+
+    if (response.data.success === 1) {
+      display.value = response.data.result.toString();
+      isResultState.value = true; 
+    } else {
+      display.value = 'Error';
+      isResultState.value = false;
+      console.warn("error :", response.data.result);
+    }
+
+
+		} catch (error) {
+		alert("Impossible to reach server. Please try again later");
+		display.value = 'Error';
+		console.error(error);
+		}   
+	}
 };
 
 const showHelp = () => {

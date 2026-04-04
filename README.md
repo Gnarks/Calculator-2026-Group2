@@ -42,6 +42,7 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 
 *  You will need to have a running version of Java 25 on your machine in order to be able to compile and execute this code, although it is also backward compatible with earlier versions of Java.
 *  You will need to have a running version of Maven, since this project is accompanied by a pom.xml file so that it can be installed, compiled, tested and run using Maven.
+* You will need to have docker and docker-compose installed for the Server + API
 
 ### Installation and testing instructions
 
@@ -50,6 +51,10 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 *  Once the code is compiled, you can execute the main class of the Java code using "mvn exec:java" 
 *  The tests and BDD scenarios are executable with Maven using "mvn test"
 *  Note that the tests are also executed when you do a "mvn install". It is possible to skip those tests by providing an extra parameter. For details of more advanced uses of Maven, please refer to its official documentation https://maven.apache.org/guides/.
+
+### Running the server with its API
+
+* Simply enter `docker compose up` (with `-d` to detach from the logs) to run the application on http://127.0.0.1:1626.
 
 ### Test coverage and JavaDoc reporting
 
@@ -63,6 +68,7 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 *  [Cucumber](https://cucumber.io/docs/cucumber/) - a tool for Behaviour-Driven Development
 *  [JaCoCo](https://www.jacoco.org) - a code coverage library for Java
 *  [JavaDoc](https://docs.oracle.com/en/java/javase/21/javadoc/javadoc.html) - a code documentation tool for Java
+
 
 ## Frontend web interface 
 To launch the web interface, navigate to the frontend directory with `cd frontend` and run the command `npm run dev` to start the development server.

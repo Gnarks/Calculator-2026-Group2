@@ -53,10 +53,15 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 *  The tests and BDD scenarios are executable with Maven using "mvn test"
 *  Note that the tests are also executed when you do a "mvn install". It is possible to skip those tests by providing an extra parameter. For details of more advanced uses of Maven, please refer to its official documentation https://maven.apache.org/guides/.
 
-### Running the server with its API
+### Running the server with its API in production
 
 * After setting up the reverse proxy defines in Prerequisites
 * Simply enter `docker compose up` (with `-d` to detach from the logs) to run the application on http://yourpath.yourdomain
+
+### Running the server with its API in dev
+
+* run the backend by going to the backend directory and entering `mvn spring-boot:run`
+* run the frontend by goind to the frontend directory and entering `npm run dev`
 
 ### Test coverage and JavaDoc reporting
 

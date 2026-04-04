@@ -111,9 +111,15 @@ const calculate = async () => {
   if (!display.value || display.value === 'Error') return;
   
   try {
-      const response = await axios.post('http://localhost:1523/api/evaluate', {
+      const response = await axios.post('/api/evaluate',
+    {
       expression: display.value
-    });
+    },
+    {
+    headers: {
+         scheme: 'https'
+    }}
+);
 
     if (response.data.success === 1) {
       display.value = response.data.result.toString();

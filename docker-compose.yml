@@ -14,6 +14,9 @@ services:
       timeout: 5s
       retries: 5
       start_period: 40s
+    networks:
+        - default
+        - proxy
 
   front:
     build: frontend/.
@@ -24,3 +27,12 @@ services:
         restart: true
     ports:
       - "1626:8080"
+    networks:
+        - default
+        - proxy
+
+
+networks:
+  proxy:
+    name: proxy
+    external: true

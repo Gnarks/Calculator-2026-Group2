@@ -32,7 +32,7 @@ public final class Divides extends Operation {
 	 */
 	public Divides(List<Expression> elist) throws IllegalConstruction {
 		super(elist);
-		symbol = "/";
+		symbol = "//";
 		neutral = 1;
 	}
 

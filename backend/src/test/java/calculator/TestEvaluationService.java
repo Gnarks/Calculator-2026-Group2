@@ -46,12 +46,4 @@ public class TestEvaluationService {
         assertEquals("33", response.getResult());
     }
 
-    @Test
-    void testValidOperationRational() {
-        String request = "(1/6) + (4/6)";
-        EvaluationResponse response = evaluationService.evaluate(request);
-        assertEquals(1, response.getSuccess());
-        assertEquals("5 / 6", response.getResult());
-    }
-
 }

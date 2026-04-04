@@ -36,7 +36,7 @@
         <button @click="clearDisplay" class="calc-op-btn btn-c orange-btn">C</button>
         <button @click="deleteLast" class="calc-op-btn del-btn orange-btn">DEL</button>
         <button @click="showHelp" class="orange-btn">?</button>
-        <button @click="appendToDisplay('/')" class="calc-op-btn orange-btn">/</button>
+        <button @click="appendToDisplay('//')" class="calc-op-btn orange-btn">÷</button>
 
         <button @click="appendToDisplay('7')">7</button>
         <button @click="appendToDisplay('8')">8</button>
@@ -53,6 +53,7 @@
         <button @click="appendToDisplay('3')">3</button>
         <button @click="appendToDisplay('+')" class="calc-op-btn orange-btn">+</button>
 
+        <button @click="appendToDisplay('/')">/</button>
         <button @click="appendToDisplay('0')" class="btn-zero">0</button>
         <button @click="appendToDisplay('.')">.</button>
         <button @click="calculate" class="calc-op-btn equal-btn">=</button>
@@ -241,7 +242,6 @@ const closeHelp = () => {
 
 
 .btn-zero {
-  grid-column: span 2; 
   aspect-ratio: unset !important;
   height: 100%;
   border-radius: 40px !important; 

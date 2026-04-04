@@ -124,6 +124,9 @@ class TestParserVisitor {
     void testDifferentiateRationalAndDivision() {
         assertInstanceOf(Rationnal.class, parser.parse("1/6"));
         assertInstanceOf(Divides.class, parser.parse("1//6"));
+        Rationnal q = (Rationnal) parser.parse("1/6");
+        assertEquals(1, q.getNumerator());
+        assertEquals(6, q.getDenominator());
     }
 
 }

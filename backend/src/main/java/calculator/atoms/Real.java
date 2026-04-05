@@ -25,6 +25,15 @@ public class Real implements Atom {
 	public static int scale = 64;
 	public static MathContext context = new MathContext(scale + 1, RoundingMode.HALF_EVEN);
 
+	/**
+	 * Sets the precision (scale) for Real number calculations globally.
+	 * @param newScale The new scale to use.
+	 */
+	public static void setPrecision(int newScale) {
+		scale = newScale;
+		context = new MathContext(scale + 1, RoundingMode.HALF_EVEN);
+	}
+
 	/*
 	 * the actual Real value
 	 * in case of a special real value it is used to determine which special real

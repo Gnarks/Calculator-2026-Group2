@@ -82,6 +82,16 @@ public class Counter extends Visitor {
 		currentDepth--;
 	}
 
+	@Override
+	public void visit(RandomFunction f) {
+		nbOps++;
+		currentDepth++;
+		for (Expression a : f.getArgs()) {
+			a.accept(this);
+		}
+		currentDepth--;
+	}
+
 	/**
 	 * Gets the number of operations.
 	 * 

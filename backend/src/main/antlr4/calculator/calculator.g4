@@ -108,7 +108,7 @@ constant : PI #ConstPi | EULER #ConstEuler ;
 
 // functions of the form : (infix notation)
 // function (parameter1, parameter2, ...)
-functionIN : funcname LPAR expressionIN (COMMA expressionIN)* RPAR #InfixFunctionCall;
+functionIN : funcname LPAR (expressionIN (COMMA expressionIN)*)? RPAR #InfixFunctionCall;
 
 //accepted functions
 funcname
@@ -124,6 +124,10 @@ funcname
     | COSH #FnCosh // 1 parameter
     | SINH #FnSinh // 1 parameter
     | TANH #FnTanh // 1 parameter
+		| RANDINT #FnRandInt // 1 or 2 parameters (optional seed first)
+		| RANDRAT #FnRandRat // 1 or 2 parameters (optional seed first)
+		| RANDREAL #FnRandReal // 0 or 1 parameter (optional seed first)
+		| RANDCOMPLEX #FnRandComplex // 0 or 1 parameter (optional seed first)
 		;
 
 
@@ -139,6 +143,10 @@ TANH : 'tanh' ;
 LN : 'ln' ;
 LOG : 'log' ;
 SQRT : 'sqrt' ;
+RANDINT : 'randint' ;
+RANDRAT : 'randrat' ;
+RANDREAL : 'randreal' ;
+RANDCOMPLEX : 'randcomplex' ;
 LPAR : '(' ;
 RPAR : ')' ;
 PLUS : '+' ;

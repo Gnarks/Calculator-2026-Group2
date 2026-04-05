@@ -5,6 +5,7 @@ import calculator.Notation;
 import calculator.operations.Operation;
 import calculator.atoms.*;
 import calculator.functions.BinaryFunction;
+import calculator.functions.RandomFunction;
 import calculator.functions.UnaryFunction;
 import calculator.Expression;
 
@@ -197,6 +198,37 @@ public class Printer extends Visitor {
 				sb.append(", ");
 				f.getSecondArg().accept(this);
 				sb.append(")").append(f.getSymbol());
+			}
+		}
+	}
+
+	@Override
+	public void visit(RandomFunction f) {
+		String funcName;
+		switch(f.getType()) {
+			case INTEGER -> funcName = "randint";
+			case RATIONNAL -> funcName = "randrat";
+			case REAL -> funcName = "randreal";
+			case COMPLEX -> funcName = "randcomplex";
+			default -> funcName = "rand";
+		}
+		
+		switch (notation) {
+			case PREFIX, INFIX -> {
+				sb.append(funcName).append("(");
+				for (int i = 0; i < f.getArgs().size(); i++) {
+					if (i > 0) sb.append(", ");
+					f.getArgs().get(i).accept(this);
+				}
+				sb.append(")");
+			}
+			case POSTFIX -> {
+				sb.append("(");
+				for (int i = 0; i < f.getArgs().size(); i++) {
+					if (i > 0) sb.append(", ");
+					f.getArgs().get(i).accept(this);
+				}
+				sb.append(")").append(funcName);
 			}
 		}
 	}

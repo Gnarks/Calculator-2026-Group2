@@ -4,6 +4,9 @@ name: Deployement on joselin
 on:
   push:
     branches: [ master]
+    # TODO: delete only to test github variables are well setup
+  pull_request:
+    branches: [  dev ]
 
 jobs:
   deploy:
@@ -18,7 +21,10 @@ jobs:
           script: |
             cd ~/Calculator-2026-Group2/
             
-            git pull origin master
+            # git pull origin master
+            
+            # todo remove this and uncomment above only to test github variables
+            git checkout Maxime/FEAT/ContinuousDeployment
             
             docker compose up -d --build
             

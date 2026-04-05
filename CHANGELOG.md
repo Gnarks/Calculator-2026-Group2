@@ -3,7 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-
+## Added
+- precision command to set the precision of Real number calculations globally (for the CLI)
 
 ## [v2.0.0]
 

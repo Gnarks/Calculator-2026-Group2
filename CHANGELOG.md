@@ -3,7 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+## Added
+- Random function: 
+     - randreal: generates a random number between 0 and 1.
+     - randint: generates a random integer between 0 and a maximum.
+     - randrat: generates a random rational number with a numerator and denominator between 0 and a maximum. (denominator cannot be zero)
+     - randcomplex: generates a random complex number with real and imaginary parts between 0 and a maximum.
+- Random generator: generates a random number between a specified minimum and maximum.
 
+## Changed
+- POM file: The main class is now `calculator.Main` instead of `calculator.CalculatorApplication` to launch the CLI.
 
 ## [v2.0.0]
 

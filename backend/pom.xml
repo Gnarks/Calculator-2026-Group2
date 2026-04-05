@@ -172,7 +172,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.6.3</version>
 				<configuration>
-					<mainClass>calculator.CalculatorApplication</mainClass>
+					<mainClass>calculator.Main</mainClass>
 				</configuration>
 			</plugin>
 

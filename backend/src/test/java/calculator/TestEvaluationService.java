@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.api.EvaluationService;
 import calculator.api.dto.EvaluationResponse;
+import calculator.atoms.Real;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ public class TestEvaluationService {
 
     private EvaluationService evaluationService;
 
-    private int precision = 64;
+    private final int precision = 64;
 
     @BeforeEach
     void setUp() {
@@ -54,6 +55,14 @@ public class TestEvaluationService {
         EvaluationResponse response = evaluationService.evaluate(request, -1);
         assertEquals(0, response.getSuccess());
         assertEquals("", response.getResult());
+    }
+
+    @Test
+    void testPrecisionChanged() {
+        assertEquals(64, Real.scale);
+        String request = "(6 + 9 * 3)";
+        evaluationService.evaluate(request, 15);
+        assertEquals(15, Real.scale);
     }
 
 }

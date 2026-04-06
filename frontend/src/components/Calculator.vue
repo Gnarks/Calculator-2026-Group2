@@ -3,7 +3,7 @@
     <h1 class="title">Calculator</h1>
     
     <div id="calculator">
-      <input id="display" :value="display" readonly placeholder="0">
+      <div id="display">{{ display || '0' }}</div>
 
       <div class="precision-wrapper">
         <span>Precision: <strong>{{ precision }}</strong></span>
@@ -204,7 +204,9 @@ const closeHelp = () => {
   box-sizing: border-box;
   outline: none;
   user-select: none;
-  pointer-events: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-color: #4ade80 #1a1a1a;
 }
 
 .precision-wrapper {

@@ -126,6 +126,14 @@ public class Evaluator extends Visitor {
 		computedValue = firstValue.apply(f, secondValue);
 	}
 
+	/**
+	 * Evaluates a {@code RandomFunction} node.
+	 * Random functions generate pseudorandom numbers based on given arguments (max bounds and/or a random seed).
+	 * If a seed is present, it is configured on the generator prior to evaluation.
+	 * 
+	 * @param f the {@code RandomFunction} node to be evaluated
+	 * @throws UnsupportedOperationException if any of the provided random function arguments do not evaluate to integers
+	 */
 	@Override
 	public void visit(RandomFunction f) {
 		long seed = 0;

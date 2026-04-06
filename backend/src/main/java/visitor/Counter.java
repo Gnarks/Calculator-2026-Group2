@@ -82,6 +82,12 @@ public class Counter extends Visitor {
 		currentDepth--;
 	}
 
+	/**
+	 * Visits a {@code RandomFunction} node to count operations and depth.
+	 * Random functions themselves count as an operation (+1 to nbOps). Each argument expression is visited and contributes.
+	 * 
+	 * @param f the {@code RandomFunction} node to visit
+	 */
 	@Override
 	public void visit(RandomFunction f) {
 		nbOps++;

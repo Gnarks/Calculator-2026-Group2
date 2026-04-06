@@ -202,6 +202,12 @@ public class Printer extends Visitor {
 		}
 	}
 
+	/**
+	 * Formats a {@code RandomFunction} node with corresponding function calls (e.g. 'randint', 'randrat').
+	 * The output representation depends on the chosen {@link calculator.Notation}.
+	 *
+	 * @param f the {@code RandomFunction} node to append to the print result
+	 */
 	@Override
 	public void visit(RandomFunction f) {
 		String funcName;

@@ -10,24 +10,38 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.logging.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestCLICommands {
 
 	private final PrintStream standardOut = System.out;
+	private final PrintStream standardErr = System.err;
 	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+	private final ByteArrayOutputStream errStreamCaptor = new ByteArrayOutputStream();
+	private StreamHandler testLogHandler;
+	private static final Logger LOGGER = Logger.getLogger(""); // Root logger to handle CLI logger
 	private int originalScale;
 
 	@BeforeEach
 	public void setUp() {
 		System.setOut(new PrintStream(outputStreamCaptor));
+		System.setErr(new PrintStream(errStreamCaptor));
+		
+		// forcing Logger to be caught by captor
+		testLogHandler = new StreamHandler(errStreamCaptor, new SimpleFormatter());
+		testLogHandler.setLevel(Level.ALL);
+		LOGGER.addHandler(testLogHandler);
+
 		originalScale = Real.scale;
 	}
 
 	@AfterEach
 	public void tearDown() {
 		System.setOut(standardOut);
+		System.setErr(standardErr);
+		LOGGER.removeHandler(testLogHandler);
 		Real.scale = originalScale; // Restore original precision after each test
 	}
 
@@ -36,9 +50,11 @@ class TestCLICommands {
 		PrecisionCommand cmd = new PrecisionCommand();
 		boolean result = cmd.execute("15");
 
+		testLogHandler.flush();
+
 		assertTrue(result);
 		assertEquals(15, Real.scale);
-		assertTrue(outputStreamCaptor.toString().contains("Precision set to 15 decimal places."));
+		assertTrue(errStreamCaptor.toString().contains("Precision set to 15 decimal places."));
 	}
 
 	@Test
@@ -46,8 +62,10 @@ class TestCLICommands {
 		PrecisionCommand cmd = new PrecisionCommand();
 		boolean result = cmd.execute("abc");
 
+		testLogHandler.flush();
+
 		assertTrue(result);
-		assertTrue(outputStreamCaptor.toString().contains("Error: Invalid precision value. Usage: precision <number>"));
+		assertTrue(errStreamCaptor.toString().contains("Error: Invalid precision value. Usage: precision <number>"));
 	}
 
 	@Test
@@ -55,8 +73,10 @@ class TestCLICommands {
 		PrecisionCommand cmd = new PrecisionCommand();
 		boolean result = cmd.execute("-5");
 
+		testLogHandler.flush();
+
 		assertTrue(result);
-		assertTrue(outputStreamCaptor.toString().contains("Error: Precision must be a non-negative integer."));
+		assertTrue(errStreamCaptor.toString().contains("Error: Precision must be a non-negative integer."));
 	}
 
 	@Test
@@ -64,8 +84,10 @@ class TestCLICommands {
 		PrecisionCommand cmd = new PrecisionCommand();
 		boolean result = cmd.execute("");
 
+		testLogHandler.flush();
+
 		assertTrue(result);
-		assertTrue(outputStreamCaptor.toString().contains("Error: Missing arguments. Usage: precision <number>"));
+		assertTrue(errStreamCaptor.toString().contains("Error: Missing arguments. Usage: precision <number>"));
 	}
 
 	@Test

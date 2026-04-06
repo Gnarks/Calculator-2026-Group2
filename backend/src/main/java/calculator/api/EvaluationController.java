@@ -16,8 +16,8 @@ public class EvaluationController {
     }
 
     @PostMapping("/evaluate")
-    public EvaluationResponse evaluateExpression(@RequestBody ExpressionDTO expression) {
-        return evaluationService.evaluate(expression.getExpression());
+    public EvaluationResponse evaluateExpression(@RequestBody ExpressionDTO expressionDTO) {
+        return evaluationService.evaluate(expressionDTO.getExpression(), expressionDTO.getPrecision());
     }
 
 }

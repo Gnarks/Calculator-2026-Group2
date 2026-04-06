@@ -11,6 +11,8 @@ public class TestEvaluationService {
 
     private EvaluationService evaluationService;
 
+    private int precision = 64;
+
     @BeforeEach
     void setUp() {
         evaluationService = new EvaluationService();
@@ -18,14 +20,14 @@ public class TestEvaluationService {
 
     @Test
     void testNullArgs() {
-        EvaluationResponse response = evaluationService.evaluate(null);
+        EvaluationResponse response = evaluationService.evaluate(null, precision);
         assertEquals(0, response.getSuccess());
         assertEquals("", response.getResult());
     }
 
     @Test
     void testEmptyArgs() {
-        EvaluationResponse response = evaluationService.evaluate("");
+        EvaluationResponse response = evaluationService.evaluate("", precision);
         assertEquals(0, response.getSuccess());
         assertEquals("", response.getResult());
     }
@@ -33,7 +35,7 @@ public class TestEvaluationService {
     @Test
     void testInvalidOperation() {
         String request = "9/0";
-        EvaluationResponse response = evaluationService.evaluate(request);
+        EvaluationResponse response = evaluationService.evaluate(request, precision);
         assertEquals(0, response.getSuccess());
         assertEquals("", response.getResult());
     }
@@ -41,9 +43,17 @@ public class TestEvaluationService {
     @Test
     void testValidOperation() {
         String request = "(6 + 9 * 3)";
-        EvaluationResponse response = evaluationService.evaluate(request);
+        EvaluationResponse response = evaluationService.evaluate(request, precision);
         assertEquals(1, response.getSuccess());
         assertEquals("33", response.getResult());
+    }
+
+    @Test
+    void testNegativePrecision() {
+        String request = "(6 + 9 * 3)";
+        EvaluationResponse response = evaluationService.evaluate(request, -1);
+        assertEquals(0, response.getSuccess());
+        assertEquals("", response.getResult());
     }
 
 }

@@ -23,16 +23,7 @@ import visitor.Visitor;
 public class Real implements Atom {
 
 	public static int scale = 64;
-	public static MathContext context = new MathContext(scale + 1, RoundingMode.HALF_EVEN);
-
-	/**
-	 * Sets the precision (scale) for Real number calculations globally.
-	 * @param newScale The new scale to use.
-	 */
-	public static void setPrecision(int newScale) {
-		scale = newScale;
-		context = new MathContext(scale + 1, RoundingMode.HALF_EVEN);
-	}
+	final public static MathContext context = new MathContext(scale + 1, RoundingMode.HALF_EVEN);
 
 	/*
 	 * the actual Real value
@@ -255,5 +246,7 @@ public class Real implements Atom {
 	}
 
 	@Override
-	public String toString() { return value.stripTrailingZeros().toPlainString(); }
+	public String toString() {
+		return value.stripTrailingZeros().toPlainString();
+	}
 }

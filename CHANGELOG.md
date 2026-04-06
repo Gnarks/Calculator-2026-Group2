@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+- Difference between division and rational numbers
 
 ## [v2.0.0]
 

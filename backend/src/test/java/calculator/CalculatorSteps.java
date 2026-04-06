@@ -39,7 +39,7 @@ public class CalculatorSteps {
 				case "+" -> op = new Plus(params);
 				case "-" -> op = new Minus(params);
 				case "*" -> op = new Times(params);
-				case "/" -> op = new Divides(params);
+				case "//" -> op = new Divides(params);
 				case "**" -> op = new Power(params);
 				default -> fail();
 			}

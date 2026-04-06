@@ -88,8 +88,8 @@ atomIN
     | functionIN #INFunction
     ;
 
-// atoms being either complex numbers or numbers
-atom : complex #AtomComplex | number #AtomNumber ;
+// atoms being either complex numbers, rational numbers or numbers
+atom : complex #AtomComplex | rational #AtomRational | number #AtomNumber ;
 
 // any real number either being in the form of a constant (pi, e), a real (54.66) or in scientific notation (34.55E10) 
 number : constant #NumberConstant | real #NumberReal | scientific #NumberScientific ;
@@ -102,6 +102,9 @@ real : INT (DOT INT)? #RealNumber;
 
 // complex numbers are formed of numbers followed by i
 complex : number? (constant)* I #ComplexNumber;
+
+// rational numbers are two integer numbers separated by a fraction
+rational : INT FRACTION INT #RationalNumber;
 
 // constants : pi, e 
 constant : PI #ConstPi | EULER #ConstEuler ;
@@ -144,13 +147,14 @@ RPAR : ')' ;
 PLUS : '+' ;
 MINUS : '-' ;
 TIMES : '*' ;
-DIV : '/' ;
+DIV : '//' ;
 COMMA : ',' ;
 DOT : '.' ;
 POW : '**' ;
 PI : 'pi' ;
 EULER : 'e' ;
 I   : 'i' ;
+FRACTION : '/';
 
 
 INT :'0' .. '9'+ ;

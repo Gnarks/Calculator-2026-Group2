@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+## [v2.1.0]
+
+### Fixed
+- Difference between division and rational numbers (/ is for rationnals and // for the real division)
+
 ## [v2.0.0]
 
 ### Added

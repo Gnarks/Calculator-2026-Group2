@@ -31,7 +31,7 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to 35
 
   Scenario: Dividing two integer numbers
-    Given an integer operation '/'
+    Given an integer operation '//'
     When I provide a first number 7
     And I provide a second number 5
     Then the operation evaluates to 1
@@ -43,7 +43,7 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to the real number 9
 
   Scenario: Dividing a number by zero
-    Given an integer operation '/'
+    Given an integer operation '//'
     When I provide a first number 8
     And I provide a second number 0
     Then the operation throws an ArithmeticException
@@ -81,7 +81,7 @@ Feature: Integer Arithmetic Expressions
       |5|3|8|
 
   Scenario Outline: Dividing two integer numbers
-    Given an integer operation '/'
+    Given an integer operation '//'
     When I provide a first number <n1>
     And I provide a second number <n2>
     Then the operation evaluates to <result>
@@ -103,7 +103,7 @@ Feature: Integer Arithmetic Expressions
       | "+" | 4| 5|     9|
       | "-" | 8| 5|     3|
       | "*" | 7| 2|    14|
-      | "/" | 6| 2|     3|
+      | "//" | 6| 2|     3|
 
   Scenario: Adding two complex numbers
     Given an integer operation '+'
@@ -124,7 +124,7 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to the complex number -7.0 and 22.0i
 
   Scenario: Dividing two complex numbers
-    Given an integer operation '/'
+    Given an integer operation '//'
     When I provide a complex number 4.0 and 2.0i
     And I provide a complex number 1.0 and 1.0i
     Then the operation evaluates to the complex number 3.0 and -1.0i
@@ -148,7 +148,7 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to the complex number -7.0 and 22.0i
 
   Scenario: Dividing two complex numbers
-    Given an integer operation '/'
+    Given an integer operation '//'
     When I provide a complex number 4.0 and 2.0i
     And I provide a complex number 1.0 and 1.0i
     Then the operation evaluates to the complex number 3.0 and -1.0i
@@ -178,7 +178,7 @@ Scenario: Adding two rational numbers
     Then the operation evaluates to the rational number 1 / 2
 
   Scenario: Dividing two rational numbers
-    Given an integer operation "/"
+    Given an integer operation "//"
     When I provide a rational number 1 / 2
     And I provide a rational number 1 / 4
     Then the operation evaluates to the rational number 2 / 1
@@ -196,7 +196,7 @@ Scenario: Adding two rational numbers
     Then the operation evaluates to the rational number 1 / 1
 
   Scenario: Dividing a rational by zero
-    Given an integer operation "/"
+    Given an integer operation "//"
     When I provide a rational number 1 / 2
     And I provide a rational number 0 / 1
     Then the operation throws an ArithmeticException

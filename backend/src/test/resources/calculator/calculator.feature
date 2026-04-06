@@ -40,6 +40,7 @@ Feature: Integer Arithmetic Expressions
     Given an integer operation '**'
     When I provide a first number 3
     And I provide a first number 2
+    And I set the precision to 0
     Then the operation evaluates to the real number 9
 
   Scenario: Dividing a number by zero
@@ -187,7 +188,8 @@ Scenario: Adding two rational numbers
     Given an integer operation "**"
     When I provide a rational number 1 / 2
     And I provide a rational number 1 / 4
-    Then the operation evaluates to the real number 0.9
+    And I set the precision to 8
+    Then the operation evaluates to the real number 0.84089642
 
   Scenario: Automatic simplification of results
     Given an integer operation "+"
@@ -205,4 +207,5 @@ Scenario: Adding two rational numbers
     Given an integer operation "**"
     When I provide a real number 3.234
     And I provide a real number 2.67
-    Then the operation evaluates to the real number 23.1
+    And I set the precision to 8
+    Then the operation evaluates to the real number 22.96179533

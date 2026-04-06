@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestEvaluationService {
 
-    private EvaluationService evaluationService;
+    private final EvaluationService evaluationService = new EvaluationService();
 
     private final int precision = 64;
 
     @BeforeEach
     void setUp() {
-        evaluationService = new EvaluationService();
+        Real.scale = precision;
     }
 
     @Test

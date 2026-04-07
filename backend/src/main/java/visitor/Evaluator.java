@@ -7,6 +7,8 @@ import calculator.atoms.visitor.AtomCaster;
 import calculator.atoms.visitor.AtomComparator;
 import calculator.functions.BinaryFunction;
 import calculator.functions.UnaryFunction;
+import calculator.functions.RandomFunction;
+import calculator.functions.RandomGenerator;
 
 import java.util.ArrayList;
 
@@ -122,6 +124,47 @@ public class Evaluator extends Visitor {
 		secondValue = atomCaster.getResult();
 
 		computedValue = firstValue.apply(f, secondValue);
+	}
+
+	/**
+	 * Evaluates a {@code RandomFunction} node.
+	 * Random functions generate pseudorandom numbers based on given arguments (max bounds and/or a random seed).
+	 * If a seed is present, it is configured on the generator prior to evaluation.
+	 * 
+	 * @param f the {@code RandomFunction} node to be evaluated
+	 * @throws UnsupportedOperationException if any of the provided random function arguments do not evaluate to integers
+	 */
+	@Override
+	public void visit(RandomFunction f) {
+		long seed = 0;
+		int max = 0;
+		boolean useSeed = false;
+
+		// Extract arguments
+		for (int i = 0; i < f.getArgs().size(); i++) {
+			f.getArgs().get(i).accept(this);
+			Atom argValue = computedValue;
+			if (!(argValue instanceof IntegerAtom)) {
+				throw new UnsupportedOperationException("Random arguments must evaluate to an integer");
+			}
+			int val = ((IntegerAtom) argValue).getValue();
+
+			if (f.hasSeed() && i == 0) {
+				seed = val;
+				useSeed = true;
+			} else {
+				max = val;
+			}
+		}
+
+		RandomGenerator generator = useSeed ? new RandomGenerator(seed) : new RandomGenerator();
+
+		switch (f.getType()) {
+			case INTEGER -> computedValue = generator.generateInteger(max);
+			case RATIONNAL -> computedValue = generator.generateRational(max);
+			case REAL -> computedValue = generator.generateReal();
+			case COMPLEX -> computedValue = generator.generateComplex();
+		}
 	}
 
 }

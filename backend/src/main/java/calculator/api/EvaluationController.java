@@ -15,14 +15,14 @@ public class EvaluationController {
 		this.evaluationService = evaluationService;
 	}
 
-	@PostMapping("/evaluate")
-	public EvaluationResponse evaluateExpression(@RequestBody ExpressionDTO expression) {
-		return evaluationService.evaluate(expression.getExpression());
-	}
-
 	@GetMapping("/ping")
 	public String pong() {
 		return "pong";
+	}
+
+	@PostMapping("/evaluate")
+	public EvaluationResponse evaluateExpression(@RequestBody ExpressionDTO expressionDTO) {
+		return evaluationService.evaluate(expressionDTO.getExpression(), expressionDTO.getPrecision());
 	}
 
 }

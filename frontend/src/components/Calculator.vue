@@ -3,7 +3,15 @@
     <h1 class="title">Calculator</h1>
     
     <div id="calculator">
-      <input id="display" :value="display" readonly placeholder="0">
+      <div id="display">{{ display || '0' }}</div>
+
+      <div class="precision-wrapper">
+        <span>Precision: <strong>{{ precision }}</strong></span>
+        <div class="prec-controls">
+          <button @click="decreasePrecision" class="prec-btn">-</button>
+          <button @click="increasePrecision" class="prec-btn">+</button>
+        </div>
+      </div>
 
       <div class="scientific-keys">
         <button @click="appendToDisplay('sin(')" class="func-btn">sin</button>
@@ -67,6 +75,7 @@
           <ul>
             <li><strong>Operations:</strong> Enter your math expression (e.g., <code class="math-preview">cos(pi) + 3 * 5</code>) and press <span class="key-hint">=</span>.</li>
             <li><strong>Logarithm:</strong> <code class="math-preview">log</code> takes 2 parameters (e.g., <code class="math-preview">log(8, 2)</code>).</li>
+            <li><strong>Precision:</strong> Adjust the number of decimal places calculated by the server.</li>
             <li><strong>Editing:</strong> 
               <ul>
                 <li>Press <span class="key-hint">C</span> to clear the entire screen.</li>
@@ -89,6 +98,19 @@ import axios from 'axios';
 const display = ref('');
 const isHelpVisible = ref(false);
 const isResultState = ref(false);
+
+// default = 64
+const precision = ref(64);
+
+const increasePrecision = () => {
+  precision.value++;
+};
+
+const decreasePrecision = () => {
+  if (precision.value > 0) {
+    precision.value--;
+  }
+};
 
 const appendToDisplay = (value) => {
   if (isResultState.value) return; 
@@ -118,7 +140,8 @@ const calculate = async () => {
   try {
       const response = await axios.post('/api/evaluate',
     {
-      expression: display.value
+      expression: display.value,
+      precision: precision.value 
     },
     {
     headers: {
@@ -146,7 +169,8 @@ const calculate = async () => {
 	  try {
 	     const response = await axios.post('http://localhost:1523/api/evaluate',
 		   {
-			  expression: display.value
+			  expression: display.value,
+			  precision: precision.value 
 			},
 		);
 
@@ -213,11 +237,54 @@ const closeHelp = () => {
   background-color: #1a1a1a;
   color: white;
   border-radius: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   box-sizing: border-box;
   outline: none;
   user-select: none;
-  pointer-events: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-color: #4ade80 #1a1a1a;
+}
+
+.precision-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
+  padding: 8px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  color: #a1a1aa;
+  font-size: 0.9rem;
+}
+
+.precision-wrapper strong {
+  color: #4ade80;
+  font-size: 1.1rem;
+  margin-left: 5px;
+}
+
+.prec-controls {
+  display: flex;
+  gap: 10px;
+}
+
+#calculator .prec-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background-color: #3f3f46;
+  font-size: 1.2rem;
+  color: white;
+}
+
+#calculator .prec-btn:hover {
+  background-color: #52525b;
+}
+
+#calculator .prec-btn:active {
+  background-color: #4ade80;
+  color: #1a1a1a;
 }
 
 .scientific-keys {

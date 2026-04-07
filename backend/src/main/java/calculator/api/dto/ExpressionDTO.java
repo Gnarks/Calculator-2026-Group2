@@ -9,4 +9,6 @@ public class ExpressionDTO {
 
     private String expression;
 
+    private int precision;
+
 }

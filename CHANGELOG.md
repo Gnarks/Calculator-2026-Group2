@@ -4,13 +4,21 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-### Added
+## Added
+- precision command to set the precision of Real number calculations globally (for the CLI)
+- precision field to set the precision of Real number calculations globally (for the GUI)
 - DockerFile to run backend
 - DockerFile to run frontend
 - DockerCompose to run the backend and frontend and expose the application
 
 ### Changed
 - README: added information about the way to start the web-app with docker compose
+
+## [v2.1.0]
+
+### Fixed
+- Difference between division and rational numbers (/ is for rationnals and // for the real division)
+
 
 ## [v2.1.0]
 

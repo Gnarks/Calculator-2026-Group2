@@ -25,4 +25,9 @@ public class EvaluationController {
 		return evaluationService.evaluate(expressionDTO.getExpression(), expressionDTO.getPrecision());
 	}
 
+	@GetMapping("/random")
+	public EvaluationResponse getRandomNumber(@RequestParam() String type) {
+		return evaluationService.getRandomNumber(type);
+	}
+
 }

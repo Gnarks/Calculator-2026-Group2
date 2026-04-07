@@ -3,8 +3,7 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
-import java.beans.Transient;
-
+import calculator.atoms.Rationnal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -120,4 +119,14 @@ class TestParserVisitor {
         assertInstanceOf(Log.class, parser.parse("log(2, 10)"));
         assertInstanceOf(Power.class, parser.parse("2**3"));
     }
+
+    @Test
+    void testDifferentiateRationalAndDivision() {
+        assertInstanceOf(Rationnal.class, parser.parse("1/6"));
+        assertInstanceOf(Divides.class, parser.parse("1//6"));
+        Rationnal q = (Rationnal) parser.parse("1/6");
+        assertEquals(1, q.getNumerator());
+        assertEquals(6, q.getDenominator());
+    }
+
 }

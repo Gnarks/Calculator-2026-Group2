@@ -13,7 +13,7 @@ USAGE:
 
 AVAILABLE OPERATORS:
   +   Addition                 -   Subtraction
-  *   Multiplication           /   Division
+  *   Multiplication           //   Division
   **  Power
 
 AVAILABLE FUNCTIONS:

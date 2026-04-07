@@ -70,7 +70,7 @@ class TestCounting {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "*", "+", "/", "-" })
+	@ValueSource(strings = { "*", "+", "//", "-" })
 	void testOperationCounting(String symbol) {
 		List<Expression> params = Arrays.asList(new Real(value1), new Real(value2));
 		try {
@@ -80,7 +80,7 @@ class TestCounting {
 				case "+" -> e = new Plus(params);
 				case "-" -> e = new Minus(params);
 				case "*" -> e = new Times(params);
-				case "/" -> e = new Divides(params);
+				case "//" -> e = new Divides(params);
 				default -> fail();
 			}
 		} catch (IllegalConstruction _) {

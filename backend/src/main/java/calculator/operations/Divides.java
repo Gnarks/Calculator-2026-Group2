@@ -11,7 +11,7 @@ import calculator.atoms.Rationnal;
 import calculator.atoms.Real;
 
 /**
- * This class represents the arithmetic division operation "/".
+ * This class represents the arithmetic division operation "//".
  * The class extends an abstract superclass Operation.
  * Other subclasses of Operation represent other arithmetic operations.
  * 
@@ -32,7 +32,7 @@ public final class Divides extends Operation {
 	 */
 	public Divides(List<Expression> elist) throws IllegalConstruction {
 		super(elist);
-		symbol = "/";
+		symbol = "//";
 		neutral = 1;
 	}
 

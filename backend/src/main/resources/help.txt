@@ -22,6 +22,14 @@ AVAILABLE FUNCTIONS:
   sinh(x), cosh(x), tanh(x)    Hyperbolic functions
   ln(x), log(x)                Natural and base-10 logarithms
   sqrt(x)                      Square root
+  randint(max)                 Random integer in [0, max]
+  randint(seed, max)           Same with deterministic seed as first argument
+  randrat(max)                 Random rational a/b with a in [0, max] and b in [1, max]
+  randrat(seed, max)           Same with deterministic seed as first argument
+  randreal()                   Random real in [0, 1]
+  randreal(seed)               Same with deterministic seed as first argument
+  randcomplex()                Random complex a + ib with a,b in [0, 1]
+  randcomplex(seed)            Same with deterministic seed as first argument
 
 CONSTANTS & NUMBERS:
   pi                           Archimedes' constant (3.1415...)

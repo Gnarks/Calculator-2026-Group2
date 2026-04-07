@@ -57,4 +57,11 @@ public abstract class Visitor {
 	 * @param f The binary function being visited
 	 */
 	public abstract void visit(BinaryFunction f);
+
+	/**
+	 * The Visitor can traverse a random function (a subtype of Expression)
+	 *
+	 * @param f The random function being visited
+	 */
+	public abstract void visit(RandomFunction f);
 }

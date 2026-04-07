@@ -43,6 +43,51 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     private Expression buildFunction(String funcName, List<Expression> args) {
+        if ("randint".equals(funcName)) {
+            if (args.size() == 1) {
+                return RandomFunction.randomInteger(args.get(0));
+            }
+            if (args.size() == 2) {
+                return RandomFunction.randomInteger(args.get(0), args.get(1));
+            }
+            throw new UnsupportedOperationException("Invalid number of arguments for function " + funcName + ": " + args.size());
+        }
+
+        if ("randrat".equals(funcName)) {
+            if (args.size() == 1) {
+                return RandomFunction.randomRational(args.get(0));
+            }
+            if (args.size() == 2) {
+                return RandomFunction.randomRational(args.get(0), args.get(1));
+            }
+            throw new UnsupportedOperationException("Invalid number of arguments for function " + funcName + ": " + args.size());
+        }
+
+        if ("randreal".equals(funcName)) {
+            if (args.isEmpty()) {
+                return RandomFunction.randomReal();
+            }
+            if (args.size() == 1) {
+                return RandomFunction.randomReal(args.get(0));
+            }
+            throw new UnsupportedOperationException("Invalid number of arguments for function " + funcName + ": " + args.size());
+        }
+
+        if ("randcomplex".equals(funcName)) {
+            if (args.isEmpty()) {
+                return RandomFunction.randomComplex();
+            }
+            if (args.size() == 1) {
+                return RandomFunction.randomComplex(args.get(0));
+            }
+            throw new UnsupportedOperationException("Invalid number of arguments for function " + funcName + ": " + args.size());
+        }
+
+        if (args.isEmpty()) {
+            throw new UnsupportedOperationException(
+                    "Invalid number of arguments for function " + funcName + ": " + args.size());
+        }
+
         if (args.size() == 1) {
             Expression arg = args.get(0);
             try {
@@ -473,7 +518,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     /**
-     * Rule: functionIN : funcname LPAR expressionIN (COMMA expressionIN)* RPAR #InfixFunctionCall
+     * Rule: functionIN : funcname LPAR (expressionIN (COMMA expressionIN)*)? RPAR #InfixFunctionCall
      */
     @Override
     public Expression visitInfixFunctionCall(InfixFunctionCallContext ctx) {

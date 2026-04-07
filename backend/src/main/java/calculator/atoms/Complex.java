@@ -108,6 +108,24 @@ public class Complex implements Atom {
 	}
 
 	@Override
-	public String toString() {return value.toString(); }
+	public String toString() {
+		double realPart = value.getReal();
+		double imaginaryPart = value.getImaginary();
+
+		if (realPart == 0 && imaginaryPart == 0)
+			return "0";
+
+		if (realPart == 0)
+			return imaginaryPart + "i";
+
+		if (imaginaryPart == 0)
+			return String.valueOf(realPart);
+		
+		if (imaginaryPart > 0) {
+			return realPart + " + " + imaginaryPart + "i";
+		} else {
+			return realPart + " - " + Math.abs(imaginaryPart) + "i";
+		}
+	}
 
 }

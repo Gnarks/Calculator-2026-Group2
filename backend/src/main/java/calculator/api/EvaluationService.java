@@ -49,7 +49,7 @@ public class EvaluationService {
         if(max <= 0)
             return new EvaluationResponse(0, "");
         String random;
-        RandomGenerator generator = seed == null ? new RandomGenerator() : new RandomGenerator(seed);
+        RandomGenerator generator = (seed == null) ? new RandomGenerator() : new RandomGenerator(seed);
         switch (type) {
             case INTEGER -> random = generator.generateInteger(max).toString();
             case RATIONNAL -> random = generator.generateRational(max).toString();

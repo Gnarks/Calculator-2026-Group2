@@ -2,11 +2,12 @@ package calculator;
 
 import calculator.api.EvaluationService;
 import calculator.api.dto.EvaluationResponse;
+import calculator.atoms.AtomType;
 import calculator.atoms.Real;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestEvaluationService {
 
@@ -63,6 +64,65 @@ public class TestEvaluationService {
         String request = "(6 + 9 * 3)";
         evaluationService.evaluate(request, 15);
         assertEquals(15, Real.scale);
+    }
+
+    @Test
+    void testGenerateRandomInteger() {
+        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.INTEGER, 100, null);
+        assertEquals(1, random.getSuccess());
+        assertDoesNotThrow(() -> Integer.parseInt(random.getResult()));
+    }
+
+    @Test
+    void testGenerateRandomRational() {
+        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.RATIONNAL, 100, null);
+        assertEquals(1, random.getSuccess());
+        assertTrue(random.getResult().contains("/"));
+    }
+
+    @Test
+    void testGenerateRandomReal() {
+        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.REAL, 1, null);
+        assertEquals(1, random.getSuccess());
+        assertTrue(random.getResult().contains("."));
+    }
+
+    @Test
+    void testGenerateRandomComplex() {
+        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.COMPLEX, 1, null);
+        assertEquals(1, random.getSuccess());
+        assertTrue(random.getResult().contains("i"));
+    }
+
+    @Test
+    void testSameSeedProduceSameResult() {
+        EvaluationResponse randomOne = evaluationService.getRandomNumber(AtomType.INTEGER, 1000, 222333L);
+        EvaluationResponse randomTwo = evaluationService.getRandomNumber(AtomType.INTEGER, 1000, 222333L);
+        assertEquals(1, randomOne.getSuccess(), randomTwo.getSuccess());
+        assertEquals(randomOne.getResult(), randomTwo.getResult());
+    }
+
+    @Test
+    void testDiffSeedProduceDiffResult() {
+        EvaluationResponse randomOne = evaluationService.getRandomNumber(AtomType.INTEGER, 1000, 222333L);
+        EvaluationResponse randomTwo = evaluationService.getRandomNumber(AtomType.INTEGER, 1000, 333222L);
+        assertEquals(1, randomOne.getSuccess(), randomTwo.getSuccess());
+        assertNotEquals(randomOne.getResult(), randomTwo.getResult());
+    }
+
+    @Test
+    void testNegativeMax_invalidRequest() {
+        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.INTEGER, -1, null);
+        assertEquals(0, random.getSuccess());
+        assertEquals("", random.getResult());
+    }
+
+    @Test
+    void testRandomLessThanMax() {
+        int max = 2;
+        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.INTEGER, max, null);
+        int result = Integer.parseInt(random.getResult());
+        assertTrue(result <= max && result >= 0);
     }
 
 }

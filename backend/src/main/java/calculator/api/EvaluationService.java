@@ -45,16 +45,12 @@ public class EvaluationService {
      * @param max the maximum value possible to generate
      * @return a structure containing a string representation of the random number and a success code
      */
-    public EvaluationResponse getRandomNumber(String type, int max) {
-        AtomType atomType;
-        try {
-            atomType = AtomType.valueOf(type.toUpperCase());
-        } catch (IllegalArgumentException e) {
+    public EvaluationResponse getRandomNumber(AtomType type, int max, Long seed) {
+        if(max <= 0)
             return new EvaluationResponse(0, "");
-        }
         String random;
-        RandomGenerator generator = new RandomGenerator();
-        switch (atomType) {
+        RandomGenerator generator = seed == null ? new RandomGenerator() : new RandomGenerator(seed);
+        switch (type) {
             case INTEGER -> random = generator.generateInteger(max).toString();
             case RATIONNAL -> random = generator.generateRational(max).toString();
             case REAL -> random = generator.generateReal().toString();

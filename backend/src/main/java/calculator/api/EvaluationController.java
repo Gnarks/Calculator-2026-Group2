@@ -2,6 +2,7 @@ package calculator.api;
 
 import calculator.api.dto.EvaluationResponse;
 import calculator.api.dto.ExpressionDTO;
+import calculator.atoms.AtomType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,8 +27,9 @@ public class EvaluationController {
 	}
 
 	@GetMapping("/random")
-	public EvaluationResponse getRandomNumber(@RequestParam() String type, @RequestParam() int max) {
-		return evaluationService.getRandomNumber(type, max);
+	public EvaluationResponse getRandomNumber(@RequestParam() AtomType type, @RequestParam() int max,
+											  @RequestParam(required = false) Long seed) {
+		return evaluationService.getRandomNumber(type, max, seed);
 	}
 
 }

@@ -119,8 +119,8 @@ public class Complex implements Atom {
 			return imaginaryPart + "i";
 
 		if (imaginaryPart == 0)
-			return String.valueOf(realPart);
-		
+			return String.valueOf(realPart).;
+
 		if (imaginaryPart > 0) {
 			return realPart + " + " + imaginaryPart + "i";
 		} else {

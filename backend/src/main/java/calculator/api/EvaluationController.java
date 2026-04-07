@@ -26,8 +26,8 @@ public class EvaluationController {
 	}
 
 	@GetMapping("/random")
-	public EvaluationResponse getRandomNumber(@RequestParam() String type) {
-		return evaluationService.getRandomNumber(type);
+	public EvaluationResponse getRandomNumber(@RequestParam() String type, @RequestParam() int max) {
+		return evaluationService.getRandomNumber(type, max);
 	}
 
 }

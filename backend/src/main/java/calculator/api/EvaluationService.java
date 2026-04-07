@@ -8,6 +8,8 @@ import calculator.api.dto.ExpressionDTO;
 import calculator.atoms.Atom;
 import calculator.atoms.AtomType;
 import calculator.atoms.Real;
+import calculator.functions.RandomFunction;
+import calculator.functions.RandomGenerator;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,12 +38,14 @@ public class EvaluationService {
     }
 
     /**
-     * Generates a random number of the given type
+     * Generates a random number of the given type, with a maximum value in some cases.
+     * The maximum value is used when generating an integer or a rational number.
      *
-     * @param type the type of number to generate
+     * @param type the type of number to generate.
+     * @param max the maximum value possible to generate
      * @return a structure containing a string representation of the random number and a success code
      */
-    public EvaluationResponse getRandomNumber(String type) {
+    public EvaluationResponse getRandomNumber(String type, int max) {
         AtomType atomType;
         try {
             atomType = AtomType.valueOf(type.toUpperCase());
@@ -49,11 +53,12 @@ public class EvaluationService {
             return new EvaluationResponse(0, "");
         }
         String random;
+        RandomGenerator generator = new RandomGenerator();
         switch (atomType) {
-            case INTEGER -> random = "";
-            case RATIONNAL -> random = "";
-            case REAL -> random = "";
-            case COMPLEX -> random = "";
+            case INTEGER -> random = generator.generateInteger(max).toString();
+            case RATIONNAL -> random = generator.generateRational(max).toString();
+            case REAL -> random = generator.generateReal().toString();
+            case COMPLEX -> random = generator.generateComplex().toString();
             default -> {
                 return new EvaluationResponse(0, "");
             }

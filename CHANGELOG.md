@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## Added
+- precision command to set the precision of Real number calculations globally (for the CLI)
+- precision field to set the precision of Real number calculations globally (for the GUI)
+
+
+## [v2.1.0]
+
+### Fixed
+- Difference between division and rational numbers (/ is for rationnals and // for the real division)
 
 ## [v2.0.0]
 

@@ -19,7 +19,7 @@ public class CalculatorSteps {
 	private Operation op;
 	private Calculator c;
 
-	@Before
+    @Before
 	public void resetMemoryBeforeEachScenario() {
 		params = null;
 		op = null;
@@ -196,4 +196,8 @@ public class CalculatorSteps {
 		assertThrows(ArithmeticException.class, () -> c.eval(op));
 	}
 
+	@When("I set the precision to {int}")
+	public void whenISetThePrecision(int precision) {
+		Real.scale = precision;
+	}
 }

@@ -128,7 +128,7 @@ class TestEvaluator {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "*", "+", "/", "-" })
+	@ValueSource(strings = { "*", "+", "//", "-" })
 	void testEvaluateOperations(String symbol) {
 		List<Expression> params = Arrays.asList(new Real(value1), new Real(value2));
 		try {
@@ -138,7 +138,7 @@ class TestEvaluator {
 				case "+" -> assertEquals(new Real(value1 + value2), calc.eval(new Plus(params)));
 				case "-" -> assertEquals(new Real(value1 - value2), calc.eval(new Minus(params)));
 				case "*" -> assertEquals(new Real(value1 * value2), calc.eval(new Times(params)));
-				case "/" ->
+				case "//" ->
 					assertEquals(new Real(new BigDecimal(value1).divide(new BigDecimal(value2), Real.context)),
 							calc.eval(new Divides(params)));
 				default -> fail();
@@ -154,7 +154,7 @@ class TestEvaluator {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "*", "+", "/", "-" })
+	@ValueSource(strings = { "*", "+", "//", "-" })
 	void testEvaluateComplexOperations(String symbol) {
 		// value1 = 8, value2 = 6
 		Complex c1 = new Complex(value1, value2); // 8 + 6i
@@ -165,7 +165,7 @@ class TestEvaluator {
 				case "+" -> assertEquals(new Complex(14, 14), calc.eval(new Plus(params)));
 				case "-" -> assertEquals(new Complex(2, -2), calc.eval(new Minus(params)));
 				case "*" -> assertEquals(new Complex(0, 100), calc.eval(new Times(params)));
-				case "/" -> assertEquals(new Complex(0.96, -0.28), calc.eval(new Divides(params)));
+				case "//" -> assertEquals(new Complex(0.96, -0.28), calc.eval(new Divides(params)));
 				default -> fail();
 			}
 		} catch (IllegalConstruction e) {
@@ -179,7 +179,7 @@ class TestEvaluator {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "*", "+", "/", "-" })
+	@ValueSource(strings = { "*", "+", "//", "-" })
 	void testEvaluateRationnalOperations(String symbol) {
 		// value1 = 8, value2 = 6
 		Rationnal q1 = new Rationnal(value1, value2); // equal to 8/6 = 4/3
@@ -190,7 +190,7 @@ class TestEvaluator {
 				case "+" -> assertEquals(new Rationnal(25, 12), calc.eval(new Plus(params)));
 				case "-" -> assertEquals(new Rationnal(7, 12), calc.eval(new Minus(params)));
 				case "*" -> assertEquals(new Rationnal(1, 1), calc.eval(new Times(params)));
-				case "/" -> assertEquals(new Rationnal(16, 9), calc.eval(new Divides(params)));
+				case "//" -> assertEquals(new Rationnal(16, 9), calc.eval(new Divides(params)));
 				default -> fail();
 			}
 		} catch (IllegalConstruction e) {

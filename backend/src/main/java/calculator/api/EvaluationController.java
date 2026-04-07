@@ -9,15 +9,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class EvaluationController {
 
-    private final EvaluationService evaluationService;
+	private final EvaluationService evaluationService;
 
-    public EvaluationController(EvaluationService evaluationService) {
-        this.evaluationService = evaluationService;
-    }
+	public EvaluationController(EvaluationService evaluationService) {
+		this.evaluationService = evaluationService;
+	}
 
-    @PostMapping("/evaluate")
-    public EvaluationResponse evaluateExpression(@RequestBody ExpressionDTO expression) {
-        return evaluationService.evaluate(expression.getExpression());
-    }
+	@GetMapping("/ping")
+	public String pong() {
+		return "pong";
+	}
+
+	@PostMapping("/evaluate")
+	public EvaluationResponse evaluateExpression(@RequestBody ExpressionDTO expressionDTO) {
+		return evaluationService.evaluate(expressionDTO.getExpression(), expressionDTO.getPrecision());
+	}
 
 }

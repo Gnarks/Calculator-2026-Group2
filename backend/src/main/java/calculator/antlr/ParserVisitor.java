@@ -11,6 +11,7 @@ import calculator.calculatorBaseVisitor;
 import calculator.calculatorParser.*;
 import calculator.functions.*;
 import calculator.operations.*;
+import org.apache.commons.numbers.fraction.Fraction;
 
 /**
  * Builds Expression objects from the ANTLR parse tree.
@@ -29,7 +30,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
                     return new Minus(args);
                 case "*":
                     return new Times(args);
-                case "/":
+                case "//":
                     return new Divides(args);
                 case "**":
                     return new Power(args);
@@ -411,6 +412,12 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     /**
+     * Rule atom : rational #AtomRational
+     */
+    @Override
+    public Expression visitAtomRational(AtomRationalContext ctx) { return visit(ctx.rational()); }
+
+    /**
      * Rule: atom : number #AtomNumber
      */
     @Override
@@ -482,6 +489,16 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
             return factors.get(0);
         }
         return buildOperation("*", factors);
+    }
+
+    /**
+     * Rule : rational : INT FRACTION INT #RationalNumber;
+     */
+    @Override
+    public Expression visitRationalNumber(RationalNumberContext ctx) {
+        int num = Integer.parseInt(ctx.INT(0).getText());
+        int denom = Integer.parseInt(ctx.INT(1).getText());
+        return new Rationnal(Fraction.of(num, denom));
     }
 
     /**

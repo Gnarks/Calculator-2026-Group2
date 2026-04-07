@@ -9,10 +9,11 @@ USAGE:
   calc> eval <expression>     (Same as above)
   calc> help                  Displays this help message.
   calc> exit                  Exits the calculator.
+  calc> precision <number>    Set the precision (for reals) to <number> digits after the comma
 
 AVAILABLE OPERATORS:
   +   Addition                 -   Subtraction
-  *   Multiplication           /   Division
+  *   Multiplication           //   Division
   **  Power
 
 AVAILABLE FUNCTIONS:

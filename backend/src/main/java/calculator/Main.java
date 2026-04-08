@@ -4,6 +4,7 @@ import calculator.command.CLICommand;
 import calculator.command.EvalCommand;
 import calculator.command.ExitCommand;
 import calculator.command.HelpCommand;
+import calculator.command.PrecisionCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,7 @@ public class Main {
         commands.put("help", new HelpCommand());
         commands.put("exit", new ExitCommand());
         commands.put("eval", new EvalCommand());
+        commands.put("precision", new PrecisionCommand());
 
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to the Calculator! Type 'help' for assistance.");

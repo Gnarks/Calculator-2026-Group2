@@ -23,12 +23,12 @@ public class TestEvaluationController {
     private EvaluationService evaluationService;
 
     @Test
-    void greetingShouldReturnMessageFromService() throws Exception {
+    void testResponseFromService() throws Exception {
         EvaluationResponse response = new EvaluationResponse(1, "25");
-        when(evaluationService.evaluate("5*5")).thenReturn(response);
+        when(evaluationService.evaluate("5*5", 64)).thenReturn(response);
         mockMvc.perform(post("/api/evaluate")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"expression\":\"5*5\"}"))
+                        .content("{\"expression\":\"5*5\", \"precision\":64}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result").value("25"))
                 .andExpect(jsonPath("$.success").value("1"));

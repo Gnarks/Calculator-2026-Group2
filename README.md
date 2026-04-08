@@ -18,6 +18,9 @@ Test coverage:
 A report of the code quality, test coverage, BDD tests, and units test can be found at :
 [This repository GitHub Pages](https://gnarks.github.io/Calculator-2026-Group2/)
 
+The production site can be found at :  
+[This link](https://calculator.barathaba.space/)
+
 
 ## About
 
@@ -42,6 +45,8 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 
 *  You will need to have a running version of Java 25 on your machine in order to be able to compile and execute this code, although it is also backward compatible with earlier versions of Java.
 *  You will need to have a running version of Maven, since this project is accompanied by a pom.xml file so that it can be installed, compiled, tested and run using Maven.
+* You will need to have docker and docker-compose installed for the Server + API
+* Also for the Server + API to work you would need a dockerized reverse proxy on network "proxy" and a configuration using ssl and mapping /api to "http://backend:1523"
 
 ### Installation and testing instructions
 
@@ -50,6 +55,16 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 *  Once the code is compiled, you can execute the main class of the Java code using "mvn exec:java" 
 *  The tests and BDD scenarios are executable with Maven using "mvn test"
 *  Note that the tests are also executed when you do a "mvn install". It is possible to skip those tests by providing an extra parameter. For details of more advanced uses of Maven, please refer to its official documentation https://maven.apache.org/guides/.
+
+### Running the server with its API in production
+
+* After setting up the reverse proxy defines in Prerequisites
+* Simply enter `docker compose up` (with `-d` to detach from the logs) to run the application on http://yourpath.yourdomain
+
+### Running the server with its API in dev
+
+* run the backend by going to the backend directory and entering `mvn spring-boot:run`
+* run the frontend by goind to the frontend directory and entering `npm run dev`
 
 ### Test coverage and JavaDoc reporting
 
@@ -63,6 +78,7 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 *  [Cucumber](https://cucumber.io/docs/cucumber/) - a tool for Behaviour-Driven Development
 *  [JaCoCo](https://www.jacoco.org) - a code coverage library for Java
 *  [JavaDoc](https://docs.oracle.com/en/java/javase/21/javadoc/javadoc.html) - a code documentation tool for Java
+
 
 ## Frontend web interface 
 To launch the web interface, navigate to the frontend directory with `cd frontend` and run the command `npm run dev` to start the development server.

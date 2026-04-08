@@ -27,11 +27,11 @@ public class Evaluator extends Visitor {
 
 	/**
 	 * Default constructor of the class.
-	 * Initializes the angleMode to the default value DEG.
+	 * Initializes the angleMode to the default value RAD.
 	 *
 	 */
 	public Evaluator() {
-		this(AngleMode.DEG);
+		this(AngleMode.RAD);
 	}
 
 	/**

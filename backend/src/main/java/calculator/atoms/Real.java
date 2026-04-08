@@ -11,6 +11,7 @@ import calculator.operations.Operation;
 import calculator.atoms.visitor.AtomVisitor;
 import calculator.functions.BinaryFunction;
 import calculator.functions.UnaryFunction;
+import ch.obermuhlner.math.big.BigDecimalMath;
 import visitor.Visitor;
 
 /**
@@ -248,5 +249,19 @@ public class Real implements Atom {
 	@Override
 	public String toString() {
 		return value.stripTrailingZeros().toPlainString();
+	}
+
+	@Override
+	public Atom toRadian() {
+		BigDecimal pi = BigDecimalMath.pi(Real.context);
+		BigDecimal val = getValue().multiply(pi).divide(BigDecimal.valueOf(180), Real.context);
+		return new Real(val);
+	}
+
+	@Override
+	public Atom toDegree() {
+		BigDecimal pi = BigDecimalMath.pi(Real.context);
+		BigDecimal val = getValue().multiply(BigDecimal.valueOf(180)).divide(pi, Real.context);
+		return new Real(val);
 	}
 }

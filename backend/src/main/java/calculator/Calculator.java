@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.atoms.AngleMode;
 import calculator.atoms.Atom;
 import visitor.Counter;
 import visitor.Evaluator;
@@ -12,6 +13,8 @@ import visitor.Printer;
  * @author tommens
  */
 public class Calculator {
+
+	public static AngleMode mode = AngleMode.DEG;
 
 	/**
 	 * Default constructor of the class.

@@ -5,11 +5,22 @@
     <div id="calculator">
       <div id="display">{{ display || '0' }}</div>
 
-      <div class="precision-wrapper">
-        <span>Precision: <strong>{{ precision }}</strong></span>
-        <div class="prec-controls">
-          <button @click="decreasePrecision" class="prec-btn">-</button>
-          <button @click="increasePrecision" class="prec-btn">+</button>
+      <div class="settings-row">
+        <div class="angle-wrapper">
+          <label>
+            <input type="radio" value="RAD" v-model="angleMode" @change="updateAngleMode"> RAD
+          </label>
+          <label>
+            <input type="radio" value="DEG" v-model="angleMode" @change="updateAngleMode"> DEG
+          </label>
+        </div>
+
+        <div class="precision-wrapper">
+          <span>Precision: <strong>{{ precision }}</strong></span>
+          <div class="prec-controls">
+            <button @click="decreasePrecision" class="prec-btn">-</button>
+            <button @click="increasePrecision" class="prec-btn">+</button>
+          </div>
         </div>
       </div>
 
@@ -102,6 +113,39 @@ const isResultState = ref(false);
 // default = 64
 const precision = ref(64);
 
+// default mode angle : RAD
+const angleMode = ref('RAD');
+
+const updateAngleMode = async () => {
+  const payload = JSON.stringify(angleMode.value);
+
+  // if in production : request on /api
+  if (import.meta.env.PROD) {
+    try {
+      await axios.post('/api/setAngleMode', payload, {
+        headers: {
+          scheme: 'https',
+          'Content-Type': 'application/json'
+        }
+      });
+    } catch (error) {
+      console.error("Impossible to reach server", error);
+    }
+  }
+  // otherwise (in dev) request on localhost without https
+  else {
+    try {
+      await axios.post('http://localhost:1523/api/setAngleMode', payload, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } catch (error) {
+      console.error("Impossible to reach server", error);
+    }
+  }
+};
+
 const increasePrecision = () => {
   precision.value++;
 };
@@ -134,62 +178,62 @@ const deleteLast = () => {
 const calculate = async () => {
   if (!display.value || display.value === 'Error') return;
 
-	// if in production : request on /api
-	if (import.meta.env.PROD){
+  // if in production : request on /api
+  if (import.meta.env.PROD){
 	  
-  try {
+    try {
       const response = await axios.post('/api/evaluate',
-    {
-      expression: display.value,
-      precision: precision.value 
-    },
-    {
-    headers: {
-         scheme: 'https'
+      {
+        expression: display.value,
+        precision: precision.value 
+      },
+      {
+        headers: {
+          scheme: 'https'
     }}
 );
 
-    if (response.data.success === 1) {
-      display.value = response.data.result.toString();
-      isResultState.value = true; 
-    } else {
-      display.value = 'Error';
-      isResultState.value = false;
-      console.warn("error :", response.data.result);
-    }
+      if (response.data.success === 1) {
+        display.value = response.data.result.toString();
+        isResultState.value = true; 
+      } else {
+        display.value = 'Error';
+        isResultState.value = false;
+        console.warn("error :", response.data.result);
+      }
 
-  } catch (error) {
-    alert("Impossible to reach server. Please try again later");
-    display.value = 'Error';
-    console.error(error);
+    } catch (error) {
+      alert("Impossible to reach server. Please try again later");
+      display.value = 'Error';
+      console.error(error);
+    }
   }
-	}
-	// otherwise (in dev) request on localhost without https
-	else {
-	  try {
-	     const response = await axios.post('http://localhost:1523/api/evaluate',
-		   {
-			  expression: display.value,
-			  precision: precision.value 
+  // otherwise (in dev) request on localhost without https
+  else {
+    try {
+       const response = await axios.post('http://localhost:1523/api/evaluate',
+       {
+        expression: display.value,
+        precision: precision.value 
 			},
 		);
 
-    if (response.data.success === 1) {
-      display.value = response.data.result.toString();
-      isResultState.value = true; 
-    } else {
+      if (response.data.success === 1) {
+        display.value = response.data.result.toString();
+        isResultState.value = true; 
+      } else {
+        display.value = 'Error';
+        isResultState.value = false;
+        console.warn("error :", response.data.result);
+      }
+
+
+    } catch (error) {
+      alert("Impossible to reach server. Please try again later");
       display.value = 'Error';
-      isResultState.value = false;
-      console.warn("error :", response.data.result);
-    }
-
-
-		} catch (error) {
-		alert("Impossible to reach server. Please try again later");
-		display.value = 'Error';
-		console.error(error);
-		}   
-	}
+      console.error(error);
+    }   
+  }
 };
 
 const showHelp = () => {
@@ -246,12 +290,42 @@ const closeHelp = () => {
   scrollbar-color: #4ade80 #1a1a1a;
 }
 
+.settings-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.angle-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #1a1a1a;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #a1a1aa;
+  font-size: 0.9rem;
+  gap: 10px;
+}
+
+.angle-wrapper label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.angle-wrapper input[type="radio"] {
+  accent-color: #4ade80;
+  cursor: pointer;
+  margin: 0;
+}
+
 .precision-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #1a1a1a;
-  padding: 8px 15px;
+  padding: 8px 12px;
   border-radius: 8px;
   margin-bottom: 20px;
   color: #a1a1aa;

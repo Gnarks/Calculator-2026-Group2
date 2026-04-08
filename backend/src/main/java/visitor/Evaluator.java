@@ -116,9 +116,11 @@ public class Evaluator extends Visitor {
 
 	@Override
 	public void visit(UnaryFunction o) {
-		if(isFunctionTrigo(o))
 		o.getArg().accept(this);
-		computedValue = computedValue.apply(o);
+		Atom converted = null;
+		if(isFunctionTrigo(o) && angleMode == AngleMode.DEG)
+			converted = computedValue.toRadian();
+		computedValue = (converted == null) ? computedValue.apply(o) : converted.apply(o);
 	}
 
 	private boolean isFunctionTrigo(UnaryFunction f) {

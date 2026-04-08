@@ -1,7 +1,7 @@
 package calculator.atoms;
 
 /**
- * Enumeration of the ways to represent angles.
+ * Enumeration of the representations of angles.
  *
  */
 public enum AngleMode {

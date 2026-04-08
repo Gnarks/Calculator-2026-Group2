@@ -20,7 +20,7 @@ public class Evaluator extends Visitor {
 
 	/**
 	 * The angle representation, can either be DEG or RAD.
-	 * Is used for the sin, cos, tan, asin, acos and atan functions.
+	 * Is used for the sin, cos and tan functions.
 	 *
 	 */
 	private final AngleMode angleMode;

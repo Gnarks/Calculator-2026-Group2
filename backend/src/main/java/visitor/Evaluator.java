@@ -23,7 +23,7 @@ public class Evaluator extends Visitor {
 	 * Is used for the sin, cos, tan, asin, acos and atan functions.
 	 *
 	 */
-	private AngleMode angleMode;
+	private final AngleMode angleMode;
 
 	/**
 	 * Default constructor of the class.

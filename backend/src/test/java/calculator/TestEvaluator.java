@@ -2,6 +2,8 @@ package calculator;
 
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.atoms.AngleMode;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -193,6 +195,48 @@ class TestEvaluator {
 				case "//" -> assertEquals(new Rationnal(16, 9), calc.eval(new Divides(params)));
 				default -> fail();
 			}
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testSinWithDiffModes() {
+		Real.scale = 8;
+		Calculator.mode = AngleMode.RAD;
+		Real r = new Real(Math.PI);
+		try {
+			assertEquals(new Real(0), calc.eval(new Sinus(r)));
+			Calculator.mode = AngleMode.DEG;
+			assertEquals(new Real(0.05480367), calc.eval(new Sinus(r)));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testCosWithDiffModes() {
+		Real.scale = 8;
+		Calculator.mode = AngleMode.RAD;
+		Real r = new Real(225);
+		try {
+			assertEquals(new Real(0.36731937), calc.eval(new Cosinus(r)));
+			Calculator.mode = AngleMode.DEG;
+			assertEquals(new Real(-0.70710678), calc.eval(new Cosinus(r)));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testTanWithDiffModes() {
+		Real.scale = 8;
+		Calculator.mode = AngleMode.RAD;
+		Real r = new Real(300);
+		try {
+			assertEquals(new Real(45.24474207), calc.eval(new Tangente(r)));
+			Calculator.mode = AngleMode.DEG;
+			assertEquals(new Real(-1.73205079), calc.eval(new Tangente(r)));
 		} catch (IllegalConstruction e) {
 			fail();
 		}

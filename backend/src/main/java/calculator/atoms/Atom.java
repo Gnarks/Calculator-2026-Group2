@@ -56,5 +56,4 @@ public interface Atom extends Expression {
 
 	public Atom toRadian();
 
-	public Atom toDegree();
 }

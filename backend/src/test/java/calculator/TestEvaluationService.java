@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.api.EvaluationService;
 import calculator.api.dto.EvaluationResponse;
+import calculator.atoms.AngleMode;
 import calculator.atoms.Real;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,6 +64,13 @@ public class TestEvaluationService {
         String request = "(6 + 9 * 3)";
         evaluationService.evaluate(request, 15);
         assertEquals(15, Real.scale);
+    }
+
+    @Test
+    void testChangeAngleRepresentation() {
+        assertEquals(AngleMode.RAD, Calculator.mode);
+        evaluationService.setAngleMode(AngleMode.DEG);
+        assertEquals(AngleMode.DEG, Calculator.mode);
     }
 
 }

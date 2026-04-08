@@ -8,7 +8,7 @@ import visitor.Printer;
 
 /**
  * This class represents the core logic of a Calculator.
- * It can be used to print and evaluate artihmetic expressions.
+ * It can be used to print and evaluate arithmetic expressions.
  *
  * @author tommens
  */
@@ -19,7 +19,8 @@ public class Calculator {
 	/**
 	 * Default constructor of the class.
 	 * Does nothing since the class does not have any variables that need to be
-	 * initialised.
+	 * initialized.
+	 *
 	 */
 	public Calculator() {
 	}

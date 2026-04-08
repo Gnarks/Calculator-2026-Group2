@@ -29,6 +29,8 @@ class TestEvaluator {
 		calc = new Calculator();
 		value1 = 8;
 		value2 = 6;
+		Calculator.mode = AngleMode.RAD;
+		Real.scale = 64;
 	}
 
 	@Test
@@ -203,7 +205,6 @@ class TestEvaluator {
 	@Test
 	void testSinWithDiffModes() {
 		Real.scale = 8;
-		Calculator.mode = AngleMode.RAD;
 		Real r = new Real(Math.PI);
 		try {
 			assertEquals(new Real(0), calc.eval(new Sinus(r)));
@@ -217,7 +218,6 @@ class TestEvaluator {
 	@Test
 	void testCosWithDiffModes() {
 		Real.scale = 8;
-		Calculator.mode = AngleMode.RAD;
 		Real r = new Real(225);
 		try {
 			assertEquals(new Real(0.36731937), calc.eval(new Cosinus(r)));
@@ -231,12 +231,56 @@ class TestEvaluator {
 	@Test
 	void testTanWithDiffModes() {
 		Real.scale = 8;
-		Calculator.mode = AngleMode.RAD;
 		Real r = new Real(300);
 		try {
 			assertEquals(new Real(45.24474207), calc.eval(new Tangente(r)));
 			Calculator.mode = AngleMode.DEG;
 			assertEquals(new Real(-1.73205079), calc.eval(new Tangente(r)));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testSinSameValDiffRepresentationSameResult() {
+		Real.scale = 8;
+		Real radReal = new Real(Math.PI/2);
+		Real degReal = new Real(90);
+		try {
+			Real resultRad = (Real) calc.eval(new Sinus(radReal));
+			Calculator.mode = AngleMode.DEG;
+			Real resultDeg = (Real) calc.eval(new Sinus(degReal));
+			assertEquals(resultDeg, resultRad);
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testCosSameValDiffRepresentationSameResult() {
+		Real.scale = 8;
+		Real radReal = new Real(Math.PI);
+		Real degReal = new Real(180);
+		try {
+			Real resultRad = (Real) calc.eval(new Cosinus(radReal));
+			Calculator.mode = AngleMode.DEG;
+			Real resultDeg = (Real) calc.eval(new Cosinus(degReal));
+			assertEquals(resultDeg, resultRad);
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testTanSameValDiffRepresentationSameResult() {
+		Real.scale = 8;
+		Real radReal = new Real(Math.PI/4);
+		Real degReal = new Real(45);
+		try {
+			Real resultRad = (Real) calc.eval(new Tangente(radReal));
+			Calculator.mode = AngleMode.DEG;
+			Real resultDeg = (Real) calc.eval(new Tangente(degReal));
+			assertEquals(resultDeg, resultRad);
 		} catch (IllegalConstruction e) {
 			fail();
 		}

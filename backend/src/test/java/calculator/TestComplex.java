@@ -2,6 +2,8 @@ package calculator;
 
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.atoms.Atom;
 import org.junit.jupiter.api.*;
 
 import calculator.atoms.AtomType;
@@ -93,5 +95,12 @@ class TestComplex {
 		} catch (IllegalConstruction e) {
 			fail();
 		}
+	}
+
+	@Test
+	void testToRadian() {
+		Complex c = new Complex(3, 2);
+		Complex converted = (Complex) c.toRadian();
+		assertEquals(c, converted);
 	}
 }

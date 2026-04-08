@@ -1,6 +1,9 @@
 package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.atoms.Real;
+import org.apache.commons.numbers.fraction.Fraction;
 import org.junit.jupiter.api.*;
 
 import calculator.atoms.Rationnal;
@@ -50,5 +53,13 @@ class TestRationnal {
         assertEquals(new Rationnal(-1, 2), new Rationnal(1, -2));
         // Double negative should be positive
         assertEquals(new Rationnal(1, 2), new Rationnal(-1, -2));
+    }
+
+    @Test
+    void testToRadian() {
+        Rationnal r = new Rationnal(Fraction.of(34, 9));
+        Real.scale = 8;
+        Real converted = (Real) r.toRadian();
+        assertEquals(new Real(0.06593466), converted);
     }
 }

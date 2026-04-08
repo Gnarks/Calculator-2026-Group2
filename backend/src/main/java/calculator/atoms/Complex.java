@@ -110,4 +110,13 @@ public class Complex implements Atom {
 	@Override
 	public String toString() {return value.toString(); }
 
+	@Override
+	public Atom toDegree() {
+		return this;
+	}
+
+	@Override
+	public Atom toRadian() {
+		return this;
+	}
 }

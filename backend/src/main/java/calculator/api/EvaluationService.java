@@ -5,6 +5,7 @@ import calculator.Expression;
 import calculator.antlr.Parser;
 import calculator.api.dto.EvaluationResponse;
 import calculator.api.dto.ExpressionDTO;
+import calculator.atoms.AngleMode;
 import calculator.atoms.Atom;
 import calculator.atoms.Real;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,11 @@ public class EvaluationService {
         } catch (Exception _) {
             return new EvaluationResponse(0, "");
         }
+    }
+
+    public void setAngleMode(AngleMode angleMode) {
+        if(angleMode != null)
+            Calculator.mode = angleMode;
     }
 
 }

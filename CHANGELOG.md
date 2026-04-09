@@ -20,6 +20,9 @@ All notable changes to this project will be documented in this file.
 - README: added information about the way to start the web-app with docker compose
 - POM file: The main class is now `calculator.Main` instead of `calculator.CalculatorApplication` to launch the CLI
 
+### Fixed
+- In the CLI, the logger no longer displays the date, hour when this is a message from the calculator.
+
 ## [v2.1.0]
 
 ### Fixed

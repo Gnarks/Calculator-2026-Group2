@@ -28,6 +28,7 @@ The project currently supports:
 * **Notations**: Expressions can be represented and printed in Infix, Prefix, and Postfix notations.
 * **Design Patterns**: The code implements the **Composite** pattern for expression structures and the **Visitor** pattern for operations like evaluation and printing.
 * **Testing**: Includes a comprehensive test suite using **JUnit 5** for unit tests and **Cucumber** for Behavior-Driven Development (BDD).
+* **Web Interface**: A Vue.js 3 GUI featuring scientific notation, precision control, and a random number generator.
 
 **For more information about the instructions for this project, please read the [Wiki pages](https://github.com/University-of-Mons/calculator-cucumber-2026/wiki).**
 
@@ -42,6 +43,7 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 
 *  You will need to have a running version of Java 25 on your machine in order to be able to compile and execute this code, although it is also backward compatible with earlier versions of Java.
 *  You will need to have a running version of Maven, since this project is accompanied by a pom.xml file so that it can be installed, compiled, tested and run using Maven.
+*  You will need Node.js (version 22) installed on your machine to build and run the frontend interface.
 * You will need to have docker and docker-compose installed for the Server + API
 * Also for the Server + API to work you would need a dockerized reverse proxy on network "proxy" and a configuration using ssl and mapping /api to "http://backend:1523"
 
@@ -75,10 +77,24 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 *  [Cucumber](https://cucumber.io/docs/cucumber/) - a tool for Behaviour-Driven Development
 *  [JaCoCo](https://www.jacoco.org) - a code coverage library for Java
 *  [JavaDoc](https://docs.oracle.com/en/java/javase/21/javadoc/javadoc.html) - a code documentation tool for Java
+*  [Vue.js](https://vuejs.org/) - The Progressive JavaScript Framework
+*  [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+*  [Axios](https://axios-http.com/) - Promise based HTTP client
 
 
-## Frontend web interface 
-To launch the web interface, navigate to the frontend directory with `cd frontend` and run the command `npm run dev` to start the development server.
+## Frontend Web Interface
+The project includes a web Graphical user interface to interact with the calculator API.
+
+### Features
+* **Scientific buttons**: Supports trigonometry, logarithms, and complex constants ($\pi, e, i$).
+* **Precision control**: Choose precision response from the UI with a button
+* **Random generator**: A tool to generate random Integers, Reals, Rationals, or Complex numbers
+* **Choose angle mode**: Support for degree (DEG) and Radian (RAD).
+
+### Quick Start
+1. Navigate to the frontend directory: `cd frontend`
+2. Install dependencies: `npm install`
+3. Launch the dev server: `npm run dev`
 
 ## Versions
 

@@ -12,17 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import calculator.operations.*;
+import calculator.functions.*;
 
 public class CalculatorSteps {
 
 	private ArrayList<Expression> params;
 	private Operation op;
+	private Expression unaryOp;
+	private String unaryOpName;
 	private Calculator c;
 
     @Before
 	public void resetMemoryBeforeEachScenario() {
 		params = null;
 		op = null;
+		unaryOp = null;
+		unaryOpName = null;
 	}
 
 	@Given("I initialise a calculator")
@@ -199,5 +204,40 @@ public class CalculatorSteps {
 	@When("I set the precision to {int}")
 	public void whenISetThePrecision(int precision) {
 		Real.scale = precision;
+	}
+
+	@Given("a unary function {string}")
+	public void givenAUnaryFunction(String s) {
+		unaryOpName = s;
+	}
+
+	@When("I provide a single real number {double}")
+	public void whenIProvideASingleRealNumber(double real) {
+		try {
+			Expression arg = new Real(real);
+			switch (unaryOpName) {
+				case "sin" -> unaryOp = new Sinus(arg);
+				case "cos" -> unaryOp = new Cosinus(arg);
+				case "tan" -> unaryOp = new Tangente(arg);
+				case "asin" -> unaryOp = new Arcsinus(arg);
+				case "acos" -> unaryOp = new Arccosinus(arg);
+				case "atan" -> unaryOp = new Arctangente(arg);
+				case "sinh" -> unaryOp = new Sinh(arg);
+				case "cosh" -> unaryOp = new Cosh(arg);
+				case "tanh" -> unaryOp = new Tanh(arg);
+				case "ln" -> unaryOp = new Ln(arg);
+				case "sqrt" -> unaryOp = new Sqrt(arg);
+				default -> fail("Unknown unary function: " + unaryOpName);
+			}
+		} catch (IllegalConstruction _) {
+			fail("Illegal construction for unary function");
+		}
+	}
+
+	@Then("the unary operation evaluates to the real number {double}")
+	public void thenTheUnaryOperationEvaluatesToReal(double real) {
+		Real expected = new Real(real);
+		Real result = (Real) c.eval(unaryOp);
+		assertEquals(expected, result);
 	}
 }

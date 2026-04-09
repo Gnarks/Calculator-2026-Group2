@@ -209,3 +209,23 @@ Scenario: Adding two rational numbers
     And I provide a real number 2.67
     And I set the precision to 8
     Then the operation evaluates to the real number 22.96179533
+
+  Scenario Outline: Evaluating unary mathematical functions
+    Given a unary function <func>
+    When I provide a single real number <n1>
+    And I set the precision to <precision>
+    Then the unary operation evaluates to the real number <result>
+
+    Examples:
+      | func   | n1 | precision | result      |
+      | "sin"  | 0.0| 5         | 0.0         |
+      | "cos"  | 0.0| 5         | 1.0         |
+      | "tan"  | 0.0| 5         | 0.0         |
+      | "asin" | 0.0| 5         | 0.0         |
+      | "acos" | 1.0| 5         | 0.0         |
+      | "atan" | 0.0| 5         | 0.0         |
+      | "sinh" | 0.0| 5         | 0.0         |
+      | "cosh" | 0.0| 5         | 1.0         |
+      | "tanh" | 0.0| 5         | 0.0         |
+      | "ln"   | 1.0| 5         | 0.0         |
+      | "sqrt" | 4.0| 5         | 2.0         |

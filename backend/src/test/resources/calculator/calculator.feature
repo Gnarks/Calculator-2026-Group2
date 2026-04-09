@@ -229,3 +229,12 @@ Scenario: Adding two rational numbers
       | "tanh" | 0.0| 5         | 0.0         |
       | "ln"   | 1.0| 5         | 0.0         |
       | "sqrt" | 4.0| 5         | 2.0         |
+
+  Scenario: Evaluating binary log function
+    Given a binary function log with base 10.0 of 100.0
+    When I set the precision to 5
+    Then the binary operation evaluates to the real number 2.0
+
+  Scenario: Evaluating random integer generation
+    Given a random integer function up to 10 with seed 1234
+    Then the result is a specific integer 7

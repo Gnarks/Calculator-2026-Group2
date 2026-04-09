@@ -18,7 +18,7 @@ public class CalculatorSteps {
 
 	private ArrayList<Expression> params;
 	private Operation op;
-	private Expression unaryOp;
+	private Expression funcOp;
 	private String unaryOpName;
 	private Calculator c;
 
@@ -26,7 +26,7 @@ public class CalculatorSteps {
 	public void resetMemoryBeforeEachScenario() {
 		params = null;
 		op = null;
-		unaryOp = null;
+		funcOp = null;
 		unaryOpName = null;
 	}
 
@@ -216,17 +216,17 @@ public class CalculatorSteps {
 		try {
 			Expression arg = new Real(real);
 			switch (unaryOpName) {
-				case "sin" -> unaryOp = new Sinus(arg);
-				case "cos" -> unaryOp = new Cosinus(arg);
-				case "tan" -> unaryOp = new Tangente(arg);
-				case "asin" -> unaryOp = new Arcsinus(arg);
-				case "acos" -> unaryOp = new Arccosinus(arg);
-				case "atan" -> unaryOp = new Arctangente(arg);
-				case "sinh" -> unaryOp = new Sinh(arg);
-				case "cosh" -> unaryOp = new Cosh(arg);
-				case "tanh" -> unaryOp = new Tanh(arg);
-				case "ln" -> unaryOp = new Ln(arg);
-				case "sqrt" -> unaryOp = new Sqrt(arg);
+				case "sin" -> funcOp = new Sinus(arg);
+				case "cos" -> funcOp = new Cosinus(arg);
+				case "tan" -> funcOp = new Tangente(arg);
+				case "asin" -> funcOp = new Arcsinus(arg);
+				case "acos" -> funcOp = new Arccosinus(arg);
+				case "atan" -> funcOp = new Arctangente(arg);
+				case "sinh" -> funcOp = new Sinh(arg);
+				case "cosh" -> funcOp = new Cosh(arg);
+				case "tanh" -> funcOp = new Tanh(arg);
+				case "ln" -> funcOp = new Ln(arg);
+				case "sqrt" -> funcOp = new Sqrt(arg);
 				default -> fail("Unknown unary function: " + unaryOpName);
 			}
 		} catch (IllegalConstruction _) {
@@ -237,7 +237,33 @@ public class CalculatorSteps {
 	@Then("the unary operation evaluates to the real number {double}")
 	public void thenTheUnaryOperationEvaluatesToReal(double real) {
 		Real expected = new Real(real);
-		Real result = (Real) c.eval(unaryOp);
+		Real result = (Real) c.eval(funcOp);
 		assertEquals(expected, result);
+	}
+
+	@Given("a binary function log with base {double} of {double}")
+	public void givenLogFunction(double base, double number) {
+		try {
+			funcOp = new Log(new Real(base), new Real(number));
+		} catch (IllegalConstruction e) {
+			fail("Illegal construction for log function");
+		}
+	}
+
+	@Then("the binary operation evaluates to the real number {double}")
+	public void thenTheBinaryOperationEvaluatesToReal(double real) {
+		Real expected = new Real(real);
+		Real result = (Real) c.eval(funcOp);
+		assertEquals(expected, result);
+	}
+
+	@Given("a random integer function up to {int} with seed {int}")
+	public void givenRandomIntFunction(int max, int seed) {
+		funcOp = RandomFunction.randomInteger(new IntegerAtom(seed), new IntegerAtom(max));
+	}
+
+	@Then("the result is a specific integer {int}")
+	public void thenResultIsSpecificInteger(int expectedVal) {
+		assertEquals(new IntegerAtom(expectedVal), c.eval(funcOp));
 	}
 }

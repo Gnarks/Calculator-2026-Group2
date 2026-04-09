@@ -2,8 +2,6 @@ package calculator.command;
 
 import calculator.Calculator;
 import calculator.atoms.AngleMode;
-import calculator.atoms.Real;
-
 import java.util.Locale;
 import java.util.logging.Logger;
 

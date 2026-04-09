@@ -13,6 +13,7 @@ import java.util.List;
 
 import calculator.operations.*;
 import calculator.functions.*;
+import calculator.command.*;
 
 public class CalculatorSteps {
 
@@ -21,6 +22,9 @@ public class CalculatorSteps {
 	private Expression funcOp;
 	private String unaryOpName;
 	private Calculator c;
+	
+	private CLICommand cliCommand;
+	private boolean cliResult;
 
     @Before
 	public void resetMemoryBeforeEachScenario() {
@@ -28,6 +32,8 @@ public class CalculatorSteps {
 		op = null;
 		funcOp = null;
 		unaryOpName = null;
+		cliCommand = null;
+		cliResult = true;
 	}
 
 	@Given("I initialise a calculator")
@@ -265,5 +271,30 @@ public class CalculatorSteps {
 	@Then("the result is a specific integer {int}")
 	public void thenResultIsSpecificInteger(int expectedVal) {
 		assertEquals(new IntegerAtom(expectedVal), c.eval(funcOp));
+	}
+
+	@Given("a precision command")
+	public void givenAPrecisionCommand() {
+		cliCommand = new PrecisionCommand();
+	}
+
+	@Given("an eval command")
+	public void givenAnEvalCommand() {
+		cliCommand = new EvalCommand();
+	}
+
+	@When("the user runs the command with arguments {string}")
+	public void whenTheUserRunsTheCommandWithArguments(String args) {
+		cliResult = cliCommand.execute(args);
+	}
+
+	@Then("the command indicates the calculator should continue running")
+	public void thenTheCommandIndicatesTheCalculatorShouldContinueRunning() {
+		assertTrue(cliResult);
+	}
+
+	@Then("the calculator precision is updated to {int}")
+	public void thenTheCalculatorPrecisionIsUpdatedTo(int expectedPrecision) {
+		assertEquals(expectedPrecision, Real.scale);
 	}
 }

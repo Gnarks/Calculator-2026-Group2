@@ -238,3 +238,14 @@ Scenario: Adding two rational numbers
   Scenario: Evaluating random integer generation
     Given a random integer function up to 10 with seed 1234
     Then the result is a specific integer 7
+
+  Scenario: Testing the precision CLI command
+    Given a precision command
+    When the user runs the command with arguments "15"
+    Then the command indicates the calculator should continue running
+    And the calculator precision is updated to 15
+
+  Scenario: Testing the eval CLI command
+    Given an eval command
+    When the user runs the command with arguments "5+5"
+    Then the command indicates the calculator should continue running

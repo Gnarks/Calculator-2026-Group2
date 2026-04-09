@@ -83,7 +83,7 @@ public class TestEvaluationService {
 
     @Test
     void testGenerateRandomRational() {
-        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.RATIONNAL, 100, null);
+        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.RATIONNAL, 100, 117L);
         assertEquals(1, random.getSuccess());
         assertTrue(random.getResult().contains("/"));
     }

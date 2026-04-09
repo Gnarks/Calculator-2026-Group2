@@ -38,9 +38,15 @@ public class EvaluationService {
         }
     }
 
+    /**
+     * Changes the calculator's angles representation.
+     *
+     * @param angleMode the desired representation
+     */
     public void setAngleMode(AngleMode angleMode) {
         if(angleMode != null)
             Calculator.mode = angleMode;
+    }
       
     /**
      * Generates a random number of the given type, with a maximum value in some cases.

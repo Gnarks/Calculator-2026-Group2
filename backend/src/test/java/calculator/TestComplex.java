@@ -102,7 +102,9 @@ class TestComplex {
 		Complex c = new Complex(3, 2);
 		Complex converted = (Complex) c.toRadian();
 		assertEquals(c, converted);
-    
+	}
+
+	@Test
 	void testToStringComplex() {
 		assertEquals("0", new Complex(0, 0).toString());
 		assertEquals("2.0i", new Complex(0, 2).toString());

@@ -30,6 +30,7 @@ public class EvaluationController {
 	@PostMapping("/setAngleMode")
 	public void setAngleMode(@RequestBody AngleMode angleMode) {
 		evaluationService.setAngleMode(angleMode);
+	}
     
 	@GetMapping("/random")
 	public EvaluationResponse getRandomNumber(@RequestParam() AtomType type, @RequestParam() int max,

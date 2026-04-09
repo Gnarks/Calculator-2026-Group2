@@ -38,14 +38,6 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Difference between division and rational numbers (/ is for rationnals and // for the real division)
 
-## Changed
-- POM file: The main class is now `calculator.Main` instead of `calculator.CalculatorApplication` to launch the CLI.
-
-## [v2.1.0]
-
-### Fixed
-- Difference between division and rational numbers (/ is for rationnals and // for the real division)
-
 ## [v2.0.0]
 
 ### Added

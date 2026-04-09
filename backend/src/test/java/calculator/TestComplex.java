@@ -94,4 +94,14 @@ class TestComplex {
 			fail();
 		}
 	}
+
+	@Test
+	void testToStringComplex() {
+		assertEquals("0", new Complex(0, 0).toString());
+		assertEquals("2.0i", new Complex(0, 2).toString());
+		assertEquals("-2.0i", new Complex(0, -2).toString());
+		assertEquals("2.0 + 1.0i", new Complex(2, 1).toString());
+		assertEquals("4.0 - 3.0i", new Complex(4, -3).toString());
+		assertEquals("4.0", new Complex(4, 0).toString());
+	}
 }

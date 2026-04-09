@@ -28,6 +28,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Difference between division and rational numbers (/ is for rationnals and // for the real division)
 
+## Changed
+- POM file: The main class is now `calculator.Main` instead of `calculator.CalculatorApplication` to launch the CLI.
 
 ## [v2.1.0]
 
@@ -88,4 +90,3 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated `.gitignore` to ignore the `target/` directory and others files.
 - Updated dependencies of Junit and Cucumber to the latest version (6.0.2 and 7.34.2 respectively).
-

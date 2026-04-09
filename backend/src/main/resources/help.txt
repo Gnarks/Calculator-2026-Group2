@@ -10,6 +10,7 @@ USAGE:
   calc> help                  Displays this help message.
   calc> exit                  Exits the calculator.
   calc> precision <number>    Set the precision (for reals) to <number> digits after the comma
+  calc> mode <mode>           Sets the angles representation to <mode>. Has to be either RAD or DEG (RAD by default)
 
 AVAILABLE OPERATORS:
   +   Addition                 -   Subtraction

@@ -1,10 +1,6 @@
 package calculator;
 
-import calculator.command.CLICommand;
-import calculator.command.EvalCommand;
-import calculator.command.ExitCommand;
-import calculator.command.HelpCommand;
-import calculator.command.PrecisionCommand;
+import calculator.command.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +33,7 @@ public class Main {
         commands.put("exit", new ExitCommand());
         commands.put("eval", new EvalCommand());
         commands.put("precision", new PrecisionCommand());
+        commands.put("mode", new AngleModeCommand());
 
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to the Calculator! Type 'help' for assistance.");

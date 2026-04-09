@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
   - randrat: generates a random rational number with a numerator and denominator between 0 and a maximum. (denominator cannot be zero)
   - randcomplex: generates a random complex number with real and imaginary parts between 0 and a maximum.
 - Random generator: generates a random number between a specified minimum and maximum.
+- Possibility to chose the angles representation (either in radian or in degrees)
 
 ### Changed
 - README: added information about the way to start the web-app with docker compose

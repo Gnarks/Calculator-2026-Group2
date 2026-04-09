@@ -4,6 +4,7 @@ import calculator.Calculator;
 import calculator.atoms.AngleMode;
 import calculator.atoms.Real;
 
+import java.util.Locale;
 import java.util.logging.Logger;
 
 public class AngleModeCommand implements CLICommand {
@@ -16,7 +17,7 @@ public class AngleModeCommand implements CLICommand {
             LOGGER.warning("Error: Missing arguments. Usage: mode <mode>");
             return true;
         }
-        String mode = args.trim().toLowerCase();
+        String mode = args.trim().toLowerCase(Locale.ENGLISH);
         AngleMode angleMode = null;
         switch (mode) {
             case "rad" -> angleMode = AngleMode.RAD;

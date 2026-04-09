@@ -31,6 +31,9 @@ public class Main {
 	 * @param args Command-line parameters are not used in this version
 	 */
 	public static void main(String[] args) {
+		// Set lightweight formatting for java.util.logging
+		System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s%n");
+
 		// Commands registration
         Map<String, CLICommand> commands = new HashMap<>();
         commands.put("help", new HelpCommand());

@@ -26,3 +26,23 @@ updates:
       interval: "weekly"
     # Allow up to 10 open pull requests for GHA dependencies (default is 5)
     open-pull-requests-limit: 10
+
+  - package-ecosystem: docker
+    directory: /backend
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /frontend
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /backend
+    schedule:
+      interval: daily

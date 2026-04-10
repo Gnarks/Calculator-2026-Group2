@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import calculator.atoms.Real;
-import calculator.operations.*;
-
 /**
  * A very simple calculator in Java
  * University of Mons - UMONS

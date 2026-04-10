@@ -62,24 +62,40 @@ public class Evaluator extends Visitor {
 		computedValue = r;
 	}
 
+	/**
+	 * Use the visitor design pattern to visit an IntegerAtom.
+	 *
+	 * @param i The IntegerAtom being visited
+	 */
 	public void visit(IntegerAtom i) {
 		computedValue = i;
 	}
 
-	@Override
-	public void visit(Complex c) {
-		computedValue = c;
-	}
-
+	/**
+	 * Use the visitor design pattern to visit a Rationnal number.
+	 *
+	 * @param q The Rationnal number being visited
+	 */
 	@Override
 	public void visit(Rationnal q) {
 		computedValue = q;
 	}
 
+
 	/**
-	 * Use the visitor design pattern to visit an operation
-	 * 
-	 * @param o The operation being visited
+	 * Use the visitor design pattern to visit a Complex number.
+	 *
+	 * @param c The Complex number being visited
+	 */
+	@Override
+	public void visit(Complex c) {
+		computedValue = c;
+	}
+
+	/**
+	 * Use the visitor design pattern to visit an Operation.
+	 *
+	 * @param o The Operation being visited
 	 */
 	public void visit(Operation o) {
 		ArrayList<Atom> evaluatedArgs = new ArrayList<>();
@@ -115,15 +131,29 @@ public class Evaluator extends Visitor {
 	}
 
 	@Override
+	/**
+	 * Evaluates a unary function. If the function is trigonometric and the angle
+	 * mode is set to DEGREE, it will automatically convert the nested value to radians first.
+	 *
+	 * @param o the unary function to evaluate
+	 */
 	public void visit(UnaryFunction o) {
 		o.getArg().accept(this);
-		Atom converted = null;
-		if(o instanceof TrigonometricFunction && angleMode == AngleMode.DEG)
-			converted = computedValue.toRadian();
-		computedValue = (converted == null) ? computedValue.apply(o) : converted.apply(o);
+		if(o instanceof TrigonometricFunction && angleMode == AngleMode.DEG) {
+			Atom converted = computedValue.toRadian();
+			computedValue = converted.apply(o);
+		} else {
+			computedValue = computedValue.apply(o);
+		}
 	}
 
 	@Override
+	/**
+	 * Evaluates a binary function by first computing its two arguments
+	 * and then applying the function on the properly casted Atoms.
+	 *
+	 * @param f the binary function to evaluate
+	 */
 	public void visit(BinaryFunction f) {
 		f.getFirstArg().accept(this);
 		Atom firstValue = computedValue;

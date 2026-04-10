@@ -58,7 +58,7 @@ public class Real implements Atom {
 	 */
 	public /* constructor */ Real(String s) {
 		BigDecimal temp = new BigDecimal(s, context);
-		value = temp.setScale(Real.scale, RoundingMode.HALF_EVEN);
+		value = temp.setScale(scale, RoundingMode.HALF_EVEN);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class Real implements Atom {
 	 * @param d the BigDecimal to be represented in the Real
 	 */
 	public /* constructor */ Real(BigDecimal d) {
-		value = d.setScale(Real.scale, RoundingMode.HALF_EVEN);
+		value = d.setScale(scale, RoundingMode.HALF_EVEN);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class Real implements Atom {
 	 */
 	public /* constructor */ Real(double d) {
 		BigDecimal temp = BigDecimal.valueOf(d);
-		value = temp.setScale(Real.scale, RoundingMode.HALF_EVEN);
+		value = temp.setScale(scale, RoundingMode.HALF_EVEN);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class Real implements Atom {
 	 */
 	public /* constructor */ Real(int i) {
 		BigDecimal temp = BigDecimal.valueOf(i);
-		value = temp.setScale(Real.scale, RoundingMode.HALF_EVEN);
+		value = temp.setScale(scale, RoundingMode.HALF_EVEN);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class Real implements Atom {
 	 */
 	private /* constructor */ Real(boolean s, int v) {
 		BigDecimal temp = BigDecimal.valueOf(v);
-		value = temp.setScale(Real.scale, RoundingMode.HALF_EVEN);
+		value = temp.setScale(scale, RoundingMode.HALF_EVEN);
 		special = s;
 	}
 
@@ -109,7 +109,7 @@ public class Real implements Atom {
 	 */
 	public static Real nan() {
 		return new Real(true, 0);
-	};
+	}
 
 	/**
 	 * Returns a Real representing +infinity
@@ -118,7 +118,7 @@ public class Real implements Atom {
 	 */
 	public static Real plusInf() {
 		return new Real(true, 1);
-	};
+	}
 
 	/**
 	 * Returns a Real representing -infinity
@@ -127,7 +127,7 @@ public class Real implements Atom {
 	 */
 	public static Real minusInf() {
 		return new Real(true, -1);
-	};
+	}
 
 	/**
 	 * Returns if the Real is representing -infinity
@@ -237,23 +237,43 @@ public class Real implements Atom {
 	}
 
 	@Override
+        /**
+         * applies a binary function between two Reals
+         *
+         * @param f the binary function to apply
+         * @param a the other Real
+         * @return The result of the application of f on this instance and a
+         */
 	public Atom apply(BinaryFunction f, Atom a) {
 		return f.op(this, (Real) a);
 	}
 
 	@Override
+        /**
+         * applies a unary operation to the Real
+         *
+         * @param o the operation to apply
+         * @return The result of the application
+         */
 	public Real apply(UnaryFunction o) {
 		return o.op(this);
 	}
 
 	@Override
+        /**
+         * Returns a string representation of the Real without trailing zeros.
+         */
 	public String toString() {
 		return value.stripTrailingZeros().toPlainString();
 	}
 
 	@Override
+        /**
+         * Converts the current Real value to radians.
+         *
+         * @return a new Real containing the converted value
+         */
 	public Atom toRadian() {
-		return new Real(BigDecimalMath.toRadians(value, Real.context));
+        return new Real(BigDecimalMath.toRadians(value, context));
 	}
-
 }

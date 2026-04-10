@@ -165,13 +165,13 @@ public final class RandomFunction implements Expression {
     }
 
     @Override
-	public final String toString() {
-		Printer p = new Printer();
-		this.accept(p);
-		return p.getResult();
-	}
+    public String toString() {
+        Printer p = new Printer();
+        this.accept(p);
+        return p.getResult();
+    }
 
-	public final String toString(Notation n) {
+    public String toString(Notation n) {
 		Printer p = new Printer(n);
 		this.accept(p);
 		return p.getResult();
@@ -187,5 +187,10 @@ public final class RandomFunction implements Expression {
 			return false;
         RandomFunction that = (RandomFunction) o;
         return type == that.type && Objects.equals(args, that.args);
+	}
+
+    @Override
+	public int hashCode() {
+		return Objects.hash(type, args);
 	}
 }

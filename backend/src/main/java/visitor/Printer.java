@@ -30,6 +30,13 @@ public class Printer extends Visitor {
 	 */
 	private final Notation notation;
 
+	private static final int DEFAULT_DENOMINATOR = 1;
+	private static final String RANDINT_FUNC = "randint";
+	private static final String RANDRAT_FUNC = "randrat";
+	private static final String RANDREAL_FUNC = "randreal";
+	private static final String RANDCOMPLEX_FUNC = "randcomplex";
+	private static final String RAND_FUNC = "rand";
+
 	/**
 	 * Constructor of the Printer class, which takes a Notation as a parameter to
 	 * specify the notation to be used for printing expressions.
@@ -58,15 +65,33 @@ public class Printer extends Visitor {
 	 */
 	@Override
 	public void visit(Real r) {
-		sb.append(r.getValue().stripTrailingZeros());
+		if (r.isNan()) {
+			sb.append("NaN");
+		} else if (r.isPlusInf()) {
+			sb.append("+infinity");
+		} else if (r.isMinusInf()) {
+			sb.append("-infinity");
+		} else {
+			sb.append(r.getValue().stripTrailingZeros());
+		}
 	}
 
 	@Override
+        /**
+         * The visit method for IntegerAtom.
+         *
+         * @param i The IntegerAtom to be visited
+         */
 	public void visit(IntegerAtom i) {
 		sb.append(i.getValue());
 	}
 
 	@Override
+        /**
+         * The visit method for Complex numbers.
+         *
+         * @param c The Complex number to be visited
+         */
 	public void visit(Complex c) {
 		double realPart = c.getValue().getReal();
 		double imaginaryPart = c.getValue().getImaginary();
@@ -85,11 +110,16 @@ public class Printer extends Visitor {
 	}
 
 	@Override
+        /**
+         * The visit method for Rationnal numbers.
+         *
+         * @param q The Rationnal number to be visited
+         */
 	public void visit(Rationnal q) {
 		int num = q.getNumerator();
 		int den = q.getDenominator();
 
-		if (den == 1) {
+		if (den == DEFAULT_DENOMINATOR) {
 			sb.append(num);
 			return;
 		}
@@ -209,14 +239,19 @@ public class Printer extends Visitor {
 	 * @param f the {@code RandomFunction} node to append to the print result
 	 */
 	@Override
+        /**
+         * The visit method for a random function.
+         *
+         * @param f The random function to be visited
+         */
 	public void visit(RandomFunction f) {
 		String funcName;
 		switch(f.getType()) {
-			case INTEGER -> funcName = "randint";
-			case RATIONNAL -> funcName = "randrat";
-			case REAL -> funcName = "randreal";
-			case COMPLEX -> funcName = "randcomplex";
-			default -> funcName = "rand";
+			case INTEGER -> funcName = RANDINT_FUNC;
+			case RATIONNAL -> funcName = RANDRAT_FUNC;
+			case REAL -> funcName = RANDREAL_FUNC;
+			case COMPLEX -> funcName = RANDCOMPLEX_FUNC;
+			default -> funcName = RAND_FUNC;
 		}
 		
 		switch (notation) {

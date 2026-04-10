@@ -33,10 +33,10 @@ public final class Arctangente extends UnaryFunction {
 			return Real.nan();
 		}
 		if (r.isPlusInf()) {
-			return new Real(new java.math.BigDecimal(Math.PI / 2));
+			return new Real(BigDecimal.valueOf(Math.PI / 2));
 		}
 		if (r.isMinusInf()) {
-			return new Real(new java.math.BigDecimal(-Math.PI / 2));
+			return new Real(BigDecimal.valueOf(-Math.PI / 2));
 		}
 
 		BigDecimal val = BigDecimalMath.atan(r.getValue(), Real.context);

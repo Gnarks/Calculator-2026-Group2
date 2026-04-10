@@ -30,7 +30,7 @@ public class EvalCommand implements CLICommand {
 
 		} catch (IllegalArgumentException e) {
 			LOGGER.log(Level.SEVERE, "Invalid expression: " + e.getMessage());
-		} catch (Exception e) {
+		} catch (IllegalStateException | UnsupportedOperationException | ArithmeticException e) {
 			LOGGER.log(Level.SEVERE, "Error evaluating expression: {0}", e.getMessage());
 		}
 		return true;

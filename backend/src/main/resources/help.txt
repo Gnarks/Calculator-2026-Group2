@@ -17,6 +17,8 @@ AVAILABLE OPERATORS:
   *   Multiplication           //   Division
   **  Power
 
+  Note : / is used to represent a fractional number
+
 AVAILABLE FUNCTIONS:
   sin(x), cos(x), tan(x)       Trigonometric functions
   asin(x), acos(x), atan(x)    Inverse trigonometric functions

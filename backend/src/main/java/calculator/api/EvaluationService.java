@@ -4,15 +4,18 @@ import calculator.Calculator;
 import calculator.Expression;
 import calculator.antlr.Parser;
 import calculator.api.dto.EvaluationResponse;
-import calculator.api.dto.ExpressionDTO;
 import calculator.atoms.AngleMode;
 import calculator.atoms.Atom;
 import calculator.atoms.AtomType;
 import calculator.atoms.Real;
-import calculator.functions.RandomFunction;
 import calculator.functions.RandomGenerator;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class that handles the core business logic of the calculator API.
+ * It connects the REST endpoints (Controller) to the Calculator backend,
+ * orchestrating the parsing, evaluation, and formatting of expressions.
+ */
 @Service
 public class EvaluationService {
 
@@ -33,7 +36,7 @@ public class EvaluationService {
             Real.scale = precision;
             Atom result = calculator.eval(expression);
             return new EvaluationResponse(1, result.toString());
-        } catch (Exception _) {
+        } catch (IllegalArgumentException | IllegalStateException | UnsupportedOperationException | ArithmeticException _) {
             return new EvaluationResponse(0, "");
         }
     }

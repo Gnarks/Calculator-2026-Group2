@@ -72,6 +72,17 @@ public class Evaluator extends Visitor {
 	}
 
 	/**
+	 * Use the visitor design pattern to visit a Rationnal number.
+	 *
+	 * @param q The Rationnal number being visited
+	 */
+	@Override
+	public void visit(Rationnal q) {
+		computedValue = q;
+	}
+
+
+	/**
 	 * Use the visitor design pattern to visit a Complex number.
 	 *
 	 * @param c The Complex number being visited

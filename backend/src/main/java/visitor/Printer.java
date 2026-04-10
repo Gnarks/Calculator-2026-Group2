@@ -30,6 +30,13 @@ public class Printer extends Visitor {
 	 */
 	private final Notation notation;
 
+	private static final int DEFAULT_DENOMINATOR = 1;
+	private static final String RANDINT_FUNC = "randint";
+	private static final String RANDRAT_FUNC = "randrat";
+	private static final String RANDREAL_FUNC = "randreal";
+	private static final String RANDCOMPLEX_FUNC = "randcomplex";
+	private static final String RAND_FUNC = "rand";
+
 	/**
 	 * Constructor of the Printer class, which takes a Notation as a parameter to
 	 * specify the notation to be used for printing expressions.
@@ -89,7 +96,7 @@ public class Printer extends Visitor {
 		int num = q.getNumerator();
 		int den = q.getDenominator();
 
-		if (den == 1) {
+		if (den == DEFAULT_DENOMINATOR) {
 			sb.append(num);
 			return;
 		}
@@ -212,11 +219,11 @@ public class Printer extends Visitor {
 	public void visit(RandomFunction f) {
 		String funcName;
 		switch(f.getType()) {
-			case INTEGER -> funcName = "randint";
-			case RATIONNAL -> funcName = "randrat";
-			case REAL -> funcName = "randreal";
-			case COMPLEX -> funcName = "randcomplex";
-			default -> funcName = "rand";
+			case INTEGER -> funcName = RANDINT_FUNC;
+			case RATIONNAL -> funcName = RANDRAT_FUNC;
+			case REAL -> funcName = RANDREAL_FUNC;
+			case COMPLEX -> funcName = RANDCOMPLEX_FUNC;
+			default -> funcName = RAND_FUNC;
 		}
 		
 		switch (notation) {

@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   # runs pmd and outputs a sarif file and is used for the github badge 
-  pmd:
+  pmd-code-scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -32,7 +32,7 @@ jobs:
         with:
           rulesets: 'category/java/errorprone.xml'
           analyzeModifiedFilesOnly: 'false'
-          sourcePath: 'src/main/java'
+          sourcePath: 'backend/src/main/java'
       - name: Fail build if there are violations
         if: steps.pmd.outputs.violations >= 50
         run: exit 1

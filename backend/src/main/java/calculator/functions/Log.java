@@ -100,9 +100,8 @@ public class Log extends BinaryFunction {
 		}
 
 		// uses the log_b(n) = log_e(n)/log_e(b)
-		BigDecimal logBase = BigDecimalMath.log(new BigDecimal(base.getValue().doubleValue()), Real.context);
-		BigDecimal logN = BigDecimalMath.log(new BigDecimal(n.getValue().doubleValue()), Real.context);
-
+        BigDecimal logBase = BigDecimalMath.log(BigDecimal.valueOf(base.getValue().doubleValue()), Real.context);
+        BigDecimal logN = BigDecimalMath.log(BigDecimal.valueOf(n.getValue().doubleValue()), Real.context);
 		return new Real(logN.divide(logBase, Real.context));
 	}
 }

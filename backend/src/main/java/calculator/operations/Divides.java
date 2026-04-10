@@ -1,6 +1,5 @@
 package calculator.operations;
 
-import java.math.RoundingMode;
 import java.util.List;
 
 import calculator.Expression;
@@ -49,7 +48,7 @@ public final class Divides extends Operation {
 		if (r == 0) {
 			throw new ArithmeticException(DIVISION_BY_ZERO_MSG);
 		}
-		return (l / r);
+		return l / r;
 	}
 
 	/**

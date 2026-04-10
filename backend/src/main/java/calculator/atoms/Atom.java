@@ -25,7 +25,7 @@ public interface Atom extends Expression {
 	 * @param a the other atom
 	 * @return the result of the operation having the same type as a
 	 */
-	public Atom apply(Operation o, Atom a);
+	Atom apply(Operation o, Atom a);
 
 	/**
 	 * Applies an Binary between two atoms of the same concrete type
@@ -37,23 +37,23 @@ public interface Atom extends Expression {
 	 * @param a the other atom
 	 * @return the result of the operation having the same type as a
 	 */
-	public Atom apply(BinaryFunction f, Atom a);
+	Atom apply(BinaryFunction f, Atom a);
 
 	/**
 	 * Applies an operation on the atom
 	 *
-	 * @param o the unary operation to apply
+	 * @param f the unary operation to apply
 	 * @return the result of the operation
 	 */
-	public Atom apply(UnaryFunction o);
+	Atom apply(UnaryFunction f);
 
 	/**
 	 * accepts the specific AtomVisitor
 	 *
 	 * @param aV The Atomvisitor object being passed as a parameter
 	 */
-	public void accept(AtomVisitor aV);
+	void accept(AtomVisitor aV);
 
-	public Atom toRadian();
+	Atom toRadian();
 
 }

@@ -6,8 +6,8 @@ Use this section to tell people about which versions of your project are current
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.x   | YES                |
-| < 1.0   | NO                 |
+| 2.5.x   | YES                |
+| < 2.5   | NO                 |
 
 ## Reporting a Vulnerability
 

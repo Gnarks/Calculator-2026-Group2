@@ -237,21 +237,42 @@ public class Real implements Atom {
 	}
 
 	@Override
+        /**
+         * applies a binary function between two Reals
+         *
+         * @param f the binary function to apply
+         * @param a the other Real
+         * @return The result of the application of f on this instance and a
+         */
 	public Atom apply(BinaryFunction f, Atom a) {
 		return f.op(this, (Real) a);
 	}
 
 	@Override
+        /**
+         * applies a unary operation to the Real
+         *
+         * @param o the operation to apply
+         * @return The result of the application
+         */
 	public Real apply(UnaryFunction o) {
 		return o.op(this);
 	}
 
 	@Override
+        /**
+         * Returns a string representation of the Real without trailing zeros.
+         */
 	public String toString() {
 		return value.stripTrailingZeros().toPlainString();
 	}
 
 	@Override
+        /**
+         * Converts the current Real value to radians.
+         *
+         * @return a new Real containing the converted value
+         */
 	public Atom toRadian() {
         return new Real(BigDecimalMath.toRadians(value, context));
 	}

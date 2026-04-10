@@ -5,7 +5,9 @@ import calculator.atoms.*;
 import calculator.functions.*;
 
 /**
- * Visitor design pattern
+ * Visitor design pattern interface for mathematical expressions.
+ * Provides visit methods for all concrete components of an expression tree.
+ *
  */
 public abstract class Visitor {
 

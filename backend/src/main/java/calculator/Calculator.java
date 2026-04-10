@@ -14,13 +14,16 @@ import visitor.Printer;
  */
 public class Calculator {
 
-	public static AngleMode mode = AngleMode.RAD;
+/**
+         * The default angle mode used by the calculator (e.g. RADIAN or DEGREE).
+         * Defaults to RADIAN.
+         */
+        public static AngleMode mode = AngleMode.RAD;
 
-	/**
-	 * Default constructor of the class.
-	 * Does nothing since the class does not have any variables that need to be
-	 * initialized.
-	 *
+        /**
+         * Default constructor of the class.
+         * Does nothing since the class does not have any variables that need to be
+         * initialized.
 	 */
 	public Calculator() {
 	}

@@ -66,31 +66,64 @@ public class Complex implements Atom {
 	}
 
 	@Override
+        /**
+         * applies an operation between two Complex
+         *
+         * @param o the operation to apply
+         * @param a the other Complex
+         * @return The result of the application of o on this instance and a
+         */
 	public Complex apply(Operation o, Atom a) {
 		return o.op(this, (Complex) a);
 	}
 
 	@Override
+        /**
+         * applies a binary function between two Complex
+         *
+         * @param f the binary function to apply
+         * @param a the other Complex
+         * @return The result of the application of f on this instance and a
+         */
 	public Atom apply(BinaryFunction f, Atom a) {
 		return f.op(this, (Complex) a);
 	}
 
 	@Override
+        /**
+         * applies a unary operation to the Complex
+         *
+         * @param o the operation to apply
+         * @return The result of the application
+         */
 	public Complex apply(UnaryFunction o) {
 		return o.op(this);
 	}
 
 	@Override
+        /**
+         * accept method to implement the visitor design pattern to traverse Atoms.
+         *
+         * @param v The Atomvisitor object
+         */
 	public void accept(AtomVisitor v) {
 		v.visit(this);
 	}
 
 	@Override
+        /**
+         * accept method to implement the visitor design pattern to traverse arithmetic expressions.
+         *
+         * @param v The visitor object
+         */
 	public void accept(Visitor v) {
 		v.visit(this);
 	}
 
 	@Override
+        /**
+         * Checks equality based on the complex value.
+         */
 	public boolean equals(Object o) {
 		if (o == null)
 			return false;
@@ -103,11 +136,17 @@ public class Complex implements Atom {
 	}
 
 	@Override
+        /**
+         * Generates the hash code based on the inner complex value.
+         */
 	public int hashCode() {
 		return Objects.hash(value);
 	}
 
 	@Override
+        /**
+         * Returns the string representation of this Complex number.
+         */
 	public String toString() {
 		double realPart = value.getReal();
 		double imaginaryPart = value.getImaginary();
@@ -129,6 +168,9 @@ public class Complex implements Atom {
 	}
 
 	@Override
+        /**
+         * Does nothing for Complex numbers (returns this).
+         */
 	public Atom toRadian() {
 		return this;
 	}

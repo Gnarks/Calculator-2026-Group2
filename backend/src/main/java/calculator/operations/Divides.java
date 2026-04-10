@@ -22,6 +22,8 @@ import calculator.atoms.Real;
  */
 public final class Divides extends Operation {
 
+	private static final String DIVISION_BY_ZERO_MSG = "Division by zero";
+
 	/**
 	 * Class constructor specifying a number of Expressions to divide.
 	 *
@@ -45,7 +47,7 @@ public final class Divides extends Operation {
 	 */
 	public int op(int l, int r) {
 		if (r == 0) {
-			throw new ArithmeticException("Division by zero");
+			throw new ArithmeticException(DIVISION_BY_ZERO_MSG);
 		}
 		return (l / r);
 	}
@@ -105,7 +107,7 @@ public final class Divides extends Operation {
 	 */
 	public IntegerAtom op(IntegerAtom i1, IntegerAtom i2) {
 		if (i2.getValue() == 0) {
-			throw new ArithmeticException("Division by zero");
+			throw new ArithmeticException(DIVISION_BY_ZERO_MSG);
 		}
 		return new IntegerAtom(i1.getValue() / i2.getValue());
 	}
@@ -117,7 +119,7 @@ public final class Divides extends Operation {
 		}
 
 		if (c2.getValue().equals(org.apache.commons.numbers.complex.Complex.ZERO)) {
-			throw new ArithmeticException("Division by zero");
+			throw new ArithmeticException(DIVISION_BY_ZERO_MSG);
 		}
 		org.apache.commons.numbers.complex.Complex result = c1.getValue().divide(c2.getValue());
 		return new Complex(result);
@@ -126,7 +128,7 @@ public final class Divides extends Operation {
 	@Override
 	public Rationnal op(Rationnal q1, Rationnal q2) {
 		if (q2.getValue().equals(org.apache.commons.numbers.fraction.Fraction.ZERO)) {
-			throw new ArithmeticException("Division by zero");
+			throw new ArithmeticException(DIVISION_BY_ZERO_MSG);
 		}
 
 		org.apache.commons.numbers.fraction.Fraction result = q1.getValue().divide(q2.getValue());

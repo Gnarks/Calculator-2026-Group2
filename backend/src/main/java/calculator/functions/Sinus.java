@@ -14,7 +14,7 @@ import ch.obermuhlner.math.big.BigDecimalMath;
  * This class represents the arithmetic unary operation "sin".
  * The class extends an abstract superclass UnaryFunction.
  */
-public final class Sinus extends UnaryFunction {
+public final class Sinus extends TrigonometricFunction {
 
 	/**
 	 * Class constructor specifying an Expression to apply the sine function.

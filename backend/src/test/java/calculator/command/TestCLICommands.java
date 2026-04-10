@@ -128,6 +128,6 @@ class TestCLICommands {
 		boolean result = angleModeCommand.execute("");
 		testLogHandler.flush();
 		assertTrue(result);
-		assertTrue(errStreamCaptor.toString().contains("Error: Missing arguments. Usage: mode <mode>"));
+		assertTrue(errStreamCaptor.toString().contains("Error: Missing arguments. Usage: mode <DEG|RAD>"));
 	}
 }

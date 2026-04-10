@@ -12,7 +12,7 @@ public class AngleModeCommand implements CLICommand {
     @Override
     public boolean execute(String args) {
         if (args == null || args.trim().isEmpty()) {
-            LOGGER.warning("Error: Missing arguments. Usage: mode <mode>");
+            LOGGER.warning("Error: Missing arguments. Usage: mode <DEG|RAD>");
             return true;
         }
         String mode = args.trim().toLowerCase(Locale.ENGLISH);

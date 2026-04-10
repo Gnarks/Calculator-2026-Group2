@@ -54,6 +54,12 @@ public interface Atom extends Expression {
 	 */
 	public void accept(AtomVisitor aV);
 
-	public Atom toRadian();
+/**
+         * Converts the current atom's value to radians.
+         * Useful when dealing with angles (e.g., trigonometric functions).
+         *
+         * @return a new Atom representing the value converted to radians.
+         */
+        public Atom toRadian();
 
 }

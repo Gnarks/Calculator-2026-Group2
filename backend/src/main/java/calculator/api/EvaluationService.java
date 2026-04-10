@@ -13,6 +13,11 @@ import calculator.functions.RandomFunction;
 import calculator.functions.RandomGenerator;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class that handles the core business logic of the calculator API.
+ * It connects the REST endpoints (Controller) to the Calculator backend,
+ * orchestrating the parsing, evaluation, and formatting of expressions.
+ */
 @Service
 public class EvaluationService {
 

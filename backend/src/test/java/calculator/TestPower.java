@@ -64,8 +64,7 @@ public class TestPower {
 
 	@Test
 	void testNullParamList() {
-		params = null;
-		assertThrows(IllegalConstruction.class, () -> op = new Power(params));
+		assertThrows(IllegalConstruction.class, () -> op = new Power(null));
 	}
 
 	// INTEGERS

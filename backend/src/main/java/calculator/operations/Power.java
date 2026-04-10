@@ -10,8 +10,6 @@ import calculator.atoms.*;
 import calculator.atoms.visitor.AtomCaster;
 import ch.obermuhlner.math.big.BigDecimalMath;
 
-import org.apache.commons.numbers.fraction.Fraction;
-
 public final class Power extends Operation {
 
 	public Power(List<Expression> elist) throws IllegalConstruction {
@@ -37,17 +35,17 @@ public final class Power extends Operation {
 		BigDecimal exponent = r2.getValue();
 
 		// case b^-1 with b=0 or neg
-		if (base.compareTo(new BigDecimal(0)) == 0 && exponent.compareTo(new BigDecimal(0)) <= 0) {
+		if (base.compareTo(BigDecimal.ZERO) == 0 && exponent.compareTo(BigDecimal.ZERO) <= 0) {
 			return Real.nan();
 		}
 
 		if (r2.isPlusInf()) {
 			if (r1.isMinusInf())
 				return Real.nan();
-			else if (base.compareTo(new BigDecimal(0)) > 0 && base.compareTo(new BigDecimal(1)) < 0)
+			else if (base.compareTo(BigDecimal.ZERO) > 0 && base.compareTo(BigDecimal.ONE) < 0)
 				return new Real(0);
 
-			else if (base.compareTo(new BigDecimal(0)) == 0 || base.compareTo(new BigDecimal(1)) == 0)
+			else if (base.compareTo(BigDecimal.ZERO) == 0 || base.compareTo(BigDecimal.ONE) == 0)
 				return Real.nan();
 
 			return Real.plusInf();
@@ -56,7 +54,7 @@ public final class Power extends Operation {
 		if (r2.isMinusInf()) {
 			if (r1.isMinusInf())
 				return Real.nan();
-			if (base.compareTo(new BigDecimal(0)) > 0 && base.compareTo(new BigDecimal(1)) < 0)
+			if (base.compareTo(BigDecimal.ZERO) > 0 && base.compareTo(BigDecimal.ONE) < 0)
 				return Real.plusInf();
 			return new Real(0);
 		}
@@ -64,13 +62,13 @@ public final class Power extends Operation {
 		// if negative base, result undefined is irrational exponent or rational
 		// exponent with even denominator
 
-		if (base.compareTo(new BigDecimal(0)) < 0) {
+		if (base.compareTo(BigDecimal.ZERO) < 0) {
 
 			BigInteger[] expFrac = toRational(exponent);
 			BigDecimal numerator = new BigDecimal(expFrac[0]);
 			BigDecimal denominator = new BigDecimal(expFrac[1]);
 
-			if (expFrac[1].mod(new BigInteger("2")).equals(BigInteger.ONE)) {
+if (expFrac[1].mod(BigInteger.valueOf(2)).equals(BigInteger.ONE)) {
 
 				BigDecimal root = BigDecimalMath.pow(base.abs(), BigDecimal.ONE.divide(denominator), Real.context)
 						.negate();

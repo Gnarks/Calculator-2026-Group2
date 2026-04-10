@@ -9,14 +9,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  checks: write
-  pages: write
-  id-token: write
+  contents: read
 
 jobs:
   # the first job to be ran, maven verify to test
   verify:
+    permissions:
+      contents: write
+      checks: write
     strategy:
       fail-fast: false
       matrix:
@@ -48,6 +48,9 @@ jobs:
   # the second job requires the first one to suceed
   # then runs JaCoCo to generate a badge for github
   jacoco:
+    permissions:
+      contents: write
+      checks: write
     needs: verify
     runs-on: ubuntu-latest
     steps:
@@ -68,6 +71,11 @@ jobs:
   # the last job requires the all others to suceed (by chained dependencies)
   # creates a report from the javadoc, tests, test coverage and code analysis 
   report:
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+      checks: write
     needs: [jacoco]
     runs-on: ubuntu-latest
     steps:

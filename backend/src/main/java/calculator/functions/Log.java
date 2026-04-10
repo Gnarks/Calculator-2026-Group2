@@ -38,7 +38,8 @@ public class Log extends BinaryFunction {
 		else
 			precision = n.getValue().precision();
 
-		Real logBase, logN = null;
+		Real logBase;
+		Real logN;
 		if (base.isPlusInf()) {
 			logBase = Real.plusInf();
 		} else {
@@ -59,9 +60,8 @@ public class Log extends BinaryFunction {
 
 			return d.op(logN, logBase);
 		} catch (IllegalConstruction e) {
-			// won't happen
+			throw new IllegalStateException("Failed to construct Divides operation", e);
 		}
-		return Real.nan();
 
 	}
 
@@ -100,9 +100,8 @@ public class Log extends BinaryFunction {
 		}
 
 		// uses the log_b(n) = log_e(n)/log_e(b)
-		BigDecimal logBase = BigDecimalMath.log(new BigDecimal(base.getValue().doubleValue()), Real.context);
-		BigDecimal logN = BigDecimalMath.log(new BigDecimal(n.getValue().doubleValue()), Real.context);
-
+        BigDecimal logBase = BigDecimalMath.log(BigDecimal.valueOf(base.getValue().doubleValue()), Real.context);
+        BigDecimal logN = BigDecimalMath.log(BigDecimal.valueOf(n.getValue().doubleValue()), Real.context);
 		return new Real(logN.divide(logBase, Real.context));
 	}
 }

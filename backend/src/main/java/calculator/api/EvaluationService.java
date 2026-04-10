@@ -33,7 +33,7 @@ public class EvaluationService {
             Real.scale = precision;
             Atom result = calculator.eval(expression);
             return new EvaluationResponse(1, result.toString());
-        } catch (IllegalArgumentException | IllegalStateException | UnsupportedOperationException _) {
+        } catch (IllegalArgumentException | IllegalStateException | UnsupportedOperationException | ArithmeticException _) {
             return new EvaluationResponse(0, "");
         }
     }

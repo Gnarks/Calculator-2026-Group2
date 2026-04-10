@@ -59,9 +59,8 @@ public class Log extends BinaryFunction {
 
 			return d.op(logN, logBase);
 		} catch (IllegalConstruction e) {
-			// won't happen
+			throw new IllegalStateException("Failed to construct Divides operation", e);
 		}
-		return Real.nan();
 
 	}
 

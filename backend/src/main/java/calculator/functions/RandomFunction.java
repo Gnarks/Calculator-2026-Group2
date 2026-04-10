@@ -188,4 +188,9 @@ public final class RandomFunction implements Expression {
         RandomFunction that = (RandomFunction) o;
         return type == that.type && Objects.equals(args, that.args);
 	}
+
+    @Override
+	public int hashCode() {
+		return Objects.hash(type, args);
+	}
 }

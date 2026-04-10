@@ -14,13 +14,13 @@ import calculator.functions.*;
  */
 public class Counter extends Visitor {
 
-        /** Tracks the total number of operations encountered. */
+	/** Tracks the total number of operations encountered. */
 	private int nbOps = 0;
-        /** Tracks the total number of atomic numbers encountered. */
+	/** Tracks the total number of atomic numbers encountered. */
 	private int nbNbs = 0;
-        /** Stores the maximum nesting depth of the expression tree. */
+	/** Stores the maximum nesting depth of the expression tree. */
 	private int maxDepth = 0;
-        /** Maintains the current depth during tree traversal. */
+	/** Maintains the current depth during tree traversal. */
 	private int currentDepth = 0;
 
 	/**
@@ -29,45 +29,49 @@ public class Counter extends Visitor {
 	public Counter() {
 	}
 
+	/**
+	 * Visits a Real number. Increments the number count and updates max depth.
+	 * 
+	 * @param r The Real number to visit
+
+	 */
 	@Override
-        /**
-         * Visits a Real number. Increments the number count and updates max depth.
-         * 
-         * @param r The Real number to visit
-         */
 	public void visit(Real r) {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
 	}
 
+	/**
+	 * Visits an IntegerAtom. Increments the number count and updates max depth.
+	 * 
+	 * @param i The IntegerAtom to visit
+
+	 */
 	@Override
-        /**
-         * Visits an IntegerAtom. Increments the number count and updates max depth.
-         * 
-         * @param i The IntegerAtom to visit
-         */
 	public void visit(IntegerAtom i) {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
 	}
 
+	/**
+	 * Visits a Complex number. Increments the number count and updates max depth.
+	 * 
+	 * @param c The Complex number to visit
+
+	 */
 	@Override
-        /**
-         * Visits a Complex number. Increments the number count and updates max depth.
-         * 
-         * @param c The Complex number to visit
-         */
 	public void visit(Complex c) {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
 	}
 
+	/**
+	 * Visits a Rationnal number. Increments the number count and updates max depth.
+	 * 
+	 * @param q The Rationnal number to visit
+
+	 */
 	@Override
-        /**
-         * Visits a Rationnal number. Increments the number count and updates max depth.
-         * 
-         * @param q The Rationnal number to visit
-         */
 	public void visit(Rationnal q) {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
@@ -89,12 +93,13 @@ public class Counter extends Visitor {
 		currentDepth--;
 	}
 
+	/**
+	 * Visits a unary function. Counts it as an operation and increments current depth.
+	 *
+	 * @param o The unary function to visit
+
+	 */
 	@Override
-        /**
-         * Visits a unary function. Counts it as an operation and increments current depth.
-         *
-         * @param o The unary function to visit
-         */
 	public void visit(UnaryFunction o) {
 		nbOps++;
 		currentDepth++;
@@ -102,12 +107,13 @@ public class Counter extends Visitor {
 		currentDepth--;
 	}
 
+	/**
+	 * Visits a binary function. Counts it as an operation and increments current depth.
+	 *
+	 * @param f The binary function to visit
+
+	 */
 	@Override
-        /**
-         * Visits a binary function. Counts it as an operation and increments current depth.
-         *
-         * @param f The binary function to visit
-         */
 	public void visit(BinaryFunction f) {
 		nbOps++;
 		currentDepth++;

@@ -62,11 +62,21 @@ public class Printer extends Visitor {
 	}
 
 	@Override
+        /**
+         * The visit method for IntegerAtom.
+         *
+         * @param i The IntegerAtom to be visited
+         */
 	public void visit(IntegerAtom i) {
 		sb.append(i.getValue());
 	}
 
 	@Override
+        /**
+         * The visit method for Complex numbers.
+         *
+         * @param c The Complex number to be visited
+         */
 	public void visit(Complex c) {
 		double realPart = c.getValue().getReal();
 		double imaginaryPart = c.getValue().getImaginary();
@@ -85,6 +95,11 @@ public class Printer extends Visitor {
 	}
 
 	@Override
+        /**
+         * The visit method for Rationnal numbers.
+         *
+         * @param q The Rationnal number to be visited
+         */
 	public void visit(Rationnal q) {
 		int num = q.getNumerator();
 		int den = q.getDenominator();
@@ -209,6 +224,11 @@ public class Printer extends Visitor {
 	 * @param f the {@code RandomFunction} node to append to the print result
 	 */
 	@Override
+        /**
+         * The visit method for a random function.
+         *
+         * @param f The random function to be visited
+         */
 	public void visit(RandomFunction f) {
 		String funcName;
 		switch(f.getType()) {

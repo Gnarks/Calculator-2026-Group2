@@ -3,12 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-## Added
-- precision command to set the precision of Real number calculations globally (for the CLI)
-- precision field to set the precision of Real number calculations globally (for the GUI)
-- DockerFile to run backend
-- DockerFile to run frontend
-- DockerCompose to run the backend and frontend and expose the application
+
+## [v2.3.0]
+
+### Added
 - Random function: 
   - randreal: generates a random number between 0 and 1.
   - randint: generates a random integer between 0 and a maximum.
@@ -17,19 +15,23 @@ All notable changes to this project will be documented in this file.
 - Random generator: generates a random number between a specified minimum and maximum.
 
 ### Changed
-- README: added information about the way to start the web-app with docker compose
 - POM file: The main class is now `calculator.Main` instead of `calculator.CalculatorApplication` to launch the CLI
 
 ### Fixed
 - In the CLI, the logger no longer displays the date, hour when this is a message from the calculator.
 
-## [v2.1.0]
+## [v2.2.0]
 
-### Fixed
-- Difference between division and rational numbers (/ is for rationnals and // for the real division)
+### Added
+- precision command to set the precision of Real number calculations globally (for the CLI)
+- precision field to set the precision of Real number calculations globally (for the GUI)
+- DockerFile to run backend
+- DockerFile to run frontend
+- DockerCompose to run the backend and frontend and expose the application
+- automatic deployment on master push  
 
-## Changed
-- POM file: The main class is now `calculator.Main` instead of `calculator.CalculatorApplication` to launch the CLI.
+### Changed
+- README: added information about the way to start the web-app with docker compose
 
 ## [v2.1.0]
 

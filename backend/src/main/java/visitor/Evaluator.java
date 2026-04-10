@@ -93,9 +93,9 @@ public class Evaluator extends Visitor {
 	}
 
 	/**
-	 * Use the visitor design pattern to visit a Rationnal number.
+	 * Use the visitor design pattern to visit an Operation.
 	 *
-	 * @param q The Rationnal number being visited
+	 * @param o The Operation being visited
 	 */
 	public void visit(Operation o) {
 		ArrayList<Atom> evaluatedArgs = new ArrayList<>();

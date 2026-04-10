@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 
@@ -456,6 +458,15 @@ public class TestPower {
 		} catch (IllegalConstruction _) {
 			fail();
 		}
+	}
+
+	@Test
+	void testToRational_scaleIsZero() {
+		double val = 3.28;
+		BigDecimal decimal = new BigDecimal(val).setScale(0, RoundingMode.HALF_EVEN);
+		BigInteger[] result = Power.toRational(decimal);
+		assertEquals(new BigInteger("3"), result[0]);
+		assertEquals(BigInteger.ONE, result[1]);
 	}
 
 	// COMPLEX

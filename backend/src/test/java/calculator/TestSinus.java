@@ -42,4 +42,10 @@ class TestSinus {
 		BigDecimal sin = BigDecimalMath.sin(bd, Real.context);
 		assertEquals(new Real(sin), op.op(param));
 	}
+
+	@Test
+	void testToString() {
+		assertEquals("sin(0)", op.toString());
+	}
+
 }

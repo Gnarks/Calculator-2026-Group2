@@ -3,6 +3,8 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.atoms.Real;
+import calculator.functions.Log;
+import calculator.functions.Sinus;
 import org.apache.commons.numbers.fraction.Fraction;
 import org.junit.jupiter.api.*;
 
@@ -62,4 +64,39 @@ class TestRationnal {
         Real converted = (Real) r.toRadian();
         assertEquals(new Real(0.06593466), converted);
     }
+
+    @Test
+    void testNewRationalFromInt() {
+        Rationnal q = new Rationnal(6);
+        assertEquals(Fraction.of(6, 1), q.getValue());
+    }
+
+    @Test
+    void testNewRationalFromIntegers_denomZeroThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> new Rationnal(6, 0));
+    }
+
+    @Test
+    void testRationalOpLog() {
+        Real.scale = 8;
+        Rationnal base = new Rationnal(10);
+        try {
+            Log log = new Log(base, fraction);
+            assertEquals(new Real(-0.30103), base.apply(log, fraction));
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
+    @Test
+    void testRationalOpUnaryFunction() {
+        Real.scale = 8;
+        try {
+            Sinus sinus = new Sinus(fraction);
+            assertEquals(Fraction.from(0.47942554), fraction.apply(sinus).getValue());
+        } catch (IllegalConstruction _) {
+            fail();
+        }
+    }
+
 }

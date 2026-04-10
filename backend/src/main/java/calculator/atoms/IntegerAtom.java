@@ -115,6 +115,13 @@ public class IntegerAtom implements Atom {
 	}
 
 	@Override
+        /**
+         * applies a binary function between two IntegerAtom
+         *
+         * @param f the binary function to apply
+         * @param a the other IntegerAtom
+         * @return The result of the application of f on this instance and a
+         */
 	public Atom apply(BinaryFunction f, Atom a) {
 		return f.op(this, (IntegerAtom) a);
 	}
@@ -129,9 +136,19 @@ public class IntegerAtom implements Atom {
 	}
 
 	@Override
+        /**
+         * Returns the string representation of this IntegerAtom
+         *
+         * @return the string representation
+         */
 	public String toString() { return Integer.toString(value); }
 
 	@Override
+        /**
+         * Converts the integer value to a Real representing the value in radians
+         *
+         * @return a Real number of the converted value
+         */
 	public Atom toRadian() { return new Real(Math.toRadians(value)); }
 
 }

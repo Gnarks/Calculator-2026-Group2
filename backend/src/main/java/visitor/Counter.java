@@ -9,14 +9,18 @@ import calculator.atoms.Real;
 import calculator.functions.*;
 
 /**
- * Counter is a visitor that counts the numbers, operations,
- * and depth in an arithmetic expression.
+ * Counter is a concrete visitor that walks through an arithmetic expression
+ * to tally the number of atomic values, operations, and the maximum nesting depth.
  */
 public class Counter extends Visitor {
 
+        /** Tracks the total number of operations encountered. */
 	private int nbOps = 0;
+        /** Tracks the total number of atomic numbers encountered. */
 	private int nbNbs = 0;
+        /** Stores the maximum nesting depth of the expression tree. */
 	private int maxDepth = 0;
+        /** Maintains the current depth during tree traversal. */
 	private int currentDepth = 0;
 
 	/**
@@ -26,24 +30,44 @@ public class Counter extends Visitor {
 	}
 
 	@Override
+        /**
+         * Visits a Real number. Increments the number count and updates max depth.
+         * 
+         * @param r The Real number to visit
+         */
 	public void visit(Real r) {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
 	}
 
 	@Override
+        /**
+         * Visits an IntegerAtom. Increments the number count and updates max depth.
+         * 
+         * @param i The IntegerAtom to visit
+         */
 	public void visit(IntegerAtom i) {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
 	}
 
 	@Override
+        /**
+         * Visits a Complex number. Increments the number count and updates max depth.
+         * 
+         * @param c The Complex number to visit
+         */
 	public void visit(Complex c) {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
 	}
 
 	@Override
+        /**
+         * Visits a Rationnal number. Increments the number count and updates max depth.
+         * 
+         * @param q The Rationnal number to visit
+         */
 	public void visit(Rationnal q) {
 		nbNbs += 1;
 		maxDepth = Math.max(maxDepth, currentDepth);
@@ -66,6 +90,11 @@ public class Counter extends Visitor {
 	}
 
 	@Override
+        /**
+         * Visits a unary function. Counts it as an operation and increments current depth.
+         *
+         * @param o The unary function to visit
+         */
 	public void visit(UnaryFunction o) {
 		nbOps++;
 		currentDepth++;
@@ -74,6 +103,11 @@ public class Counter extends Visitor {
 	}
 
 	@Override
+        /**
+         * Visits a binary function. Counts it as an operation and increments current depth.
+         *
+         * @param f The binary function to visit
+         */
 	public void visit(BinaryFunction f) {
 		nbOps++;
 		currentDepth++;

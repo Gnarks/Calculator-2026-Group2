@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.api.EvaluationService;
 import calculator.api.dto.EvaluationResponse;
+import calculator.atoms.AngleMode;
 import calculator.atoms.AtomType;
 import calculator.atoms.Real;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,6 +68,13 @@ public class TestEvaluationService {
     }
 
     @Test
+    void testChangeAngleRepresentation() {
+        assertEquals(AngleMode.RAD, Calculator.mode);
+        evaluationService.setAngleMode(AngleMode.DEG);
+        assertEquals(AngleMode.DEG, Calculator.mode);
+    }
+  
+    @Test
     void testGenerateRandomInteger() {
         EvaluationResponse random = evaluationService.getRandomNumber(AtomType.INTEGER, 100, null);
         assertEquals(1, random.getSuccess());
@@ -75,7 +83,7 @@ public class TestEvaluationService {
 
     @Test
     void testGenerateRandomRational() {
-        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.RATIONNAL, 100, null);
+        EvaluationResponse random = evaluationService.getRandomNumber(AtomType.RATIONNAL, 100, 117L);
         assertEquals(1, random.getSuccess());
         assertTrue(random.getResult().contains("/"));
     }

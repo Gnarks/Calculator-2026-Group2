@@ -2,6 +2,8 @@ package calculator;
 
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.atoms.AngleMode;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -27,6 +29,8 @@ class TestEvaluator {
 		calc = new Calculator();
 		value1 = 8;
 		value2 = 6;
+		Calculator.mode = AngleMode.RAD;
+		Real.scale = 64;
 	}
 
 	@Test
@@ -193,6 +197,90 @@ class TestEvaluator {
 				case "//" -> assertEquals(new Rationnal(16, 9), calc.eval(new Divides(params)));
 				default -> fail();
 			}
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testSinWithDiffModes() {
+		Real.scale = 8;
+		Real r = new Real(Math.PI);
+		try {
+			assertEquals(new Real(0), calc.eval(new Sinus(r)));
+			Calculator.mode = AngleMode.DEG;
+			assertEquals(new Real(0.05480367), calc.eval(new Sinus(r)));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testCosWithDiffModes() {
+		Real.scale = 8;
+		Real r = new Real(225);
+		try {
+			assertEquals(new Real(0.36731937), calc.eval(new Cosinus(r)));
+			Calculator.mode = AngleMode.DEG;
+			assertEquals(new Real(-0.70710678), calc.eval(new Cosinus(r)));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testTanWithDiffModes() {
+		Real.scale = 8;
+		Real r = new Real(300);
+		try {
+			assertEquals(new Real(45.24474207), calc.eval(new Tangente(r)));
+			Calculator.mode = AngleMode.DEG;
+			assertEquals(new Real(-1.73205079), calc.eval(new Tangente(r)));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testSinSameValDiffRepresentationSameResult() {
+		Real.scale = 8;
+		Real radReal = new Real(Math.PI/2);
+		Real degReal = new Real(90);
+		try {
+			Real resultRad = (Real) calc.eval(new Sinus(radReal));
+			Calculator.mode = AngleMode.DEG;
+			Real resultDeg = (Real) calc.eval(new Sinus(degReal));
+			assertEquals(resultDeg, resultRad);
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testCosSameValDiffRepresentationSameResult() {
+		Real.scale = 8;
+		Real radReal = new Real(Math.PI);
+		Real degReal = new Real(180);
+		try {
+			Real resultRad = (Real) calc.eval(new Cosinus(radReal));
+			Calculator.mode = AngleMode.DEG;
+			Real resultDeg = (Real) calc.eval(new Cosinus(degReal));
+			assertEquals(resultDeg, resultRad);
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+	@Test
+	void testTanSameValDiffRepresentationSameResult() {
+		Real.scale = 8;
+		Real radReal = new Real(Math.PI/4);
+		Real degReal = new Real(45);
+		try {
+			Real resultRad = (Real) calc.eval(new Tangente(radReal));
+			Calculator.mode = AngleMode.DEG;
+			Real resultDeg = (Real) calc.eval(new Tangente(degReal));
+			assertEquals(resultDeg, resultRad);
 		} catch (IllegalConstruction e) {
 			fail();
 		}

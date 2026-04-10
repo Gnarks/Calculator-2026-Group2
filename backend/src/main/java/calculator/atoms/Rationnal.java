@@ -111,4 +111,7 @@ public class Rationnal implements Atom {
 	@Override
 	public String toString(){ return value.toString().replaceAll("\\s",""); }
 
+	@Override
+	public Atom toRadian() { return new Real(Math.toRadians(value.doubleValue())); }
+
 }

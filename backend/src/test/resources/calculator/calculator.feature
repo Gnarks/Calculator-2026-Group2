@@ -209,3 +209,43 @@ Scenario: Adding two rational numbers
     And I provide a real number 2.67
     And I set the precision to 8
     Then the operation evaluates to the real number 22.96179533
+
+  Scenario Outline: Evaluating unary mathematical functions
+    Given a unary function <func>
+    When I provide a single real number <n1>
+    And I set the precision to <precision>
+    Then the unary operation evaluates to the real number <result>
+
+    Examples:
+      | func   | n1 | precision | result      |
+      | "sin"  | 0.0| 5         | 0.0         |
+      | "cos"  | 0.0| 5         | 1.0         |
+      | "tan"  | 0.0| 5         | 0.0         |
+      | "asin" | 0.0| 5         | 0.0         |
+      | "acos" | 1.0| 5         | 0.0         |
+      | "atan" | 0.0| 5         | 0.0         |
+      | "sinh" | 0.0| 5         | 0.0         |
+      | "cosh" | 0.0| 5         | 1.0         |
+      | "tanh" | 0.0| 5         | 0.0         |
+      | "ln"   | 1.0| 5         | 0.0         |
+      | "sqrt" | 4.0| 5         | 2.0         |
+
+  Scenario: Evaluating binary log function
+    Given a binary function log with base 10.0 of 100.0
+    When I set the precision to 5
+    Then the binary operation evaluates to the real number 2.0
+
+  Scenario: Evaluating random integer generation
+    Given a random integer function up to 10 with seed 1234
+    Then the result is a specific integer 7
+
+  Scenario: Testing the precision CLI command
+    Given a precision command
+    When the user runs the command with arguments "15"
+    Then the command indicates the calculator should continue running
+    And the calculator precision is updated to 15
+
+  Scenario: Testing the eval CLI command
+    Given an eval command
+    When the user runs the command with arguments "5+5"
+    Then the command indicates the calculator should continue running

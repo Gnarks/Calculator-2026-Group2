@@ -2,6 +2,8 @@ package calculator;
 
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
+
+import ch.obermuhlner.math.big.BigDecimalMath;
 import org.junit.jupiter.api.*;
 
 import calculator.atoms.Real;
@@ -159,5 +161,13 @@ class TestReal {
 		// with new scale = 0.1
 		s1 = new Real("0.1");
 		assertEquals(s1, s99);
+	}
+
+	@Test
+	void testToRadian() {
+		Real r = new Real(Math.PI);
+		Real.scale = 8;
+		Real converted = (Real) r.toRadian();
+		assertEquals(new Real(0.05483114), converted);
 	}
 }

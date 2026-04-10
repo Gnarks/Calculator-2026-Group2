@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.atoms.AngleMode;
 import calculator.atoms.Atom;
 import visitor.Counter;
 import visitor.Evaluator;
@@ -7,16 +8,19 @@ import visitor.Printer;
 
 /**
  * This class represents the core logic of a Calculator.
- * It can be used to print and evaluate artihmetic expressions.
+ * It can be used to print and evaluate arithmetic expressions.
  *
  * @author tommens
  */
 public class Calculator {
 
+	public static AngleMode mode = AngleMode.RAD;
+
 	/**
 	 * Default constructor of the class.
 	 * Does nothing since the class does not have any variables that need to be
-	 * initialised.
+	 * initialized.
+	 *
 	 */
 	public Calculator() {
 	}
@@ -70,7 +74,7 @@ public class Calculator {
 	 */
 	public Atom eval(Expression e) {
 		// create a new visitor to evaluate expressions
-		Evaluator v = new Evaluator();
+		Evaluator v = new Evaluator(mode);
 		// and ask the expression to accept this visitor to start the evaluation process
 		e.accept(v);
 		// and return the result of the evaluation at the end of the process

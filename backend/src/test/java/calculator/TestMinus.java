@@ -79,8 +79,7 @@ class TestMinus {
 
 	@Test
 	void testNullParamList() {
-		params = null;
-		assertThrows(IllegalConstruction.class, () -> op = new Minus(params));
+		assertThrows(IllegalConstruction.class, () -> op = new Minus(null));
 	}
 
 }

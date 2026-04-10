@@ -139,10 +139,12 @@ public class Evaluator extends Visitor {
 	 */
 	public void visit(UnaryFunction o) {
 		o.getArg().accept(this);
-		Atom converted = null;
-		if(o instanceof TrigonometricFunction && angleMode == AngleMode.DEG)
-			converted = computedValue.toRadian();
-		computedValue = (converted == null) ? computedValue.apply(o) : converted.apply(o);
+		if(o instanceof TrigonometricFunction && angleMode == AngleMode.DEG) {
+			Atom converted = computedValue.toRadian();
+			computedValue = converted.apply(o);
+		} else {
+			computedValue = computedValue.apply(o);
+		}
 	}
 
 	@Override

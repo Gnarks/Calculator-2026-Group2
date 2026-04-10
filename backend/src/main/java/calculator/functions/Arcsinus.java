@@ -33,8 +33,8 @@ public final class Arcsinus extends UnaryFunction {
 			return Real.nan();
 		}
 
-		if (r.getValue().compareTo(new BigDecimal(-1)) <= -1 // r < -1
-				|| r.getValue().compareTo(new BigDecimal(1)) >= 1) // r > 1
+		if (r.getValue().compareTo(BigDecimal.valueOf(-1)) <= -1 // r < -1
+                                || r.getValue().compareTo(BigDecimal.ONE) >= 1) // r > 1
 			return Real.nan();
 
 		BigDecimal val = BigDecimalMath.asin(r.getValue(), Real.context);

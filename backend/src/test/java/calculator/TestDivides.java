@@ -81,8 +81,7 @@ class TestDivides {
 
 	@Test
 	void testNullParamList() {
-		params = null;
-		assertThrows(IllegalConstruction.class, () -> op = new Divides(params));
+		assertThrows(IllegalConstruction.class, () -> op = new Divides(null));
 	}
 
 	@Test

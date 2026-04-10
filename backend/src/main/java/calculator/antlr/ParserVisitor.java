@@ -18,6 +18,11 @@ import org.apache.commons.numbers.fraction.Fraction;
  */
 public class ParserVisitor extends calculatorBaseVisitor<Expression> {
 
+    private static final String RANDINT_FUNC = "randint";
+    private static final String RANDRAT_FUNC = "randrat";
+    private static final String RANDREAL_FUNC = "randreal";
+    private static final String RANDCOMPLEX_FUNC = "randcomplex";
+
     /**
      * Create an Expression object corresponding to the given operator and arguments.
      */
@@ -43,7 +48,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     private Expression buildFunction(String funcName, List<Expression> args) {
-        if ("randint".equals(funcName)) {
+        if (RANDINT_FUNC.equals(funcName)) {
             if (args.size() == 1) {
                 return RandomFunction.randomInteger(args.get(0));
             }
@@ -53,7 +58,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
             throw new UnsupportedOperationException("Invalid number of arguments for function " + funcName + ": " + args.size());
         }
 
-        if ("randrat".equals(funcName)) {
+        if (RANDRAT_FUNC.equals(funcName)) {
             if (args.size() == 1) {
                 return RandomFunction.randomRational(args.get(0));
             }
@@ -63,7 +68,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
             throw new UnsupportedOperationException("Invalid number of arguments for function " + funcName + ": " + args.size());
         }
 
-        if ("randreal".equals(funcName)) {
+        if (RANDREAL_FUNC.equals(funcName)) {
             if (args.isEmpty()) {
                 return RandomFunction.randomReal();
             }
@@ -73,7 +78,7 @@ public class ParserVisitor extends calculatorBaseVisitor<Expression> {
             throw new UnsupportedOperationException("Invalid number of arguments for function " + funcName + ": " + args.size());
         }
 
-        if ("randcomplex".equals(funcName)) {
+        if (RANDCOMPLEX_FUNC.equals(funcName)) {
             if (args.isEmpty()) {
                 return RandomFunction.randomComplex();
             }

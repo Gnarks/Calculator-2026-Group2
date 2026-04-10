@@ -4,6 +4,7 @@ package calculator.functions;
 import calculator.Expression;
 import calculator.atoms.*;
 import visitor.Visitor;
+import java.util.Objects;
 
 public abstract class BinaryFunction implements Expression {
 
@@ -76,6 +77,11 @@ public abstract class BinaryFunction implements Expression {
 			return false;
 		BinaryFunction other = (BinaryFunction) o;
 		return this.firstArg.equals(other.getFirstArg()) && this.secondArg.equals(other.getSecondArg());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(firstArg, secondArg);
 	}
 
 	public String getSymbol() {

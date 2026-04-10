@@ -7,6 +7,8 @@ package calculator.atoms;
  */
 public class IllegalAtomCast extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Default constructor.
 	 *

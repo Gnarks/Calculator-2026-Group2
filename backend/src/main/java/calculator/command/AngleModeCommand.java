@@ -16,16 +16,15 @@ public class AngleModeCommand implements CLICommand {
             return true;
         }
         String mode = args.trim().toLowerCase(Locale.ENGLISH);
-        AngleMode angleMode = null;
         switch (mode) {
-            case "rad" -> angleMode = AngleMode.RAD;
-            case "deg" -> angleMode = AngleMode.DEG;
-            default -> LOGGER.warning("Error: Invalid angle representation. Must either be RAD or DEG.");
+            case "rad" -> Calculator.mode = AngleMode.RAD;
+            case "deg" -> Calculator.mode = AngleMode.DEG;
+            default -> {
+                LOGGER.warning("Error: Invalid angle representation. Must either be RAD or DEG.");
+                return true;
+            }
         }
-        if(angleMode != null) {
-            Calculator.mode = angleMode;
-            LOGGER.info("Angle representation successfully set to " + Calculator.mode + " mode.");
-        }
+        LOGGER.info("Angle representation successfully set to " + Calculator.mode + " mode.");
         return true;
     }
 }

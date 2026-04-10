@@ -65,7 +65,15 @@ public class Printer extends Visitor {
 	 */
 	@Override
 	public void visit(Real r) {
-		sb.append(r.getValue().stripTrailingZeros());
+		if (r.isNan()) {
+			sb.append("NaN");
+		} else if (r.isPlusInf()) {
+			sb.append("+infinity");
+		} else if (r.isMinusInf()) {
+			sb.append("-infinity");
+		} else {
+			sb.append(r.getValue().stripTrailingZeros());
+		}
 	}
 
 	@Override

@@ -3,14 +3,19 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-## Added
+
+### Added
+- Possibility to chose the angles representation (either in radian or in degrees)
+
+## [v2.3.0]
+
+### Added
 - Random function: 
   - randreal: generates a random number between 0 and 1.
   - randint: generates a random integer between 0 and a maximum.
   - randrat: generates a random rational number with a numerator and denominator between 0 and a maximum. (denominator cannot be zero)
   - randcomplex: generates a random complex number with real and imaginary parts between 0 and a maximum.
 - Random generator: generates a random number between a specified minimum and maximum.
-- Possibility to chose the angles representation (either in radian or in degrees)
 
 ### Changed
 - POM file: The main class is now `calculator.Main` instead of `calculator.CalculatorApplication` to launch the CLI
@@ -20,7 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ## [v2.2.0]
 
-## Added
+### Added
 - precision command to set the precision of Real number calculations globally (for the CLI)
 - precision field to set the precision of Real number calculations globally (for the GUI)
 - DockerFile to run backend
@@ -30,14 +35,6 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - README: added information about the way to start the web-app with docker compose
-
-## [v2.1.0]
-
-### Fixed
-- Difference between division and rational numbers (/ is for rationnals and // for the real division)
-
-## Changed
-- POM file: The main class is now `calculator.Main` instead of `calculator.CalculatorApplication` to launch the CLI.
 
 ## [v2.1.0]
 

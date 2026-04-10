@@ -69,7 +69,6 @@ public class AtomCaster extends AtomVisitor {
 				break;
 
 			default:
-				result = null;
 				throw new UnsupportedOperationException("Cast Not implemented");
 		}
 	}
@@ -93,7 +92,6 @@ public class AtomCaster extends AtomVisitor {
 				throw new IllegalAtomCast("Impossible to cast Complex to " + type);
 
 			default:
-				result = null;
 				throw new UnsupportedOperationException("Cast Not implemented");
 		}
 	}
@@ -126,7 +124,6 @@ public class AtomCaster extends AtomVisitor {
 				throw new IllegalAtomCast("Impossible to cast Rationnal to Integer");
 
 			default:
-				result = null;
 				throw new UnsupportedOperationException("Cast Not implemented");
 		}
 	}
@@ -157,7 +154,6 @@ public class AtomCaster extends AtomVisitor {
 				break;
 
 			default:
-				result = null;
 				throw new UnsupportedOperationException("Cast Not implemented");
 		}
 	}

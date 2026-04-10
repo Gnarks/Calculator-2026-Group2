@@ -77,8 +77,7 @@ class TestTimes {
 
 	@Test
 	void testNullParamList() {
-		params = null;
-		assertThrows(IllegalConstruction.class, () -> op = new Times(params));
+		assertThrows(IllegalConstruction.class, () -> op = new Times(null));
 	}
 
 }

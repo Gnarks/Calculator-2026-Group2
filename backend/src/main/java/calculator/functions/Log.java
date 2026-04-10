@@ -38,7 +38,8 @@ public class Log extends BinaryFunction {
 		else
 			precision = n.getValue().precision();
 
-		Real logBase, logN = null;
+		Real logBase;
+		Real logN;
 		if (base.isPlusInf()) {
 			logBase = Real.plusInf();
 		} else {

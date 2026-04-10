@@ -1,8 +1,7 @@
-package calculator;
+package calculator.command;
 
-import calculator.command.ExitCommand;
-import calculator.command.HelpCommand;
-import calculator.command.PrecisionCommand;
+import calculator.Calculator;
+import calculator.atoms.AngleMode;
 import calculator.atoms.Real;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,6 +34,7 @@ class TestCLICommands {
 		LOGGER.addHandler(testLogHandler);
 
 		originalScale = Real.scale;
+		Calculator.mode = AngleMode.RAD;
 	}
 
 	@AfterEach
@@ -98,5 +98,36 @@ class TestCLICommands {
 		assertTrue(result);
 		// The help command reads from help.txt, making sure we get text output
 		assertFalse(outputStreamCaptor.toString().isEmpty());
+	}
+
+	@Test
+	void testModeCommand() {
+		assertEquals(AngleMode.RAD, Calculator.mode);
+		AngleModeCommand angleModeCommand = new AngleModeCommand();
+		boolean result = angleModeCommand.execute("DEG");
+		assertTrue(result);
+		assertEquals(AngleMode.DEG, Calculator.mode);
+		result = angleModeCommand.execute("RAD");
+		assertTrue(result);
+		assertEquals(AngleMode.RAD, Calculator.mode);
+	}
+
+	@Test
+	void testModeCommand_invalidArgs() {
+		AngleModeCommand angleModeCommand = new AngleModeCommand();
+		boolean result = angleModeCommand.execute("invalid");
+		testLogHandler.flush();
+		assertTrue(result);
+		assertTrue(errStreamCaptor.toString()
+				.contains("Error: Invalid angle representation. Must either be RAD or DEG."));
+	}
+
+	@Test
+	void testModeCommand_emptyArgs() {
+		AngleModeCommand angleModeCommand = new AngleModeCommand();
+		boolean result = angleModeCommand.execute("");
+		testLogHandler.flush();
+		assertTrue(result);
+		assertTrue(errStreamCaptor.toString().contains("Error: Missing arguments. Usage: mode <DEG|RAD>"));
 	}
 }

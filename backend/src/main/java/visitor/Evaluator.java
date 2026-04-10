@@ -1,14 +1,11 @@
 package visitor;
 
 import calculator.Expression;
+import calculator.functions.*;
 import calculator.operations.Operation;
 import calculator.atoms.*;
 import calculator.atoms.visitor.AtomCaster;
 import calculator.atoms.visitor.AtomComparator;
-import calculator.functions.BinaryFunction;
-import calculator.functions.UnaryFunction;
-import calculator.functions.RandomFunction;
-import calculator.functions.RandomGenerator;
 
 import java.util.ArrayList;
 
@@ -18,14 +15,34 @@ import java.util.ArrayList;
  */
 public class Evaluator extends Visitor {
 
-	/**
-	 * Default constructor of the class. Does not initialise anything.
-	 */
-	public Evaluator() {
-	}
-
 	/** The result of the evaluation will be stored in this private variable */
 	private Atom computedValue;
+
+	/**
+	 * The angle representation, can either be DEG or RAD.
+	 * Is used for the sin, cos and tan functions.
+	 *
+	 */
+	private final AngleMode angleMode;
+
+	/**
+	 * Default constructor of the class.
+	 * Initializes the angleMode to the default value RAD.
+	 *
+	 */
+	public Evaluator() {
+		this(AngleMode.RAD);
+	}
+
+	/**
+	 * Constructs an Evaluator with a given angle representation.
+	 * Can either be DEG or RAD
+	 *
+	 * @param angleMode the angle representation
+	 */
+	public Evaluator(AngleMode angleMode) {
+		this.angleMode = angleMode;
+	}
 
 	/**
 	 * getter method to obtain the result of the evaluation
@@ -100,7 +117,10 @@ public class Evaluator extends Visitor {
 	@Override
 	public void visit(UnaryFunction o) {
 		o.getArg().accept(this);
-		computedValue = computedValue.apply(o);
+		Atom converted = null;
+		if(o instanceof TrigonometricFunction && angleMode == AngleMode.DEG)
+			converted = computedValue.toRadian();
+		computedValue = (converted == null) ? computedValue.apply(o) : converted.apply(o);
 	}
 
 	@Override

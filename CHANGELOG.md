@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- Possibility to chose the angles representation (either in radian or in degrees)
+
 ## [v2.3.0]
 
 ### Added

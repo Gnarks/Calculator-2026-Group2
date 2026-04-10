@@ -5,6 +5,7 @@ import calculator.Expression;
 import calculator.antlr.Parser;
 import calculator.api.dto.EvaluationResponse;
 import calculator.api.dto.ExpressionDTO;
+import calculator.atoms.AngleMode;
 import calculator.atoms.Atom;
 import calculator.atoms.AtomType;
 import calculator.atoms.Real;
@@ -37,6 +38,16 @@ public class EvaluationService {
         }
     }
 
+    /**
+     * Changes the calculator's angles representation.
+     *
+     * @param angleMode the desired representation
+     */
+    public void setAngleMode(AngleMode angleMode) {
+        if(angleMode != null)
+            Calculator.mode = angleMode;
+    }
+      
     /**
      * Generates a random number of the given type, with a maximum value in some cases.
      * The maximum value is used when generating an integer or a rational number.

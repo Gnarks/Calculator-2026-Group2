@@ -128,4 +128,8 @@ public class Complex implements Atom {
 		}
 	}
 
+	@Override
+	public Atom toRadian() {
+		return this;
+	}
 }

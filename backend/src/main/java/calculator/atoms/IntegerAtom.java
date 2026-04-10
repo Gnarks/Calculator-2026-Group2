@@ -131,4 +131,7 @@ public class IntegerAtom implements Atom {
 	@Override
 	public String toString() { return Integer.toString(value); }
 
+	@Override
+	public Atom toRadian() { return new Real(Math.toRadians(value)); }
+
 }

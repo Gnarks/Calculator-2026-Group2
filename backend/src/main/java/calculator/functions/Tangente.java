@@ -14,7 +14,7 @@ import ch.obermuhlner.math.big.BigDecimalMath;
  * This class represents the arithmetic unary operation "tan".
  * The class extends an abstract superclass UnaryFunction.
  */
-public final class Tangente extends UnaryFunction {
+public final class Tangente extends TrigonometricFunction {
 
 	/**
 	 * Class constructor specifying an Expression to apply the tangent function.

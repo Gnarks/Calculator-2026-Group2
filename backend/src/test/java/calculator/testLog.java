@@ -65,5 +65,30 @@ class TestLog {
 			fail();
 		}
 	}
+
+	@Test
+	void testLogWithNaN() {
+		try {
+			Log log = new Log(Real.nan(), Real.nan());
+			assertEquals(Real.nan(), log.op(Real.nan(), Real.nan()));
+		} catch(IllegalConstruction _) {
+			fail();
+		}
+	}
+
+	@Test
+	void testLogWithInvalidParams() {
+		Real r = new Real(6);
+		Real negativeR = new Real(-6);
+		try {
+			Log log = new Log(Real.minusInf(), r);
+			assertThrows(IllegalArgumentException.class, () -> log.op(Real.minusInf(), r));
+			assertThrows(IllegalArgumentException.class, () -> log.op(negativeR, r));
+			assertThrows(IllegalArgumentException.class, () -> log.op(r, Real.minusInf()));
+			assertThrows(IllegalArgumentException.class, () -> log.op(r, negativeR));
+		} catch(IllegalConstruction _) {
+			fail();
+		}
+	}
 	
 }

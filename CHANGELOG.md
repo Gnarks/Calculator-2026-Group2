@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v2.4.1]
+
+### Fixed
+- Some bugs related to security and Real number special values have been fixed.
+
 ## [v2.4.0]
 
 ### Added
